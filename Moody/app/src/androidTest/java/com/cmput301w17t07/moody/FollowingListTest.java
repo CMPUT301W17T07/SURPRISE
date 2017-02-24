@@ -47,5 +47,5 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    
+
 }

@@ -9,35 +9,36 @@ import java.util.Date;
  */
 
 public class Mood {
-    private String moodInformation;
+    private String moodMessage;
     private Date date;
     private String location;
     private Image moodImage;
+    private String socialSituation;
 
-    public enum feeling{
+    public enum Feeling{
         happy,sad
     }
 
-    public Mood(String moodInformation){
-        this.moodInformation=moodInformation;
+    public Mood(String moodMessage){
+        this.moodMessage =moodMessage;
         this.date=new Date();
         this.location=null;
         this.moodImage=null;
 
     }
-    public Mood(String moodInformation, String location, Image moodImage) {
-        this.moodInformation = moodInformation;
+    public Mood(String moodMessage, String location, Image moodImage) {
+        this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
         this.moodImage = moodImage;
     }
 
-    public String getMoodInformation() {
-        return moodInformation;
+    public String getMoodMessage() {
+        return moodMessage;
     }
 
-    public void setMoodInformation(String moodInformation) {
-        this.moodInformation = moodInformation;
+    public void setMoodMessage(String moodMessage) {
+        this.moodMessage = moodMessage;
     }
 
     public Date getDate() {
@@ -58,6 +59,14 @@ public class Mood {
 
     public Image getMoodImage() {
         return moodImage;
+    }
+
+    public String getSocialSituation() {
+        return socialSituation;
+    }
+
+    public void setSocialSituation(String socialSituation) {
+        this.socialSituation = socialSituation;
     }
 
     public void setMoodImage(Image moodImage) {
