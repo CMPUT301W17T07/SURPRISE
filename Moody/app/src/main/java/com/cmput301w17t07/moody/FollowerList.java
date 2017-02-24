@@ -5,4 +5,5 @@ package com.cmput301w17t07.moody;
  */
 
 public class FollowerList {
+    
 }

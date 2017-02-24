@@ -13,9 +13,9 @@ public class User {
     private MoodList moodList;
 
     public User(String username){
-        this.username=username;
-        this.profilePicture=null;
-        this.moodList=null;
+        this.username= username;
+        this.profilePicture= null;
+        this.moodList= null;
     }
 
     public User(String username,MoodList moodList){
