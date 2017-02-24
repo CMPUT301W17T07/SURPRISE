@@ -14,6 +14,10 @@ public class User {
     private FollowingList followingList;
 
     public User(String username){
+
+        this.username= username;
+        this.profilePicture= null;
+        this.moodList= null;
         this.username=username;
         this.profilePicture=null;
         this.moodList=null;

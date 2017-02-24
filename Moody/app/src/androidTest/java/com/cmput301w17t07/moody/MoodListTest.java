@@ -18,7 +18,6 @@ public class MoodListTest extends ActivityInstrumentationTestCase2 {
         MoodList moodList=new MoodList();
         Mood mood=new Mood("happy");
         moodList.addMood(mood);
-
         assertEquals(moodList.countMoodList(),1);
 
     }
