@@ -8,28 +8,40 @@ import java.util.ArrayList;
 
 public class MoodList {
 
-    public ArrayList<Mood> moodList = null;
+    public ArrayList<Mood> moodList = new ArrayList<Mood>();
 
-    public MoodList(ArrayList<Mood> moodList) {
-        moodList = new ArrayList<Mood>();
-    }
+
+//    public MoodList(ArrayList<Mood> moodList) {
+//        moodList = new ArrayList<Mood>();
+//    }
 
     public void addMood(Mood mood){
         // add mood to database?
+        moodList.add(mood);
     }
+
 
     public void deleteMood(Mood mood){
         // delete mood from database?
+        moodList.remove(mood);
     }
 
-    public ArrayList<Mood> getMoodList(){
-        // return moodList from database?
-        return moodList;
+    public int countMoodList(){
+        return moodList.size();
     }
 
-    public void setMoodList(){
-        // something in here potentially
+    public Mood getMood(int index){
+        return moodList.get(index);
     }
+//
+//    public ArrayList<Mood> getMoodList(){
+//        // return moodList from database?
+//        return moodList;
+//    }
+//
+//    public void setMoodList(){
+//        // something in here potentially
+//    }
 
 
 }
