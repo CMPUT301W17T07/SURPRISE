@@ -29,14 +29,22 @@ public class FollowerList {
     }
 
     public void addFollower(User user){
-        followerList.add(user);
+        if(pendingFollowers.contains(user)) {
+            this.deletePending(user);
+            followerList.add(user);
+        }
+        else{
+            // if attempting to add a follower who is not in the user's pending requests
+            throw new IllegalArgumentException();
+        }
     }
 
     public void deleteFollower(User user){
+        // Current app design does not allow a user to delete a follower
         followerList.remove(user);
     }
 
-    public int countFollower(){
+    public int countFollowers(){
         return followerList.size();
     }
 

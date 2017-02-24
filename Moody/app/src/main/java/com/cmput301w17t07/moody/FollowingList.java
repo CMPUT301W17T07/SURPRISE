@@ -28,19 +28,31 @@ public class FollowingList {
         pendingFollowing.get(index);
     }
 
-    public void addFollower(User user){
-        followingList.add(user);
+    public void addFollowing(User user){
+        // add a user to the user's following list
+        if(pendingFollowing.contains(user)) {
+            this.deletePending(user);
+            followingList.add(user);
+        }
+        else{
+            // throw an exception if the user being added to the list is not contained in the pending list
+            throw new IllegalArgumentException();
+        }
+
     }
 
-    public void deleteFollower(User user){
+    public void deleteFollowing(User user){
+        // remove a user from the user's following list. Current app design does not allow a user
+        // to remove another user from their following list
         followingList.remove(user);
     }
 
-    public int countFollower(){
+    public int countFollowing(){
         return followingList.size();
     }
 
-    public User getFollower(int index){
+    public User getFollowing(int index){
+        // get specific user from following list
         return followingList.get(index);
     }
 }
