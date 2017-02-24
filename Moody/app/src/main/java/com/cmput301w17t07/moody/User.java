@@ -11,11 +11,19 @@ public class User {
     private String username;
     private Image profilePicture;
     private MoodList moodList;
+    private FollowingList followingList;
 
     public User(String username){
+<<<<<<< HEAD
         this.username= username;
         this.profilePicture= null;
         this.moodList= null;
+=======
+        this.username=username;
+        this.profilePicture=null;
+        this.moodList=null;
+        this.followingList=null;
+>>>>>>> 095854a08e7b09d74d794e9384f284165ca2fc45
     }
 
     public User(String username,MoodList moodList){
@@ -23,10 +31,11 @@ public class User {
         this.moodList=moodList;
     }
 
-    public User(String username, Image profilePicture, MoodList moodList) {
+    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList) {
         this.username = username;
         this.profilePicture = profilePicture;
         this.moodList = moodList;
+        this.followingList=followingList;
     }
 
     public String getUsername() {
@@ -52,5 +61,13 @@ public class User {
 
     public void setMoodList(MoodList moodList) {
         this.moodList = moodList;
+    }
+
+    public FollowingList getFollowingList() {
+        return followingList;
+    }
+
+    public void setFollowingList(FollowingList followingList) {
+        this.followingList = followingList;
     }
 }
