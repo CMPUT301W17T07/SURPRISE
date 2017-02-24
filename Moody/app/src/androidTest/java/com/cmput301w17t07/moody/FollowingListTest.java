@@ -59,5 +59,14 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
         assertEquals(followingList.countFollowing(),1);
     }
 
+    @Test
+    public void TestGetFollowing(){
+        FollowingList followingList = new FollowingList();
+        User user = new User("user");
+
+        followingList.addPending(user);
+        followingList.addFollowing(user);
+        assertEquals(followingList.getFollowing(0),user);
+    }
 
 }

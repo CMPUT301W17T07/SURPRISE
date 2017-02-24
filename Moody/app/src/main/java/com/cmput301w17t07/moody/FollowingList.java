@@ -11,11 +11,6 @@ public class FollowingList {
     public ArrayList<User> followingList = new ArrayList<User>();
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> f7668de2b5e79045cea87ee9e18bf7788267e022
     public void addPending(User user){
         // When a user sends a follow request to another user
         pendingFollowing.add(user);

@@ -15,8 +15,7 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
 
     @Test
     public void testAddFollower() {
-<<<<<<< HEAD
-=======
+
         FollowerList followerList = new FollowerList();
         User user = new User("user");
         User user1 = new User("user1");
@@ -50,7 +49,6 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
     public void testCountFollowers(){
         FollowerList followerList = new FollowerList();
         User user = new User("user");
->>>>>>> f7668de2b5e79045cea87ee9e18bf7788267e022
 
         assertEquals(followerList.countFollowers(), 0);
         followerList.addPending(user);
@@ -58,5 +56,15 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
         assertEquals(followerList.countFollowers(),1);
     }
 
+
+    @Test
+    public void TestGetFollowers(){
+        FollowerList followerList = new FollowerList();
+        User user = new User("user");
+
+        followerList.addPending(user);
+        followerList.addFollower(user);
+        assertEquals(followerList.getFollower(0),user);
+    }
 
 }
