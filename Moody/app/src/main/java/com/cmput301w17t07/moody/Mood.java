@@ -14,7 +14,7 @@ public class Mood {
     private String location;
     private Image moodImage;
 
-    public enum feel{
+    public enum feeling{
         happy,sad
     }
 
@@ -23,6 +23,7 @@ public class Mood {
         this.date=new Date();
         this.location=null;
         this.moodImage=null;
+
     }
     public Mood(String moodInformation, String location, Image moodImage) {
         this.moodInformation = moodInformation;
