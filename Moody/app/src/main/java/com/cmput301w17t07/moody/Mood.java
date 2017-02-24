@@ -14,9 +14,20 @@ public class Mood {
     private String location;
     private Image moodImage;
     private String socialSituation;
+    private Feeling feeling;
 
     public enum Feeling{
         happy,sad
+    }
+
+    public Mood(Feeling feeling){
+        this.feeling=feeling;
+        this.moodMessage =null;
+        this.date=new Date();
+        this.location=null;
+        this.moodImage=null;
+        this.socialSituation=null;
+
     }
 
     public Mood(String moodMessage){
@@ -24,13 +35,15 @@ public class Mood {
         this.date=new Date();
         this.location=null;
         this.moodImage=null;
+        this.socialSituation=null;
 
     }
-    public Mood(String moodMessage, String location, Image moodImage) {
+    public Mood(String moodMessage, String location, Image moodImage, String socialSituation) {
         this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
         this.moodImage = moodImage;
+        this.socialSituation=socialSituation;
     }
 
     public String getMoodMessage() {
@@ -71,5 +84,13 @@ public class Mood {
 
     public void setMoodImage(Image moodImage) {
         this.moodImage = moodImage;
+    }
+
+    public Feeling getFeeling() {
+        return feeling;
+    }
+
+    public void setFeeling(Feeling feeling) {
+        this.feeling = feeling;
     }
 }
