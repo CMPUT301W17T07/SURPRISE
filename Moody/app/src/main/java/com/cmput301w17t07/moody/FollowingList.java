@@ -9,31 +9,9 @@ import java.util.ArrayList;
 public class FollowingList {
     public ArrayList<User> pendingFollowing = new ArrayList<User>();
     public ArrayList<User> followingList = new ArrayList<User>();
-    Mood mood=new Mood("happy");
+    
 
 
-    public void addFollower(User user){
-        followingList.add(user);
-        
-    }
-
-    public void deleteFollower(User user){
-        followingList.remove(user);
-    }
-
-    public int countFollower(){
-        return followingList.size();
-    }
-
-    public User getFollower(int index){
-        return followingList.get(index);
-    }
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> ed8b9189d3d4b506ce36f7aca377cdfd5cd2a498
     public void addPending(User user){
         // When a user sends a follow request to another user
         pendingFollowing.add(user);
@@ -89,8 +67,5 @@ public class FollowingList {
     public boolean hasPending(User user){
         return pendingFollowing.contains(user);
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> ed8b9189d3d4b506ce36f7aca377cdfd5cd2a498
 }
