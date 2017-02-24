@@ -30,12 +30,14 @@ public class FollowingList {
 
     public void addFollowing(User user){
         // add a user to the user's following list
-        if(pendingFollowing.contains(user)) {
+        if(pendingFollowing.contains(user) && !(followingList.contains(user))){
+            // only adds user
             this.deletePending(user);
             followingList.add(user);
         }
         else{
             // throw an exception if the user being added to the list is not contained in the pending list
+            // or if the user is already in the followinglist
             throw new IllegalArgumentException();
         }
 
@@ -54,5 +56,13 @@ public class FollowingList {
     public User getFollowing(int index){
         // get specific user from following list
         return followingList.get(index);
+    }
+
+    public boolean hasFollowing(User user){
+        return followingList.contains(user);
+    }
+
+    public boolean hasPending(User user){
+        return pendingFollowing.contains(user);
     }
 }

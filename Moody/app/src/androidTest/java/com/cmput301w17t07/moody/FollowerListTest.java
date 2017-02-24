@@ -9,13 +9,13 @@ import org.junit.Test;
  */
 
 public class FollowerListTest extends ActivityInstrumentationTestCase2{
+    public FollowerListTest() {
+        super(FollowerList.class);
+    }
+
 
     @Test
-    public void testAddMood() {
-        MoodList moodList=new MoodList();
-        Mood mood=new Mood("happy");
-        moodList.addMood(mood);
-        assertEquals(moodList.countMoodList(),1);
+    public void testAddFollower() {
 
     }
 
