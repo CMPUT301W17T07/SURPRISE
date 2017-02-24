@@ -24,7 +24,7 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
         assertTrue(followerList.hasPending(user));
         followerList.addFollower(user);
         // check if user added to following list
-        assertTrue(followerList.hasFollowing(user));
+        assertTrue(followerList.hasFollower(user));
         // check if user removed from pending list
         assertFalse(followerList.hasPending(user));
 

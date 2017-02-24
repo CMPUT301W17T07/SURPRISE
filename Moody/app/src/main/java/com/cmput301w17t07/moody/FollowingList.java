@@ -22,6 +22,7 @@ public class FollowingList {
     }
 
     public void countPending(){
+        // method should not be used, as the number of pending requests a user sends out is not kept track of
         pendingFollowing.size();
     }
 
@@ -58,6 +59,8 @@ public class FollowingList {
         // get specific user from following list
         return followingList.get(index);
     }
+
+
 
     public boolean hasFollowing(User user){
         return followingList.contains(user);

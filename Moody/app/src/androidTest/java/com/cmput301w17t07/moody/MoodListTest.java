@@ -29,6 +29,17 @@ public class MoodListTest extends ActivityInstrumentationTestCase2 {
     }
 
     @Test
+    public void testHasMood(){
+        // TDD: Test > Fail > Code > Pass (LOOP)
+        MoodList moodList = new MoodList();
+        Mood mood = new Mood("test mood");
+        // first checking that list doesn't have tweet before its addition
+        assertFalse(moodList.hasMood(mood));
+        moodList.addMood(mood);
+        assertTrue(moodList.hasMood(mood));
+    }
+
+    @Test
     public void testDeleteMood(){
         MoodList moodList=new MoodList();
         Mood mood=new Mood("happy");
@@ -43,8 +54,8 @@ public class MoodListTest extends ActivityInstrumentationTestCase2 {
     public void testCountMoodList(){
         MoodList moodList=new MoodList();
         Mood mood=new Mood("happy");
+        assertEquals(moodList.countMoodList(),0);
         moodList.addMood(mood);
-
         assertEquals(moodList.countMoodList(),1);
     }
 
