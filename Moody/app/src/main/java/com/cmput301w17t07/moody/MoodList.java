@@ -17,7 +17,12 @@ public class MoodList {
 
     public void addMood(Mood mood){
         // add mood to database?
-        moodList.add(mood);
+        if(moodList.contains(mood)){
+            throw new IllegalArgumentException();
+        }
+        else{
+            moodList.add(mood);
+        }
     }
 
 

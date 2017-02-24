@@ -14,16 +14,14 @@ public class User {
     private FollowingList followingList;
 
     public User(String username){
-<<<<<<< HEAD
+
         this.username= username;
         this.profilePicture= null;
         this.moodList= null;
-=======
         this.username=username;
         this.profilePicture=null;
         this.moodList=null;
         this.followingList=null;
->>>>>>> 095854a08e7b09d74d794e9384f284165ca2fc45
     }
 
     public User(String username,MoodList moodList){
