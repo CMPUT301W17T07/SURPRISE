@@ -12,6 +12,7 @@ public class User {
     private Image profilePicture;
     private MoodList moodList;
     private FollowingList followingList;
+    private FollowerList followerList;
 
     public User(String username){
 
@@ -22,6 +23,7 @@ public class User {
         this.profilePicture=null;
         this.moodList=null;
         this.followingList=null;
+        this.followerList=null;
     }
 
     public User(String username,MoodList moodList){
@@ -29,11 +31,13 @@ public class User {
         this.moodList=moodList;
     }
 
-    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList) {
+    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
+    ,FollowerList followerList) {
         this.username = username;
         this.profilePicture = profilePicture;
         this.moodList = moodList;
         this.followingList=followingList;
+        this.followerList=followerList;
     }
 
     public String getUsername() {
@@ -67,5 +71,13 @@ public class User {
 
     public void setFollowingList(FollowingList followingList) {
         this.followingList = followingList;
+    }
+
+    public FollowerList getFollowerList() {
+        return followerList;
+    }
+
+    public void setFollowerList(FollowerList followerList) {
+        this.followerList = followerList;
     }
 }
