@@ -52,4 +52,12 @@ public class FollowerList {
         return followerList.get(index);
     }
 
+    public boolean hasFollower(User user){
+        return followerList.contains(user);
+    }
+
+    public boolean hasPending(User user){
+        return pendingFollowers.contains(user);
+    }
+
 }

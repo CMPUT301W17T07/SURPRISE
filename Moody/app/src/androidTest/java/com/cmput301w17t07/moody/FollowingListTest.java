@@ -1,5 +1,6 @@
 package com.cmput301w17t07.moody;
 
+import android.support.v4.media.MediaMetadataCompat;
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
@@ -45,6 +46,17 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
             assertTrue((true));
         }
 
+    }
+
+    @Test
+    public void testCountFollowing(){
+        FollowingList followingList = new FollowingList();
+        User user = new User("user");
+
+        assertEquals(followingList.countFollowing(), 0);
+        followingList.addPending(user);
+        followingList.addFollowing(user);
+        assertEquals(followingList.countFollowing(),1);
     }
 
 
