@@ -42,7 +42,18 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
         } catch(IllegalArgumentException e){
             assertTrue((true));
         }
-
     }
+
+    @Test
+    public void testCountFollowers(){
+        FollowerList followerList = new FollowerList();
+        User user = new User("user");
+
+        assertEquals(followerList.countFollowers(), 0);
+        followerList.addPending(user);
+        followerList.addFollower(user);
+        assertEquals(followerList.countFollowers(),1);
+    }
+
 
 }
