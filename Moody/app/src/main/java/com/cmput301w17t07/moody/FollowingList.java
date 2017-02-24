@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class FollowingList {
     public ArrayList<User> pendingFollowing = new ArrayList<User>();
     public ArrayList<User> followingList = new ArrayList<User>();
-    
 
 
     public void addPending(User user){
