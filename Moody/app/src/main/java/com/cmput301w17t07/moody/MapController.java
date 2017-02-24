@@ -13,14 +13,14 @@ public class MapController {
 
         //private static JestDroidClient client;
 
-        public class AddMapInfor extends AsyncTask<Mood, Void, Void> {
+        public class AddMapInformation extends AsyncTask<Mood, Void, Void> {
             @Override
             protected Void doInBackground(Mood... params) {
                 return null;
             }
         }
 
-        public class GetMapInfor extends AsyncTask<String, Void, ArrayList<Mood>> {
+        public class GetMapInformation extends AsyncTask<String, Void, ArrayList<Mood>> {
             @Override
             protected ArrayList<Mood> doInBackground(String... params) {
                 verifySettings();
