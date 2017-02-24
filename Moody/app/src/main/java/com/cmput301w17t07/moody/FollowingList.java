@@ -8,20 +8,25 @@ import java.util.ArrayList;
 
 public class FollowingList {
     public ArrayList<User> followingList = new ArrayList<User>();
+    Mood mood=new Mood("happy");
 
-    public void addFolloer(User user){
+
+    public void addFollower(User user){
         followingList.add(user);
+        
     }
 
-    public void deleteFolloer(User user){
+    public void deleteFollower(User user){
         followingList.remove(user);
     }
 
-    public int countFolloer(){
+    public int countFollower(){
         return followingList.size();
     }
 
-    public User getFolloer(int index){
+    public User getFollower(int index){
         return followingList.get(index);
     }
+
+
 }
