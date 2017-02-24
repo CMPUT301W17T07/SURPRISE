@@ -45,7 +45,7 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
             assertTrue((true));
         }
 
-
-
     }
+
+
 }

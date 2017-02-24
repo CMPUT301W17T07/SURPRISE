@@ -30,7 +30,10 @@ public class FollowingList {
     }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed8b9189d3d4b506ce36f7aca377cdfd5cd2a498
     public void addPending(User user){
         // When a user sends a follow request to another user
         pendingFollowing.add(user);
@@ -86,5 +89,8 @@ public class FollowingList {
     public boolean hasPending(User user){
         return pendingFollowing.contains(user);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed8b9189d3d4b506ce36f7aca377cdfd5cd2a498
 }
