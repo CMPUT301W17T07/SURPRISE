@@ -58,13 +58,36 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
 
 
     @Test
-    public void TestGetFollowers(){
+    public void TestGetFollower(){
         FollowerList followerList = new FollowerList();
         User user = new User("user");
 
         followerList.addPending(user);
         followerList.addFollower(user);
         assertEquals(followerList.getFollower(0),user);
+    }
+
+    @Test
+    public void TestHasFollower(){
+        // TDD: Test > Fail > Code > Pass (LOOP)
+        FollowerList followerList = new FollowerList();
+        User user = new User("user");
+        assertFalse(followerList.hasFollower(user));
+        followerList.addPending(user);
+        followerList.addFollower(user);
+        assertTrue(followerList.hasFollower(user));
+    }
+
+    @Test
+    public void TestDeleteFollower(){
+        FollowerList followerList = new FollowerList();
+        User user = new User("user");
+
+        followerList.addPending(user);
+        followerList.addFollower(user);
+        assertEquals(followerList.countFollowers(),1);
+        followerList.deleteFollower(user);
+        assertEquals(followerList.countFollowers(),0);
     }
 
 }

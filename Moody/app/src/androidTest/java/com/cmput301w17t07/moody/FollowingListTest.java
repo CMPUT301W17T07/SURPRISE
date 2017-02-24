@@ -69,4 +69,27 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
         assertEquals(followingList.getFollowing(0),user);
     }
 
+    @Test
+    public void TestHasFollowing(){
+        // TDD: Test > Fail > Code > Pass (LOOP)
+        FollowingList followingList = new FollowingList();
+        User user = new User("user");
+        assertFalse(followingList.hasFollowing(user));
+        followingList.addPending(user);
+        followingList.addFollowing(user);
+        assertTrue(followingList.hasFollowing(user));
+    }
+
+    @Test
+    public void TestDeleteFollowing(){
+        FollowingList followingList = new FollowingList();
+        User user = new User("user");
+
+        followingList.addPending(user);
+        followingList.addFollowing(user);
+        assertEquals(followingList.countFollowing(),1);
+        followingList.deleteFollowing(user);
+        assertEquals(followingList.countFollowing(),0);
+    }
+
 }
