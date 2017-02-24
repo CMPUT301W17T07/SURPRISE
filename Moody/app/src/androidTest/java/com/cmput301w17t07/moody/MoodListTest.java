@@ -18,8 +18,14 @@ public class MoodListTest extends ActivityInstrumentationTestCase2 {
         MoodList moodList=new MoodList();
         Mood mood=new Mood("happy");
         moodList.addMood(mood);
-        assertEquals(moodList.countMoodList(),1);
-
+        assertTrue(moodList.hasMood(mood));
+        // testing to see if adding the same mood object will result in an error
+        try{
+            moodList.addMood(mood);
+            assertTrue(false);
+        } catch (IllegalArgumentException e){
+            assertTrue(true);
+        }
     }
 
     @Test

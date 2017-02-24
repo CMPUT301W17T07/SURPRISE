@@ -11,7 +11,6 @@ public class FollowingList {
     public ArrayList<User> followingList = new ArrayList<User>();
     Mood mood=new Mood("happy");
 
-<<<<<<< HEAD
 
     public void addFollower(User user){
         followingList.add(user);
@@ -31,7 +30,6 @@ public class FollowingList {
     }
 
 
-=======
     public void addPending(User user){
         // When a user sends a follow request to another user
         pendingFollowing.add(user);
@@ -87,5 +85,4 @@ public class FollowingList {
     public boolean hasPending(User user){
         return pendingFollowing.contains(user);
     }
->>>>>>> e01703846d538238f742c55e05ca7b7c3e37f83d
 }

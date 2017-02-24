@@ -38,6 +38,10 @@ public class MoodList {
     public Mood getMood(int index){
         return moodList.get(index);
     }
+
+    public boolean hasMood(Mood mood){
+        return moodList.contains(mood);
+    }
 //
 //    public ArrayList<Mood> getMoodList(){
 //        // return moodList from database?
