@@ -58,7 +58,7 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
 
 
     @Test
-    public void TestGetFollower(){
+    public void testGetFollower(){
         FollowerList followerList = new FollowerList();
         User user = new User("user");
 
@@ -68,7 +68,7 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
     }
 
     @Test
-    public void TestHasFollower(){
+    public void testHasFollower(){
         // TDD: Test > Fail > Code > Pass (LOOP)
         FollowerList followerList = new FollowerList();
         User user = new User("user");
@@ -79,7 +79,7 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
     }
 
     @Test
-    public void TestDeleteFollower(){
+    public void testDeleteFollower(){
         FollowerList followerList = new FollowerList();
         User user = new User("user");
 
@@ -88,6 +88,17 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
         assertEquals(followerList.countFollowers(),1);
         followerList.deleteFollower(user);
         assertEquals(followerList.countFollowers(),0);
+    }
+
+    @Test
+    public void testCountPending(){
+        FollowerList followerList = new FollowerList();
+        User user = new User("user");
+
+        assertEquals(followerList.countPending(), 0);
+        followerList.addPending(user);
+        assertEquals(followerList.countPending(), 1);
+
     }
 
 }

@@ -20,12 +20,12 @@ public class FollowerList {
         pendingFollowers.remove(user);
     }
 
-    public void countPending(){
-        pendingFollowers.size();
+    public int countPending(){
+        return pendingFollowers.size();
     }
 
-    public void getPending(int index){
-        pendingFollowers.get(index);
+    public User getPending(int index){
+        return pendingFollowers.get(index);
     }
 
     public void addFollower(User user){

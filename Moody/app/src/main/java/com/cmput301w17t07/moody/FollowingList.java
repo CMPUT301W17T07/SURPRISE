@@ -21,13 +21,13 @@ public class FollowingList {
         pendingFollowing.remove(user);
     }
 
-    public void countPending(){
+    public int countPending(){
         // method should not be used, as the number of pending requests a user sends out is not kept track of
-        pendingFollowing.size();
+        return pendingFollowing.size();
     }
 
-    public void getPending(int index){
-        pendingFollowing.get(index);
+    public User getPending(int index){
+        return pendingFollowing.get(index);
     }
 
     public void addFollowing(User user){

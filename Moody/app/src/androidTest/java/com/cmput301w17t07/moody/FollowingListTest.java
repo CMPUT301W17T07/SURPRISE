@@ -60,7 +60,7 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
     }
 
     @Test
-    public void TestGetFollowing(){
+    public void testGetFollowing(){
         FollowingList followingList = new FollowingList();
         User user = new User("user");
 
@@ -70,7 +70,7 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
     }
 
     @Test
-    public void TestHasFollowing(){
+    public void testHasFollowing(){
         // TDD: Test > Fail > Code > Pass (LOOP)
         FollowingList followingList = new FollowingList();
         User user = new User("user");
@@ -81,7 +81,7 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
     }
 
     @Test
-    public void TestDeleteFollowing(){
+    public void testDeleteFollowing(){
         FollowingList followingList = new FollowingList();
         User user = new User("user");
 
