@@ -8,8 +8,37 @@ import android.media.Image;
 
 public class User {
 
-    public String username;
-    public Image profilePicture;
+    private String username;
+    private Image profilePicture;
+    private MoodList moodList;
+    private FollowingList followingList;
+    private FollowerList followerList;
+
+    public User(String username){
+
+        this.username= username;
+        this.profilePicture= null;
+        this.moodList= null;
+        this.username=username;
+        this.profilePicture=null;
+        this.moodList=null;
+        this.followingList=null;
+        this.followerList=null;
+    }
+
+    public User(String username,MoodList moodList){
+        this.username=username;
+        this.moodList=moodList;
+    }
+
+    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
+    ,FollowerList followerList) {
+        this.username = username;
+        this.profilePicture = profilePicture;
+        this.moodList = moodList;
+        this.followingList=followingList;
+        this.followerList=followerList;
+    }
 
     public String getUsername() {
         return username;
@@ -26,5 +55,29 @@ public class User {
     public void setProfilePicture(Image profilePicture) {
         // Need to check image's size. Separate class object for this?
         this.profilePicture = profilePicture;
+    }
+
+    public MoodList getMoodList() {
+        return moodList;
+    }
+
+    public void setMoodList(MoodList moodList) {
+        this.moodList = moodList;
+    }
+
+    public FollowingList getFollowingList() {
+        return followingList;
+    }
+
+    public void setFollowingList(FollowingList followingList) {
+        this.followingList = followingList;
+    }
+
+    public FollowerList getFollowerList() {
+        return followerList;
+    }
+
+    public void setFollowerList(FollowerList followerList) {
+        this.followerList = followerList;
     }
 }
