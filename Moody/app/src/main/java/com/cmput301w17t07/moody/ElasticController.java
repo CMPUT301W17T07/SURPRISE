@@ -8,10 +8,11 @@ import com.searchly.jestdroid.JestDroidClient;
  * Created by mike on 2017-03-04.
  */
 
+/* Based on structure from LonelyTwitter */
+    
 public class ElasticController {
     protected static JestDroidClient client;
 
-    /** Sets up the client to be used for Elastic Search */
     protected static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder =
