@@ -23,8 +23,6 @@ public class TimelineActivity extends AppCompatActivity {
             registerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Toast.makeText(TimelineActivity.this, "Registtration successful!", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(TimelineActivity.this, TimelineActivity.class);
-//                    startActivity(intent);
                     setContentView(R.layout.activity_timeline);
                 }
             });
