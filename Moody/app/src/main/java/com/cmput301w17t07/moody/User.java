@@ -32,14 +32,11 @@ public class User {
 
     public User(String username){
 
-        this.username= username;
-        this.profilePicture= null;
-        this.moodList= null;
         this.username=username;
-        this.profilePicture=null;
-        this.moodList=null;
-        this.followingList=null;
-        this.followerList=null;
+//        this.profilePicture=null;
+//        this.moodList=null;
+//        this.followingList=null;
+//        this.followerList=null;
     }
 
     public User(String username,MoodList moodList){
