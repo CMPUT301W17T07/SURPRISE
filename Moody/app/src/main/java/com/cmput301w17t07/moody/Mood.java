@@ -17,7 +17,7 @@ public class Mood {
     private Feeling feeling;
 
     public enum Feeling{
-        happy,sad
+        anger, confusion, disgust, fear, happy,sad, shame, surprise
     }
 
     public Mood(Feeling feeling){
