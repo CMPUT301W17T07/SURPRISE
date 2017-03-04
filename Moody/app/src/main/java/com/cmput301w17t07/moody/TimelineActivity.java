@@ -42,7 +42,7 @@ public class TimelineActivity extends AppCompatActivity {
         }
     }
 
-    //Internet checker temp, maybe need change in the future
+    //Internet checker temp, maybe need change later
     private boolean checkNetworkState() {
         manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
