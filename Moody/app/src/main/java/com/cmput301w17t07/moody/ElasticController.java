@@ -1,5 +1,9 @@
 package com.cmput301w17t07.moody;
 
+import com.searchly.jestdroid.DroidClientConfig;
+import com.searchly.jestdroid.JestClientFactory;
+import com.searchly.jestdroid.JestDroidClient;
+
 /**
  * Created by mike on 2017-03-04.
  */
