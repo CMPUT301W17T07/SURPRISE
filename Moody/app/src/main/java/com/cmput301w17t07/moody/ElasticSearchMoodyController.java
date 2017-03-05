@@ -16,6 +16,10 @@ import io.searchbox.core.Index;
 
 public class ElasticSearchMoodyController extends ElasticController{
 
+    /**
+     * The AddUser nested class of ElasticSearchMoody controller. Allows for new users to be added
+     * to the database.
+     */
     public static class AddUser extends AsyncTask<User, Void, Void> {
 
         @Override
@@ -24,7 +28,7 @@ public class ElasticSearchMoodyController extends ElasticController{
             verifySettings();
 
             for (User user : users) {
-                Index index = new Index.Builder(user).index("cmput301w17t07").type("user").id("12321").build();
+                Index index = new Index.Builder(user).index("cmput301w17t07").type("user").build();
 
                 try {
                     DocumentResult result = client.execute(index);
