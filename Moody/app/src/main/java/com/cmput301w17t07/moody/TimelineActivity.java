@@ -11,13 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class TimelineActivity extends AppCompatActivity {
+<<<<<<< HEAD
 
     ConnectivityManager manager;
 
+=======
+    ConnectivityManager manager;
+>>>>>>> aef1f46a2eb51c2b9bc2309317d1d73a90795d91
     private EditText usernameText;
 
     @Override
@@ -37,6 +40,7 @@ public class TimelineActivity extends AppCompatActivity {
              */
             registerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
+<<<<<<< HEAD
                     String username = usernameText.getText().toString();
                     User newUser = new User(username);
                     // Want to add something here like user.checkUsername that will check the database to see if username
@@ -55,6 +59,20 @@ public class TimelineActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(TimelineActivity.this, "Registtration successful!", Toast.LENGTH_SHORT).show();
+=======
+                    if (checkNetworkState() == false) {
+                        Toast.makeText(TimelineActivity.this, "Internet not available \n" +
+                                "Plaese check internet", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        String username = usernameText.getText().toString();
+                        User newUser = new User(username);
+                        // Want to add something here like user.checkUsername that will check the database to see if username
+                        // is unique. if(user.checkUsername == false) {return} else ....
+                        ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+                        addUser.execute(newUser);
+                        Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+>>>>>>> aef1f46a2eb51c2b9bc2309317d1d73a90795d91
                         setContentView(R.layout.activity_timeline);
                     }
                 }
@@ -71,6 +89,17 @@ public class TimelineActivity extends AppCompatActivity {
         if (info == null) {
             return false;
         } else {
+            return true;
+        }
+    }
+    //Internet checker temp, maybe need change later
+    private boolean checkNetworkState() {
+        manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info == null) {
+            return false;
+        }
+        else {
             return true;
         }
     }
