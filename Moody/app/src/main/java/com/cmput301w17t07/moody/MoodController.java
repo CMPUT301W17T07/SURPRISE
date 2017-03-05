@@ -28,7 +28,7 @@ public class MoodController {
     }
 
     public String getLocation() {
-        mood.getLocation()
+        return mood.getLocation();
     }
 
     public void setLocation(String location) {
@@ -44,7 +44,7 @@ public class MoodController {
 
 
     public String getSocialSituation() {
-        mood.getSocialSituation();
+        return mood.getSocialSituation();
     }
 
     public void setSocialSituation(String socialSituation) {
