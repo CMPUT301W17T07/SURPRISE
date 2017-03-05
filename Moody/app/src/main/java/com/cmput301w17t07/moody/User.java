@@ -2,6 +2,8 @@ package com.cmput301w17t07.moody;
 
 import android.media.Image;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by mike on 2017-02-23.
  */
@@ -14,16 +16,27 @@ public class User {
     private FollowingList followingList;
     private FollowerList followerList;
 
+    @JestId
+
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
     public User(String username){
 
-        this.username= username;
-        this.profilePicture= null;
-        this.moodList= null;
         this.username=username;
-        this.profilePicture=null;
-        this.moodList=null;
-        this.followingList=null;
-        this.followerList=null;
+//        this.profilePicture=null;
+//        this.moodList=null;
+//        this.followingList=null;
+//        this.followerList=null;
     }
 
     public User(String username,MoodList moodList){
