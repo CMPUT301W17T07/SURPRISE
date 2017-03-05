@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301w17t07.moody">
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+
+>>>>>>> 86445c274da3f8e48db3e2e73b20f57035fd38c8
 
     <application
         android:allowBackup="true"
@@ -38,7 +43,6 @@
         <activity android:name=".MapOptionsActivity" />
         <activity android:name=".MapViewActivity" />
         <activity android:name=".MoodGraphActivity"></activity>
-        <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
 </manifest>
