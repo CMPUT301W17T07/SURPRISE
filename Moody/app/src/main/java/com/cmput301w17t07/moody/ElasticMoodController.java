@@ -44,7 +44,7 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-    public class GetMood extends AsyncTask<String, Void, ArrayList<Mood>> {
+    public class GetMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         @Override
         protected ArrayList<Mood> doInBackground(String... params) {
             verifySettings();

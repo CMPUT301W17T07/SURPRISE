@@ -17,6 +17,7 @@ public class Mood {
     private Image moodImage;
     private String socialSituation;
     private Feeling feeling;
+    private String username;
 
     @JestId
 
@@ -34,8 +35,9 @@ public class Mood {
         anger, confusion, disgust, fear, happy,sad, shame, surprise
     }
 
-    public Mood(Feeling feeling){
+    public Mood(Feeling feeling, String username){
         this.feeling=feeling;
+        this.username = username;
         this.moodMessage =null;
         this.date=new Date();
         this.location=null;
@@ -44,8 +46,10 @@ public class Mood {
 
     }
 
-    public Mood(String moodMessage){
-        this.moodMessage =moodMessage;
+    public Mood(Feeling feeling, String username, String moodMessage){
+        this.feeling = feeling;
+        this.username = username;
+        this.moodMessage = moodMessage;
         this.date=new Date();
         this.location=null;
         this.moodImage=null;
