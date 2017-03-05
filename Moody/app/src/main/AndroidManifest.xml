@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301w17t07.moody">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.INTERNET" />
-=======
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-=======
-    <uses-permission android:name="android.permission.INTERNET" />
-
->>>>>>> 86445c274da3f8e48db3e2e73b20f57035fd38c8
->>>>>>> ab55819fad3853fcb316011924fce42cad79ea60
-=======
-=======
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
->>>>>>> 958bee1357c1a5fb2136b3d7b3515558292e0d7d
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
->>>>>>> aef1f46a2eb51c2b9bc2309317d1d73a90795d91
 
     <application
         android:allowBackup="true"
@@ -33,11 +13,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 958bee1357c1a5fb2136b3d7b3515558292e0d7d
         <activity
             android:name = ".TimelineActivity"
             android:label = "@string/app_name">

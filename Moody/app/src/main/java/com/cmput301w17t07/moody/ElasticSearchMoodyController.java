@@ -37,13 +37,9 @@ public class ElasticSearchMoodyController extends ElasticController{
                 } catch (IOException e) {
                     Log.i("Error", "The application failed to add the user");
                 }
-<<<<<<< HEAD
 
             }
 
-=======
-            }
->>>>>>> ab55819fad3853fcb316011924fce42cad79ea60
             return null;
         }
     }
