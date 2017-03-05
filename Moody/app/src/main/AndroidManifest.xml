@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301w17t07.moody">
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -34,7 +36,6 @@
         <activity android:name=".MapOptionsActivity" />
         <activity android:name=".MapViewActivity" />
         <activity android:name=".MoodGraphActivity"></activity>
-        <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
 </manifest>
