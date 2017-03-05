@@ -28,7 +28,7 @@ public class ElasticSearchMoodyController extends ElasticController{
             verifySettings();
 
             for (User user : users) {
-                Index index = new Index.Builder(user).index("cmput301w17t07").type("user").id("12321").build();
+                Index index = new Index.Builder(user).index("cmput301w17t07").type("user").build();
 
                 try {
                     DocumentResult result = client.execute(index);

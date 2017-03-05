@@ -4,6 +4,8 @@ import android.media.Image;
 
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by mike on 2017-02-23.
  */
@@ -15,6 +17,18 @@ public class Mood {
     private Image moodImage;
     private String socialSituation;
     private Feeling feeling;
+
+    @JestId
+
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public enum Feeling{
         anger, confusion, disgust, fear, happy,sad, shame, surprise
