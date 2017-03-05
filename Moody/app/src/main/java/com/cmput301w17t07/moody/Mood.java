@@ -16,7 +16,7 @@ public class Mood {
     private String location;
     private Image moodImage;
     private String socialSituation;
-    private Feeling feeling;
+    private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
 
     @JestId
@@ -31,12 +31,12 @@ public class Mood {
         this.id = id;
     }
 
-    public enum Feeling{
-        anger, confusion, disgust, fear, happy,sad, shame, surprise
-    }
+//    public enum Feeling{
+//        anger, confusion, disgust, fear, happy,sad, shame, surprise
+//    }
 
-    public Mood(Feeling feeling, String username){
-        this.feeling=feeling;
+    public Mood(String feeling, String username){
+        this.feeling= feeling;
         this.username = username;
         this.moodMessage =null;
         this.date=new Date();
@@ -46,23 +46,18 @@ public class Mood {
 
     }
 
-    public Mood(Feeling feeling, String username, String moodMessage){
+    public Mood(String feeling, String username, String moodMessage, String location,
+                Image image, String socialSituation){
         this.feeling = feeling;
         this.username = username;
         this.moodMessage = moodMessage;
-        this.date=new Date();
-        this.location=null;
-        this.moodImage=null;
-        this.socialSituation=null;
-
-    }
-    public Mood(String moodMessage, String location, Image moodImage, String socialSituation) {
-        this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
-        this.moodImage = moodImage;
-        this.socialSituation=socialSituation;
+        this.moodImage = image;
+        this.socialSituation = socialSituation;
+
     }
+
 
     public String getMoodMessage() {
         return moodMessage;
@@ -104,11 +99,19 @@ public class Mood {
         this.moodImage = moodImage;
     }
 
-    public Feeling getFeeling() {
+    public String getFeeling() {
         return feeling;
     }
 
-    public void setFeeling(Feeling feeling) {
+    public void setFeeling(String feeling) {
         this.feeling = feeling;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
