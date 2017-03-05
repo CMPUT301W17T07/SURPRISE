@@ -13,7 +13,9 @@ import io.searchbox.core.Index;
  * Created by mike on 2017-02-23.
  */
 
+
 public class ElasticSearchMoodyController extends ElasticController{
+
     public static class AddUser extends AsyncTask<User, Void, Void> {
 
         @Override
@@ -21,7 +23,7 @@ public class ElasticSearchMoodyController extends ElasticController{
 
             verifySettings();
 
-            for (User user: users) {
+            for (User user : users) {
                 Index index = new Index.Builder(user).index("cmput301w17t07").type("user").id("12321").build();
 
                 try {
@@ -56,3 +58,5 @@ public class ElasticSearchMoodyController extends ElasticController{
 
 
 }
+
+
