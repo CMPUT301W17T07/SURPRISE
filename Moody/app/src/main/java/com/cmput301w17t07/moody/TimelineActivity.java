@@ -54,6 +54,7 @@ public class TimelineActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_timeline);
         }
+
     }
 
     //Internet checker temp, maybe need change later

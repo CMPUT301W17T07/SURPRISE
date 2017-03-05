@@ -33,24 +33,32 @@ public class User {
     public User(String username){
 
         this.username=username;
-//        this.profilePicture=null;
-//        this.moodList=null;
-//        this.followingList=null;
-//        this.followerList=null;
+        this.profilePicture=null;  // todo make stock profile image user's image
+        this.moodList=null;
+        this.followingList=null;
+        this.followerList=null;
     }
 
-    public User(String username,MoodList moodList){
-        this.username=username;
-        this.moodList=moodList;
-    }
+//    public User(String username,MoodList moodList){
+//        this.username=username;
+//        this.moodList=moodList;
+//    }
 
-    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
-    ,FollowerList followerList) {
+//    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
+//    ,FollowerList followerList) {
+//        this.username = username;
+//        this.profilePicture = profilePicture;
+//        this.moodList = moodList;
+//        this.followingList=followingList;
+//        this.followerList=followerList;
+//    }
+
+    public User(String username, Image profilePicture) {
         this.username = username;
         this.profilePicture = profilePicture;
-        this.moodList = moodList;
-        this.followingList=followingList;
-        this.followerList=followerList;
+        this.moodList = null;
+        this.followingList=null;
+        this.followerList=null;
     }
 
     public String getUsername() {
