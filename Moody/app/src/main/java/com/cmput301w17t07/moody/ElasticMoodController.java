@@ -67,13 +67,11 @@ public class ElasticMoodController extends ElasticController {
                 System.out.println("this is query" + query);
             }
 
-            // TODO Build the query
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
                     .addType("mood").build();
 
             try {
-                // TODO get the results of the query
 
 
                 SearchResult result = client.execute(search);
