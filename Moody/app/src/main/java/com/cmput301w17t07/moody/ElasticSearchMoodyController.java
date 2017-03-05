@@ -2,12 +2,6 @@ package com.cmput301w17t07.moody;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.searchly.jestdroid.DroidClientConfig;
-import com.searchly.jestdroid.JestClientFactory;
-import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,10 +14,6 @@ import io.searchbox.core.Index;
  */
 
 public class ElasticSearchMoodyController extends ElasticController{
-<<<<<<< HEAD
-=======
-
->>>>>>> 86445c274da3f8e48db3e2e73b20f57035fd38c8
     public static class AddUser extends AsyncTask<User, Void, Void> {
 
         @Override
@@ -65,8 +55,4 @@ public class ElasticSearchMoodyController extends ElasticController{
     }
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 86445c274da3f8e48db3e2e73b20f57035fd38c8
- }
+}
