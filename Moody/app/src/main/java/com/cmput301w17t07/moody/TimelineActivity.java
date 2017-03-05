@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class TimelineActivity extends AppCompatActivity {
+
     ConnectivityManager manager;
 
     private EditText usernameText;
@@ -40,6 +41,9 @@ public class TimelineActivity extends AppCompatActivity {
                     User newUser = new User(username);
                     // Want to add something here like user.checkUsername that will check the database to see if username
                     // is unique. if(user.checkUsername == false) {return} else ....
+                    /**
+                     * Adding of user to database is done here
+                     */
                     ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
                     addUser.execute(newUser);
                     Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
