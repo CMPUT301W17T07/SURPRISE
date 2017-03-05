@@ -2,7 +2,7 @@
     <string name="app_name">Moody</string>
     <string name="login">Login</string>
     <string name="Home">Home</string>
-    <string name="SearchFilter">Search and Filter</string>
+    <string name="SearchFilter">Search</string>
     <string name="Profile">Profile</string>
-    <string name="CreateMood">Create Mood</string>
+    <string name="CreateMood">Create</string>
 </resources>

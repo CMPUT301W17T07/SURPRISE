@@ -7,11 +7,19 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.lang.reflect.Field;
 
 public class TimelineActivity extends AppCompatActivity {
     ConnectivityManager manager;
@@ -37,8 +45,7 @@ public class TimelineActivity extends AppCompatActivity {
                     if (checkNetworkState() == false) {
                         Toast.makeText(TimelineActivity.this, "Internet not available \n" +
                                 "Plaese check internet", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         String username = usernameText.getText().toString();
                         User newUser = new User(username);
                         // Want to add something here like user.checkUsername that will check the database to see if username
@@ -48,11 +55,14 @@ public class TimelineActivity extends AppCompatActivity {
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
                         setContentView(R.layout.activity_timeline);
+                        setUpMenuBar();
                     }
                 }
             });
         } else {
             setContentView(R.layout.activity_timeline);
+            setUpMenuBar();
+
         }
     }
 
@@ -67,4 +77,40 @@ public class TimelineActivity extends AppCompatActivity {
         }
     }
 
+    private void setUpMenuBar() {
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+
+                                break;
+                            //setContentView(R.layout.activity_timeline);
+                            case R.id.action_search:
+
+                                break;
+                            //setContentView(R.layout.activity_search_filter_options);
+                            case R.id.action_profile:
+
+                                break;
+                            //setContentView(R.layout.activity_profile);
+                            case R.id.action_create:
+
+                                break;
+                            //setContentView(R.layout.activity_create_mood);
+                        }
+                        return false;
+                    }
+                });
+    }
+
+
+
 }
+
