@@ -16,7 +16,7 @@ public class ElasticController {
     protected static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder =
-                    new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
+                    new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();
