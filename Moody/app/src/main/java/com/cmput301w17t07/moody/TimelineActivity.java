@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class TimelineActivity extends AppCompatActivity {
     ConnectivityManager manager;
@@ -37,6 +38,8 @@ public class TimelineActivity extends AppCompatActivity {
             Button registerButton = (Button) findViewById(R.id.register);
 
             usernameText = (EditText) findViewById(R.id.enterUsername);
+
+
             /**
              * On user's click of the register button
              */
@@ -48,9 +51,6 @@ public class TimelineActivity extends AppCompatActivity {
                     } else {
                         String username = usernameText.getText().toString();
                         //todo get image from user and createUser with image parameter
-//                        User newUser = new User(username);
-//                        ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
-//                        addUser.execute(newUser);
                         UserController userController = new UserController();
                         //todo change createUser function to return an value that indicates whether
                         //todo image needs to be dif size or if username is not unique and provide unique messages for each case
