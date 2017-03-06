@@ -44,15 +44,23 @@ public class TimelineActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (checkNetworkState() == false) {
                         Toast.makeText(TimelineActivity.this, "Internet not available \n" +
-                                "Plaese check internet", Toast.LENGTH_SHORT).show();
+                                "Please check internet", Toast.LENGTH_SHORT).show();
                     } else {
                         String username = usernameText.getText().toString();
-                        User newUser = new User(username);
-                        // Want to add something here like user.checkUsername that will check the database to see if username
-                        // is unique. if(user.checkUsername == false) {return} else ....
-                        ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
-                        addUser.execute(newUser);
+                        //todo get image from user and createUser with image parameter
+//                        User newUser = new User(username);
+//                        ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+//                        addUser.execute(newUser);
+                        UserController userController = new UserController();
+                        //todo change createUser function to return an value that indicates whether
+                        //todo image needs to be dif size or if username is not unique and provide unique messages for each case
+                        if(!userController.createUser(username)){
+                            Toast.makeText(TimelineActivity.this,
+                                    "Username is already taken", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+
 
                         setContentView(R.layout.activity_timeline);
                         setUpMenuBar();
@@ -66,6 +74,7 @@ public class TimelineActivity extends AppCompatActivity {
         }
     }
 
+    //todo remove this from activity and implement in a separate class/controller/etc.
     //Internet checker temp, maybe need change later
     private boolean checkNetworkState() {
         manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
