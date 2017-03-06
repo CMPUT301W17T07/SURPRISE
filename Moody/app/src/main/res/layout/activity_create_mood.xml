@@ -32,45 +32,65 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/Camera"
+        android:layout_toEndOf="@+id/Camera" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/Description"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="86dp" />
 
     <ImageButton
         android:id="@+id/Camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_camera"
-        android:layout_alignParentBottom="true"
+        android:layout_x="50px"
+        android:layout_y="100px"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp" />
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/Camera"
-        android:layout_toRightOf="@+id/Camera"
         app:srcCompat="@drawable/ic_location"
-        android:layout_alignTop="@+id/Camera" />
+        android:layout_alignTop="@+id/Camera"
+        android:layout_toRightOf="@+id/Camera"
+        android:layout_toEndOf="@+id/Camera" />
 
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/imageButton2"
+        app:srcCompat="@drawable/ic_social"
+        android:layout_alignTop="@+id/imageButton2"
         android:layout_toRightOf="@+id/imageButton2"
-        app:srcCompat="@drawable/ic_social" />
+        android:layout_toEndOf="@+id/imageButton2" />
+
+
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/yellowTheme"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menubar" />
 
 
 </RelativeLayout>
