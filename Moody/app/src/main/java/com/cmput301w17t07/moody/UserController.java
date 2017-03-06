@@ -25,7 +25,7 @@ public class UserController {
     }
 
     public static Boolean createUser(String username){
-        if(!checkUsername()){
+        if(!checkUsername(username)){
             // if checkUsername returns false...
             return false; // timeline activity will check to see if username meets requirements
         }
@@ -42,11 +42,11 @@ public class UserController {
     }
 
     public static Boolean createUser(String username, Image profilePicture){
-        if(!checkUsername()){
+        if(!checkUsername(username)){
             // if checkUsername returns false...
             return false; // timeline activity will check to see if username meets requirements
         }
-        else if(!checkProfilePicture()){
+        else if(!checkProfilePicture(profilePicture)){
             // if checkProfilePicture returns false...
             return false; // timeline activity will check to see if profilePicture meets size requirements
         }
@@ -62,15 +62,15 @@ public class UserController {
         return true;
     }
 
-    public static Boolean checkUsername(){
+    public static Boolean checkUsername(String username){
         // function to check if username is unique
-        return false; // placeholder
+        return true; // placeholder
     }
 
-    public static Boolean checkProfilePicture(){
+    public static Boolean checkProfilePicture(Image profilePicture){
         // function to check if profile picture meets size requirements
 
-        return false; //placeholder
+        return true; //placeholder
     }
 
     public void setUsername(String username){
