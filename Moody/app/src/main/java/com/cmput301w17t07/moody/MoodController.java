@@ -11,6 +11,40 @@ public class MoodController {
 
     private static Mood mood = null;
 
+    //todo getMood method. Not sure how exactly to do this yet. Needs to retrieve the mood the user
+    // has selected
+
+    public static Boolean createMood(String feeling, String username, String moodMessage,
+                                     String location, Image image, String socialSituation){
+        if(!checkMoodMessage(moodMessage)){
+            // if it returns false...
+            return false;
+        }
+        if(!checkMoodImage(image)){
+            // if moodImage size does not meet requirements...
+            return false;
+        }
+
+        //todo implement mood constructor with all parameters
+
+        Mood newMood = new Mood(feeling, username);
+        ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+        addMood.execute(newMood);
+
+        return true;
+    }
+
+    public static Boolean checkMoodMessage(String moodMessage){
+        //todo implement method to check message length
+        return true;
+    }
+
+    public static Boolean checkMoodImage(Image image){
+        //todo implement xin's method of checking image size
+        return true;
+    }
+
+
     public String getMoodMessage() {
         return mood.getMoodMessage();
     }

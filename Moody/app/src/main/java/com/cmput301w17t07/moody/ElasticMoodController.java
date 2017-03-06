@@ -18,7 +18,7 @@ import io.searchbox.core.SearchResult;
 public class ElasticMoodController extends ElasticController {
 
 
-    public class AddMood extends AsyncTask<Mood, Void, Void> {
+    public static class AddMood extends AsyncTask<Mood, Void, Void> {
 
         @Override
         protected Void doInBackground(Mood... moods) {
@@ -47,7 +47,7 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-    public class GetFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+    public static class GetFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
@@ -91,7 +91,7 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-    public class GetUserMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+    public static class GetUserMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
