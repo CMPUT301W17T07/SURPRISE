@@ -22,7 +22,7 @@ import android.widget.Toast;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends BarMenuActivity {
     ConnectivityManager manager;
     private EditText usernameText;
 
@@ -48,7 +48,8 @@ public class TimelineActivity extends AppCompatActivity {
                     if (checkNetworkState() == false) {
                         Toast.makeText(TimelineActivity.this, "Internet not available \n" +
                                 "Please check internet", Toast.LENGTH_SHORT).show();
-                    } else {
+                    }
+                    else {
                         String username = usernameText.getText().toString();
                         //todo get image from user and createUser with image parameter
                         UserController userController = new UserController();
@@ -85,41 +86,5 @@ public class TimelineActivity extends AppCompatActivity {
             return true;
         }
     }
-
-    private void setUpMenuBar() {
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_home:
-
-                                break;
-                            //setContentView(R.layout.activity_timeline);
-                            case R.id.action_search:
-
-                                break;
-                            //setContentView(R.layout.activity_search_filter_options);
-                            case R.id.action_profile:
-
-                                break;
-                            //setContentView(R.layout.activity_profile);
-                            case R.id.action_create:
-
-                                break;
-                            //setContentView(R.layout.activity_create_mood);
-                        }
-                        return false;
-                    }
-                });
-    }
-
-
-
 }
 
