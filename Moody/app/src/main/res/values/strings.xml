@@ -5,4 +5,9 @@
     <string name="SearchFilter">Search</string>
     <string name="Profile">Profile</string>
     <string name="CreateMood">Create</string>
+    <string name="title_activity_test">testActivity</string>
+
+    <string name="title_activity_practice">practice</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

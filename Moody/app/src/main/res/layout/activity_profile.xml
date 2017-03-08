@@ -11,19 +11,9 @@
     tools:context="com.cmput301w17t07.moody.ProfileActivity">
 
 
-    <android.support.design.widget.BottomNavigationView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/bottom_navigation"
+    <ListView
+        android:id="@+id/testList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/yellowTheme"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menubar" />
-
-
-
-
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
