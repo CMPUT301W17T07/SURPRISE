@@ -17,7 +17,7 @@ import java.util.List;
 
 import static android.R.id.list;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BarMenuActivity {
 
     private ListView moodTimeline;
     private TimelineAdapter adapter;
@@ -28,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        setUpMenuBar(this);
         UserController userController = new UserController();
 //        username = userController.getUsername();
 
@@ -52,7 +53,9 @@ public class ProfileActivity extends AppCompatActivity {
 //        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
         moodTimelineListView.setAdapter(adapter);
+
     }
+
 }
 
 

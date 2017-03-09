@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class CreateMoodActivity extends AppCompatActivity {
+public class CreateMoodActivity extends BarMenuActivity {
     private ImageView mImageView;
     private EditText EmotionText;
     private EditText Description;
@@ -28,6 +28,7 @@ public class CreateMoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_mood);
+        setUpMenuBar(this);
         EmotionText = (EditText) findViewById(R.id.Emotion);
         Description = (EditText) findViewById(R.id.Description);
 

@@ -15,31 +15,31 @@ public class TestMood extends ActivityInstrumentationTestCase2{
         super(Mood.class);
 
     }
-//
-//    @Test
-//    public void testGetMoodMessage(){
-//        Mood mood=new Mood("happy");
-//        assertEquals(mood.getMoodMessage(),"happy");
-//    }
-//
-//    @Test
-//    public void testSetMoodMessage(){
-//        Mood mood=new Mood("happy");
-//        mood.setMoodMessage("sad");
-//        assertEquals(mood.getMoodMessage(),"sad");
-//    }
-//
-//    @Test
-//    public void testGetFeeling(){
-//        Mood mood=new Mood(happy);
-//        assertEquals(mood.getFeeling(),happy);
-//    }
-//
-//    @Test
-//    public void testSetFeeling(){
-//        Mood mood=new Mood(happy);
-//        mood.setFeeling(sad);
-//        assertEquals(mood.getFeeling(),sad);
-//    }
+
+    @Test
+    public void testGetMoodMessage(){
+        Mood mood=new Mood("happy","xin");
+        assertEquals(mood.getFeeling(),"happy");
+    }
+
+    @Test
+    public void testSetMoodMessage(){
+        Mood mood=new Mood("happy","xin");
+        mood.setMoodMessage("sad");
+        assertEquals(mood.getMoodMessage(),"sad");
+    }
+
+    @Test
+    public void testGetFeeling(){
+        Mood mood=new Mood("happy","xin");
+        assertEquals(mood.getFeeling(),"happy");
+    }
+
+    @Test
+    public void testSetFeeling(){
+        Mood mood=new Mood("happy","xin");
+        mood.setFeeling("sad");
+        assertEquals(mood.getFeeling(),"sad");
+    }
 
 }
