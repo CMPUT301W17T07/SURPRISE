@@ -69,7 +69,7 @@ public class TimelineActivity extends AppCompatActivity {
                 }
             });
         } else {
-            setUpMenuBar();
+//            setUpMenuBar();
             Intent intent = new Intent(TimelineActivity.this, ProfileActivity.class);
             startActivity(intent);
 //            setContentView(R.layout.activity_timeline);

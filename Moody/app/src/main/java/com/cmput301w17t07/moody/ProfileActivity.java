@@ -22,11 +22,14 @@ public class ProfileActivity extends AppCompatActivity {
     private ListView moodTimeline;
     private TimelineAdapter adapter;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        UserController userController = new UserController();
+//        username = userController.getUsername();
 
     }
 
@@ -46,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         adapter = new TimelineAdapter(this, R.layout.timeline_list, moodArrayList);
-        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
         moodTimelineListView.setAdapter(adapter);
     }

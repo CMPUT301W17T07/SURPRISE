@@ -53,7 +53,7 @@ public class MoodController {
         mood.setMoodMessage(moodMessage);
     }
 
-    public Date getDate() {
+    public String getDate() {
         return mood.getDate();
     }
 

@@ -55,7 +55,7 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
 //        feelingText.setTypeface(font);
 
         TextView dateText = (TextView) convertView.findViewById(R.id.dateTV);
-        dateText.setText("placeholder date");
+        dateText.setText(mood.getDate());
 //        dateText.setTypeface(font);
 
         return convertView;

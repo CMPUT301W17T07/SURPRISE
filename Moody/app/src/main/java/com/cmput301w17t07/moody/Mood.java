@@ -2,6 +2,8 @@ package com.cmput301w17t07.moody;
 
 import android.media.Image;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.searchbox.annotations.JestId;
@@ -67,8 +69,14 @@ public class Mood {
         this.moodMessage = moodMessage;
     }
 
-    public Date getDate() {
-        return date;
+    /**
+     *  Logic on date to string from http://www.java-examples.com/java-date-string-example
+     * @return
+     */
+    public String getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String stringDate = dateFormat.format(this.date);
+        return stringDate;
     }
 
     public void setDate(Date date) {
