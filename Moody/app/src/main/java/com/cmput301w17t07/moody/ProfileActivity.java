@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,8 @@ import static android.R.id.list;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ListView oldMoodList;
-    private hopefuladapter adapter;
+    private ListView moodTimeline;
+    private TimelineAdapter adapter;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
 
     @Override
@@ -29,38 +30,26 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-        @Override
-        protected void onStart(){
-            super.onStart();
-            ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-            getUserMoods.execute("xin");
+    @Override
+    protected void onStart(){
+        super.onStart();
+        ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
+        getUserMoods.execute("xin");
+        final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
-            try {
-                moodArrayList= getUserMoods.get();
-                System.out.println("this is moodlist"+moodArrayList);
+        try {
+            moodArrayList= getUserMoods.get();
+//               System.out.println("this is moodlist"+moodArrayList);
 
-            }catch (Exception e){
-                Log.i("error","failed to get the mood out of the async matched");
-            }
-            adapter = new hopefuladapter(this, moodArrayList);
-//                @Override
-//                public View getView(int position, View convertView, ViewGroup parent) {
-//                    View view = super.getView(position, convertView, parent);
-//                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-//                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-//                /* Setting the text that will appear on the two lines of the list entry */
-//                    text1.setText(moodArrayList.get(position).getUsername());
-//                /* Bolding the name entry */
-//                    text1.setTypeface(null, Typeface.BOLD);
-//
-//                    text2.setText("Feeling: " + moodArrayList.get(position).getFeeling() );
-//                    return view;
-//                }
+        }catch (Exception e){
+            Log.i("error","failed to get the mood out of the async matched");
+        }
 
+        adapter = new TimelineAdapter(this, R.layout.timeline_list, moodArrayList);
+        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
-
-            oldMoodList.setAdapter(adapter);
-            }
+        moodTimelineListView.setAdapter(adapter);
+    }
 }
 
 

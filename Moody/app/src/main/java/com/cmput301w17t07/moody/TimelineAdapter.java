@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,20 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.timeline_list, parent, false);
         }
+
+        TextView username = (TextView) convertView.findViewById(R.id.usernameTV);
+        username.setText(mood.getUsername());
+//        username.setTypeface(font);
+
+        TextView feelingText = (TextView) convertView.findViewById(R.id.feelingTV);
+        feelingText.setText(mood.getFeeling());
+//        feelingText.setTypeface(font);
+
+        TextView dateText = (TextView) convertView.findViewById(R.id.dateTV);
+        dateText.setText("placeholder date");
+//        dateText.setTypeface(font);
+
+        return convertView;
     }
 
 

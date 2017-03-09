@@ -3,6 +3,7 @@ package com.cmput301w17t07.moody;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -68,8 +69,10 @@ public class TimelineActivity extends AppCompatActivity {
                 }
             });
         } else {
-            setContentView(R.layout.activity_timeline);
             setUpMenuBar();
+            Intent intent = new Intent(TimelineActivity.this, ProfileActivity.class);
+            startActivity(intent);
+//            setContentView(R.layout.activity_timeline);
 
         }
     }
