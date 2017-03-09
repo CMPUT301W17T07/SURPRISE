@@ -1,6 +1,7 @@
 package com.cmput301w17t07.moody;
 
 import android.media.Image;
+import android.provider.ContactsContract;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ public class Mood {
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
+//    private Image emoji;
 
     @JestId
 
@@ -38,7 +40,7 @@ public class Mood {
 //    }
 
     public Mood(String feeling, String username){
-        this.feeling= feeling;
+        this.feeling = feeling;
         this.username = username;
         this.moodMessage =null;
         this.date=new Date();
@@ -122,4 +124,15 @@ public class Mood {
     public void setUsername(String username) {
         this.username = username;
     }
+
+//    public void setEmoji(){
+//        switch (this.getFeeling()) {
+//            case "happy":
+//                 //todo set this.emoji to be equal to image
+//                break;
+//            case "sad":
+//                break;
+//        }
+//    }
+
 }
