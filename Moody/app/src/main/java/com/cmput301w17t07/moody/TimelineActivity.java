@@ -13,6 +13,7 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ActivityChooserView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class TimelineActivity extends BarMenuActivity {
     ConnectivityManager manager;
     private EditText usernameText;
+    Integer createUserFlag = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,23 +56,37 @@ public class TimelineActivity extends BarMenuActivity {
                         String username = usernameText.getText().toString();
                         //todo get image from user and createUser with image parameter
                         UserController userController = new UserController();
-                        //todo change createUser function to return an value that indicates whether
-                        //todo image needs to be dif size or if username is not unique and provide unique messages for each case
-                        if(!userController.createUser(username)){
+                        createUserFlag = userController.createUser(username);
+                        if(createUserFlag.equals(1)){
                             Toast.makeText(TimelineActivity.this,
                                     "Username is already taken", Toast.LENGTH_SHORT).show();
                             return;
+                        }
+                        else if(createUserFlag.equals(2)){
+                            Toast.makeText(TimelineActivity.this,
+                                    "Sorry, but the profile picture you selected is too large",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        //todo use this internet checking method instead of one inside the activity
+//                        else if(createUserFlag.equals(3)){
+//                            Toast.makeText(TimelineActivity.this,
+//                                    "Please check your internet connection", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+
                         }
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
 
                         setContentView(R.layout.activity_timeline);
                         //setUpMenuBar(this);
-                    }
                 }
             });
-        } else {
-//            setContentView(R.layout.activity_timeline);
+        }
+        else {
+            //todo IMPORTANT: need to implement a fuction that will be called here and after the user is created for
+            // the timeline logic. Otherwise will have to write code for this section twice
             setContentView(R.layout.activity_timeline);
             setUpMenuBar(this);
 

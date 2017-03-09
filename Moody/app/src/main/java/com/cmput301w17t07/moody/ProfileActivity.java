@@ -38,6 +38,7 @@ public class ProfileActivity extends BarMenuActivity {
     protected void onStart(){
         super.onStart();
         ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
+        //todo once nick sets up local save of username, search for username here
         getUserMoods.execute("xin");
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 

@@ -59,6 +59,7 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
         dateText.setText(mood.getDate());
 //        dateText.setTypeface(font);
 
+        //todo get appropriate emoji images in the application and then can check mood.getFeeling() for proper emojis
         ImageView emojiImage = (ImageView) convertView.findViewById(R.id.feelingEmoji);
         emojiImage.setImageResource(R.drawable.ic_action_happy);
 
