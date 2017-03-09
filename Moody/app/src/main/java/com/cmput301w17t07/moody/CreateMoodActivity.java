@@ -28,7 +28,7 @@ public class CreateMoodActivity extends BarMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_mood);
-        setUpMenuBar();
+        setUpMenuBar(this);
         EmotionText = (EditText) findViewById(R.id.Emotion);
         Description = (EditText) findViewById(R.id.Description);
 

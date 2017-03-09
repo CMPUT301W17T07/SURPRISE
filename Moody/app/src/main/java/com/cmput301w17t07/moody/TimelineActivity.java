@@ -64,13 +64,13 @@ public class TimelineActivity extends BarMenuActivity {
 
 
                         setContentView(R.layout.activity_timeline);
-                        setUpMenuBar();
+                        //setUpMenuBar(this);
                     }
                 }
             });
         } else {
             setContentView(R.layout.activity_timeline);
-            setUpMenuBar();
+            setUpMenuBar(this);
 
         }
     }

@@ -9,6 +9,7 @@ public class ProfileActivity extends BarMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        setUpMenuBar();
+        setUpMenuBar(this);
     }
+
 }

@@ -1,5 +1,7 @@
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +13,9 @@ import android.view.MenuItem;
 
 public abstract class BarMenuActivity extends AppCompatActivity {
 
-    public void setUpMenuBar() {
+    public void setUpMenuBar(Context context) {
+
+        final Context currentContext = context;
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -23,16 +27,24 @@ public abstract class BarMenuActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_home:
-                                setContentView(R.layout.activity_timeline);
+                                Intent home = new Intent (currentContext, TimelineActivity.class);
+                                startActivity(home);
+                                //setContentView(R.layout.activity_timeline);
                                 break;
                             case R.id.action_search:
-                                setContentView(R.layout.activity_search_filter_options);
+                                Intent search = new Intent (currentContext, SearchFilterOptionsActivity.class);
+                                startActivity(search);
+                                //setContentView(R.layout.activity_search_filter_options);
                                 break;
                             case R.id.action_profile:
-                                setContentView(R.layout.activity_profile);
+                                Intent profile = new Intent (currentContext, ProfileActivity.class);
+                                startActivity(profile);
+                                //setContentView(R.layout.activity_profile);
                                 break;
                             case R.id.action_create:
-                                setContentView(R.layout.activity_create_mood);
+                                Intent create = new Intent (currentContext, CreateMoodActivity.class);
+                                startActivity(create);
+                                //setContentView(R.layout.activity_create_mood);
                                 break;
                         }
                         return false;
