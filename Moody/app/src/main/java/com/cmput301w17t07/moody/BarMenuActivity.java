@@ -27,25 +27,50 @@ public abstract class BarMenuActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_home:
-                                Intent home = new Intent (currentContext, TimelineActivity.class);
-                                startActivity(home);
-                                //setContentView(R.layout.activity_timeline);
-                                break;
+                                Class timelineActivity = TimelineActivity.class;
+                                // makes sure that you don't try to switch to same activity
+                                if(currentContext.getClass() == timelineActivity){
+                                    break;
+                                }
+                                else{
+                                    Intent home = new Intent (currentContext, timelineActivity);
+                                    startActivity(home);
+                                    //setContentView(R.layout.activity_timeline);
+                                    break;
+                                }
                             case R.id.action_search:
-                                Intent search = new Intent (currentContext, SearchFilterOptionsActivity.class);
-                                startActivity(search);
-                                //setContentView(R.layout.activity_search_filter_options);
-                                break;
+                                Class searchFilterActivity = SearchFilterOptionsActivity.class;
+                                if(currentContext.getClass() == searchFilterActivity){
+                                    break;
+                                }
+                                else {
+                                    Intent search = new Intent(currentContext, searchFilterActivity);
+                                    startActivity(search);
+                                    //setContentView(R.layout.activity_search_filter_options);
+                                    break;
+                                }
                             case R.id.action_profile:
-                                Intent profile = new Intent (currentContext, ProfileActivity.class);
-                                startActivity(profile);
-                                //setContentView(R.layout.activity_profile);
-                                break;
+                                Class profileActivity = ProfileActivity.class;
+                                if(currentContext.getClass() == profileActivity){
+                                    break;
+                                }
+                                else {
+                                    Intent profile = new Intent(currentContext, profileActivity);
+                                    startActivity(profile);
+                                    //setContentView(R.layout.activity_profile);
+                                    break;
+                                }
                             case R.id.action_create:
-                                Intent create = new Intent (currentContext, CreateMoodActivity.class);
-                                startActivity(create);
-                                //setContentView(R.layout.activity_create_mood);
-                                break;
+                                Class createMoodActivity = CreateMoodActivity.class;
+                                if(currentContext.getClass() == createMoodActivity){
+                                    break;
+                                }
+                                else {
+                                    Intent create = new Intent(currentContext, createMoodActivity);
+                                    startActivity(create);
+                                    //setContentView(R.layout.activity_create_mood);
+                                    break;
+                                }
                         }
                         return false;
                     }
