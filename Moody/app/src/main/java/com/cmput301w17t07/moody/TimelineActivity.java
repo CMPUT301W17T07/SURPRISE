@@ -83,18 +83,16 @@ public class TimelineActivity extends BarMenuActivity {
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
 
-                        setContentView(R.layout.activity_timeline);
+//                        setContentView(R.layout.activity_timeline);
                         //setUpMenuBar(this);
                 }
             });
         }
-        else {
-            //todo IMPORTANT: need to implement a fuction that will be called here and after the user is created for
-            // the timeline logic. Otherwise will have to write code for this section twice
-            setContentView(R.layout.activity_timeline);
-            setUpMenuBar(this);
+        
+        setContentView(R.layout.activity_timeline);
+        setUpMenuBar(this);
 
-        }
+
     }
 
     //todo remove this from activity and implement in a separate class/controller/etc.
