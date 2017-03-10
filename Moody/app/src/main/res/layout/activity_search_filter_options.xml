@@ -4,11 +4,11 @@
     android:id="@+id/activity_search_filter_options"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cmput301w17t07.moody.SearchFilterOptionsActivity">
+    <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
 
     <android.support.design.widget.BottomNavigationView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,40 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
 
+    <Button
+        android:id="@+id/searchUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:backgroundTint="@color/yellowTheme"
+        android:text="Search For Other Users"
+        android:textColor="@color/redTheme"/>
 
+    <Button
+        android:id="@+id/filterMood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/searchUsers"
+        android:layout_marginTop="46dp"
+        android:backgroundTint="@color/yellowTheme"
+        android:text="Filter Mood "
+        android:textColor="@color/redTheme"/>
+
+    <Button
+        android:id="@+id/mapFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filterMood"
+        android:layout_marginTop="49dp"
+        android:backgroundTint="@color/yellowTheme"
+        android:text="Map Filters"
+        android:textColor="@color/redTheme"/>
 
 
 </RelativeLayout>

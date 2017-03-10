@@ -54,11 +54,48 @@ public class ElasticSearchMoodyController extends ElasticController{
 
     public static class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
-        protected ArrayList<User> doInBackground(String... params) {
+        protected ArrayList<User> doInBackground(String... search_parameters) {
             verifySettings();
-            return null;
+            ArrayList<User> users = new ArrayList<User>();
+
+            String query;
+            if (search_parameters[0]=="") {
+                query = "{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
+            }
+            else {
+                query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
+                        "    }\n" +
+                        "}";
+                System.out.println("this is query" + query);
+            }
+
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w17t07")
+                    .addType("user").build();
+
+            try {
+                // TODO get the results of the query
+
+
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<User> foundUsers = result.getSourceAsObjectList(User.class);
+                    users.addAll(foundUsers);
+                }
+                else {
+                    Log.i("Error", "The search query failed to find any tweets that matched, buddy");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return users;
         }
     }
+
+
 
     /**
      * Class for identifying if a user's desired username is unique before allocating it to him or her

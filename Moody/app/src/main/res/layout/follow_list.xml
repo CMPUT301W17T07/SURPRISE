@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="60dp"
+            android:maxWidth="70dp"
+            android:paddingBottom = "10dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/profilePicture" >
+
+            <TextView
+                android:id="@+id/usernameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/feelingTV"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout1"
+            android:text="TextView" />
+
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/feelingTV"
+            android:layout_below="@+id/feelingTV" >
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/linearLayout1"
+            >
+
+            <ImageView
+                android:id="@+id/feelingEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp"
+                android:paddingBottom = "10dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+
