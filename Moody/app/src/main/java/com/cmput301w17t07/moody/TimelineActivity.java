@@ -81,16 +81,15 @@ public class TimelineActivity extends BarMenuActivity {
                         }
 
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-
+                        timelineActivity();
 
 //                        setContentView(R.layout.activity_timeline);
                         //setUpMenuBar(this);
                 }
             });
+        }else {
+            timelineActivity();
         }
-        
-        setContentView(R.layout.activity_timeline);
-        setUpMenuBar(this);
 
 
     }
@@ -106,5 +105,11 @@ public class TimelineActivity extends BarMenuActivity {
             return true;
         }
     }
+
+    private void timelineActivity(){
+        setContentView(R.layout.activity_timeline);
+        setUpMenuBar(this);
+    }
+
 }
 
