@@ -28,7 +28,7 @@ public class TimelineActivity extends BarMenuActivity {
     private EditText usernameText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
         boolean isFirstIn = sp.getBoolean("isFirstIn", true);
@@ -61,6 +61,7 @@ public class TimelineActivity extends BarMenuActivity {
                                     "Username is already taken", Toast.LENGTH_SHORT).show();
                             return;
                         }
+                        userController.saveUsername(username, TimelineActivity.this);
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
 

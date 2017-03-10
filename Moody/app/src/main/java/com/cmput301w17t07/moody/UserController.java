@@ -1,6 +1,22 @@
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.media.Image;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.nio.ByteBuffer;
+
+import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
+
 
 /**
  * Created by mike on 2017-03-04.
@@ -113,5 +129,34 @@ public class UserController {
         return user.getFollowerList();
     }
 
+    public static void saveUsername(String username, Context ctx) {
+        FileOutputStream outputStream;
+        try {
+            outputStream = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            outputStream.write(username.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // https://developer.android.com/guide/topics/data/data-storage.html#filesInternal
+    // how to read from file
+    public StringBuffer readUsername(Context ctx) {
+        FileInputStream inputStream;
+        StringBuffer fileContent = new StringBuffer("");
+        int n;
+        byte[] buffer = new byte[1024];
+        try {
+            inputStream = ctx.openFileInput(FILENAME);
+            while ((n = inputStream.read(buffer)) != -1)
+            {
+                fileContent.append(new String(buffer, 0, n));
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileContent;
+    }
 
 }

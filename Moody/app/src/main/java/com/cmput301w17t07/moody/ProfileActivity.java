@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.id.list;
+import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 public class ProfileActivity extends BarMenuActivity {
 
@@ -31,6 +32,7 @@ public class ProfileActivity extends BarMenuActivity {
         setUpMenuBar(this);
         UserController userController = new UserController();
 //        username = userController.getUsername();
+        username = userController.readUsername(ProfileActivity.this).toString();
 
     }
 
@@ -38,7 +40,7 @@ public class ProfileActivity extends BarMenuActivity {
     protected void onStart(){
         super.onStart();
         ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-        getUserMoods.execute("xin");
+        getUserMoods.execute(username);
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
         try {
