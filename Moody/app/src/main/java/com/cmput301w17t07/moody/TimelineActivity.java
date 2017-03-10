@@ -36,7 +36,7 @@ public class TimelineActivity extends BarMenuActivity {
         SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
         boolean isFirstIn = sp.getBoolean("isFirstIn", true);
         if (isFirstIn) {
-            sp.edit().putBoolean("isFirstIn", false).commit();
+            sp.edit().putBoolean("isFirstIn", false).apply();
             setContentView(R.layout.activity_create_user);
             Toast.makeText(TimelineActivity.this, " Welcome to Moody! ", Toast.LENGTH_SHORT).show();
             Button registerButton = (Button) findViewById(R.id.register);
@@ -78,19 +78,17 @@ public class TimelineActivity extends BarMenuActivity {
                         userController.saveUsername(username, TimelineActivity.this);
 
 
-                        }
+                    }
 
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
-
-//                        setContentView(R.layout.activity_timeline);
-                        //setUpMenuBar(this);
+                    setIntroScreen();
                 }
             });
         }
-        
-        setContentView(R.layout.activity_timeline);
-        setUpMenuBar(this);
+        else {
+            setIntroScreen();
+        }
 
 
     }
@@ -105,6 +103,11 @@ public class TimelineActivity extends BarMenuActivity {
         } else {
             return true;
         }
+    }
+
+    private void setIntroScreen() {
+        setContentView(R.layout.activity_timeline);
+        setUpMenuBar(this);
     }
 }
 
