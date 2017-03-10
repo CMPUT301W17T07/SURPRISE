@@ -70,9 +70,8 @@ public class TimelineActivity extends BarMenuActivity {
             });
         } else {
             setContentView(R.layout.activity_timeline);
-            setUpMenuBar(this);
-
         }
+        setUpMenuBar(this);
     }
 
     //todo remove this from activity and implement in a separate class/controller/etc.
