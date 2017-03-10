@@ -1,5 +1,6 @@
 package com.cmput301w17t07.moody;
 
+import android.location.Location;
 import android.media.Image;
 import android.provider.ContactsContract;
 
@@ -16,7 +17,7 @@ import io.searchbox.annotations.JestId;
 public class Mood {
     private String moodMessage;
     private Date date;
-    private String location;
+    private Location location;
     private Image moodImage;
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
@@ -50,7 +51,7 @@ public class Mood {
 
     }
 
-    public Mood(String feeling, String username, String moodMessage, String location,
+    public Mood(String feeling, String username, String moodMessage, Location location,
                 Image image, String socialSituation){
         this.feeling = feeling;
         this.username = username;
@@ -85,11 +86,11 @@ public class Mood {
         this.date = date;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

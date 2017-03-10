@@ -1,8 +1,13 @@
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
 import android.media.Image;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.concurrent.ExecutionException;
+
+import static android.provider.Telephony.Mms.Part.FILENAME;
 
 /**
  * Created by mike on 2017-03-04.
@@ -144,6 +149,36 @@ public class UserController {
 
     public FollowerList getFollowerList(){
         return user.getFollowerList();
+    }
+
+    public static void saveUsername(String username, Context ctx) {
+        FileOutputStream outputStream;
+        try {
+            outputStream = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            outputStream.write(username.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // http://stackoverflow.com/questions/9095610/android-fileinputstream-read-txt-file-to-string
+    // how to read from file
+    public StringBuffer readUsername(Context ctx) {
+        FileInputStream inputStream;
+        StringBuffer fileContent = new StringBuffer("");
+        int n;
+        byte[] buffer = new byte[1024];
+        try {
+            inputStream = ctx.openFileInput(FILENAME);
+            while ((n = inputStream.read(buffer)) != -1)
+            {
+                fileContent.append(new String(buffer, 0, n));
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileContent;
     }
 
 

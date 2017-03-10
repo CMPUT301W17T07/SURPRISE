@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class TimelineActivity extends BarMenuActivity {
@@ -74,8 +75,11 @@ public class TimelineActivity extends BarMenuActivity {
 //                                    "Please check your internet connection", Toast.LENGTH_SHORT).show();
 //                            return;
 //                        }
+                        userController.saveUsername(username, TimelineActivity.this);
+
 
                         }
+
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
 
