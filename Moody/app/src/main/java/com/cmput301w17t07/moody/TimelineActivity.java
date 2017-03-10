@@ -8,22 +8,29 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimelineActivity extends AppCompatActivity {
     ConnectivityManager manager;
     private EditText usernameText;
+    private ArrayList<User> userArrayList;
+    //private List<User> userList;
+
+    private ListView oldUserList;
+    private ArrayAdapter<User> adapter;
+    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class TimelineActivity extends AppCompatActivity {
             Button registerButton = (Button) findViewById(R.id.register);
 
             usernameText = (EditText) findViewById(R.id.enterUsername);
+            oldUserList=(ListView) findViewById(R.id.List_view_timeLine);
             /**
              * On user's click of the register button
              */
@@ -64,6 +72,43 @@ public class TimelineActivity extends AppCompatActivity {
             setUpMenuBar();
 
         }
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        System.out.println("this is onstart");
+        ElasticSearchMoodyController.GetUser getUser=new ElasticSearchMoodyController.GetUser();
+        getUser.execute("");
+
+        try {
+            //userArrayList=new ArrayList<>();
+            userArrayList=getUser.get();
+            System.out.println("this is userlist"+userArrayList);
+
+        }catch (Exception e){
+            Log.i("error","failed to get the User out of the async matched");
+        }
+        try {
+            adapter = new ArrayAdapter<>(this,
+                    R.layout.list_item, userArrayList);
+            oldUserList.setAdapter(adapter);
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+//        userAdapter=new UserAdapter(getApplicationContext(),userArrayList);
+//        oldUserList.setAdapter(userAdapter);
+//        userAdapter.notifyDataSetChanged();
+//        userArrayList.add(new User("panchy"));
+//        System.out.println(userArrayList);
+//        adapter = new ArrayAdapter<User>(this,
+//                R.layout.list_item, userArrayList);
+//
+//
+//        oldUserList.setAdapter(adapter);
+
     }
 
     //Internet checker temp, maybe need change later
