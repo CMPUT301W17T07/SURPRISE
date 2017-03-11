@@ -56,7 +56,7 @@ public class ElasticSearchMoodyController extends ElasticController{
             ArrayList<User> users = new ArrayList<User>();
             String query;
             if (params[0]==""){
-                query="{\"from\":0,\"size\":2}";
+                query="{\"from\":0,\"size\":20}";
 
             }else {
                 query = "{\n" +

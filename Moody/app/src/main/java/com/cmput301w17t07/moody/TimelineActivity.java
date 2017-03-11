@@ -29,7 +29,6 @@ public class TimelineActivity extends AppCompatActivity {
     //private List<User> userList;
 
     private ListView oldUserList;
-    private ArrayAdapter<User> adapter;
     private UserAdapter userAdapter;
 
     @Override
@@ -44,7 +43,7 @@ public class TimelineActivity extends AppCompatActivity {
             Button registerButton = (Button) findViewById(R.id.register);
 
             usernameText = (EditText) findViewById(R.id.enterUsername);
-            oldUserList=(ListView) findViewById(R.id.List_view_timeLine);
+
             /**
              * On user's click of the register button
              */
@@ -80,23 +79,24 @@ public class TimelineActivity extends AppCompatActivity {
         System.out.println("this is onstart");
         ElasticSearchMoodyController.GetUser getUser=new ElasticSearchMoodyController.GetUser();
         getUser.execute("");
+        oldUserList=(ListView) findViewById(R.id.List_view_timeLine);
 
         try {
             //userArrayList=new ArrayList<>();
             userArrayList=getUser.get();
-            System.out.println("this is userlist"+userArrayList);
+            System.out.println("this is userlist"+userArrayList.get(0).getUsername());
 
         }catch (Exception e){
             Log.i("error","failed to get the User out of the async matched");
         }
-        try {
-            adapter = new ArrayAdapter<>(this,
-                    R.layout.list_item, userArrayList);
-            oldUserList.setAdapter(adapter);
 
-        }catch (Exception e){
-            System.out.println(e);
-        }
+        userAdapter=new UserAdapter(this,userArrayList);
+        oldUserList.setAdapter(userAdapter);
+//            adapter = new ArrayAdapter<>(this,
+//                    R.layout.list_item, userArrayList);
+//            oldUserList.setAdapter(adapter);
+
+
 
 //        userAdapter=new UserAdapter(getApplicationContext(),userArrayList);
 //        oldUserList.setAdapter(userAdapter);
