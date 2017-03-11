@@ -127,7 +127,7 @@ public class CreateMoodActivity extends BarMenuActivity {
                 if (moodController.createMood(EmotionText, userName, moodMessage_text, null, bitmap, SocialSituation) == false) {
                     Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(CreateMoodActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
                 }
             }

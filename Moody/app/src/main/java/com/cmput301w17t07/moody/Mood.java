@@ -26,6 +26,7 @@ public class Mood {
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
+    private String displayUsername;
 
     private String encodedImage;
 //    private Image emoji;
@@ -45,22 +46,23 @@ public class Mood {
 //    public enum Feeling{
 //        anger, confusion, disgust, fear, happy,sad, shame, surprise
 //    }
-
-    public Mood(String feeling, String username){
-        this.feeling = feeling;
-        this.username = username;
-        this.moodMessage =null;
-        this.date=new Date();
-        this.location=null;
-        this.moodImage=null;
-        this.socialSituation=null;
-
-    }
+//
+//    public Mood(String feeling, String username){
+//        this.feeling = feeling;
+//        this.username = username;
+//        this.moodMessage =null;
+//        this.date=new Date();
+//        this.location=null;
+//        this.moodImage=null;
+//        this.socialSituation=null;
+//
+//    }
 
     public Mood(String feeling, String username, String moodMessage, Location location,
                 Bitmap image, String socialSituation){
         this.feeling = feeling;
-        this.username = username;
+        this.username = username.toLowerCase();
+        this.displayUsername = username;
         this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
@@ -157,4 +159,12 @@ public class Mood {
 //        }
 //    }
 
+
+    public String getDisplayUsername() {
+        return displayUsername;
+    }
+
+    public void setDisplayUsername(String displayUsername) {
+        this.displayUsername = displayUsername;
+    }
 }
