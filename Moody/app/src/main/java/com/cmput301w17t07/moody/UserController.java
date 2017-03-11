@@ -24,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.concurrent.ExecutionException;
 
-import static android.provider.Telephony.Mms.Part.FILENAME;
 
 /**
  * Created by mike on 2017-03-04.
