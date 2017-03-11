@@ -47,8 +47,11 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.timeline_list, parent, false);
         }
 
+//        ImageView testImage = (ImageView) convertView.findViewById(R.id.profilePicture);
+//        testImage.setImageBitmap(mood.getMoodImage());
+
         TextView username = (TextView) convertView.findViewById(R.id.usernameTV);
-        username.setText(mood.getUsername());
+        username.setText(mood.getDisplayUsername());
 //        username.setTypeface(font);
 
         TextView feelingText = (TextView) convertView.findViewById(R.id.feelingTV);
@@ -61,7 +64,7 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
 
         //todo get appropriate emoji images in the application and then can check mood.getFeeling() for proper emojis
         ImageView emojiImage = (ImageView) convertView.findViewById(R.id.feelingEmoji);
-        emojiImage.setImageResource(R.drawable.ic_action_happy);
+        emojiImage.setImageResource(R.drawable.disgust);
 
         return convertView;
     }

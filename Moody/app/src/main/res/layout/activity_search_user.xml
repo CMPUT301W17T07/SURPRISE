@@ -22,6 +22,7 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
 
+
     <ListView
         android:id="@+id/listSearch"
         android:layout_width="match_parent"
