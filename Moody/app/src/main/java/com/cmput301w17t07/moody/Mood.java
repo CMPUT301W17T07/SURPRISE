@@ -1,9 +1,13 @@
 package com.cmput301w17t07.moody;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.media.Image;
 import android.provider.ContactsContract;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,10 +22,12 @@ public class Mood {
     private String moodMessage;
     private Date date;
     private Location location;
-    private Image moodImage;
+    private String moodImage; //use getMoodImage to decode string into Bitmap
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
+
+    private String encodedImage;
 //    private Image emoji;
 
     @JestId
@@ -52,13 +58,13 @@ public class Mood {
     }
 
     public Mood(String feeling, String username, String moodMessage, Location location,
-                Image image, String socialSituation){
+                Bitmap image, String socialSituation){
         this.feeling = feeling;
         this.username = username;
         this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
-        this.moodImage = image;
+        this.moodImage = encodeImage(image);
         this.socialSituation = socialSituation;
 
     }
@@ -94,8 +100,10 @@ public class Mood {
         this.location = location;
     }
 
-    public Image getMoodImage() {
-        return moodImage;
+    public Bitmap getMoodImage() {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedImage;
     }
 
     public String getSocialSituation() {
@@ -106,8 +114,17 @@ public class Mood {
         this.socialSituation = socialSituation;
     }
 
-    public void setMoodImage(Image moodImage) {
+    public void setMoodImage(String moodImage) {
         this.moodImage = moodImage;
+    }
+
+    public String encodeImage(Bitmap moodImage){
+        // http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        moodImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        byte[] imageBytes = outputStream.toByteArray();
+        encodedImage = Base64.encodeToString(imageBytes,Base64.DEFAULT);
+        return encodedImage;
     }
 
     public String getFeeling() {

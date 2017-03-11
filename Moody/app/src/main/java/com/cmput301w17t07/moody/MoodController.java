@@ -1,5 +1,6 @@
 package com.cmput301w17t07.moody;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.media.Image;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class MoodController {
     // has selected
 
     public static Boolean createMood(String feeling, String username, String moodMessage,
-                                     String location, Image image, String socialSituation){
+                                     Location location, Bitmap image, String socialSituation){
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
             return false;
@@ -28,7 +29,9 @@ public class MoodController {
 
         //todo implement mood constructor with all parameters
 
-        Mood newMood = new Mood(feeling, username);
+//        Mood newMood = new Mood(feeling, username);
+        Mood newMood = new Mood(feeling, username, moodMessage, location, image, socialSituation);
+
         ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
         addMood.execute(newMood);
 
@@ -40,7 +43,7 @@ public class MoodController {
         return true;
     }
 
-    public static Boolean checkMoodImage(Image image){
+    public static Boolean checkMoodImage(Bitmap image){
         //todo implement xin's method of checking image size
         return true;
     }
@@ -70,10 +73,11 @@ public class MoodController {
         mood.setLocation(location);
     }
 
-    public Image getMoodImage() {
+    public Bitmap getMoodImage() {
         return mood.getMoodImage();
     }
-    public void setMoodImage(Image moodImage) {
+
+    public void setMoodImage(String moodImage) {
         mood.setMoodImage(moodImage);
     }
 

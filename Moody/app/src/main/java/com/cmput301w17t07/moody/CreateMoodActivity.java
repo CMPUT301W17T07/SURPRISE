@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -25,6 +27,11 @@ public class CreateMoodActivity extends BarMenuActivity {
     private String EmotionText;
     private String SocialSituation;
     private EditText Description;
+
+    private String encodedImage;
+    Bitmap moodBitmap = null;
+
+//    private String imageByte;
 
     private static final String iconPath = Environment.getExternalStorageDirectory()+"/Image";
 
@@ -36,7 +43,7 @@ public class CreateMoodActivity extends BarMenuActivity {
 
 
         Spinner dropdown = (Spinner)findViewById(R.id.Emotion);
-        String[] items = new String[]{"angery", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        String[] items = new String[]{"angry", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
@@ -86,7 +93,7 @@ public class CreateMoodActivity extends BarMenuActivity {
                 //String feeling_text = EmotionText.getText().toString();
                 String username_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
-                if (moodController.createMood(EmotionText, username_text, null, null, null, null) == false) {
+                if (moodController.createMood(EmotionText, username_text, null, null, moodBitmap, null) == false) {
                     Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -109,22 +116,29 @@ public class CreateMoodActivity extends BarMenuActivity {
         if(data==null){
             return;   //no data return
         }
-        Bitmap bitmap = null;
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+//        Bitmap bitmap = null;
         if(requestCode==0){
             //get pic from local photo
-            bitmap = data.getParcelableExtra("data");
-            if(bitmap==null){//if pic is not so big use original one
+            moodBitmap = data.getParcelableExtra("data");
+
+            System.out.println("photo"+ moodBitmap.getByteCount());
+            if(moodBitmap==null){//if pic is not so big use original one
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                    bitmap = BitmapFactory.decodeStream(inputStream);
+//                    bitmap = BitmapFactory.decodeStream(inputStream);
+                    moodBitmap = BitmapFactory.decodeStream(inputStream);
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         }else if(requestCode==1){
-            bitmap = (Bitmap) data.getExtras().get("data");
+            //todo implement proper method for user taking a photo
+            moodBitmap = (Bitmap) data.getExtras().get("data");
             System.out.println("photosize = ");
-            // saveToSDCard(bitmap);
+            // For when user elects to take a photo; saveToSDCard(bitmap);
         }
         else if (resultCode== Activity.RESULT_CANCELED)
         {
@@ -133,6 +147,12 @@ public class CreateMoodActivity extends BarMenuActivity {
             finish();
             return;
         }
-        mImageView.setImageBitmap(bitmap);
+        System.out.println("photosize = ");
+        mImageView.setImageBitmap(moodBitmap);
+
+//        moodBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+//        byte[] imageBytes = outputStream.toByteArray();
+//        encodedImage = Base64.encodeToString(imageBytes,Base64.DEFAULT);
     }
 }
+
