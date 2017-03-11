@@ -1,6 +1,8 @@
 package com.cmput301w17t07.moody;
 
+import android.location.Location;
 import android.media.Image;
+import android.provider.ContactsContract;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,11 +17,12 @@ import io.searchbox.annotations.JestId;
 public class Mood {
     private String moodMessage;
     private Date date;
-    private String location;
+    private Location location;
     private Image moodImage;
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
+//    private Image emoji;
 
     @JestId
 
@@ -38,7 +41,7 @@ public class Mood {
 //    }
 
     public Mood(String feeling, String username){
-        this.feeling= feeling;
+        this.feeling = feeling;
         this.username = username;
         this.moodMessage =null;
         this.date=new Date();
@@ -48,7 +51,7 @@ public class Mood {
 
     }
 
-    public Mood(String feeling, String username, String moodMessage, String location,
+    public Mood(String feeling, String username, String moodMessage, Location location,
                 Image image, String socialSituation){
         this.feeling = feeling;
         this.username = username;
@@ -83,11 +86,11 @@ public class Mood {
         this.date = date;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -122,4 +125,15 @@ public class Mood {
     public void setUsername(String username) {
         this.username = username;
     }
+
+//    public void setEmoji(){
+//        switch (this.getFeeling()) {
+//            case "happy":
+//                 //todo set this.emoji to be equal to image
+//                break;
+//            case "sad":
+//                break;
+//        }
+//    }
+
 }
