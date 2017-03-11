@@ -6,12 +6,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -19,7 +22,8 @@ import java.io.InputStream;
 
 public class CreateMoodActivity extends BarMenuActivity {
     private ImageView mImageView;
-    private EditText EmotionText;
+    private String EmotionText;
+    private String SocialSituation;
     private EditText Description;
 
     private static final String iconPath = Environment.getExternalStorageDirectory()+"/Image";
@@ -29,7 +33,27 @@ public class CreateMoodActivity extends BarMenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_mood);
         setUpMenuBar(this);
-        EmotionText = (EditText) findViewById(R.id.Emotion);
+
+
+        Spinner dropdown = (Spinner)findViewById(R.id.Emotion);
+        String[] items = new String[]{"angery", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                EmotionText =  parent.getItemAtPosition(position).toString();
+                Log.v("item",  EmotionText);}
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(CreateMoodActivity.this, "Please pick an emotion !", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        //EmotionText = (EditText) findViewById(R.id.Emotion);
         Description = (EditText) findViewById(R.id.Description);
 
         mImageView = (ImageView) findViewById(R.id.imageView);
@@ -59,10 +83,10 @@ public class CreateMoodActivity extends BarMenuActivity {
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String feeling_text = EmotionText.getText().toString();
+                //String feeling_text = EmotionText.getText().toString();
                 String username_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
-                if (moodController.createMood(feeling_text, username_text, null, null, null, null) == false) {
+                if (moodController.createMood(EmotionText, username_text, null, null, null, null) == false) {
                     Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
                 }
                 else{

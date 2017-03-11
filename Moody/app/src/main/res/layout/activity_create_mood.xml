@@ -3,77 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffffff"
     android:weightSum="1">
 
-    <EditText
+    <Spinner
         android:id="@+id/Emotion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:layout_above="@+id/Description"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:hint="Emotional State"
-        android:inputType="textPersonName" />
+        android:spinnerMode="@null" />
 
     <EditText
         android:id="@+id/Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Emotion"
         android:ems="10"
         android:hint="Description"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_below="@+id/toolbar2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginBottom="25dp"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_alignBottom="@+id/imageButton3"
+        android:layout_alignEnd="@+id/bottom_navigation"
+        android:layout_alignRight="@+id/bottom_navigation"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#00000000"
+        android:text="Send"
+        android:textAllCaps="false"
+        android:textColor="#66CD00"
+        android:textSize="23dp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginBottom="86dp" />
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_above="@+id/imageButton2"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/Camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_camera"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="17dp"
         android:layout_x="50px"
         android:layout_y="100px"
-        android:layout_alignTop="@+id/button5"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_marginTop="13dp" />
+        android:background="#00000000"
+        app:srcCompat="@drawable/ic_camera"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignRight="@+id/toolbar2"
+        android:layout_alignEnd="@+id/toolbar2" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:background="#00000000"
         app:srcCompat="@drawable/ic_location"
         android:layout_alignTop="@+id/Camera"
-        android:layout_toRightOf="@+id/Camera"
-        android:layout_toEndOf="@+id/Camera" />
+        android:layout_toRightOf="@+id/toolbar2"
+        android:layout_toEndOf="@+id/toolbar2" />
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:background="#00000000"
         app:srcCompat="@drawable/ic_social"
         android:layout_alignTop="@+id/imageButton2"
         android:layout_toRightOf="@+id/imageButton2"
@@ -91,6 +98,18 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#00000000"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
 
 </RelativeLayout>
