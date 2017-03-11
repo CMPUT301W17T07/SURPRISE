@@ -31,7 +31,7 @@ public class TimelineActivity extends BarMenuActivity {
     Integer createUserFlag = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
         boolean isFirstIn = sp.getBoolean("isFirstIn", true);
@@ -63,6 +63,9 @@ public class TimelineActivity extends BarMenuActivity {
                                     "Username is already taken", Toast.LENGTH_SHORT).show();
                             return;
                         }
+<<<<<<< HEAD
+                        userController.saveUsername(username, TimelineActivity.this);
+=======
                         else if(createUserFlag.equals(2)){
                             Toast.makeText(TimelineActivity.this,
                                     "Sorry, but the profile picture you selected is too large",
@@ -80,27 +83,18 @@ public class TimelineActivity extends BarMenuActivity {
 
                     }
 
+>>>>>>> 2c4770a0cc0ef4a380739680f46c42e97ff412a8
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
 
-                    setIntroScreen();
-=======
                         timelineActivity();
 
 //                        setContentView(R.layout.activity_timeline);
                         //setUpMenuBar(this);
->>>>>>> 467f59d5f1dc1ee2b14bc65be77c104d9aa0a102
                 }
             });
         }else {
             timelineActivity();
         }
-<<<<<<< HEAD
-        else {
-            setIntroScreen();
-        }
-=======
->>>>>>> 467f59d5f1dc1ee2b14bc65be77c104d9aa0a102
 
 
     }
@@ -117,17 +111,10 @@ public class TimelineActivity extends BarMenuActivity {
         }
     }
 
-<<<<<<< HEAD
-    private void setIntroScreen() {
-        setContentView(R.layout.activity_timeline);
-        setUpMenuBar(this);
-    }
-=======
     private void timelineActivity(){
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
     }
 
->>>>>>> 467f59d5f1dc1ee2b14bc65be77c104d9aa0a102
 }
 

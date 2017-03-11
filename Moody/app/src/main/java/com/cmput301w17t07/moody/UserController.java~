@@ -1,7 +1,7 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Context;
-
+<<<<<<< HEAD
 import android.content.res.AssetManager;
 import android.media.Image;
 
@@ -18,6 +18,7 @@ import java.nio.ByteBuffer;
 
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
+=======
 import android.media.Image;
 
 import java.io.FileInputStream;
@@ -25,6 +26,7 @@ import java.io.FileOutputStream;
 import java.util.concurrent.ExecutionException;
 
 import static android.provider.Telephony.Mms.Part.FILENAME;
+>>>>>>> 2c4770a0cc0ef4a380739680f46c42e97ff412a8
 
 /**
  * Created by mike on 2017-03-04.
@@ -178,8 +180,11 @@ public class UserController {
             e.printStackTrace();
         }
     }
-
+<<<<<<< HEAD
+    // https://developer.android.com/guide/topics/data/data-storage.html#filesInternal
+=======
     // http://stackoverflow.com/questions/9095610/android-fileinputstream-read-txt-file-to-string
+>>>>>>> 2c4770a0cc0ef4a380739680f46c42e97ff412a8
     // how to read from file
     public StringBuffer readUsername(Context ctx) {
         FileInputStream inputStream;
@@ -198,4 +203,9 @@ public class UserController {
         }
         return fileContent;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2c4770a0cc0ef4a380739680f46c42e97ff412a8
+
 }
