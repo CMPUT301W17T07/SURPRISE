@@ -81,16 +81,26 @@ public class TimelineActivity extends BarMenuActivity {
                     }
 
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
 
+                    setIntroScreen();
+=======
                         timelineActivity();
 
 //                        setContentView(R.layout.activity_timeline);
                         //setUpMenuBar(this);
+>>>>>>> 467f59d5f1dc1ee2b14bc65be77c104d9aa0a102
                 }
             });
         }else {
             timelineActivity();
         }
+<<<<<<< HEAD
+        else {
+            setIntroScreen();
+        }
+=======
+>>>>>>> 467f59d5f1dc1ee2b14bc65be77c104d9aa0a102
 
 
     }
@@ -107,10 +117,17 @@ public class TimelineActivity extends BarMenuActivity {
         }
     }
 
+<<<<<<< HEAD
+    private void setIntroScreen() {
+        setContentView(R.layout.activity_timeline);
+        setUpMenuBar(this);
+    }
+=======
     private void timelineActivity(){
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
     }
 
+>>>>>>> 467f59d5f1dc1ee2b14bc65be77c104d9aa0a102
 }
 

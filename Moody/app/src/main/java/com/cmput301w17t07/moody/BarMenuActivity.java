@@ -11,7 +11,7 @@ import android.view.MenuItem;
  * Created by Alex on 2017-03-08.
  */
 
-public abstract class BarMenuActivity extends AppCompatActivity {
+public class BarMenuActivity extends AppCompatActivity {
 
     public void setUpMenuBar(Context context) {
 

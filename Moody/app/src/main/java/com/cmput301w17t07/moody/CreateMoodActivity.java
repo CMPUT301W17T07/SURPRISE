@@ -90,7 +90,7 @@ public class CreateMoodActivity extends BarMenuActivity {
                     Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
+                    Intent intent = new Intent(CreateMoodActivity.this, ProfileActivity.class);
                     startActivity(intent);
                 }
 

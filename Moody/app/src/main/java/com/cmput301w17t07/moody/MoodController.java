@@ -1,5 +1,6 @@
 package com.cmput301w17t07.moody;
 
+import android.location.Location;
 import android.media.Image;
 import java.util.Date;
 
@@ -61,11 +62,11 @@ public class MoodController {
         mood.setDate(date);
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return mood.getLocation();
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         mood.setLocation(location);
     }
 

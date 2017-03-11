@@ -31,6 +31,9 @@ public class ProfileActivity extends BarMenuActivity {
         setUpMenuBar(this);
         UserController userController = new UserController();
 //        username = userController.getUsername();
+        username = userController.readUsername(ProfileActivity.this).toString();
+        Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -39,7 +42,7 @@ public class ProfileActivity extends BarMenuActivity {
         super.onStart();
         ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
         //todo once nick sets up local save of username, search for username here
-        getUserMoods.execute("xin");
+        getUserMoods.execute(username);
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
         try {
