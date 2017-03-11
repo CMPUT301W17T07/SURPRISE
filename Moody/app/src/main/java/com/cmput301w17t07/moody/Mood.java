@@ -119,12 +119,16 @@ public class Mood {
     }
 
     public String encodeImage(Bitmap moodImage){
+        if(moodImage == null){
+            return null;
+        }
         // http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         moodImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
         encodedImage = Base64.encodeToString(imageBytes,Base64.DEFAULT);
         return encodedImage;
+
     }
 
     public String getFeeling() {
