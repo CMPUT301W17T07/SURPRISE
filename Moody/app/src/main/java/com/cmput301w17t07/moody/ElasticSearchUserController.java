@@ -18,7 +18,7 @@ import io.searchbox.core.SearchResult;
  */
 
 
-public class ElasticSearchMoodyController extends ElasticController{
+public class ElasticSearchUserController extends ElasticController{
 
     /**
      * The AddUser nested class of ElasticSearchMoody controller. Allows for new users to be added

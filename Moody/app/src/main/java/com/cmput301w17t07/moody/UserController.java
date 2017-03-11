@@ -2,8 +2,6 @@ package com.cmput301w17t07.moody;
 
 import android.media.Image;
 
-import java.util.concurrent.ExecutionException;
-
 /**
  * Created by mike on 2017-03-04.
  */
@@ -43,10 +41,10 @@ public class UserController {
         }
         else{
 //            User newUser = new User(username);
-//            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
 //            addUser.execute(newUser);
             user = new User(username);
-            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);
         }
 
@@ -68,10 +66,10 @@ public class UserController {
         }
         else{
 //            User newUser = new User(username);
-//            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
 //            addUser.execute(newUser);
             user = new User(username);
-            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);
         }
 
@@ -82,8 +80,8 @@ public class UserController {
         // function to check if username is unique
         Boolean uniqueFlag = false;
 
-        ElasticSearchMoodyController.UniqueUsername uniqueUsername =
-                new ElasticSearchMoodyController.UniqueUsername();
+        ElasticSearchUserController.UniqueUsername uniqueUsername =
+                new ElasticSearchUserController.UniqueUsername();
 
         try {
             uniqueFlag = uniqueUsername.execute(username).get();
