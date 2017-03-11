@@ -47,6 +47,9 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.timeline_list, parent, false);
         }
 
+        ImageView testImage = (ImageView) convertView.findViewById(R.id.profilePicture);
+        testImage.setImageBitmap(mood.getMoodImage());
+
         TextView username = (TextView) convertView.findViewById(R.id.usernameTV);
         username.setText(mood.getUsername());
 //        username.setTypeface(font);
