@@ -64,8 +64,6 @@ public class TimelineActivity extends BarMenuActivity {
                             return;
                         }
 
-                        userController.saveUsername(username, TimelineActivity.this);
-
                         else if(createUserFlag.equals(2)){
                             Toast.makeText(TimelineActivity.this,
                                     "Sorry, but the profile picture you selected is too large",

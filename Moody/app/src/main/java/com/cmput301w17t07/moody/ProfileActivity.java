@@ -1,11 +1,14 @@
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,6 +27,8 @@ public class ProfileActivity extends BarMenuActivity {
     private TimelineAdapter adapter;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
     String username;
+
+//    final Context currentContext = context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,26 @@ public class ProfileActivity extends BarMenuActivity {
 //        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
         moodTimelineListView.setAdapter(adapter);
+        moodTimelineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                // TODO Auto-generated method stub
+                Mood viewMood = moodArrayList.get(position);
+
+                Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                viewMoodIntent.putExtra("viewMood", viewMood);
+                startActivity(viewMoodIntent);
+
+
+            }
+
+
+        });
+
+
+
 
     }
 

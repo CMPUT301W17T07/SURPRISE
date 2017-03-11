@@ -7,8 +7,7 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/mainProfilePicture"
-        android:contentDescription="ProfilePicture"
+        android:id="@+id/userProfilePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -21,11 +20,11 @@
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/mainProfilePicture"
-        android:layout_toEndOf="@+id/mainProfilePicture" >
+        android:layout_toRightOf="@+id/userProfilePicture"
+        android:layout_toEndOf="@+id/userProfilePicture" >
 
         <TextView
-            android:id="@+id/mainUsernameTV"
+            android:id="@+id/userUsernameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="anicn" />
@@ -33,7 +32,7 @@
 
 
     <TextView
-        android:id="@+id/dateTV"
+        android:id="@+id/userDateTV"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
@@ -47,7 +46,7 @@
         android:layout_below="@+id/dateTV"
         android:id="@+id/linearLayout">
         <TextView
-            android:id="@+id/mainFeelingTV"
+            android:id="@+id/userFeelingTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="we sad fam" />
@@ -61,7 +60,7 @@
         android:layout_toRightOf="@id/linearLayout1" >
 
         <ImageView
-            android:id="@+id/mainFeelingEmoji"
+            android:id="@+id/userFeelingEmoji"
             android:contentDescription="Emoji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +84,7 @@
         app:menu="@menu/menubar" />
 
     <TextView
-        android:id="@+id/mainSocialTV"
+        android:id="@+id/userSocialTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="39dp"
@@ -104,6 +103,28 @@
         app:srcCompat="@android:drawable/ic_menu_camera"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userProfilePicture"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_toLeftOf="@+id/userSocialTV"
+        android:layout_toStartOf="@+id/userSocialTV"
+        app:srcCompat="@drawable/ic_newmood" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_toLeftOf="@+id/userSocialTV"
+        android:layout_toStartOf="@+id/userSocialTV"
+        app:srcCompat="@drawable/ic_delete" />
 
 
 </RelativeLayout>
