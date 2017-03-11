@@ -1,6 +1,7 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -64,7 +65,11 @@ public class UserAdapter extends BaseAdapter{
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v=View.inflate(context,R.layout.list_of_search,null);
+
+        if (convertView == null) {
+            System.out.printf("this is view=null");
+        }
+        View v=View.inflate(context,R.layout.single_search_list,null);
         TextView name=(TextView) v.findViewById(R.id.singleSearchItem);
 
         name.setText(userList.get(position).getUsername());

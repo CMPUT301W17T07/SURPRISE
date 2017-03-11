@@ -1,17 +1,22 @@
 package com.cmput301w17t07.moody;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchUserActivity extends AppCompatActivity {
 
-    private UserAdapter adapter;
-    private List<User> userList;
-    private ListView olduserlist;
+    //private EditText usernameText;
+    private ArrayList<User> userArrayList=new ArrayList<>();
+    //private List<User> userList;
+
+    private ListView oldUserList;
+    private UserAdapter userAdapter;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,24 +25,31 @@ public class SearchUserActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        ElasticSearchUserController.GetUser getUser=new ElasticSearchUserController.GetUser();
-        getUser.execute("");
+        System.out.println("this is onstart");
+        ElasticSearchUserController.GetUser getUser = new ElasticSearchUserController.GetUser();
+        //getUser.execute("");
+        final ListView oldUserList = (ListView) findViewById(R.id.listSearch);
+        Intent intent=getIntent();
+        String username=intent.getStringExtra("editUsername");
+        System.out.printf("this is xin in after " + username);
+        getUser.execute(username);
 
-        olduserlist=(ListView) findViewById(R.id.listOfSearch);
-        try{
-            userList=getUser.get();
-            System.out.println("this is userlist"+
-                    userList);
+        try {
+            //userArrayList=new ArrayList<>();
+            userArrayList = getUser.get();
+            //System.out.println("this is userlist " + userArrayList.get(0).getUsername());
+
+        } catch (Exception e) {
+            Log.i("error", "failed to get the User out of the async matched");
+        }
+        try {
+            userAdapter = new UserAdapter(this, userArrayList);
+            oldUserList.setAdapter(userAdapter);
         }catch (Exception e){
-            Log.i("error","failed to get the user out of the async matched");
+            System.out.println("this is error"+e);
         }
 
-        adapter=new UserAdapter(this,userList);
-        olduserlist.setAdapter(adapter);
-
-
-
     }
-}
+ }
