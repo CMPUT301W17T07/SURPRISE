@@ -64,7 +64,33 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
 
         //todo get appropriate emoji images in the application and then can check mood.getFeeling() for proper emojis
         ImageView emojiImage = (ImageView) convertView.findViewById(R.id.feelingEmoji);
-        emojiImage.setImageResource(R.drawable.disgust);
+        //emojiImage.setImageResource(R.drawable.disgust);
+        switch (mood.getFeeling()) {
+            case "anger":
+                emojiImage.setImageResource(R.drawable.angry);
+                break;
+            case "confusion":
+                emojiImage.setImageResource(R.drawable.confused);
+                break;
+            case "disgust":
+                emojiImage.setImageResource(R.drawable.disgust);
+                break;
+            case "fear":
+                emojiImage.setImageResource(R.drawable.fear);
+                break;
+            case "happiness":
+                emojiImage.setImageResource(R.drawable.happy);
+                break;
+            case "sadness":
+                emojiImage.setImageResource(R.drawable.sad);
+                break;
+            case "shame":
+                emojiImage.setImageResource(R.drawable.shame);
+                break;
+            case "surprise":
+                emojiImage.setImageResource(R.drawable.surprise);
+                break;
+        }
 
         return convertView;
     }

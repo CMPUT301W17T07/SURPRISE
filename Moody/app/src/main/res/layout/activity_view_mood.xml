@@ -7,8 +7,7 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/mainProfilePicture"
-        android:contentDescription="ProfilePicture"
+        android:id="@+id/userProfilePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -21,36 +20,36 @@
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/mainProfilePicture"
-        android:layout_toEndOf="@+id/mainProfilePicture" >
+        android:layout_toRightOf="@+id/userProfilePicture"
+        android:layout_toEndOf="@+id/userProfilePicture" >
 
         <TextView
-            android:id="@+id/mainUsernameTV"
+            android:id="@+id/userUsernameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="anicn" />
+            android:text="TextView"/>
     </LinearLayout>
 
 
     <TextView
-        android:id="@+id/dateTV"
+        android:id="@+id/userDateTV"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
-        android:text="10-03-17" />
+        android:text="TextView"/>
 
     <LinearLayout
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/dateTV"
-        android:layout_alignLeft="@+id/dateTV"
-        android:layout_below="@+id/dateTV"
+        android:layout_alignStart="@+id/userDateTV"
+        android:layout_alignLeft="@+id/userDateTV"
+        android:layout_below="@+id/userDateTV"
         android:id="@+id/linearLayout">
         <TextView
-            android:id="@+id/mainFeelingTV"
+            android:id="@+id/userFeelingTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="we sad fam" />
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -58,17 +57,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/linearLayout1"
-        android:layout_toRightOf="@id/linearLayout1" >
+        android:layout_toRightOf="@id/linearLayout1"
+        android:id="@+id/linearLayout2">
 
         <ImageView
-            android:id="@+id/mainFeelingEmoji"
-            android:contentDescription="Emoji"
+            android:id="@+id/userFeelingEmoji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxHeight="30dp"
-            android:maxWidth="30dp"
-            android:paddingBottom = "10dp" />
+            android:maxHeight="150dp"
+            android:maxWidth="150dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
 
     </LinearLayout>
 
@@ -85,14 +86,14 @@
         app:menu="@menu/menubar" />
 
     <TextView
-        android:id="@+id/mainSocialTV"
+        android:id="@+id/userSocialTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="39dp"
-        android:text="feeling moody with: Jonny"
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:text="TextView"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -104,6 +105,26 @@
         app:srcCompat="@android:drawable/ic_menu_camera"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/userSocialTV"
+        android:layout_toEndOf="@+id/userProfilePicture"
+        android:layout_toRightOf="@+id/userProfilePicture"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button2"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+        android:text="Delete" />
 
 
 </RelativeLayout>

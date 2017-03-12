@@ -41,7 +41,7 @@ public class CreateMoodActivity extends BarMenuActivity {
 
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
 
-        String[] items = new String[]{"angry", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
