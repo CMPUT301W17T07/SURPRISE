@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -168,5 +168,20 @@ public class CreateMoodActivity extends BarMenuActivity {
         mImageView.setImageBitmap(bitmap);
 
 
+        //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
+        while(((bitmap.getRowBytes() * bitmap.getHeight())/8) > 65536) {
+            System.out.println("Image size is too big! "+((bitmap.getRowBytes() * bitmap.getHeight())/8));
+
+            BitmapFactory.Options options2 = new BitmapFactory.Options();
+            options2.inPreferredConfig = Bitmap.Config.RGB_565;
+
+            Matrix matrix = new Matrix();
+            matrix.setScale(0.5f, 0.5f);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                    bitmap.getHeight(), matrix, true);
+
+            System.out.println("Image size is too big! "+((bitmap.getRowBytes() * bitmap.getHeight())/8));
+
+        }
     }
 }
