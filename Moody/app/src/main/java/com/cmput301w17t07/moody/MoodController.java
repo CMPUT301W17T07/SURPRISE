@@ -103,9 +103,9 @@ public class MoodController {
         mood.setLocation(location);
     }
 
-    public Bitmap getMoodImage() {
-        return mood.getMoodImage();
-    }
+//    public Bitmap getMoodImage() {
+//        return mood.getMoodImage();
+//    }
 
     public void setMoodImage(String moodImage) {
         mood.setMoodImage(moodImage);
