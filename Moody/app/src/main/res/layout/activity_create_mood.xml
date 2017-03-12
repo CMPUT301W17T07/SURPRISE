@@ -37,11 +37,11 @@
         android:textColor="#66CD00"
         android:textSize="23dp"
         android:layout_alignTop="@+id/SocialSituation"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView" />
+        android:layout_alignRight="@+id/editImageView"
+        android:layout_alignEnd="@+id/editImageView" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/editImageView"
         android:layout_width="300dp"
         android:layout_height="250dp"
         android:layout_above="@+id/Camera"
@@ -58,8 +58,8 @@
         app:srcCompat="@drawable/ic_camera"
         android:layout_marginBottom="17dp"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        android:layout_alignLeft="@+id/editImageView"
+        android:layout_alignStart="@+id/editImageView" />
 
     <ImageButton
         android:id="@+id/location"
@@ -78,7 +78,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@drawable/ic_social"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/editImageView"
         android:layout_toRightOf="@+id/location"
         android:layout_toEndOf="@+id/location"
         android:layout_marginLeft="17dp"
@@ -127,8 +127,8 @@
         android:text="Social Situation"
         android:layout_alignBaseline="@+id/locationText"
         android:layout_alignBottom="@+id/locationText"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView" />
+        android:layout_alignRight="@+id/editImageView"
+        android:layout_alignEnd="@+id/editImageView" />
 
 
 </RelativeLayout>

@@ -85,7 +85,7 @@ public class TimelineActivity extends BarMenuActivity {
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
                         timelineActivity();
-                    
+
                 }
             });
         }else {

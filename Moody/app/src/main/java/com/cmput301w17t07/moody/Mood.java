@@ -2,6 +2,7 @@ package com.cmput301w17t07.moody;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Location;
 import android.media.Image;
 import android.provider.ContactsContract;
@@ -132,18 +133,40 @@ public class Mood implements Serializable {
         this.moodImageID = moodImage;
     }
 
-    public String encodeImage(Bitmap moodImage){
-        if(moodImage == null){
-            return null;
-        }
-        // http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        moodImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-        byte[] imageBytes = outputStream.toByteArray();
-        encodedImage = Base64.encodeToString(imageBytes,Base64.URL_SAFE);
-        return encodedImage;
-
-    }
+//    public String encodeImage(Bitmap moodImage){
+//        if(moodImage == null){
+//            return null;
+//        }
+//
+//        try {
+//            //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
+//            // for compressing the image to meet the project storage requirements
+//            while (((moodImage.getRowBytes() * moodImage.getHeight()) / 8) > 65536) {
+//                System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
+//
+//                BitmapFactory.Options options2 = new BitmapFactory.Options();
+//                options2.inPreferredConfig = Bitmap.Config.RGB_565;
+//
+//                Matrix matrix = new Matrix();
+//                matrix.setScale(0.5f, 0.5f);
+//                moodImage = Bitmap.createBitmap(moodImage, 0, 0, moodImage.getWidth(),
+//                        moodImage.getHeight(), matrix, true);
+//
+//                System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
+//
+//            }
+//        } catch (Exception E){
+//
+//        }
+//        System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
+//        // http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        moodImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+//        byte[] imageBytes = outputStream.toByteArray();
+//        encodedImage = Base64.encodeToString(imageBytes,Base64.URL_SAFE);
+//        return encodedImage;
+//
+//    }
 
     public String getFeeling() {
         return feeling;

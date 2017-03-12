@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,13 +37,23 @@ public class ViewMoodActivity extends BarMenuActivity {
         username = userController.readUsername(ViewMoodActivity.this).toString();
         // if the mood was from user profile allow edit/delete
         if (viewMood.getUsername().equals(username)) {
+
             displayAttributes();
+            // edit mood stuff ...
+            Button editButton = (Button) findViewById(R.id.userEditButton);
+            editButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
+                    editMoodIntent.putExtra("editMood", viewMood);
+                    startActivity(editMoodIntent);
+                }
+            });
         }
         // else we disable and don't show the edit/delete button
         else {
-            Button edit = (Button) findViewById(R.id.button2);
+            Button edit = (Button) findViewById(R.id.userDeleteButton);
             edit.setVisibility(Button.GONE);
-            Button delete = (Button) findViewById(R.id.button3);
+            Button delete = (Button) findViewById(R.id.userEditButton);
             delete.setVisibility(Button.GONE);
             displayAttributes();
         }

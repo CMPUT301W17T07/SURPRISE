@@ -53,7 +53,7 @@
         android:id="@+id/viewMoodImage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_above="@+id/button3"
+        android:layout_above="@+id/userDeleteButton"
         android:scaleType="fitCenter"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
@@ -91,17 +91,17 @@
         android:layout_alignStart="@+id/userFeelingTV" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/userDeleteButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="Delete"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
+        android:layout_alignBaseline="@+id/userEditButton"
+        android:layout_alignBottom="@+id/userEditButton"
         android:layout_alignRight="@+id/bottom_navigation"
         android:layout_alignEnd="@+id/bottom_navigation" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/userEditButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_above="@+id/bottom_navigation"

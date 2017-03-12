@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -81,7 +80,7 @@ public class CreateMoodActivity extends BarMenuActivity {
 
         Description = (EditText) findViewById(R.id.Description);
 
-        mImageView = (ImageView) findViewById(R.id.imageView);
+        mImageView = (ImageView) findViewById(R.id.editImageView);
 
         ImageButton chooseButton = (ImageButton) findViewById(R.id.Camera);
 
@@ -91,9 +90,11 @@ public class CreateMoodActivity extends BarMenuActivity {
         chooseButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.PICK");
-                intent.setType("image/*");
-                startActivityForResult(intent, 0);
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intent, 1);
+//                Intent intent = new Intent("android.intent.action.PICK");
+//                intent.setType("image/*");
+//                startActivityForResult(intent, 0);
             }
         });
 
@@ -168,20 +169,6 @@ public class CreateMoodActivity extends BarMenuActivity {
         mImageView.setImageBitmap(bitmap);
 
 
-        //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
-        while(((bitmap.getRowBytes() * bitmap.getHeight())/8) > 65536) {
-            System.out.println("Image size is too big! "+((bitmap.getRowBytes() * bitmap.getHeight())/8));
 
-            BitmapFactory.Options options2 = new BitmapFactory.Options();
-            options2.inPreferredConfig = Bitmap.Config.RGB_565;
-
-            Matrix matrix = new Matrix();
-            matrix.setScale(0.5f, 0.5f);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                    bitmap.getHeight(), matrix, true);
-
-            System.out.println("Image size is too big! "+((bitmap.getRowBytes() * bitmap.getHeight())/8));
-
-        }
     }
 }
