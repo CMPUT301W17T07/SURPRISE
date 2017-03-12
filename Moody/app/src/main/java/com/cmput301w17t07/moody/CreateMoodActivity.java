@@ -125,8 +125,10 @@ public class CreateMoodActivity extends BarMenuActivity {
             public void onClick(View v) {
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
-                if (moodController.createMood(EmotionText, userName, moodMessage_text, null, bitmap, SocialSituation) == false) {
-                    Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
+                if (moodController.createMood(EmotionText, userName,
+                        moodMessage_text, null, bitmap, SocialSituation) == false) {
+                    Toast.makeText(CreateMoodActivity.this,
+                            "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);

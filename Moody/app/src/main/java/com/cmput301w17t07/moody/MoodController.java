@@ -24,10 +24,10 @@ public class MoodController {
             // if it returns false...
             return false;
         }
-        if(!checkMoodImage(image)){
-            // if moodImage size does not meet requirements...
-            return false;
-        }
+//        if(!checkMoodImage(image)){
+//            // if moodImage size does not meet requirements...
+//            return false;
+//        }
 
 
         // Creating a new image object that will be linked to the proper mood; greasy workaround
@@ -62,14 +62,21 @@ public class MoodController {
     }
 
     public static Boolean checkMoodMessage(String moodMessage){
-        //todo implement method to check message length
-        return true;
+        String wordCheck = moodMessage.trim();
+        if(wordCheck.split("\\s+").length > 3){
+            return false;
+        }
+        else if(moodMessage.length() > 20){
+            return false;
+        }else{
+            return true;
+        }
     }
 
-    public static Boolean checkMoodImage(Bitmap image){
-        //todo implement xin's method of checking image size
-        return true;
-    }
+//    public static Boolean checkMoodImage(Bitmap image){
+//        //todo implement xin's method of checking image size
+//        return true;
+//    }
 
 
     public String getMoodMessage() {

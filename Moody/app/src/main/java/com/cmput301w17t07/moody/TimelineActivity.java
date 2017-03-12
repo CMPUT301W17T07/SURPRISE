@@ -76,7 +76,7 @@ public class TimelineActivity extends BarMenuActivity {
 //                                    "Please check your internet connection", Toast.LENGTH_SHORT).show();
 //                            return;
 //                        }
-                        userController.saveUsername(username, TimelineActivity.this);
+                        userController.saveUsername(username.toLowerCase(), TimelineActivity.this);
 
 
                     }
