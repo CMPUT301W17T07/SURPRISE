@@ -115,9 +115,6 @@ public class CreateMoodActivity extends BarMenuActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.PICK");
-                intent.setType("map/*");
-                startActivityForResult(intent, 0);
             }
         });
 
@@ -126,8 +123,10 @@ public class CreateMoodActivity extends BarMenuActivity {
             public void onClick(View v) {
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
-                if (moodController.createMood(EmotionText, userName, moodMessage_text, null, bitmap, SocialSituation) == false) {
-                    Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
+                if (moodController.createMood(EmotionText, userName,
+                        moodMessage_text, null, bitmap, SocialSituation) == false) {
+                    Toast.makeText(CreateMoodActivity.this,
+                            "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
@@ -143,10 +142,11 @@ public class CreateMoodActivity extends BarMenuActivity {
     //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {
-            return;   //no data return
+            finish();   //no data return
         }
         if (requestCode == 0) {
             //get pic from local photo
+            try{
             bitmap = data.getParcelableExtra("data");
             if (bitmap == null) {//if pic is not so big use original one
                 try {
@@ -155,20 +155,33 @@ public class CreateMoodActivity extends BarMenuActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+            }}
+            catch(RuntimeException e){
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
             }
-        } else if (requestCode == 1) {
+        }
+        else if (requestCode == 1) {
+            try{
             bitmap = (Bitmap) data.getExtras().get("data");
-            System.out.println("photosize = " + bitmap.getByteCount());
-            // saveToSDCard(bitmap);
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
-            startActivity(intent);
-            finish();
-            return;
+            System.out.println("photosize = " + bitmap.getByteCount());}
+            catch (Exception e){
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
+            }
+
+
+        }
+        else if (resultCode == Activity.RESULT_CANCELED) {
+            try {
+                System.out.println("test for ccamere" + data.getExtras().get("data"));
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
+            } catch (RuntimeException e) {
+            }
+
         }
         mImageView.setImageBitmap(bitmap);
+        }
 
-
-
-    }
 }

@@ -53,20 +53,20 @@
         android:id="@+id/viewMoodImage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_above="@+id/userDeleteButton"
+        android:layout_above="@+id/deleteButton"
         android:scaleType="fitCenter"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
 
-        <TextView
+    <TextView
         android:id="@+id/userFeelingTV"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:text="TextView"
         android:textSize="65px"
-            android:layout_below="@+id/userDateTV"
-            android:layout_alignLeft="@+id/userDateTV"
-            android:layout_alignStart="@+id/userDateTV" />
+        android:layout_below="@+id/userDateTV"
+        android:layout_alignLeft="@+id/userDateTV"
+        android:layout_alignStart="@+id/userDateTV" />
 
     <TextView
         android:id="@+id/userUsernameTV"
@@ -91,17 +91,17 @@
         android:layout_alignStart="@+id/userFeelingTV" />
 
     <Button
-        android:id="@+id/userDeleteButton"
+        android:id="@+id/deleteButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="Delete"
-        android:layout_alignBaseline="@+id/userEditButton"
-        android:layout_alignBottom="@+id/userEditButton"
+        android:layout_alignBaseline="@+id/editButton"
+        android:layout_alignBottom="@+id/editButton"
         android:layout_alignRight="@+id/bottom_navigation"
         android:layout_alignEnd="@+id/bottom_navigation" />
 
     <Button
-        android:id="@+id/userEditButton"
+        android:id="@+id/editButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_above="@+id/bottom_navigation"

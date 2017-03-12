@@ -3,16 +3,13 @@ package com.cmput301w17t07.moody;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 
 public class ViewMoodActivity extends BarMenuActivity {
     private String username;
@@ -20,6 +17,8 @@ public class ViewMoodActivity extends BarMenuActivity {
     public Integer id;
     private MoodImage moodImage;
     private Bitmap bitmapImage;
+
+    private String viewMoodID;
 
 
     @Override
@@ -31,6 +30,8 @@ public class ViewMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
+        // Get the database id for the selected mood
+        viewMoodID = viewMood.getId();
 
         // get username right
         UserController userController = new UserController();
@@ -39,8 +40,21 @@ public class ViewMoodActivity extends BarMenuActivity {
         if (viewMood.getUsername().equals(username)) {
 
             displayAttributes();
+
+            Button deleteButton = (Button) findViewById(R.id.deleteButton);
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+                    deleteMood.execute(viewMoodID);
+                    finish();
+                }
+            });
+
+
             // edit mood stuff ...
-            Button editButton = (Button) findViewById(R.id.userEditButton);
+            Button editButton = (Button) findViewById(R.id.editButton);
             editButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
@@ -51,9 +65,9 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
         // else we disable and don't show the edit/delete button
         else {
-            Button edit = (Button) findViewById(R.id.userDeleteButton);
+            Button edit = (Button) findViewById(R.id.deleteButton);
             edit.setVisibility(Button.GONE);
-            Button delete = (Button) findViewById(R.id.userEditButton);
+            Button delete = (Button) findViewById(R.id.editButton);
             delete.setVisibility(Button.GONE);
             displayAttributes();
         }
@@ -64,7 +78,7 @@ public class ViewMoodActivity extends BarMenuActivity {
 
         // NOTE MISSING IMAGE AND LOCATION STILL !!!!!!!!!!!
         TextView user = (TextView) findViewById(R.id.userUsernameTV);
-        user.setText(viewMood.getUsername());
+        user.setText(viewMood.getDisplayUsername());
 
         TextView feeling = (TextView) findViewById(R.id.userFeelingTV);
         feeling.setText(viewMood.getMoodMessage());
@@ -121,6 +135,7 @@ public class ViewMoodActivity extends BarMenuActivity {
                 emoji.setImageResource(R.drawable.surprise);
                 break;
         }
+
 
     }
 
