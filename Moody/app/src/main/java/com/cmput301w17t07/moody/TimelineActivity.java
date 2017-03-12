@@ -63,6 +63,7 @@ public class TimelineActivity extends BarMenuActivity {
                                     "Username is already taken", Toast.LENGTH_SHORT).show();
                             return;
                         }
+
                         else if(createUserFlag.equals(2)){
                             Toast.makeText(TimelineActivity.this,
                                     "Sorry, but the profile picture you selected is too large",
@@ -84,9 +85,7 @@ public class TimelineActivity extends BarMenuActivity {
                         Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
                         timelineActivity();
-
-//                        setContentView(R.layout.activity_timeline);
-                        //setUpMenuBar(this);
+                    
                 }
             });
         }else {

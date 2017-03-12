@@ -18,7 +18,7 @@ import io.searchbox.core.SearchResult;
  */
 
 
-public class ElasticSearchMoodyController extends ElasticController{
+public class ElasticSearchUserController extends ElasticController{
 
     /**
      * The AddUser nested class of ElasticSearchMoody controller. Allows for new users to be added
@@ -52,11 +52,47 @@ public class ElasticSearchMoodyController extends ElasticController{
         }
     }
 
-    public static class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
+    public static class GetUser extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... params) {
             verifySettings();
-            return null;
+
+
+            ArrayList<User> users = new ArrayList<User>();
+            String query;
+            if (params[0]==""){
+                query="{\"from\":0,\"size\":20}";
+
+            }else {
+                query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"username\" :\"" + params[0] + "\" }\n" +
+                        "    }\n" +
+                        "}";
+                System.out.println("This is query" + query);
+            }
+            // TODO Build the query
+            Search search=new Search.Builder(query)
+                    .addIndex("cmput301w17t07")
+                    .addType("user")
+                    .build();
+
+            try {
+                // TODO get the results of the query
+                SearchResult result=client.execute(search);
+                if (result.isSucceeded()){
+                    List<User> foundUsers=result.getSourceAsObjectList(User.class);
+                    users.addAll(foundUsers);
+                }else {
+                    Log.i("erroe","the search quary failed to find any tweet that matched");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            //System.out.println("this is user"+users);
+            return users;
+
         }
     }
 

@@ -56,17 +56,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/linearLayout1"
-            >
+            android:layout_toRightOf="@id/linearLayout1" >
 
             <ImageView
                 android:id="@+id/feelingEmoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:maxHeight="30dp"
-                android:maxWidth="30dp"
-                android:paddingBottom = "10dp" />
+                android:maxHeight="50dp"
+                android:maxWidth="50dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
 
         </LinearLayout>
 

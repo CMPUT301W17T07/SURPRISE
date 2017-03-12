@@ -7,7 +7,10 @@ import android.media.Image;
 import android.provider.ContactsContract;
 import android.util.Base64;
 
+import java.io.Serializable;
+
 import java.io.ByteArrayOutputStream;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +21,10 @@ import io.searchbox.annotations.JestId;
  * Created by mike on 2017-02-23.
  */
 
-public class Mood {
+public class Mood implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String moodMessage;
     private Date date;
     private Location location;

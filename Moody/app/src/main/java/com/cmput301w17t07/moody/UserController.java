@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.media.Image;
 
+
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
@@ -64,10 +65,10 @@ public class UserController {
         }
         else{
 //            User newUser = new User(username);
-//            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
 //            addUser.execute(newUser);
             user = new User(username);
-            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);
         }
 
@@ -89,10 +90,10 @@ public class UserController {
         }
         else{
 //            User newUser = new User(username);
-//            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
 //            addUser.execute(newUser);
             user = new User(username);
-            ElasticSearchMoodyController.AddUser addUser = new ElasticSearchMoodyController.AddUser();
+            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);
         }
 
@@ -103,8 +104,8 @@ public class UserController {
         // function to check if username is unique
         Boolean uniqueFlag = false;
 
-        ElasticSearchMoodyController.UniqueUsername uniqueUsername =
-                new ElasticSearchMoodyController.UniqueUsername();
+        ElasticSearchUserController.UniqueUsername uniqueUsername =
+                new ElasticSearchUserController.UniqueUsername();
 
         try {
             uniqueFlag = uniqueUsername.execute(username).get();
