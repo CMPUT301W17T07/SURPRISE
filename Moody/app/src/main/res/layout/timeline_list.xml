@@ -34,7 +34,7 @@
 
 
         <TextView
-            android:id="@+id/feelingTV"
+            android:id="@+id/messageTV"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linearLayout1"
@@ -43,8 +43,8 @@
         <LinearLayout
             android:layout_width="310dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/feelingTV"
-            android:layout_below="@+id/feelingTV" >
+            android:layout_alignLeft="@+id/messageTV"
+            android:layout_below="@+id/messageTV" >
             <TextView
                 android:id="@+id/dateTV"
                 android:layout_width="wrap_content"

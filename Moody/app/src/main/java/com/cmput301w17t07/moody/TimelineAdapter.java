@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class TimelineAdapter extends ArrayAdapter<Mood> {
     ArrayList<Mood> moodTimeline;
-    ArrayList<Mood> filteredMoodTimeline; //won't be implemented for now
+    ArrayList<Mood> filteredMoodTimeline;
     Context context;
     int layout_timeline_list;
 
@@ -39,9 +39,7 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
     public View getView(int position, View convertView, ViewGroup parent){
 
 
-        // Do I need to check the view?
-
-        Mood mood = getItem(position); //do I need to override the getItem position?
+        Mood mood = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.timeline_list, parent, false);
@@ -54,8 +52,8 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
         username.setText(mood.getDisplayUsername());
 //        username.setTypeface(font);
 
-        TextView feelingText = (TextView) convertView.findViewById(R.id.feelingTV);
-        feelingText.setText(mood.getFeeling());
+        TextView feelingText = (TextView) convertView.findViewById(R.id.messageTV);
+        feelingText.setText(mood.getMoodMessage());
 //        feelingText.setTypeface(font);
 
         TextView dateText = (TextView) convertView.findViewById(R.id.dateTV);
