@@ -46,7 +46,35 @@
         android:layout_marginBottom="52dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
         android:text="UserName"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/searchMood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="Search Mood" />
+
+    <EditText
+        android:id="@+id/searchMoodMes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/searchMood"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:text="Mood"
         android:textSize="30sp" />
 
 

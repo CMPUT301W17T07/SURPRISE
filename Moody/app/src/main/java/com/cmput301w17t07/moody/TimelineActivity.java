@@ -55,6 +55,11 @@ public class TimelineActivity extends BarMenuActivity {
                     }
                     else {
                         String username = usernameText.getText().toString();
+
+                        //Intent intent= new Intent(TimelineActivity.this,UserAdapter.class);
+                        //intent.putExtra("userNameBegin",username);
+                        //startActivity(intent);
+
                         //todo get image from user and createUser with image parameter
                         UserController userController = new UserController();
                         createUserFlag = userController.createUser(username);

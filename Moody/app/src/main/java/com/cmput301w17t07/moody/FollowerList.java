@@ -10,6 +10,7 @@ public class FollowerList {
     public ArrayList<User> pendingFollowers = new ArrayList<User>();
     public ArrayList<User> followerList = new ArrayList<User>();
 
+
     public void addPending(User user){
         // When another user requests to follow the user
         pendingFollowers.add(user);

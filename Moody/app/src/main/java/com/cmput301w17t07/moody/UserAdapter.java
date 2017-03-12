@@ -1,21 +1,29 @@
 package com.cmput301w17t07.moody;
 
+import android.app.Activity;
 import android.content.Context;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+
+
 /**
- * Created by mike on 2017-02-24.
+ * Created by Panchy on 2017-03-12.
  */
 
-public class UserAdapter extends BaseAdapter{
+public class UserAdapter extends BaseAdapter {
     private Context context;
     private List<User> userList;
+
 
     /**
      * creat a new peopleadapter
@@ -64,20 +72,62 @@ public class UserAdapter extends BaseAdapter{
      * @return
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        View view;
+        SearchViewHolder viewHolder;
+
 
         if (convertView == null) {
-            System.out.printf("this is view=null");
+            viewHolder =new SearchViewHolder();
+            view = LayoutInflater.from(context).inflate(R.layout.single_search_list,null);
+            viewHolder.userName=(TextView) view.findViewById(R.id.singleSearchItemName);
+            viewHolder.addBtn=(Button) view.findViewById(R.id.searchAdd);
+            //viewHolder.declineBtn=(Button) view.findViewById(R.id.searchDecline);
+
+            view.setTag(viewHolder);
+        }else {
+            view=convertView;
+            viewHolder=(SearchViewHolder) view.getTag();
         }
-        View v=View.inflate(context,R.layout.single_search_list,null);
-        TextView name=(TextView) v.findViewById(R.id.singleSearchItem);
-
-        name.setText(userList.get(position).getUsername());
-        name.setTextSize(20);
 
 
-        v.setTag(userList.get(position));
-        return v;
+        viewHolder.userName.setText(userList.get(position).getUsername());
+        viewHolder.userName.setTextSize(30);
+
+        viewHolder.addBtn.setTag(position);
+        viewHolder.addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v){
+                Toast.makeText(context,"list view add button was clicked by Panchy in position "
+                        +position+" username is "+userList.get(position).getUsername(),Toast.LENGTH_SHORT).show();
+
+                //Intent intent=((Activity) context).getIntent();
+                //final String username= intent.getStringExtra("userNameBegin");
+
+
+
+            }
+        });
+
+//        viewHolder.declineBtn.setTag(position+1);
+//        viewHolder.declineBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public  void onClick(View v){
+//                Toast.makeText(context,"list view decline was clicked by Panchy in position "
+//                        +position+" username is "+userList.get(position).getUsername(),Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        return view;
+    }
+
+    public class SearchViewHolder {
+        //private ImageView userImag;
+        public TextView userName;
+        public Button addBtn;
+
+
+
     }
 
 }
