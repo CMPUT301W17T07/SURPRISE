@@ -7,7 +7,10 @@ import android.media.Image;
 import android.provider.ContactsContract;
 import android.util.Base64;
 
+import java.io.Serializable;
+
 import java.io.ByteArrayOutputStream;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,11 +21,14 @@ import io.searchbox.annotations.JestId;
  * Created by mike on 2017-02-23.
  */
 
-public class Mood {
+public class Mood implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String moodMessage;
     private Date date;
     private Location location;
-    private String moodImage; //use getMoodImage to decode string into Bitmap
+    private String moodImageID; //use getMoodImage to decode string into Bitmap
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
@@ -59,15 +65,16 @@ public class Mood {
 //    }
 
     public Mood(String feeling, String username, String moodMessage, Location location,
-                Bitmap image, String socialSituation){
+                String imageID, String socialSituation){
         this.feeling = feeling;
         this.username = username.toLowerCase();
         this.displayUsername = username;
         this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
-        this.moodImage = encodeImage(image);
+        this.moodImageID = imageID;
         this.socialSituation = socialSituation;
+        //        this.moodImage = encodeImage(image);
 
     }
 
@@ -103,9 +110,14 @@ public class Mood {
     }
 
     public Bitmap getMoodImage() {
-        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedImage;
+        Bitmap bitmap;
+        bitmap = null;
+        if(encodedImage != null){
+            byte[]bitmapArray = null;
+            bitmapArray= Base64.decode(encodedImage, Base64.URL_SAFE);
+            bitmap= BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        }
+        return bitmap;
     }
 
     public String getSocialSituation() {
@@ -117,7 +129,7 @@ public class Mood {
     }
 
     public void setMoodImage(String moodImage) {
-        this.moodImage = moodImage;
+        this.moodImageID = moodImage;
     }
 
     public String encodeImage(Bitmap moodImage){
@@ -128,7 +140,7 @@ public class Mood {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         moodImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
-        encodedImage = Base64.encodeToString(imageBytes,Base64.DEFAULT);
+        encodedImage = Base64.encodeToString(imageBytes,Base64.URL_SAFE);
         return encodedImage;
 
     }
@@ -166,5 +178,9 @@ public class Mood {
 
     public void setDisplayUsername(String displayUsername) {
         this.displayUsername = displayUsername;
+    }
+
+    public String getMoodImageID(){
+        return this.moodImageID;
     }
 }

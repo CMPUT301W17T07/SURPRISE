@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,7 +28,7 @@ public class CreateMoodActivity extends BarMenuActivity {
     private String userName;
     Bitmap bitmap = null;
 
-    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
+//    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class CreateMoodActivity extends BarMenuActivity {
 
 
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
-        String[] items = new String[]{"angry", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+
+        String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -52,7 +53,7 @@ public class CreateMoodActivity extends BarMenuActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(CreateMoodActivity.this, "Please pick an emotion !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateMoodActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,9 +114,6 @@ public class CreateMoodActivity extends BarMenuActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.PICK");
-                intent.setType("map/*");
-                startActivityForResult(intent, 0);
             }
         });
 
@@ -124,8 +122,10 @@ public class CreateMoodActivity extends BarMenuActivity {
             public void onClick(View v) {
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
-                if (moodController.createMood(EmotionText, userName, moodMessage_text, null, bitmap, SocialSituation) == false) {
-                    Toast.makeText(CreateMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
+                if (moodController.createMood(EmotionText, userName,
+                        moodMessage_text, null, bitmap, SocialSituation) == false) {
+                    Toast.makeText(CreateMoodActivity.this,
+                            "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
@@ -141,7 +141,7 @@ public class CreateMoodActivity extends BarMenuActivity {
     //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {
-            return;   //no data return
+            finish();   //no data return
         }
         if (requestCode == 0) {
             //get pic from local photo
@@ -155,17 +155,39 @@ public class CreateMoodActivity extends BarMenuActivity {
                 }
             }
         } else if (requestCode == 1) {
+
+            try{
             bitmap = (Bitmap) data.getExtras().get("data");
-            System.out.println("photosize = " + bitmap.getByteCount());
-            // saveToSDCard(bitmap);
+            System.out.println("photosize = " + bitmap.getByteCount());}
+            catch (Exception e){
+            }
+
+
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
-            startActivity(intent);
-            finish();
-            return;
+            try {
+                System.out.println("test for ccamere" + data.getExtras().get("data"));
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
+            } catch (RuntimeException e) {
+            }
+
         }
         mImageView.setImageBitmap(bitmap);
+        try{
+            //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
+            while(((bitmap.getRowBytes() * bitmap.getHeight())/8) > 65536) {
+                System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
+                BitmapFactory.Options options2 = new BitmapFactory.Options();
+                options2.inPreferredConfig = Bitmap.Config.RGB_565;
+                Matrix matrix = new Matrix();
+                matrix.setScale(0.5f, 0.5f);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), matrix, true);
+                System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
+            }
+        }catch(Exception e) {
+        }
 
+        }
 
-    }
 }
