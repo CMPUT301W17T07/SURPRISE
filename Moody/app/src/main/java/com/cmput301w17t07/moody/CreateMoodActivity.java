@@ -142,7 +142,7 @@ public class CreateMoodActivity extends BarMenuActivity {
     //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {
-            return;   //no data return
+            finish();   //no data return
         }
         if (requestCode == 0) {
             //get pic from local photo
@@ -156,32 +156,39 @@ public class CreateMoodActivity extends BarMenuActivity {
                 }
             }
         } else if (requestCode == 1) {
+
+            try{
             bitmap = (Bitmap) data.getExtras().get("data");
-            System.out.println("photosize = " + bitmap.getByteCount());
-            // saveToSDCard(bitmap);
+            System.out.println("photosize = " + bitmap.getByteCount());}
+            catch (Exception e){
+            }
+
+
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
-            startActivity(intent);
-            finish();
-            return;
+            try {
+                System.out.println("test for ccamere" + data.getExtras().get("data"));
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
+            } catch (RuntimeException e) {
+            }
+
         }
         mImageView.setImageBitmap(bitmap);
-
-
-        //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
-        while(((bitmap.getRowBytes() * bitmap.getHeight())/8) > 65536) {
-            System.out.println("Image size is too big! "+((bitmap.getRowBytes() * bitmap.getHeight())/8));
-
-            BitmapFactory.Options options2 = new BitmapFactory.Options();
-            options2.inPreferredConfig = Bitmap.Config.RGB_565;
-
-            Matrix matrix = new Matrix();
-            matrix.setScale(0.5f, 0.5f);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                    bitmap.getHeight(), matrix, true);
-
-            System.out.println("Image size is too big! "+((bitmap.getRowBytes() * bitmap.getHeight())/8));
+        try{
+            //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
+            while(((bitmap.getRowBytes() * bitmap.getHeight())/8) > 65536) {
+                System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
+                BitmapFactory.Options options2 = new BitmapFactory.Options();
+                options2.inPreferredConfig = Bitmap.Config.RGB_565;
+                Matrix matrix = new Matrix();
+                matrix.setScale(0.5f, 0.5f);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), matrix, true);
+                System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
+            }
+        }catch(Exception e) {
+        }
 
         }
-    }
+
 }
