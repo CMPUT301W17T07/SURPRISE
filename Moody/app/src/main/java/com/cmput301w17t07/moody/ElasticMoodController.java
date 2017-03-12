@@ -3,9 +3,11 @@ package com.cmput301w17t07.moody;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -210,6 +212,35 @@ public class ElasticMoodController extends ElasticController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return moods;
+        }
+    }
+
+
+    public static class DeleteMood extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... search_parameters) {
+            verifySettings();
+
+            String search_string = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"_id\" :\"" + search_parameters[0] + "\" }\n" +
+                    "    }\n" +
+                    "}";
+
+            DeleteByQuery delete = new DeleteByQuery.Builder(search_string)
+                    .addIndex("cmput301w17t07")
+                    .addType("mood")
+                    .build();
+
+            try {
+                client.execute(delete);
+            } catch (Exception e) {
+                e.printStackTrace();
+//                   throw new IllegalArgumentException();
+            }
+
+            return null;
         }
     }
 

@@ -3,15 +3,14 @@ package com.cmput301w17t07.moody;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import static com.cmput301w17t07.moody.R.id.deleteButton;
 
 public class ViewMoodActivity extends BarMenuActivity {
     private String username;
@@ -19,6 +18,8 @@ public class ViewMoodActivity extends BarMenuActivity {
     public Integer id;
     private MoodImage moodImage;
     private Bitmap bitmapImage;
+
+    private String viewMoodID;
 
 
     @Override
@@ -30,6 +31,8 @@ public class ViewMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
+        // Get the database id for the selected mood
+        viewMoodID = viewMood.getId();
 
         // get username right
         UserController userController = new UserController();
@@ -37,12 +40,25 @@ public class ViewMoodActivity extends BarMenuActivity {
         // if the mood was from user profile allow edit/delete
         if (viewMood.getUsername().equals(username)) {
             displayAttributes();
+
+            final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+                    deleteMood.execute(viewMoodID);
+                    finish();
+                }
+            });
+
+
         }
         // else we disable and don't show the edit/delete button
         else {
-            Button edit = (Button) findViewById(R.id.button2);
+            Button edit = (Button) findViewById(R.id.editButton);
             edit.setVisibility(Button.GONE);
-            Button delete = (Button) findViewById(R.id.button3);
+            final Button delete = (Button) findViewById(R.id.deleteButton);
             delete.setVisibility(Button.GONE);
             displayAttributes();
         }
@@ -110,6 +126,7 @@ public class ViewMoodActivity extends BarMenuActivity {
                 emoji.setImageResource(R.drawable.surprise);
                 break;
         }
+
 
     }
 
