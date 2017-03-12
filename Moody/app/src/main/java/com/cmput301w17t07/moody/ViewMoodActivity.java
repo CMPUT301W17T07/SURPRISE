@@ -46,6 +46,8 @@ public class ViewMoodActivity extends BarMenuActivity {
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
+                    //todo implement this functionality through the mood controller, so that offline
+                    // deletion can be handled
                     ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
                     deleteMood.execute(viewMoodID);
                     finish();
