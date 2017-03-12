@@ -101,7 +101,7 @@ public class ElasticMoodController extends ElasticController {
             String query;
             //search param 0 = username FOR NOW
             if (search_parameters[0]==""){
-                query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
+                query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\n" +
                         "    \"query\" : {\n" +
