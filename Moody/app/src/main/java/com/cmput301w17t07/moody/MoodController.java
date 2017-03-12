@@ -3,6 +3,8 @@ package com.cmput301w17t07.moody;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.media.Image;
+import android.util.Log;
+
 import java.util.Date;
 
 /**
@@ -27,10 +29,31 @@ public class MoodController {
             return false;
         }
 
-        //todo implement mood constructor with all parameters
 
-//        Mood newMood = new Mood(feeling, username);
-        Mood newMood = new Mood(feeling, username, moodMessage, location, image, socialSituation);
+        // Creating a new image object that will be linked to the proper mood; greasy workaround
+        // to prevent slow loading of timeline
+        ElasticMoodController.AddImage addImage = new ElasticMoodController.AddImage();
+
+        //todo add test in case there is no IMAGE!!
+        // encoding image
+        MoodImage newImage = new MoodImage();
+        newImage.encodeImage(image);
+
+        String moodID = null;
+
+        //adding image to database
+        addImage.execute(newImage);
+        try {
+            moodID = addImage.get().getId();
+        } catch (Exception E){
+            Log.i("Error", "Weird method resulted in error because method is weird and sucks");
+        }
+
+
+        // ID to link mood to image
+        System.out.println("test ID"+ moodID);
+
+        Mood newMood = new Mood(feeling, username, moodMessage, location, moodID, socialSituation);
 
         ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
         addMood.execute(newMood);

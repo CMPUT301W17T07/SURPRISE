@@ -1,12 +1,15 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,6 +17,8 @@ public class ViewMoodActivity extends BarMenuActivity {
     private String username;
     public Mood viewMood;
     public Integer id;
+    private MoodImage moodImage;
+    private Bitmap bitmapImage;
 
 
     @Override
@@ -56,9 +61,24 @@ public class ViewMoodActivity extends BarMenuActivity {
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate());
 
-//        ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
+        ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
 //        //todo handle no image case!!
 //        image.setImageBitmap(viewMood.getMoodImage());
+
+        //!!!! NEW STUFF
+        String imageID = viewMood.getMoodImageID();
+//        Toast.makeText(ViewMoodActivity.this, imageID, Toast.LENGTH_SHORT).show();
+
+        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
+        getMoodImage.execute(imageID);
+        // retrieving the image
+        try {
+            bitmapImage = getMoodImage.get().decodeImage();
+        }catch (Exception e){
+            Log.i("error","failed to get the moodImage"+imageID);
+        }
+
+        image.setImageBitmap(bitmapImage);
 
         TextView social = (TextView) findViewById(R.id.userSocialTV);
         social.setText(viewMood.getSocialSituation());

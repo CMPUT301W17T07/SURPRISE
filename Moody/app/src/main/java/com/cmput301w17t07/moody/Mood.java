@@ -28,7 +28,7 @@ public class Mood implements Serializable {
     private String moodMessage;
     private Date date;
     private Location location;
-    private String moodImage; //use getMoodImage to decode string into Bitmap
+    private String moodImageID; //use getMoodImage to decode string into Bitmap
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
@@ -65,15 +65,16 @@ public class Mood implements Serializable {
 //    }
 
     public Mood(String feeling, String username, String moodMessage, Location location,
-                Bitmap image, String socialSituation){
+                String imageID, String socialSituation){
         this.feeling = feeling;
         this.username = username.toLowerCase();
         this.displayUsername = username;
         this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
-        this.moodImage = encodeImage(image);
+        this.moodImageID = imageID;
         this.socialSituation = socialSituation;
+        //        this.moodImage = encodeImage(image);
 
     }
 
@@ -109,10 +110,13 @@ public class Mood implements Serializable {
     }
 
     public Bitmap getMoodImage() {
-        byte[]bitmapArray = null;
         Bitmap bitmap;
-        bitmapArray= Base64.decode(encodedImage, Base64.URL_SAFE);
-        bitmap= BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        bitmap = null;
+        if(encodedImage != null){
+            byte[]bitmapArray = null;
+            bitmapArray= Base64.decode(encodedImage, Base64.URL_SAFE);
+            bitmap= BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        }
         return bitmap;
     }
 
@@ -125,7 +129,7 @@ public class Mood implements Serializable {
     }
 
     public void setMoodImage(String moodImage) {
-        this.moodImage = moodImage;
+        this.moodImageID = moodImage;
     }
 
     public String encodeImage(Bitmap moodImage){
@@ -174,5 +178,9 @@ public class Mood implements Serializable {
 
     public void setDisplayUsername(String displayUsername) {
         this.displayUsername = displayUsername;
+    }
+
+    public String getMoodImageID(){
+        return this.moodImageID;
     }
 }
