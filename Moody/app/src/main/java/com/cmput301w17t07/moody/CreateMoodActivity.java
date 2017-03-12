@@ -145,6 +145,7 @@ public class CreateMoodActivity extends BarMenuActivity {
         }
         if (requestCode == 0) {
             //get pic from local photo
+            try{
             bitmap = data.getParcelableExtra("data");
             if (bitmap == null) {//if pic is not so big use original one
                 try {
@@ -153,6 +154,10 @@ public class CreateMoodActivity extends BarMenuActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+            }}
+            catch(RuntimeException e){
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
             }
         } else if (requestCode == 1) {
 
@@ -160,6 +165,8 @@ public class CreateMoodActivity extends BarMenuActivity {
             bitmap = (Bitmap) data.getExtras().get("data");
             System.out.println("photosize = " + bitmap.getByteCount());}
             catch (Exception e){
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
             }
 
 
