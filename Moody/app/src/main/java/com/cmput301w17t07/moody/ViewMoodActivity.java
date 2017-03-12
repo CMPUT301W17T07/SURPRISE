@@ -53,7 +53,7 @@ public class ViewMoodActivity extends BarMenuActivity {
 
         // NOTE MISSING IMAGE AND LOCATION STILL !!!!!!!!!!!
         TextView user = (TextView) findViewById(R.id.userUsernameTV);
-        user.setText(viewMood.getUsername());
+        user.setText(viewMood.getDisplayUsername());
 
         TextView feeling = (TextView) findViewById(R.id.userFeelingTV);
         feeling.setText(viewMood.getMoodMessage());
