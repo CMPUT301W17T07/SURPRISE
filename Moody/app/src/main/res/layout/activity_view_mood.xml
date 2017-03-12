@@ -96,15 +96,15 @@
         android:text="TextView"/>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/viewMoodImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/linearLayout"
         android:layout_marginTop="141dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <Button
         android:id="@+id/button2"

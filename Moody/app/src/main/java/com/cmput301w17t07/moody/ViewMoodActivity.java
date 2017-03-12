@@ -2,6 +2,7 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,6 +55,10 @@ public class ViewMoodActivity extends BarMenuActivity {
 
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate());
+
+//        ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
+//        //todo handle no image case!!
+//        image.setImageBitmap(viewMood.getMoodImage());
 
         TextView social = (TextView) findViewById(R.id.userSocialTV);
         social.setText(viewMood.getSocialSituation());

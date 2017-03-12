@@ -109,9 +109,11 @@ public class Mood implements Serializable {
     }
 
     public Bitmap getMoodImage() {
-        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedImage;
+        byte[]bitmapArray = null;
+        Bitmap bitmap;
+        bitmapArray= Base64.decode(encodedImage, Base64.URL_SAFE);
+        bitmap= BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        return bitmap;
     }
 
     public String getSocialSituation() {
@@ -134,7 +136,7 @@ public class Mood implements Serializable {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         moodImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
-        encodedImage = Base64.encodeToString(imageBytes,Base64.DEFAULT);
+        encodedImage = Base64.encodeToString(imageBytes,Base64.URL_SAFE);
         return encodedImage;
 
     }
