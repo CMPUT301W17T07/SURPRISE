@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,6 +88,17 @@ public class EditMoodActivity extends BarMenuActivity {
                     Intent intent = new Intent(EditMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+
+        final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
+        deletePicture.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ImageView image = (ImageView) findViewById(R.id.editImageView);
+                image.setImageDrawable(null);
+                deletePicture.setImageResource(android.R.color.transparent);
+
             }
         });
     }

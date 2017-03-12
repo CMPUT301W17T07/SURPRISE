@@ -62,6 +62,16 @@
         android:layout_alignStart="@+id/editImageView" />
 
     <ImageButton
+        android:id="@+id/deletePicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/editImageView"
+        android:layout_alignStart="@+id/editImageView"
+        android:layout_alignTop="@+id/editImageView"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_deletepic" />
+
+    <ImageButton
         android:id="@+id/location"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -98,18 +108,6 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="#00000000"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
-
     <TextView
         android:id="@+id/locationText"
         android:layout_width="100dp"
@@ -133,9 +131,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:layout_above="@+id/editImageView"
+        android:layout_below="@+id/locationText"
         android:layout_alignLeft="@+id/editDescription"
-        android:layout_alignStart="@+id/editDescription" />
+        android:layout_alignStart="@+id/editDescription"
+        android:layout_marginTop="9dp" />
 
 
 </RelativeLayout>
