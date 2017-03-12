@@ -114,9 +114,6 @@ public class CreateMoodActivity extends BarMenuActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.PICK");
-                intent.setType("map/*");
-                startActivityForResult(intent, 0);
             }
         });
 
