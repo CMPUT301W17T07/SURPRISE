@@ -61,8 +61,11 @@ public class ElasticMoodController extends ElasticController {
             }else {
                 query = "{\n" +
                         "    \"query\" : {\n" +
-                        "        \"term\" : { \"feeling\" :\"" + search_parameters[0] + "\" }\n" +
+                        "        \"term\" : { \"feeling\" :\"" + search_parameters[0] + "\" },\n" +
+                        "  \"sort\": [ {\n" +
+                        "    \"date\": {\"order\"\n" +
                         "    }\n" +
+                        "  } ]\n" +
                         "}";
                 System.out.println("this is query" + query);
             }

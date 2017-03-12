@@ -28,7 +28,7 @@ public class CreateMoodActivity extends BarMenuActivity {
     private String userName;
     Bitmap bitmap = null;
 
-    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
+//    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class CreateMoodActivity extends BarMenuActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(CreateMoodActivity.this, "Please pick an emotion !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateMoodActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
             }
         });
 
