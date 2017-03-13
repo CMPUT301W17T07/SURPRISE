@@ -86,8 +86,9 @@ public class EditMoodActivity extends BarMenuActivity {
                 String moodMessage_text = Description.getText().toString();
 //                String dateValue = date.getText().toString();
                 MoodController moodController = new MoodController();
+                Bitmap editBitmapImage = bitmapImage;
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        null, bitmapImage, SocialSituation, null, editMood ) == false) {
+                        null, editBitmapImage, SocialSituation, null, editMood ) == false) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {
@@ -104,6 +105,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 ImageView image = (ImageView) findViewById(R.id.editImageView);
                 image.setImageDrawable(null);
                 deletePicture.setImageResource(android.R.color.transparent);
+                bitmapImage = null;
 
             }
         });
