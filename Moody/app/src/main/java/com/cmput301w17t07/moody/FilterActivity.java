@@ -88,6 +88,10 @@ public class FilterActivity extends BarMenuActivity {
         });
 
         // -------------------------Filter by Date------------------------------------------------
+        Button dateFilterButton = (Button) findViewById(R.id.filterDateResults);
+        dateFilterButton.setEnabled(false);
+
+
         Spinner dropdownDate = (Spinner) findViewById(R.id.filterDate);
 
         String[] dates = new String[]{"Last Week"};

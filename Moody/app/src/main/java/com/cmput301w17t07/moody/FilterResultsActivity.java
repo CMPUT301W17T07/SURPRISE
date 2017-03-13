@@ -81,7 +81,7 @@ public class FilterResultsActivity extends BarMenuActivity {
         }
 
 
-        Toast.makeText(FilterResultsActivity.this, selectedFilter.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(FilterResultsActivity.this, selectedFilter.toString(), Toast.LENGTH_SHORT).show();
 
 
 
