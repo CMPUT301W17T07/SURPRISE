@@ -11,6 +11,7 @@ import io.searchbox.annotations.JestId;
 public class User {
 
     private String username;
+    private String displayUsername;
     private Image profilePicture;
     private MoodList moodList;
     private FollowingList followingList;
@@ -32,25 +33,35 @@ public class User {
 
     public User(String username){
 
-        this.username=username;
-//        this.profilePicture=null;
-//        this.moodList=null;
-//        this.followingList=null;
-//        this.followerList=null;
+        this.username=username.toLowerCase();
+        this.displayUsername = username;
+        this.profilePicture=null;  // todo make stock profile image user's image
+        this.moodList=null;
+        this.followingList=null;
+        this.followerList=null;
     }
 
-    public User(String username,MoodList moodList){
-        this.username=username;
-        this.moodList=moodList;
-    }
+//    public User(String username,MoodList moodList){
+//        this.username=username;
+//        this.moodList=moodList;
+//    }
 
-    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
-    ,FollowerList followerList) {
-        this.username = username;
+//    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
+//    ,FollowerList followerList) {
+//        this.username = username;
+//        this.profilePicture = profilePicture;
+//        this.moodList = moodList;
+//        this.followingList=followingList;
+//        this.followerList=followerList;
+//    }
+
+    public User(String username, Image profilePicture) {
+        this.username=username.toLowerCase();
+        this.displayUsername = username;
         this.profilePicture = profilePicture;
-        this.moodList = moodList;
-        this.followingList=followingList;
-        this.followerList=followerList;
+        this.moodList = null;
+        this.followingList=null;
+        this.followerList=null;
     }
 
     public String getUsername() {
@@ -92,5 +103,13 @@ public class User {
 
     public void setFollowerList(FollowerList followerList) {
         this.followerList = followerList;
+    }
+
+    public String getDisplayUsername() {
+        return displayUsername;
+    }
+
+    public void setDisplayUsername(String displayUsername) {
+        this.displayUsername = displayUsername;
     }
 }

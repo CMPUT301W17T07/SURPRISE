@@ -1,13 +1,72 @@
 package com.cmput301w17t07.moody;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class SearchFilterOptionsActivity extends AppCompatActivity {
+
+public class SearchFilterOptionsActivity extends BarMenuActivity {
+
+    private Button searchUser;
+    private TextView searchUsername;
+    private Button filterMood;
+    private TextView searchMoodmes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_filter_options);
+        setUpMenuBar(this);
+
+        searchUser = (Button) findViewById(R.id.searchUser);
+        searchUsername = (TextView) findViewById(R.id.searchEditname);
+
+//        searchMoodmes=(TextView) findViewById(R.id.searchMoodMes);
+
+
+
+        filterMood = (Button) findViewById(R.id.filterMood);
+        filterMood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filterMoodIntent = new Intent(SearchFilterOptionsActivity.this, FilterActivity.class);
+                startActivity(filterMoodIntent);
+                finish();
+            }
+        });
+
+        searchUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentUser = new Intent(SearchFilterOptionsActivity.this, SearchUserActivity.class);
+                String username = searchUsername.getText().toString();
+                intentUser.putExtra("editUsername", username);
+                startActivity(intentUser);
+                finish();
+            }
+        });
+
+
+
     }
 }
+
+//        searchUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public  void onClick(View v){
+//                Intent intentMood=new Intent(SearchFilterOptionsActivity.this,SearchUserActivity.class);
+//                String moodfeel=searchMoodmes.getText().toString();
+//                intentMood.putExtra("mood",moodfeel);
+//                startActivity(intentMood);
+//                finish();
+//            }
+//        });
+//
+//
+//    }
+//
+//
+//}

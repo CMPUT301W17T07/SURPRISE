@@ -2,6 +2,7 @@ package com.cmput301w17t07.moody;
 
 import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.ImageView;
 
 import org.junit.Test;
 
@@ -17,6 +18,22 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+
+    @Test
+    public void testSetId(){
+        User user=new User("panchy");
+        user.setId("1");
+        user.setId("2");
+        assertEquals(user.getId(),"2");
+    }
+
+    @Test
+    public void testGetId(){
+        User user=new User("panchy");
+        user.setId("1");
+        assertEquals(user.getId(),"1");
+    }
+
     @Test
     public void testSetUsername(){
         User user=new User("panchy");
@@ -30,43 +47,13 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         assertEquals(user.getUsername(),"panchy");
     }
 
-    @Test
-    public void testGetMoodList(){
-        MoodList moodList=new MoodList();
-        User user=new User("panchy",moodList);
-
-        assertEquals(user.getMoodList(),moodList);
-
-    }
-
-    @Test
-    public void testSetMoodList(){
-        MoodList moodList=new MoodList();
-        User user=new User("panchy",moodList);
-
-        MoodList moodList1=new MoodList();
-        user.setMoodList(moodList1);
-
-        assertEquals(user.getMoodList(),moodList1);
-    }
 
     @Test
     public void testsetProfilePicture(){
-//        Image img = ImageIO.read;
-//        assertEquals(ImageIO().read("/Users/xin/Desktop/project/SURPRISE/Moody/app/src/main/res/mipmap-hdpi"), null);
-//
-//        InputStream input = uploadedFile.getInputStream();
-//            String mimeType = Magic.getMagicMatch(input, false).getMimeType();
-//            if (mimeType.startsWith("image/")) {
-//                // It's an image.
-//            } else {
-//                // It's not an image.
-//            }
-//        }
+
         User user=new User("panchy");
         Image image = null;
-//        image = ImageIO.read();
-//        File img = new File(filepath);
+
         user.setProfilePicture(image);
         assertEquals(user.getProfilePicture(),null);
     }
