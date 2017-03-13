@@ -21,6 +21,11 @@ import java.util.List;
 import static android.R.id.list;
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
+/**
+ *  The ProfileActivity handles the user interface logic for when a user is viewing their
+ *  mood history.
+ */
+
 public class ProfileActivity extends BarMenuActivity {
 
     private ListView moodTimeline;

@@ -10,6 +10,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
+ *  mood.
+ */
 
 public class ViewMoodActivity extends BarMenuActivity {
     private String username;

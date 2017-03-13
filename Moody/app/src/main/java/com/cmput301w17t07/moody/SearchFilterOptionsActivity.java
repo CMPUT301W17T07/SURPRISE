@@ -6,13 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ *  The SearchFilterOptionsActivity handles the user interface logic for when a user is selecting
+ *  the type of searching or filtering they would like to conduct.
+ */
 
 public class SearchFilterOptionsActivity extends BarMenuActivity {
 
     private Button searchUser;
     private TextView searchUsername;
     private Button filterMood;
-    private TextView searchMoodmes;
 
 
     @Override
@@ -24,10 +27,9 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
         searchUser = (Button) findViewById(R.id.searchUser);
         searchUsername = (TextView) findViewById(R.id.searchEditname);
 
-//        searchMoodmes=(TextView) findViewById(R.id.searchMoodMes);
 
 
-
+        // for filtering
         filterMood = (Button) findViewById(R.id.filterMood);
         filterMood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +39,7 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
                 finish();
             }
         });
-
+        // for searching
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,19 +56,3 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
     }
 }
 
-//        searchUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public  void onClick(View v){
-//                Intent intentMood=new Intent(SearchFilterOptionsActivity.this,SearchUserActivity.class);
-//                String moodfeel=searchMoodmes.getText().toString();
-//                intentMood.putExtra("mood",moodfeel);
-//                startActivity(intentMood);
-//                finish();
-//            }
-//        });
-//
-//
-//    }
-//
-//
-//}

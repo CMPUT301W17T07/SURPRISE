@@ -6,6 +6,13 @@ import java.util.ArrayList;
  * Created by mike on 2017-02-23.
  */
 
+/**
+ * The MoodList model class for the Moody application. This class object is not currently
+ * utilized in our application. May be utilized in the future for part 5. Detailed javadocs
+ * would be included then.
+ *
+ */
+
 public class MoodList {
 
     public ArrayList<Mood> moodList = new ArrayList<Mood>();

@@ -31,12 +31,14 @@ import java.util.concurrent.ExecutionException;
  */
 
 /**
- * UserController class for the user class object.
+ * UserController class for the user class object. Controller that controls user objects with
+ * regards to offline functionality. The UserController also acts as a communicator
+ * between User objects and the ElasticUserController.
  */
 
 public class UserController {
     private static User user = null;
-
+    // not currently fully implemented
     static public User getUser(){
         if(user == null){
             try{
@@ -49,10 +51,12 @@ public class UserController {
     }
 
     /**
-     *
-     * @param username
-     * @return 0,1, or 3. 0 indicates that the user was created. 1 indicates that the username
-     * is not unique. 3 indicates that the device is not connected to the internet
+     * createUser method. Checks appropriate responses for if a user can be created and then
+     * communicates to the ElasticSearchUserController to add the user to the database. Returns
+     * int values that act as flags that will indicate appropriate response on the activity pages
+     * @param username      user's desired username
+     * @return              0,1, or 3. 0 indicates that the user was created. 1 indicates that the username
+     *                      is not unique. 3 indicates that the device is not connected to the internet
      */
     public static int createUser(String username){
         if(!checkInternet()){
@@ -64,9 +68,7 @@ public class UserController {
             return 1; // timeline activity will check to see if username meets requirements
         }
         else{
-//            User newUser = new User(username);
-//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
-//            addUser.execute(newUser);
+            //adding to the database
             user = new User(username);
             ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);
@@ -75,6 +77,14 @@ public class UserController {
         return 0;
     }
 
+    /**
+     * createUser method. Checks appropriate responses for if a user can be created and then
+     * communicates to the ElasticSearchUserController to add the user to the database. Returns
+     * int values that act as flags that will indicate appropriate response on the activity pages
+     * @param username          user's desired username
+     * @param profilePicture    user's desired profile picture
+     * @return
+     */
     public static int createUser(String username, Image profilePicture){
         if(!checkInternet()){
             //if device is not connected to the internet...
@@ -100,6 +110,12 @@ public class UserController {
         return 0;
     }
 
+    /**
+     * checkUsername method that communicates with the ElasticSearchUserController to determine
+     * if a user's username is unique.
+     * @param username          user's desired username
+     * @return                  boolean value indicating whether username is unique
+     */
     public static Boolean checkUsername(String username){
         // function to check if username is unique
         Boolean uniqueFlag = false;
@@ -168,6 +184,12 @@ public class UserController {
         return user.getFollowerList();
     }
 
+    /**
+     * Method that saves the username locally. This allows us to always have a username
+     * to pass to the elasticSearch controllers and then on to our server.
+     * @param username          User's username
+     * @param ctx
+     */
     public static void saveUsername(String username, Context ctx) {
         FileOutputStream outputStream;
         try {
@@ -179,8 +201,17 @@ public class UserController {
         }
     }
 
-    // http://stackoverflow.com/questions/9095610/android-fileinputstream-read-txt-file-to-string
-    // how to read from file
+
+    /**
+     * Method that returns the locally saved username.
+     *
+     * Logic for reading a locally saved file from:
+     * link: http://stackoverflow.com/questions/9095610/android-fileinputstream-read-txt-file-to-string
+     * Author: user370305  Feb 1 '12 at 12:19
+     * Taken by: Nick Anic 2017/03/09
+     * @param ctx
+     * @return  fileContent         StringBuffer of the saved username
+     */
     public StringBuffer readUsername(Context ctx) {
         FileInputStream inputStream;
         StringBuffer fileContent = new StringBuffer("");

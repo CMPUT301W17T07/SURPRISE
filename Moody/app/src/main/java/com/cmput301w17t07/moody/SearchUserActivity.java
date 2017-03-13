@@ -8,6 +8,11 @@ import android.util.Log;
 import android.widget.ListView;
 import java.util.ArrayList;
 
+/**
+ *  The SearchUserActivty handles the user interface logic for when a user is viewing
+ *  the users they searched for. Functionality of this activity will be increased
+ *  when following functionality is added in part 5.
+ */
 
 public class SearchUserActivity extends BarMenuActivity {
 

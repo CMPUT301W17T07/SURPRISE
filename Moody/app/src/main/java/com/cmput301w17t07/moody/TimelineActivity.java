@@ -25,6 +25,15 @@ import java.lang.reflect.Field;
 import java.sql.Time;
 import java.util.ArrayList;
 
+/**
+ *  The Timeline Activity handles the user interface logic for when the user has first installed
+ *  our application. It allows them to create a unique username after that.
+ *
+ *  After the user's first time using the application, it takes them to the timeline activity page
+ *  which will display the moods of the users they follow. This functionality is being added in
+ *  project part 5.
+ */
+
 public class TimelineActivity extends BarMenuActivity {
     ConnectivityManager manager;
     private EditText usernameText;
@@ -102,6 +111,16 @@ public class TimelineActivity extends BarMenuActivity {
 
     //todo remove this from activity and implement in a separate class/controller/etc.
     //Internet checker temp, maybe need change later
+
+    /**
+     * checkNetworkState method. This is a temporary method in project part 4 that checks if a user
+     * is online before attempting to register a username. A similar type of function will be moved
+     * into an appropriate controller class for project part 5 to reflect better separation of
+     * user interface logic and backend logic.
+     *
+     * Method currently returns a boolean indicating whether the user is connected to the internet.
+     * @return
+     */
     private boolean checkNetworkState() {
         manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
@@ -112,6 +131,10 @@ public class TimelineActivity extends BarMenuActivity {
         }
     }
 
+    /**
+     * Current implementation of timelineActivity method. Just displays blank xml content screen
+     * with menubar.
+     */
     private void timelineActivity(){
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
