@@ -16,11 +16,15 @@ import io.searchbox.core.SearchResult;
  * Created by mike on 2017-02-23.
  */
 
+/**
+ * ElasticSearchUserController class for the Moody application. ElasticMoodController is the communicator
+ * between our application and our server for all user related tasks.
+ */
 
 public class ElasticSearchUserController extends ElasticController{
 
     /**
-     * The AddUser nested class of ElasticSearchMoody controller. Allows for new users to be added
+     * The AddUser nested class of ElasticSearchUserController. Allows for new users to be added
      * to the database.
      */
     public static class AddUser extends AsyncTask<User, Void, Void> {
@@ -51,7 +55,15 @@ public class ElasticSearchUserController extends ElasticController{
         }
     }
 
+    /**
+     * The GetUser nested class. Allows a user to be returned from the server
+     */
     public static class GetUser extends AsyncTask<String, Void, ArrayList<User>> {
+        /**
+         * doInBackground returns a user from the server
+         * @param params            username is passed in
+         * @return users             a user object is returned
+         */
         @Override
         protected ArrayList<User> doInBackground(String... params) {
             verifySettings();
@@ -96,13 +108,22 @@ public class ElasticSearchUserController extends ElasticController{
     }
 
     /**
-     * Class for identifying if a user's desired username is unique before allocating it to him or her
+     * Nested class for identifying if a user's desired username is unique before allocating it to him or her
      */
     public static class UniqueUsername extends AsyncTask<String, Void, Boolean> {
-        // http://stackoverflow.com/questions/33616123/asynctask-doinbackgroundstring-clashes-with-doinbackgroundparams
-        // reference for how to return type Boolean while using async task
         Boolean uniqueFlag;
 
+        /**
+         * doInBackground returns a boolean value indicating whether a user's desired username is
+         * unique. This lets the user know if he or she can have his/her desired username
+         *
+         * Knowledge of how to return a boolean value while using async task is from:
+         * link: http://stackoverflow.com/questions/33616123/asynctask-doinbackgroundstring-clashes-with-doinbackgroundparams
+         * Author: prashant Nov 9 '15 at 19:01
+         * Referenced by: Michael Simion 2017/03/5
+         * @param search_parameters             desired username
+         * @return uniqueFlag                   Boolean value indicating whether unique (true = unique)
+         */
         @Override
         protected Boolean doInBackground(String... search_parameters) {
             verifySettings();
