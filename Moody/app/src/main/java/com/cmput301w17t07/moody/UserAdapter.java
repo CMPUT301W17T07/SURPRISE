@@ -18,9 +18,14 @@ import java.util.List;
  */
 
 /**
- * 
- * get the idea from google's developer wab page about ListView Scrolling Smooth
+ * The UserAdapter class object of the Moody application. This class is used to properly display
+ * the list of user after searching for user in SearchFilterOptionsActivity. It is used in the
+ * SearchUserActivity class.
+ *
+ * Implementation of part of this class was partially inspired by the Android developer's web
+ * page on ListView Scrolling Smoothly:
  * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask
+ * Taken By: Qi Pang 2017/03/10
  */
 
 public class UserAdapter extends BaseAdapter {
@@ -29,9 +34,9 @@ public class UserAdapter extends BaseAdapter {
 
 
     /**
-     * creat a new peopleadapter
-     * @param context
-     * @param userList
+     * Constructor for the UserAdapter
+     * @param context       Context for the adapter
+     * @param userList      The list of users
      */
     public UserAdapter(Context context, List<User> userList) {
         this.context = context;

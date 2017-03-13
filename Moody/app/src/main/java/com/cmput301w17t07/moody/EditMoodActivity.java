@@ -20,6 +20,9 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+/**
+ * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
+ */
 public class EditMoodActivity extends BarMenuActivity {
     public Mood editMood;
     private Bitmap bitmapImage = null;
@@ -120,10 +123,12 @@ public class EditMoodActivity extends BarMenuActivity {
     private void displayAttributes() {
 
 
-        //Spinner drodown taken from http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
-        //Author: Nicolas Tyler, 2013/07/15 8:47
-        //taken by Xin Huang 2017-03-04 15:30 (used and swith function writen by Nick 2017/03/12 14:30)
-
+        /**
+         * Spinner dropdown logic taken from
+         * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
+         * Author: Nicolas Tyler, 2013/07/15 8:47
+         * taken by Xin Huang 2017-03-04 15:30 (used and swith function written by Nick 2017/03/12 14:30)
+         */
         Spinner dropdown = (Spinner) findViewById(R.id.editEmotion);
 
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
@@ -236,12 +241,19 @@ public class EditMoodActivity extends BarMenuActivity {
     }
 
 
+    /**
+     * Method handles user interface response to when a user adds an image to their mood
+     * from either their camera or their gallery.
+     *
+     * Knowledge and logic of onActivityResult referenced and taken from
+     * link: http://blog.csdn.net/AndroidStudioo/article/details/52077597
+     * author: AndroidStudio 2016-07-31 11:15
+     * taken by Xin Huang 2017-03-04 15:30
+     * @param requestCode          integer indicating the kind of action taken by the user
+     * @param resultCode
+     * @param data
+     */
     @Override
-
-    //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
-    //author: AndroidStudioo 2016-07-31 11:15
-    //taken by Xin Huang 2017-03-04 15:30
-    //(used by Nick 2017/03/12 14:50)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        ImageView image = (ImageView) findViewById(R.id.editImageView);
 

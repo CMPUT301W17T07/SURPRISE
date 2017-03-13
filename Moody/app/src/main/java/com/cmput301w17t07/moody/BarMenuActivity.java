@@ -11,8 +11,16 @@ import android.view.MenuItem;
  * Created by Alex on 2017-03-08.
  */
 
+/**
+ * The BarMenuActivity extended by all of our currently implemented activities. Activity allows
+ * us to easily display the menu bar at the bottom of our application screen without re-writing
+ * the same piece of code in our application.
+ */
 public class BarMenuActivity extends AppCompatActivity {
-
+    /**
+     * This method contains the logic for responding to specific button presses on the menu bar.
+     * @param context
+     */
     public void setUpMenuBar(Context context) {
 
         final Context currentContext = context;

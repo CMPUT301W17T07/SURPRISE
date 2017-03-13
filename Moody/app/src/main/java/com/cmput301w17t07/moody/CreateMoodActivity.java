@@ -19,6 +19,9 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+/**
+ * The CreateMoodActivity for handles the user interface logic for when a user is creating a mood.
+ */
 public class CreateMoodActivity extends BarMenuActivity {
     private ImageView mImageView;
     private String EmotionText;
@@ -38,9 +41,12 @@ public class CreateMoodActivity extends BarMenuActivity {
         setUpMenuBar(this);
 
 
-        //Spinner drodown taken from http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
-        //Author: Nicolas Tyler, 2013/07/15 8:47
-        //taken by Xin Huang 2017/03/10 23:10
+
+        /**
+         * Spinner dropdown logic taken from http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
+         * Author: Nicolas Tyler, 2013/07/15 8:47
+         * taken by Xin Huang 2017/03/10
+         */
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
 
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
@@ -145,10 +151,20 @@ public class CreateMoodActivity extends BarMenuActivity {
 
     }
 
+
+    /**
+     * Method handles user interface response to when a user adds an image to their mood
+     * from either their camera or their gallery.
+     *
+     * Knowledge and logic of onActivityResult referenced and taken from
+     * link: http://blog.csdn.net/AndroidStudioo/article/details/52077597
+     * author: AndroidStudio 2016-07-31 11:15
+     * taken by Xin Huang 2017-03-04 15:30
+     * @param requestCode          integer indicating the kind of action taken by the user
+     * @param resultCode
+     * @param data
+     */
     @Override
-    //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
-    //author: AndroidStudioo 2016-07-31 11:15
-    //taken by Xin Huang 2017-03-04 15:30
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {
             finish();   //no data return
