@@ -17,6 +17,12 @@ import java.util.List;
  * Created by Panchy on 2017-03-12.
  */
 
+/**
+ * 
+ * get the idea from google's developer wab page about ListView Scrolling Smooth
+ * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask
+ */
+
 public class UserAdapter extends BaseAdapter {
     private Context context;
     private List<User> userList;
