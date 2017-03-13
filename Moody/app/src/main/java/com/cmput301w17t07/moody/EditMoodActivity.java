@@ -91,7 +91,7 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         });
 
-
+        // TODO button needs only display when image present in Mood
         final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
         deletePicture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
