@@ -33,6 +33,7 @@ public class EditMoodActivity extends BarMenuActivity {
     private String SocialSituation;
     private EditText Description;
     private EditText date;
+    private ImageView image;
 //    private Date dateValue;
 
 //    Bitmap bitmap = null;
@@ -48,6 +49,10 @@ public class EditMoodActivity extends BarMenuActivity {
 
         setContentView(R.layout.activity_edit_mood);
         setUpMenuBar(this);
+
+        image = (ImageView) findViewById(R.id.editImageView);
+
+
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
@@ -102,7 +107,7 @@ public class EditMoodActivity extends BarMenuActivity {
         final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
         deletePicture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ImageView image = (ImageView) findViewById(R.id.editImageView);
+//                ImageView image = (ImageView) findViewById(R.id.editImageView);
                 image.setImageDrawable(null);
                 deletePicture.setImageResource(android.R.color.transparent);
                 bitmapImage = null;
@@ -207,7 +212,7 @@ public class EditMoodActivity extends BarMenuActivity {
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
 
-        ImageView image = (ImageView) findViewById(R.id.editImageView);
+//        image = (ImageView) findViewById(R.id.editImageView);
 
         String imageID = editMood.getMoodImageID();
 
@@ -231,7 +236,7 @@ public class EditMoodActivity extends BarMenuActivity {
     @Override
     //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ImageView image = (ImageView) findViewById(R.id.editImageView);
+//        ImageView image = (ImageView) findViewById(R.id.editImageView);
 
         if (data == null) {
             return;   //no data return
@@ -244,18 +249,28 @@ public class EditMoodActivity extends BarMenuActivity {
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
                     bitmapImage = BitmapFactory.decodeStream(inputStream);
                 } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
                 }
             }
         } else if (requestCode == 1) {
-            bitmapImage = (Bitmap) data.getExtras().get("data");
-            System.out.println("photosize = " + bitmapImage.getByteCount());
             // saveToSDCard(bitmap);
+            try {
+                bitmapImage = (Bitmap) data.getExtras().get("data");
+                System.out.println("photosize = " + bitmapImage.getByteCount());
+            }
+            catch (Exception e){
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
-            startActivity(intent);
-            finish();
-            return;
+            try {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+            }
         }
         image.setImageBitmap(bitmapImage);
 
