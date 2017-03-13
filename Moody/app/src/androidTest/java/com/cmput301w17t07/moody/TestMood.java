@@ -12,6 +12,10 @@ import java.util.Date;
  * Created by Panchy on 2017/2/24.
  */
 
+/**
+ * Tests for the Mood class model.
+ */
+
 
 public class TestMood extends ActivityInstrumentationTestCase2{
 

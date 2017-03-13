@@ -10,6 +10,12 @@ import com.robotium.solo.Solo;
  * Created by mike on 2017-03-12.
  */
 
+/**
+ * Intent testing for filtering of a user's moods. Also tests creation of moods, and navigating
+ * through user interface screens. Requires a username to already have been created on device to
+ * work.
+ */
+
 public class FilterMoodsUITest extends ActivityInstrumentationTestCase2<FilterActivity> {
 
     private Solo solo;

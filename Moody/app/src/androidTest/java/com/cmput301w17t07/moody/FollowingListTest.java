@@ -9,6 +9,10 @@ import org.junit.Test;
  * Created by mike on 2017-02-24.
  */
 
+/**
+ * Tests for the FollowingList class model.
+ */
+
 public class FollowingListTest extends ActivityInstrumentationTestCase2 {
 
     public FollowingListTest() {

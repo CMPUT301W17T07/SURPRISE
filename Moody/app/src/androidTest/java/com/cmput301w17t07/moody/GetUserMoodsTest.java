@@ -11,6 +11,11 @@ import java.util.ArrayList;
  * Created by mike on 2017-03-05.
  */
 
+/**
+ * Tests for the GetUserMoods subclass of the ElasticMood controller. Tests whether a user's mood
+ * history is retrieved from the server.
+ */
+
 public class GetUserMoodsTest extends ActivityInstrumentationTestCase2 {
 
     public GetUserMoodsTest() {super(ElasticMoodController.GetUserMoods.class);}

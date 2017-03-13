@@ -11,6 +11,11 @@ import com.robotium.solo.Solo;
  * Created by xin on 2017/3/12.
  */
 
+/**
+ * Intent testing of creating and deleting moods in the Moody Application. Requires a username
+ * to already have been created on device.
+ */
+
 public class CreateMoodActivityTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 

@@ -11,6 +11,11 @@ import com.robotium.solo.Solo;
  * Created by xin on 2017/3/12.
  */
 
+/**
+ * Intent testing for the edit mood functionality of our application. Tests addition of moods, and
+ * then further editing of those moods. Also tests user interface navigation.
+ */
+
 public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 

@@ -8,6 +8,10 @@ import org.junit.Test;
  * Created by mike on 2017-02-24.
  */
 
+/**
+ * Tests for the FollowerList class model
+ */
+
 public class FollowerListTest extends ActivityInstrumentationTestCase2{
     public FollowerListTest() {
         super(FollowerList.class);

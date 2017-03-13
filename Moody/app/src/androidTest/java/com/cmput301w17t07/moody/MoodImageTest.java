@@ -13,6 +13,10 @@ import static org.junit.Assert.*;
 /**
  * Created by Panchy on 2017/3/12.
  */
+
+/**
+ * Tests for the MoodImage model class.
+ */
 public class MoodImageTest {
 
 
