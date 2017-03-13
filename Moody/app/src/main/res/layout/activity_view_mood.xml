@@ -89,7 +89,6 @@
         android:layout_below="@+id/userFeelingTV"
         android:layout_alignLeft="@+id/userFeelingTV"
         android:layout_alignStart="@+id/userFeelingTV" />
-
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="150dp"
