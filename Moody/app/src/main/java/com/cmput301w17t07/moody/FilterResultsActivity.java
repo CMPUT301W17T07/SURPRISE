@@ -68,7 +68,7 @@ public class FilterResultsActivity extends BarMenuActivity {
             filterMessage = intent.getStringExtra("messageFilter");
             ElasticMoodController.GetMessageFilterMoods getMessageFilterMoods =
                     new ElasticMoodController.GetMessageFilterMoods();
-            getMessageFilterMoods.execute(username, filterMessage);
+            getMessageFilterMoods.execute(username, filterMessage.toLowerCase());
 
             try {
                 moodArrayList= getMessageFilterMoods.get();
@@ -79,10 +79,6 @@ public class FilterResultsActivity extends BarMenuActivity {
             }
 
         }
-
-
-        Toast.makeText(FilterResultsActivity.this, selectedFilter.toString(), Toast.LENGTH_SHORT).show();
-
 
 
         adapter = new TimelineAdapter(this, R.layout.timeline_list, moodArrayList);
