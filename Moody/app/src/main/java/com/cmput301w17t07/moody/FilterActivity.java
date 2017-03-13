@@ -1,9 +1,12 @@
 package com.cmput301w17t07.moody;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +20,21 @@ public class FilterActivity extends BarMenuActivity {
     private String userText;
     private String feelingText;
     private String dateText;
+    private Button feelingFilterButton;
+    private Button messageFilterButton;
+    private Integer selectedFilter;
+    private EditText messageFilter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_filter_mood);
         setUpMenuBar(this);
+
+        feelingFilterButton = (Button) findViewById(R.id.filterFeelingResults);
 
         // ---------------------Filter by User--------------------------------------
         Spinner dropdownUser = (Spinner) findViewById(R.id.filterUser);
@@ -56,12 +67,23 @@ public class FilterActivity extends BarMenuActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                feelingText = "Mood Feelings: " + parent.getItemAtPosition(position).toString();
+                feelingText = parent.getItemAtPosition(position).toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(FilterActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        feelingFilterButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedFilter = 0;
+                Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
+                filterResults.putExtra("feelingFilter", feelingText);
+                filterResults.putExtra("selectedFilter", selectedFilter);
+                startActivity(filterResults);
+                finish();
             }
         });
 
@@ -84,6 +106,26 @@ public class FilterActivity extends BarMenuActivity {
                 Toast.makeText(FilterActivity.this, "Please pick a date!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // ---------------------Filter by Message --------------------------------------
+
+        messageFilterButton = (Button) findViewById(R.id.filterMessageResults);
+        messageFilter = (EditText) findViewById(R.id.filterMessageText);
+
+
+
+        messageFilterButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedFilter = 2;
+                String filterMessage = messageFilter.getText().toString();
+                Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
+                filterResults.putExtra("messageFilter", filterMessage);
+                filterResults.putExtra("selectedFilter", selectedFilter);
+                startActivity(filterResults);
+                finish();
+            }
+        });
+
 
 
 

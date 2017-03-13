@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,11 @@ public class FilterResultsActivity extends BarMenuActivity {
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
     private Button feelingFilterButton;
     private Button messageFilterButton;
+    private Integer selectedFilter;
+    private String filterFeeling;
+    private String filterMessage;
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,9 @@ public class FilterResultsActivity extends BarMenuActivity {
         UserController userController = new UserController();
         username = userController.readUsername(FilterResultsActivity.this).toString();
 
-        feelingFilterButton = (Button) findViewById(R.id.filterFeelingResults);
-        messageFilterButton = (Button) findViewById(R.id.filterMessageResults);
+        intent = getIntent();
+        selectedFilter = intent.getIntExtra("selectedFilter", 0);
+
     }
 
 
@@ -38,21 +45,45 @@ public class FilterResultsActivity extends BarMenuActivity {
     @Override
     protected void onStart(){
         super.onStart();
-
-
-        ElasticMoodController.GetFeelingFilterMoods getFilterMoods =
-                new ElasticMoodController.GetFeelingFilterMoods();
-        getFilterMoods.execute(username);
-
         moodTimeline = (ListView) findViewById(R.id.filterResultsList);
 
-        try {
-            moodArrayList= getFilterMoods.get();
+
+
+        if(selectedFilter == 0){
+            filterFeeling = intent.getStringExtra("feelingFilter");
+            ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                    new ElasticMoodController.GetFeelingFilterMoods();
+            getFeelingFilterMoods.execute(username, filterFeeling);
+
+            try {
+                moodArrayList= getFeelingFilterMoods.get();
 //               System.out.println("this is moodlist"+moodArrayList);
 
-        }catch (Exception e){
-            Log.i("error","failed to get the mood out of the async matched");
+            }catch (Exception e){
+                Log.i("error","failed to get the mood out of the async matched");
+            }
+
         }
+        if(selectedFilter == 2){
+            filterMessage = intent.getStringExtra("messageFilter");
+            ElasticMoodController.GetMessageFilterMoods getMessageFilterMoods =
+                    new ElasticMoodController.GetMessageFilterMoods();
+            getMessageFilterMoods.execute(username, filterMessage);
+
+            try {
+                moodArrayList= getMessageFilterMoods.get();
+//               System.out.println("this is moodlist"+moodArrayList);
+
+            }catch (Exception e){
+                Log.i("error","failed to get the mood out of the async matched");
+            }
+
+        }
+
+
+        Toast.makeText(FilterResultsActivity.this, selectedFilter.toString(), Toast.LENGTH_SHORT).show();
+
+
 
         adapter = new TimelineAdapter(this, R.layout.timeline_list, moodArrayList);
 //        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();

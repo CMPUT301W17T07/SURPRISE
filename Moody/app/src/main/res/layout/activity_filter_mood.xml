@@ -79,7 +79,7 @@
 
 
     <EditText
-        android:id="@+id/editMoodMessage"
+        android:id="@+id/filterMessageText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -96,7 +96,7 @@
         android:text="Filter Results"
         android:textColor="@color/redTheme"
         android:background="@color/yellowTheme"
-        android:layout_alignTop="@+id/editMoodMessage"
+        android:layout_alignTop="@+id/filterMessageText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
