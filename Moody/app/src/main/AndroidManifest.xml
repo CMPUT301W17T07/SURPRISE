@@ -38,6 +38,7 @@
         <activity android:name=".MapOptionsActivity" />
         <activity android:name=".MapViewActivity" />
         <activity android:name=".MoodGraphActivity" />
+        <activity android:name=".FilterResultsActivity"></activity>
     </application>
 
 </manifest>

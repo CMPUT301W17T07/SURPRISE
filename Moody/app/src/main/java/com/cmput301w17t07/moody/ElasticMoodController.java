@@ -124,7 +124,7 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-    public static class GetFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+    public static class GetFeelingFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
@@ -132,7 +132,6 @@ public class ElasticMoodController extends ElasticController {
             ArrayList<Mood> moods = new ArrayList<Mood>();
 
             String query;
-            //search param 0 = username, 1 = feeling, (FOR NOW)
             if ((search_parameters[0]=="") && (search_parameters[1]=="") && search_parameters[2]==""){
                 query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
@@ -141,6 +140,51 @@ public class ElasticMoodController extends ElasticController {
                         " {\"must\": [\n" +
                         "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
                         "{\"term\": {\"feeling\": \""+ search_parameters[1] +"\"}}\n" +
+                        "]\n" +
+                        "}}}";
+                System.out.println("this is query" + query);
+            }
+
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w17t07")
+                    .addType("mood").build();
+
+            try {
+
+
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
+                    moods.addAll(foundMoods);
+                }
+                else {
+                    Log.i("Error", "The search query failed to find any tweets that matched, buddy");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return moods;
+        }
+    }
+
+    public static class GetMessageFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+        @Override
+        protected ArrayList<Mood> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Mood> moods = new ArrayList<Mood>();
+
+            String query;
+            if ((search_parameters[0]=="") && (search_parameters[1]=="") && search_parameters[2]==""){
+                query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
+            }else {
+                query = "{\"query\":\n" +
+                        "{\"bool\":\n" +
+                        " {\"must\": [\n" +
+                        "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
+                        "{\"term\": {\"moodMessage\": \""+ search_parameters[1] +"\"}}\n" +
                         "]\n" +
                         "}}}";
                 System.out.println("this is query" + query);

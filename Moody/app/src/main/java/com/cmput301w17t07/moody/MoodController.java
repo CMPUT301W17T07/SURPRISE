@@ -88,7 +88,9 @@ public class MoodController {
         }
 
         // ID that will link mood to its respective image
-        String moodID = oldMood.getMoodImageID();
+//        String moodID = oldMood.getMoodImageID();
+        String moodID = null;
+
 
         // checking to see if there is an image to add to the database
         if(image != null){
@@ -107,6 +109,9 @@ public class MoodController {
                 Log.i("Error", "Weird method resulted in error because method is weird and sucks");
             }
 
+        }
+        else{
+            moodID = null;
         }
 
 

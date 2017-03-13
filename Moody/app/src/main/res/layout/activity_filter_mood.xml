@@ -30,63 +30,74 @@
 
     <Spinner
         android:id="@+id/filterUser"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="17dp" />
 
     <Spinner
         android:id="@+id/filterFeeling"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_below="@+id/filterUser"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filterUser"
+        android:layout_marginTop="31dp" />
+
+    <Button
+        android:id="@+id/filterFeelingResults"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:text="Filter Results"
+        android:textColor="@color/redTheme"
+        android:background="@color/yellowTheme"
+        android:layout_alignTop="@+id/filterFeeling"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Spinner
         android:id="@+id/filterDate"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/filterFeeling"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filterFeeling"
+        android:layout_marginTop="27dp" />
+
+    <Button
+        android:id="@+id/filterDateResults"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:text="Filter Results"
+        android:textColor="@color/redTheme"
+        android:background="@color/yellowTheme"
+        android:layout_alignTop="@+id/filterDate"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
     <EditText
         android:id="@+id/editMoodMessage"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/filterDate"
         android:layout_marginTop="25dp"
-        android:hint="(filter mood messages by specific word)" />
+        android:hint="(filter mood messages by specific word)"
+        android:textSize="14sp" />
 
     <Button
-        android:id="@+id/filterResults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
+        android:id="@+id/filterMessageResults"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:text="Filter Results"
         android:textColor="@color/redTheme"
         android:background="@color/yellowTheme"
-        android:layout_below="@+id/editMoodMessage"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/clearFilterResults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/filterResults"
-        android:layout_alignStart="@+id/filterResults"
-        android:layout_below="@+id/filterResults"
-        android:layout_marginTop="25dp"
-        android:background="@color/redTheme"
-        android:textColor="#ffffff"
-        android:text="CLEAR ALL FILTER RESULTS" />
+        android:layout_alignTop="@+id/editMoodMessage"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
