@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,11 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Date;
 
 public class EditMoodActivity extends BarMenuActivity {
     public Mood editMood;
@@ -64,19 +59,22 @@ public class EditMoodActivity extends BarMenuActivity {
         editCameraButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivityForResult(intent, 1);
-//                Intent intent = new Intent("android.intent.action.PICK");
-//                intent.setType("image/*");
-//                startActivityForResult(intent, 0);
+                try {
+                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                    startActivityForResult(intent, 1);
+                } catch (Exception e) {
+                    Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
         editCameraButton.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View view) {
                 try {
-                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                    startActivityForResult(intent, 1);
+                    Intent intent = new Intent("android.intent.action.PICK");
+                    intent.setType("image/*");
+                    startActivityForResult(intent, 0);
                 } catch (Exception e) {
                     Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
                     startActivity(intent);
@@ -120,6 +118,11 @@ public class EditMoodActivity extends BarMenuActivity {
 
     // display the attributes of the mood that was selected to view
     private void displayAttributes() {
+
+
+        //Spinner drodown taken from http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
+        //Author: Nicolas Tyler, 2013/07/15 8:47
+        //taken by Xin Huang 2017-03-04 15:30 (used and swith function writen by Nick 2017/03/12 14:30)
 
         Spinner dropdown = (Spinner) findViewById(R.id.editEmotion);
 
@@ -234,7 +237,11 @@ public class EditMoodActivity extends BarMenuActivity {
 
 
     @Override
+
     //onActivityResult taken from: http://blog.csdn.net/AndroidStudioo/article/details/52077597
+    //author: AndroidStudioo 2016-07-31 11:15
+    //taken by Xin Huang 2017-03-04 15:30
+    //(used by Nick 2017/03/12 14:50)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        ImageView image = (ImageView) findViewById(R.id.editImageView);
 
