@@ -16,11 +16,24 @@ import io.searchbox.core.SearchResult;
  * Created by mike on 2017-03-05.
  */
 
+/**
+ * ElasticMoodController class for the Moody application. ElasticMoodController is the communicator
+ * between our application and our server for all mood related tasks.
+ */
+
 public class ElasticMoodController extends ElasticController {
 
-
+    /**
+     * AddMood nested class object. Used to add Moods to the server under the "mood" type on the
+     * server.
+     */
     public static class AddMood extends AsyncTask<Mood, Void, Void> {
 
+        /**
+         * doInBackground function that adds mood to server.
+         * @param moods     Mood to be added to server
+         * @return
+         */
         @Override
         protected Void doInBackground(Mood... moods) {
             verifySettings();
@@ -48,8 +61,18 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
+    /**
+     * AddImage nested class object. Used to add MoodImages to the server under the "image" type.
+     */
     public static class AddImage extends AsyncTask<MoodImage, Void, MoodImage> {
-
+        /**
+         * doInBackgorund adds the MoodImage to the server. It returns the added moodImage so that
+         * it's assigned server ID can be passed to the Mood object that will need to reference it.
+         * This allows us to only "load" the image objects once they are viewed.
+         *
+         * @param moodImages        the moodImage to be added
+         * @return moodImage[0]     the added moodImage
+         */
         @Override
         protected MoodImage doInBackground(MoodImage... moodImages) {
             verifySettings();
@@ -76,8 +99,17 @@ public class ElasticMoodController extends ElasticController {
 
         }
     }
-    // Gets the moodImage associated to its respective mood when clicking to view a mood's details
+
+    /**
+     * GetMoodImage nested class object. Gets the moodImage associated to its respective mood
+     * when clicking to view a mood's details.
+     */
     public static class GetMoodImage extends AsyncTask<String, Void, MoodImage> {
+        /**
+         * doInBackground retrieves the moodImage from the server.
+         * @param search_parameters     the unique ID that identifies the image on the server
+         * @return moodImage            the MoodImage associated to the mood object
+         */
         @Override
         protected MoodImage doInBackground(String... search_parameters) {
             verifySettings();
@@ -122,7 +154,17 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
+    /**
+     * The GetFeelingFilterMoods nested class object. The class returns a filtered moodList of the
+     * user's moods, based on feeling, to the FilterResultsActivity
+     *
+     */
     public static class GetFeelingFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+        /**
+         * doInBackground returns the filtered list of moods.
+         * @param search_parameters       the username and desired feeling are passed in
+         * @return moods                  the filtered list of moods
+         */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
@@ -167,7 +209,17 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
+    /**
+     * The GetMessageFilterMoods nested class object. The class returns a filtered moodList of the
+     * user's moods, based on a specific word, to the FilterResultsActivity
+     *
+     */
     public static class GetMessageFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+        /**
+         * doInBackground returns the filtered list of moods.
+         * @param search_parameters    Username and desired filter word are passed in
+         * @return moods               A list of the filtered moods
+         */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
@@ -212,7 +264,17 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
+    /**
+     * The GetUserMoods nested class object. Used to return a user's moodHistory on his or her
+     * profile page.
+     */
     public static class GetUserMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+        /**
+         * doInBackground returns a list of moods for a particular user, sorted by date with
+         * the most recent moods coming first.
+         * @param search_parameters         username is passed in
+         * @return moods                    list of the user's moods
+         */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
@@ -259,9 +321,15 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-
+    /**
+     * Nested DeleteMood class object. Used to delete a mood from the server.
+     */
     public static class DeleteMood extends AsyncTask<String, Void, Void> {
-
+        /**
+         * doInBackground deletes the desired mood from the server
+         * @param search_parameters        unique server ID of the mood to be deleted
+         * @return null
+         */
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
@@ -290,7 +358,7 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-
+    //todo part 5 implement EditMood nested class, as opposed to relying on add and delete for editing
 //    public static class EditMood extends AsyncTask<Mood, Void, Void> {
 //
 //        @Override

@@ -6,6 +6,12 @@ import java.util.ArrayList;
  * Created by mike on 2017-02-23.
  */
 
+/**
+ * The FollowingList model class for the Moody application. Will be utilized for implementation of
+ * user following capabilities in part 5. Javadocs for methods will be included then, once
+ * the model is implemented.
+ */
+
 public class FollowingList {
     public ArrayList<User> pendingFollowing = new ArrayList<User>();
     public ArrayList<User> followingList = new ArrayList<User>();

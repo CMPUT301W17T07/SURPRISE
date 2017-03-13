@@ -113,6 +113,7 @@ public class FilterActivity extends BarMenuActivity {
 
         // ---------------------Filter by Message --------------------------------------
 
+        //todo restrict message to a single word!!
         messageFilterButton = (Button) findViewById(R.id.filterMessageResults);
         messageFilter = (EditText) findViewById(R.id.filterMessageText);
 
