@@ -71,6 +71,7 @@
         android:layout_width="80dp"
         android:layout_height="35dp"
         android:text="Filter Results"
+        android:clickable="false"
         android:textColor="@color/redTheme"
         android:background="@color/yellowTheme"
         android:layout_alignTop="@+id/filterDate"
