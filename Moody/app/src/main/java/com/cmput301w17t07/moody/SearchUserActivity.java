@@ -9,7 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 
-public class SearchUserActivity extends AppCompatActivity {
+public class SearchUserActivity extends BarMenuActivity {
 
     private ArrayList<User> userArrayList=new ArrayList<>();
     private ListView oldUserList;
@@ -20,6 +20,7 @@ public class SearchUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
+        setUpMenuBar(this);
     }
 
     @Override
