@@ -23,16 +23,19 @@ import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Date;
 
 public class EditMoodActivity extends BarMenuActivity {
     public Mood editMood;
-    private Bitmap bitmapImage;
+    private Bitmap bitmapImage = null;
     private String userName;
     private String EmotionText;
     private String SocialSituation;
     private EditText Description;
+    private EditText date;
+//    private Date dateValue;
 
-    Bitmap bitmap = null;
+//    Bitmap bitmap = null;
 
 
     @Override
@@ -81,9 +84,12 @@ public class EditMoodActivity extends BarMenuActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String moodMessage_text = Description.getText().toString();
+                String dateValue = date.getText().toString();
                 MoodController moodController = new MoodController();
-                if (moodController.createMood(EmotionText, userName, moodMessage_text, null, null, SocialSituation) == false) {
-                    Toast.makeText(EditMoodActivity.this, "submit unsuccessful, try it again", Toast.LENGTH_SHORT).show();
+                if (moodController.editMood(EmotionText, userName, moodMessage_text,
+                        null, bitmapImage, SocialSituation, null, editMood ) == false) {
+                    Toast.makeText(EditMoodActivity.this,
+                            "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(EditMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
@@ -193,13 +199,13 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         });
 
-        EditText date = (EditText) findViewById(R.id.editDate);
+        date = (EditText) findViewById(R.id.editDate);
         date.setText(editMood.getDate());
 
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
 
-       ImageView image = (ImageView) findViewById(R.id.editImageView);
+        ImageView image = (ImageView) findViewById(R.id.editImageView);
 
         String imageID = editMood.getMoodImageID();
 
@@ -230,18 +236,18 @@ public class EditMoodActivity extends BarMenuActivity {
         }
         if (requestCode == 0) {
             //get pic from local photo
-            bitmap = data.getParcelableExtra("data");
-            if (bitmap == null) {//if pic is not so big use original one
+            bitmapImage = data.getParcelableExtra("data");
+            if (bitmapImage == null) {//if pic is not so big use original one
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                    bitmap = BitmapFactory.decodeStream(inputStream);
+                    bitmapImage = BitmapFactory.decodeStream(inputStream);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         } else if (requestCode == 1) {
-            bitmap = (Bitmap) data.getExtras().get("data");
-            System.out.println("photosize = " + bitmap.getByteCount());
+            bitmapImage = (Bitmap) data.getExtras().get("data");
+            System.out.println("photosize = " + bitmapImage.getByteCount());
             // saveToSDCard(bitmap);
         } else if (resultCode == Activity.RESULT_CANCELED) {
             Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
@@ -249,7 +255,7 @@ public class EditMoodActivity extends BarMenuActivity {
             finish();
             return;
         }
-        image.setImageBitmap(bitmap);
+        image.setImageBitmap(bitmapImage);
 
 
 

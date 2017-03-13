@@ -12,6 +12,7 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import io.searchbox.core.Update;
 
 /**
  * Created by mike on 2017-03-05.
@@ -233,6 +234,8 @@ public class ElasticMoodController extends ElasticController {
                     .addType("mood")
                     .build();
 
+            //todo probably worth trying to see if an associated image could also be deleted here
+
             try {
                 client.execute(delete);
             } catch (Exception e) {
@@ -243,5 +246,34 @@ public class ElasticMoodController extends ElasticController {
             return null;
         }
     }
+
+
+//    public static class EditMood extends AsyncTask<Mood, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Mood... moods) {
+//            verifySettings();
+//
+//            for (Mood mood : moods ) {
+//
+//                String query;
+//
+//
+//                Update update = new Update.Builder(query)
+//                        .index("cmput301w17t07")
+//                        .type("mood")
+//                        .id(mood.getId())
+//                        .build();
+//
+//                try {
+//                    client.execute( update );
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            return null;
+//        }
+//    }
 
 }

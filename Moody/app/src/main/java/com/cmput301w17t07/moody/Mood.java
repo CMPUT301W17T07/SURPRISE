@@ -206,4 +206,8 @@ public class Mood implements Serializable {
     public String getMoodImageID(){
         return this.moodImageID;
     }
+
+    public void setMoodImageID(String moodImageID) {
+        this.moodImageID = moodImageID;
+    }
 }
