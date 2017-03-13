@@ -113,7 +113,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by mike on 2017-03-08.
+ * Created on 2017-03-12.
+ * get the idea from google's developer wab page about ListView Scrolling Smooth
+ * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask
  */
 
 public class TimelineAdapter extends ArrayAdapter<Mood> {
