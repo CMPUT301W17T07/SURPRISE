@@ -122,11 +122,9 @@ public class UserAdapter extends BaseAdapter {
     }
 
     public class SearchViewHolder {
-        //private ImageView userImag;
+
         public TextView userName;
         public Button addBtn;
-
-
 
     }
 

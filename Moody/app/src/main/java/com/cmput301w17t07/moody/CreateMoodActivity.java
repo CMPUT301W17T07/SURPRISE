@@ -1,11 +1,20 @@
 package com.cmput301w17t07.moody;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,13 +28,22 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.List;
 
-public class CreateMoodActivity extends BarMenuActivity {
+public class CreateMoodActivity extends BarMenuActivity implements LocationListener {
     private ImageView mImageView;
     private String EmotionText;
     private String SocialSituation;
     private EditText Description;
     private String userName;
+
+    private LocationManager locationManager;
+    private double latitude, longitude;
+    private String provider;
+    private TextView locationText;
+    private Location location;
+
     Bitmap bitmap = null;
 
 //    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
@@ -114,6 +132,39 @@ public class CreateMoodActivity extends BarMenuActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                locationText = (TextView) findViewById(R.id.locationText);
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                //check available tools
+                List<String> locationList = locationManager.getProviders(true);
+                if (locationList.contains(LocationManager.GPS_PROVIDER)) {
+                    provider = LocationManager.GPS_PROVIDER;
+                } else if (locationList.contains(LocationManager.NETWORK_PROVIDER)) {
+                    provider = LocationManager.NETWORK_PROVIDER;
+                } else {
+                    Toast.makeText(getApplicationContext(), "No map to use", Toast.LENGTH_LONG).show();
+                }
+
+                //check the permission
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    Toast.makeText(getApplicationContext(),"Get location felled, Please check the Permission",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                location = locationManager.getLastKnownLocation(provider);
+                if (location==null){
+                    latitude=0;
+                    longitude=0;
+                }else {
+                    latitude=location.getLatitude();
+                    longitude=location.getLongitude();
+                }
+                //System.out.println("this is loc "+location.getLongitude());
+                DecimalFormat decimalFormat=new DecimalFormat(".##");
+                locationText.setText("Latitude: "+decimalFormat.format(latitude)
+                        +",Longitude: "+decimalFormat.format(longitude));
             }
         });
 
@@ -123,7 +174,7 @@ public class CreateMoodActivity extends BarMenuActivity {
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
                 if (moodController.createMood(EmotionText, userName,
-                        moodMessage_text, null, bitmap, SocialSituation) == false) {
+                        moodMessage_text, location, bitmap, SocialSituation) == false) {
                     Toast.makeText(CreateMoodActivity.this,
                             "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -156,10 +207,10 @@ public class CreateMoodActivity extends BarMenuActivity {
             }
         } else if (requestCode == 1) {
 
-            try{
-            bitmap = (Bitmap) data.getExtras().get("data");
-            System.out.println("photosize = " + bitmap.getByteCount());}
-            catch (Exception e){
+            try {
+                bitmap = (Bitmap) data.getExtras().get("data");
+                System.out.println("photosize = " + bitmap.getByteCount());
+            } catch (Exception e) {
             }
 
 
@@ -173,9 +224,9 @@ public class CreateMoodActivity extends BarMenuActivity {
 
         }
         mImageView.setImageBitmap(bitmap);
-        try{
+        try {
             //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
-            while(((bitmap.getRowBytes() * bitmap.getHeight())/8) > 65536) {
+            while (((bitmap.getRowBytes() * bitmap.getHeight()) / 8) > 65536) {
                 System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;
@@ -185,9 +236,38 @@ public class CreateMoodActivity extends BarMenuActivity {
                         bitmap.getHeight(), matrix, true);
                 System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
             }
-        }catch(Exception e) {
+        } catch (Exception e) {
         }
 
-        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        locationText=(TextView) findViewById(R.id.locationText);
+        locationText.setText("Latitude:"+location.getLatitude()+",Longitude:"+location.getLongitude());
+
+        Log.e("Map", "Location changed : Lat: " + location.getLatitude()
+                + " Lng: " + location.getLongitude());
+        System.out.printf("this is loc ");
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude", "disable");
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude", "disable");
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude", "disable");
+    }
+
 
 }

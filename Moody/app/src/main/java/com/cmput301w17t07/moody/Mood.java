@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.io.ByteArrayOutputStream;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -103,6 +104,13 @@ public class Mood implements Serializable {
 
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public String toString( ){
+        DecimalFormat decimalFormat=new DecimalFormat(".##");
+        return "Latitude: "+decimalFormat.format(location.getLatitude())
+                +",Longitude: "+decimalFormat.format(location.getLongitude());
     }
 
     public void setLocation(Location location) {
