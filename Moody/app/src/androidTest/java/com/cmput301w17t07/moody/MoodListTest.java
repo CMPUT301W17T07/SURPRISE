@@ -2,11 +2,10 @@ package com.cmput301w17t07.moody;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import org.junit.Test;
-
 /**
  * Created by Panchy on 2017/2/24.
  */
+
 
 //public class MoodListTest extends ActivityInstrumentationTestCase2 {
 //    public MoodListTest() {
@@ -67,4 +66,4 @@ import org.junit.Test;
 //
 //        assertEquals(mood,moodList.getMood(0));
 //    }
-//}
+
