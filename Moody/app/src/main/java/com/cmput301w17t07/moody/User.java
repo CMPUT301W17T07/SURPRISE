@@ -8,6 +8,11 @@ import io.searchbox.annotations.JestId;
  * Created by mike on 2017-02-23.
  */
 
+/**
+ * The User model class for the Moody application. Stores the information for a user of the
+ * Moody application.
+ */
+
 public class User {
 
     private String username;
@@ -21,16 +26,29 @@ public class User {
 
     private String id;
 
+    /**
+     * Function used by jestDroid to retrieve the unique id of the user object on the server
+     * @return id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Function used by jestDroid to set the unique id of the user object on the server
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
 
-
+    /**
+     * Constructor for the user object. Takes in a username, and stores it as both "displayUsername"
+     * that will be displayed in the application, and as a "username", which is a lowercase version
+     * used to help with elastic search of the database
+     * @param username      The user's selected username
+     */
     public User(String username){
 
         this.username=username.toLowerCase();
@@ -41,20 +59,14 @@ public class User {
         this.followerList=null;
     }
 
-//    public User(String username,MoodList moodList){
-//        this.username=username;
-//        this.moodList=moodList;
-//    }
-
-//    public User(String username, Image profilePicture, MoodList moodList,FollowingList followingList
-//    ,FollowerList followerList) {
-//        this.username = username;
-//        this.profilePicture = profilePicture;
-//        this.moodList = moodList;
-//        this.followingList=followingList;
-//        this.followerList=followerList;
-//    }
-
+    /**
+     * Constructor for the user object. Takes in a username, and stores it as both "displayUsername"
+     * that will be displayed in the application, and as a "username", which is a lowercase version
+     * used to help with elastic search of the database. This constructor also takes in a profile picture
+     * that the user selects. Not yet implemented in project part 4.
+     * @param username         The user's selected username
+     * @param profilePicture   The user's selected profile picture
+     */
     public User(String username, Image profilePicture) {
         this.username=username.toLowerCase();
         this.displayUsername = username;

@@ -22,6 +22,11 @@ import io.searchbox.annotations.JestId;
  * Created by mike on 2017-02-23.
  */
 
+/**
+ * This is the Mood model class for the Moody application. It contains the data that is displayed
+ * in a user's posted mood.
+ */
+
 public class Mood implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,16 +46,34 @@ public class Mood implements Serializable {
 
     private String id;
 
+    /**
+     * Function used by jestDroid to retrieve the unique id of the mood object on the server
+     * @return id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Function used by jestDroid to set the unique id of the mood object on the server
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
 
-
+    /**
+     * Constructor for the mood object. Takes in a mandatory feeling and username, and "optional"
+     * parameters such as location, imageID, mood message, and social situation. "Optional" parameters
+     * means that objects can be passed in as null.
+     * @param feeling               The associated feeling of a mood (happiness, confusion, etc.)
+     * @param username              The user's username
+     * @param moodMessage           The textual explanation for a user's mood
+     * @param location              The user's pinned location (Will be null in part 4, as it's not yet implemented)
+     * @param imageID               The unique server ID of the mood's associated image
+     * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.)
+     */
     public Mood(String feeling, String username, String moodMessage, Location location,
                 String imageID, String socialSituation){
         this.feeling = feeling;
