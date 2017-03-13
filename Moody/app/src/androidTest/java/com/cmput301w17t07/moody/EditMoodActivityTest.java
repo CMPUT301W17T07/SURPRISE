@@ -47,9 +47,7 @@ public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
         // solo.clickOnImageButton(0);
         // solo.click
         ImageView photo = (ImageView) solo.getView(R.id.editImageView);
-        //Bitmap photoBitmap = ((BitmapDrawable) photo.getDrawable()).getBitmap();
-        //Drawable actualDrawable = getActivity().getResources().getDrawable(R.mipmap.ic_launcher);
-        //Bitmap actualBitmap = ((BitmapDrawable) actualDrawable).getBitmap();
+
 
 
         solo.clickOnButton("Send");
