@@ -99,7 +99,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
         Description = (EditText) findViewById(R.id.Description);
 
-        mImageView = (ImageView) findViewById(R.id.imageView);
+        mImageView = (ImageView) findViewById(R.id.editImageView);
 
         ImageButton chooseButton = (ImageButton) findViewById(R.id.Camera);
 
@@ -109,9 +109,11 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         chooseButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.PICK");
-                intent.setType("image/*");
-                startActivityForResult(intent, 0);
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intent, 1);
+//                Intent intent = new Intent("android.intent.action.PICK");
+//                intent.setType("image/*");
+//                startActivityForResult(intent, 0);
             }
         });
 
@@ -149,22 +151,22 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                         && ActivityCompat.checkSelfPermission(getApplicationContext(),
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
-                    Toast.makeText(getApplicationContext(),"Get location felled, Please check the Permission",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Get location felled, Please check the Permission", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 location = locationManager.getLastKnownLocation(provider);
-                if (location==null){
-                    latitude=0;
-                    longitude=0;
-                }else {
-                    latitude=location.getLatitude();
-                    longitude=location.getLongitude();
+                if (location == null) {
+                    latitude = 0;
+                    longitude = 0;
+                } else {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
                 }
                 //System.out.println("this is loc "+location.getLongitude());
-                DecimalFormat decimalFormat=new DecimalFormat(".##");
-                locationText.setText("Latitude: "+decimalFormat.format(latitude)
-                        +",Longitude: "+decimalFormat.format(longitude));
+                DecimalFormat decimalFormat = new DecimalFormat(".##");
+                locationText.setText("Latitude: " + decimalFormat.format(latitude)
+                        + ",Longitude: " + decimalFormat.format(longitude));
             }
         });
 
@@ -185,7 +187,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         });
 
 
-
     }
 
     @Override
@@ -196,21 +197,29 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         }
         if (requestCode == 0) {
             //get pic from local photo
-            bitmap = data.getParcelableExtra("data");
-            if (bitmap == null) {//if pic is not so big use original one
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                    bitmap = BitmapFactory.decodeStream(inputStream);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+            try {
+                bitmap = data.getParcelableExtra("data");
+                if (bitmap == null) {//if pic is not so big use original one
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                        bitmap = BitmapFactory.decodeStream(inputStream);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
+            } catch (RuntimeException e) {
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
             }
-        } else if (requestCode == 1) {
 
+        } else if (requestCode == 1) {
             try {
                 bitmap = (Bitmap) data.getExtras().get("data");
                 System.out.println("photosize = " + bitmap.getByteCount());
             } catch (Exception e) {
+                Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                startActivity(intent);
+
             }
 
 
@@ -224,27 +233,14 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
         }
         mImageView.setImageBitmap(bitmap);
-        try {
-            //compress taken from http://blog.csdn.net/harryweasley/article/details/51955467
-            while (((bitmap.getRowBytes() * bitmap.getHeight()) / 8) > 65536) {
-                System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
-                BitmapFactory.Options options2 = new BitmapFactory.Options();
-                options2.inPreferredConfig = Bitmap.Config.RGB_565;
-                Matrix matrix = new Matrix();
-                matrix.setScale(0.5f, 0.5f);
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                        bitmap.getHeight(), matrix, true);
-                System.out.println("Image size is too big! " + ((bitmap.getRowBytes() * bitmap.getHeight()) / 8));
-            }
-        } catch (Exception e) {
-        }
+
 
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        locationText=(TextView) findViewById(R.id.locationText);
-        locationText.setText("Latitude:"+location.getLatitude()+",Longitude:"+location.getLongitude());
+        locationText = (TextView) findViewById(R.id.locationText);
+        locationText.setText("Latitude:" + location.getLatitude() + ",Longitude:" + location.getLongitude());
 
         Log.e("Map", "Location changed : Lat: " + location.getLatitude()
                 + " Lng: " + location.getLongitude());

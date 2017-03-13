@@ -3,13 +3,16 @@ package com.cmput301w17t07.moody;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import io.searchbox.core.Update;
 
 /**
  * Created by mike on 2017-03-05.
@@ -129,18 +132,17 @@ public class ElasticMoodController extends ElasticController {
             ArrayList<Mood> moods = new ArrayList<Mood>();
 
             String query;
-            //search param 0 = feeling, 1 = date, 2 = message (FOR NOW)
+            //search param 0 = username, 1 = feeling, (FOR NOW)
             if ((search_parameters[0]=="") && (search_parameters[1]=="") && search_parameters[2]==""){
                 query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
-                query = "{\n" +
-                        "    \"query\" : {\n" +
-                        "        \"term\" : { \"feeling\" :\"" + search_parameters[0] + "\" },\n" +
-                        "  \"sort\": [ {\n" +
-                        "    \"date\": {\"order\"\n" +
-                        "    }\n" +
-                        "  } ]\n" +
-                        "}";
+                query = "{\"query\":\n" +
+                        "{\"bool\":\n" +
+                        " {\"must\": [\n" +
+                        "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
+                        "{\"term\": {\"feeling\": \""+ search_parameters[1] +"\"}}\n" +
+                        "]\n" +
+                        "}}}";
                 System.out.println("this is query" + query);
             }
 
@@ -183,8 +185,10 @@ public class ElasticMoodController extends ElasticController {
                 query = "{\n" +
                         "    \"query\" : {\n" +
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
-                        "    }\n" +
-                        "}";
+                        "    },\n" +
+                        "     \"sort\" : {\n" +
+                        "      \"date\"  : {\"order\" : \"desc\" }}\n" +
+                        "    }";
                 System.out.println("this is query" + query);
             }
 
@@ -212,5 +216,65 @@ public class ElasticMoodController extends ElasticController {
             return moods;
         }
     }
+
+
+    public static class DeleteMood extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... search_parameters) {
+            verifySettings();
+
+            String search_string = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"_id\" :\"" + search_parameters[0] + "\" }\n" +
+                    "    }\n" +
+                    "}";
+
+            DeleteByQuery delete = new DeleteByQuery.Builder(search_string)
+                    .addIndex("cmput301w17t07")
+                    .addType("mood")
+                    .build();
+
+            //todo probably worth trying to see if an associated image could also be deleted here
+
+            try {
+                client.execute(delete);
+            } catch (Exception e) {
+                e.printStackTrace();
+//                   throw new IllegalArgumentException();
+            }
+
+            return null;
+        }
+    }
+
+
+//    public static class EditMood extends AsyncTask<Mood, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Mood... moods) {
+//            verifySettings();
+//
+//            for (Mood mood : moods ) {
+//
+//                String query;
+//
+//
+//                Update update = new Update.Builder(query)
+//                        .index("cmput301w17t07")
+//                        .type("mood")
+//                        .id(mood.getId())
+//                        .build();
+//
+//                try {
+//                    client.execute( update );
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            return null;
+//        }
+//    }
 
 }

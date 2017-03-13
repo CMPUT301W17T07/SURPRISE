@@ -1,14 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_edit_mood"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cmput301w17t07.moody.EditMoodActivity">
+    android:background="#ffffffff"
+    android:weightSum="1">
+
+    <Spinner
+        android:id="@+id/editEmotion"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:spinnerMode="@null"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/editEmotion"
+        android:layout_alignLeft="@+id/editEmotion"
+        android:layout_alignStart="@+id/editEmotion" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:background="#00000000"
+        android:text="Send"
+        android:textAllCaps="false"
+        android:textColor="#66CD00"
+        android:textSize="23dp"
+        android:layout_alignTop="@+id/editSocialSituation"
+        android:layout_alignRight="@+id/editImageView"
+        android:layout_alignEnd="@+id/editImageView" />
+
+    <ImageView
+        android:id="@+id/editImageView"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_above="@+id/editCamera"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp" />
+
+    <ImageButton
+        android:id="@+id/editCamera"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_x="50px"
+        android:layout_y="100px"
+        android:background="#00000000"
+        app:srcCompat="@drawable/ic_camera"
+        android:layout_marginBottom="17dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignLeft="@+id/editImageView"
+        android:layout_alignStart="@+id/editImageView" />
+
+    <ImageButton
+        android:id="@+id/deletePicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/editImageView"
+        android:layout_alignStart="@+id/editImageView"
+        android:layout_alignTop="@+id/editImageView"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_deletepic" />
+
+    <ImageButton
+        android:id="@+id/location"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="#00000000"
+        app:srcCompat="@drawable/ic_location"
+        android:layout_alignTop="@+id/editCamera"
+        android:layout_toRightOf="@+id/editCamera"
+        android:layout_toEndOf="@+id/editCamera" />
+
+    <Spinner
+        android:id="@+id/editSocialSituation"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_social"
+        android:layout_below="@+id/editImageView"
+        android:layout_toRightOf="@+id/location"
+        android:layout_toEndOf="@+id/location"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp" />
+
 
 
     <android.support.design.widget.BottomNavigationView
@@ -23,8 +108,33 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
 
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="Location"
+        android:layout_below="@+id/editDescription"
+        android:layout_toRightOf="@+id/toolbar2"
+        android:layout_toEndOf="@+id/toolbar2" />
 
+    <TextView
+        android:id="@+id/editSocialText"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="Social Situation"
+        android:layout_below="@+id/editDescription"
+        android:layout_alignRight="@+id/editImageView"
+        android:layout_alignEnd="@+id/editImageView" />
 
+    <EditText
+        android:id="@+id/editDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:layout_below="@+id/locationText"
+        android:layout_alignLeft="@+id/editDescription"
+        android:layout_alignStart="@+id/editDescription"
+        android:layout_marginTop="9dp" />
 
 
 </RelativeLayout>

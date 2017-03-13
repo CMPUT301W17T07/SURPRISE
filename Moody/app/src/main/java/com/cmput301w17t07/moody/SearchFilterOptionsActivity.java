@@ -11,7 +11,7 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
 
     private Button searchUser;
     private TextView searchUsername;
-    private Button searchMood;
+    private Button filterMood;
     private TextView searchMoodmes;
 
 
@@ -21,23 +21,36 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
         setContentView(R.layout.activity_search_filter_options);
         setUpMenuBar(this);
 
-        searchUser=(Button) findViewById(R.id.searchUser);
-        searchUsername=(TextView) findViewById(R.id.searchEditname);
+        searchUser = (Button) findViewById(R.id.searchUser);
+        searchUsername = (TextView) findViewById(R.id.searchEditname);
 
-        //searchMood=(Button) findViewById(R.id.searchMood);
-        //searchMoodmes=(TextView) findViewById(R.id.searchMoodMes);
 
+
+        filterMood = (Button) findViewById(R.id.filterMood);
+        filterMood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filterMoodIntent = new Intent(SearchFilterOptionsActivity.this, FilterActivity.class);
+                startActivity(filterMoodIntent);
+                finish();
+            }
+        });
 
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentUser = new Intent(SearchFilterOptionsActivity.this, SearchUserActivity.class);
-                String username=searchUsername.getText().toString();
+                String username = searchUsername.getText().toString();
                 intentUser.putExtra("editUsername", username);
                 startActivity(intentUser);
                 finish();
             }
         });
+
+
+
+    }
+}
 
 //        searchUser.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -49,9 +62,9 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
 //                finish();
 //            }
 //        });
-
-
-    }
-
-
-}
+//
+//
+//    }
+//
+//
+//}

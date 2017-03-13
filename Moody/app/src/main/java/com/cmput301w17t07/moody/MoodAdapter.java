@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,7 +69,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         viewHolder.messageTest.setTextSize(20);
         //        feelingText.setTypeface(font);
 
-        viewHolder.dataText.setText(mood.getDate());
+        viewHolder.dataText.setText(mood.getDate().toString());
         viewHolder.dataText.setTextSize(20);
         //        dateText.setTypeface(font);
 
