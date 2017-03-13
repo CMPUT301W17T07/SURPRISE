@@ -12,6 +12,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * FilterResultsActivity class. User interface logic for the view that allows the user
+ * to view the filtered moods they requested.
+ */
+
 public class FilterResultsActivity extends BarMenuActivity {
 
     String username;

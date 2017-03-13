@@ -11,13 +11,33 @@ import java.util.Date;
  * Created by mike on 2017-02-23.
  */
 
+/**
+ * MoodController class object. Controller that controls mood objects with regards to offline
+ * functionality. The MoodController also acts as a communicator between Mood objects and
+ * the ElasticMoodController.
+ */
+
 public class MoodController {
 
     private static Mood mood = null;
 
-    //todo getMood method. Not sure how exactly to do this yet. Needs to retrieve the mood the user
-    // has selected
-
+    /**
+     * createMood method that will create a new Mood object if the mood message is determined
+     * to be appropriate. Method will also provided the new Mood object with the appropriate image
+     * ID for its associated MoodImage object if it is added by the user. This means that this
+     * method also creates MoodImage objects.
+     *
+     * Also communicates with the ElasticMood controller to get it to add the Mood to the server.
+     * For project part 5, we will implement an internet checker method to determine whether
+     * online or offline code logic needs to be implemented
+     * @param feeling           user's selected feeling
+     * @param username          user's username
+     * @param moodMessage       user's textual explanation for their mood
+     * @param location          user's location
+     * @param image             bitmap of user's attached image
+     * @param socialSituation   user's socialSituation
+     * @return                  a boolean value indicating whether the mood was created
+     */
     public static Boolean createMood(String feeling, String username, String moodMessage,
                                      Location location, Bitmap image, String socialSituation){
         if(!checkMoodMessage(moodMessage)){
@@ -25,7 +45,7 @@ public class MoodController {
             return false;
         }
 
-
+        //todo implement internet check to decide whether to use offline or online functionality
 
         // ID that will link mood to its respective image
         String moodID = null;
@@ -62,6 +82,12 @@ public class MoodController {
         return true;
     }
 
+    /**
+     * Method for checking the message for appropriate word and character count. Returns a boolean
+     * value indicating whether the message complies to requirements.
+     * @param moodMessage
+     * @return
+     */
     public static Boolean checkMoodMessage(String moodMessage){
         String wordCheck = moodMessage.trim();
         if(wordCheck.split("\\s+").length > 3){
@@ -74,11 +100,26 @@ public class MoodController {
         }
     }
 
-//    public static Boolean checkMoodImage(Bitmap image){
-//        //todo implement xin's method of checking image size
-//        return true;
-//    }
 
+    /**
+     *  EditMood method that works almost identically to the createMood method. Editing of mood
+     *  date's is currently not implemented. Will discuss more thoroughly with prof/TA about
+     *  what is required for date editing, as it is a strange feature...
+     *
+     *  Noticeable difference of the EditMood method is that it is passed a Date parameter (as
+     *  mentioned above), and Mood object. The Mood object passed in is the "oldMood" that will
+     *  need to be deleted from the server, as the new "edited mood" will need to be added in its
+     *  place.
+     * @param feeling
+     * @param username
+     * @param moodMessage
+     * @param location
+     * @param image
+     * @param socialSituation
+     * @param date
+     * @param oldMood
+     * @return
+     */
     public static Boolean editMood(String feeling, String username, String moodMessage,
                            Location location, Bitmap image, String socialSituation, Date date, Mood oldMood){
 
