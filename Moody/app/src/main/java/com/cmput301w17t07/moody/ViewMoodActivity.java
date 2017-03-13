@@ -86,7 +86,7 @@ public class ViewMoodActivity extends BarMenuActivity {
         feeling.setText(viewMood.getMoodMessage());
 
         TextView date = (TextView) findViewById(R.id.userDateTV);
-        date.setText(viewMood.getDate());
+        date.setText(viewMood.getDate().toString());
 
         ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
 //        //todo handle no image case!!

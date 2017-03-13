@@ -132,18 +132,17 @@ public class ElasticMoodController extends ElasticController {
             ArrayList<Mood> moods = new ArrayList<Mood>();
 
             String query;
-            //search param 0 = feeling, 1 = date, 2 = message (FOR NOW)
+            //search param 0 = username, 1 = feeling, (FOR NOW)
             if ((search_parameters[0]=="") && (search_parameters[1]=="") && search_parameters[2]==""){
                 query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
-                query = "{\n" +
-                        "    \"query\" : {\n" +
-                        "        \"term\" : { \"feeling\" :\"" + search_parameters[0] + "\" },\n" +
-                        "  \"sort\": [ {\n" +
-                        "    \"date\": {\"order\"\n" +
-                        "    }\n" +
-                        "  } ]\n" +
-                        "}";
+                query = "{\"query\":\n" +
+                        "{\"bool\":\n" +
+                        " {\"must\": [\n" +
+                        "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
+                        "{\"term\": {\"feeling\": \""+ search_parameters[1] +"\"}}\n" +
+                        "]\n" +
+                        "}}}";
                 System.out.println("this is query" + query);
             }
 
@@ -186,8 +185,10 @@ public class ElasticMoodController extends ElasticController {
                 query = "{\n" +
                         "    \"query\" : {\n" +
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
-                        "    }\n" +
-                        "}";
+                        "    },\n" +
+                        "     \"sort\" : {\n" +
+                        "      \"date\"  : {\"order\" : \"desc\" }}\n" +
+                        "    }";
                 System.out.println("this is query" + query);
             }
 

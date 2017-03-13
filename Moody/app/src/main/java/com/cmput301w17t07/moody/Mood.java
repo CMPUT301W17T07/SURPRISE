@@ -92,10 +92,8 @@ public class Mood implements Serializable {
      *  Logic on date to string from http://www.java-examples.com/java-date-string-example
      * @return
      */
-    public String getDate() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String stringDate = dateFormat.format(this.date);
-        return stringDate;
+    public Date getDate() {
+        return this.date;
     }
 
     public void setDate(Date date) {

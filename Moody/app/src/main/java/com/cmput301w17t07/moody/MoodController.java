@@ -115,7 +115,7 @@ public class MoodController {
         System.out.println("EDIT test ID"+ moodID);
 
         Mood editMood = new Mood(feeling, username, moodMessage, location, moodID, socialSituation);
-        editMood.setDate(date);
+        editMood.setDate(oldMood.getDate());
 //        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 
         ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
@@ -137,7 +137,7 @@ public class MoodController {
         mood.setMoodMessage(moodMessage);
     }
 
-    public String getDate() {
+    public Date getDate() {
         return mood.getDate();
     }
 

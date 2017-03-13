@@ -84,7 +84,7 @@ public class EditMoodActivity extends BarMenuActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String moodMessage_text = Description.getText().toString();
-                String dateValue = date.getText().toString();
+//                String dateValue = date.getText().toString();
                 MoodController moodController = new MoodController();
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
                         null, bitmapImage, SocialSituation, null, editMood ) == false) {
@@ -199,8 +199,8 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         });
 
-        date = (EditText) findViewById(R.id.editDate);
-        date.setText(editMood.getDate());
+//        date = (EditText) findViewById(R.id.editDate);
+//        date.setText(editMood.getDate());
 
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
