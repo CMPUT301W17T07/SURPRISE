@@ -16,6 +16,7 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_map_options"
     android:layout_width="match_parent"
@@ -26,6 +27,199 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cmput301w17t07.moody.MapOptionsActivity">
 
+
+    <RelativeLayout
+        android:id="@+id/activity_filter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blueTheme"
+        tools:context="com.cmput301w17t07.moody.FilterActivity">
+
+        <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/yellowTheme"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:menu="@menu/menubar"
+            android:id="@+id/bottomNavigationView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:text="Filter your moods or your followers' moods:" />
+
+        <Spinner
+            android:id="@+id/filterUser"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="17dp" />
+
+        <Spinner
+            android:id="@+id/filterFeeling"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/filterUser"
+            android:layout_marginTop="31dp" />
+
+        <Button
+            android:id="@+id/filterFeelingResults"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/filterFeeling"
+            android:background="@color/yellowTheme"
+            android:text="Filter Results"
+            android:textColor="@color/redTheme" />
+
+        <Spinner
+            android:id="@+id/filterDate"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/filterFeeling"
+            android:layout_marginTop="27dp" />
+
+        <Button
+            android:id="@+id/filterDateResults"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/filterDate"
+            android:background="@color/yellowTheme"
+            android:clickable="false"
+            android:text="Filter Results"
+            android:textColor="@color/redTheme" />
+
+
+        <Button
+            android:id="@+id/filterMessageResults"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/filterMessageText"
+            android:background="@color/yellowTheme"
+            android:text="Filter Results"
+            android:textColor="@color/redTheme" />
+
+        <Button
+            android:id="@+id/myMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/filterDateResults"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="133dp"
+            android:background="@color/yellowTheme"
+            android:text="Map Results"
+            android:textColor="@color/redTheme" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/yellowTheme"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menubar" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Filter your moods or your followers' moods:" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="17dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filterUser"
+        android:layout_marginTop="31dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/filterFeeling"
+        android:background="@color/yellowTheme"
+        android:text="Filter Results"
+        android:textColor="@color/redTheme" />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filterFeeling"
+        android:layout_marginTop="27dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/filterDate"
+        android:background="@color/yellowTheme"
+        android:clickable="false"
+        android:text="Filter Results"
+        android:textColor="@color/redTheme" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filterDate"
+        android:layout_marginTop="25dp"
+        android:hint="(filter mood messages by specific word)"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/filterMessageText"
+        android:background="@color/yellowTheme"
+        android:text="Filter Results"
+        android:textColor="@color/redTheme" />
 
     <android.support.design.widget.BottomNavigationView
         xmlns:android="http://schemas.android.com/apk/res/android"

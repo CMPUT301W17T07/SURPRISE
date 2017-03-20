@@ -32,6 +32,7 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
     private Button searchUser;
     private TextView searchUsername;
     private Button filterMood;
+    private Button searchMap;
 
 
     @Override
@@ -63,6 +64,16 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
                 String username = searchUsername.getText().toString();
                 intentUser.putExtra("editUsername", username);
                 startActivity(intentUser);
+                finish();
+            }
+        });
+
+        searchMap = (Button) findViewById(R.id.searchMap);
+        searchMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(SearchFilterOptionsActivity.this, MapOptionsActivity.class);
+                startActivity(mapIntent);
                 finish();
             }
         });
