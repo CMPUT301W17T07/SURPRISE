@@ -16,14 +16,32 @@
 
 package com.cmput301w17t07.moody;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import static com.cmput301w17t07.moody.R.id.myMap;
+import static com.cmput301w17t07.moody.R.id.searchMap;
 
 public class MapOptionsActivity extends AppCompatActivity {
+
+    private Button resultMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_options);
+
+        resultMap = (Button) findViewById(myMap);
+        resultMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(MapOptionsActivity.this, MapViewActivity.class);
+                startActivity(mapIntent);
+                finish();
+            }
+        });
     }
 }
