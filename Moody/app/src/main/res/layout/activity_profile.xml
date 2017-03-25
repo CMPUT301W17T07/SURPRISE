@@ -112,9 +112,17 @@
         android:text="Pending request"
         android:layout_alignTop="@+id/imageView"
         android:layout_toRightOf="@+id/UserNameText"
-        android:layout_toEndOf="@+id/UserNameText"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp" />
+        android:layout_toEndOf="@+id/UserNameText" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/blueTheme"
+        app:srcCompat="@android:drawable/checkbox_on_background"
+        android:layout_above="@+id/Followers"
+        android:layout_alignRight="@+id/Followers"
+        android:layout_alignEnd="@+id/Followers" />
 
 
 </RelativeLayout>
