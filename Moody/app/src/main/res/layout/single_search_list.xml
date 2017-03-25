@@ -32,12 +32,17 @@
     <Button
         android:id="@+id/searchAdd"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/singleSearchItemName"
         android:layout_toRightOf="@+id/singleSearchItemName"
-        android:text="ADD" />
+        android:background="@color/yellowTheme"
+        android:text="SEND REQUEST"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:textColor="@color/redTheme" />
 
 </RelativeLayout>
