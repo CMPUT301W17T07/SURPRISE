@@ -39,6 +39,7 @@ public class ViewMoodActivity extends BarMenuActivity {
         username = userController.readUsername(ViewMoodActivity.this).toString();
         // if the mood was from user profile allow edit/delete
         if (viewMood.getUsername().equals(username)) {
+            //System.out.println("this is erro" +viewMood.getLocation());
 
             displayAttributes();
 
@@ -89,7 +90,7 @@ public class ViewMoodActivity extends BarMenuActivity {
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate().toString());
 
-        TextView location = (TextView) findViewById(R.id.locationTV);
+        //TextView location = (TextView) findViewById(R.id.locationTV);
         //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));
         //location.setText(viewMood.toString());
 

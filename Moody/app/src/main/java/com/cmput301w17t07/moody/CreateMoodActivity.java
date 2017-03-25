@@ -44,6 +44,8 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     private TextView locationText;
     private Location location;
 
+
+
     Bitmap bitmap = null;
 
 //    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
@@ -173,6 +175,8 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
                 if (moodController.createMood(EmotionText, userName,

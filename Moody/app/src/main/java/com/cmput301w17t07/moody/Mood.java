@@ -30,6 +30,7 @@ public class Mood implements Serializable {
     private String moodMessage;
     private Date date;
     private Location location;
+
     private String moodImageID; //use getMoodImage to decode string into Bitmap
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
