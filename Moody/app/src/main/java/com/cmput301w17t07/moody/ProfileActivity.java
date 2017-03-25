@@ -16,26 +16,16 @@
 
 package com.cmput301w17t07.moody;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.R.id.list;
-import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
  *  The ProfileActivity handles the user interface logic for when a user is viewing their
@@ -59,6 +49,12 @@ public class ProfileActivity extends BarMenuActivity {
         UserController userController = new UserController();
 //        username = userController.getUsername();
         username = userController.readUsername(ProfileActivity.this).toString();
+        TextView userName = (TextView) findViewById(R.id.UserNameText);
+        userName.setText(username);
+        TextView Following = (TextView) findViewById(R.id.Following);
+        Following.setText("Following\n0");
+        TextView Followers = (TextView) findViewById(R.id.Followers);
+        Followers.setText("Followers\n0");
 
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
 
