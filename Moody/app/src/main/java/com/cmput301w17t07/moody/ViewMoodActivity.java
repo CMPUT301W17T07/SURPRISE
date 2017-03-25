@@ -18,12 +18,10 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,6 +51,8 @@ public class ViewMoodActivity extends BarMenuActivity {
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
         // Get the database id for the selected mood
         viewMoodID = viewMood.getId();
+        System.out.println("location = " + viewMood.getFeeling().toString());
+//
 
         // get username right
         UserController userController = new UserController();
@@ -109,6 +109,9 @@ public class ViewMoodActivity extends BarMenuActivity {
 
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate().toString());
+
+//        TextView location = (TextView) findViewById(R.id.LocationTV);
+//        location.setText(viewMood.getLocation().toString());
 
         //TextView location = (TextView) findViewById(R.id.locationTV);
         //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));
