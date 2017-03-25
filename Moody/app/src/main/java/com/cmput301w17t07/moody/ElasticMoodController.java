@@ -303,6 +303,7 @@ public class ElasticMoodController extends ElasticController {
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\n" +
+                        "    \"from\":\"" + search_parameters[1] + "\",\"size\":6, \n"+
                         "    \"query\" : {\n" +
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
                         "    },\n" +

@@ -89,21 +89,20 @@
             android:background="@android:color/holo_red_light"
             android:textColor="@color/white"
             android:text="DECLINE"
-            android:layout_alignBaseline="@+id/Accept"
-            android:layout_alignBottom="@+id/Accept"
             android:layout_toRightOf="@+id/Accept"
             android:layout_toEndOf="@+id/Accept"
             android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp" />
+            android:layout_marginStart="13dp"
+            android:layout_alignBottom="@+id/Accept" />
 
     </RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/PendingRequestsText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/PendingRequestsText" />
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

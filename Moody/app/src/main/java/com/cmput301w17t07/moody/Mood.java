@@ -29,6 +29,7 @@ import java.io.Serializable;
 import java.io.ByteArrayOutputStream;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -50,6 +51,7 @@ public class Mood implements Serializable {
     private String moodMessage;
     private Date date;
     private Location location;
+
     private String moodImageID; //use getMoodImage to decode string into Bitmap
     private String socialSituation;
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
@@ -127,6 +129,13 @@ public class Mood implements Serializable {
 
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public String toString( ){
+        DecimalFormat decimalFormat=new DecimalFormat(".##");
+        return "Latitude: "+decimalFormat.format(location.getLatitude())
+                +",Longitude: "+decimalFormat.format(location.getLongitude());
     }
 
     public void setLocation(Location location) {
