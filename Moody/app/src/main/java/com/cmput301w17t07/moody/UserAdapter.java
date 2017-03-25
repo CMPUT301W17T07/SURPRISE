@@ -47,6 +47,8 @@ import java.util.List;
 public class UserAdapter extends BaseAdapter {
     private Context context;
     private List<User> userList;
+    private String username;
+    private String searchUsername;
 
 
     /**
@@ -54,9 +56,11 @@ public class UserAdapter extends BaseAdapter {
      * @param context       Context for the adapter
      * @param userList      The list of users
      */
-    public UserAdapter(Context context, List<User> userList) {
+    public UserAdapter(Context context, List<User> userList, String username, String searchUsername) {
         this.context = context;
         this.userList = userList;
+        this.username = username;
+        this.searchUsername = searchUsername;
     }
 
     /**
@@ -98,14 +102,14 @@ public class UserAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view;
-        SearchViewHolder viewHolder;
+        final SearchViewHolder viewHolder;
 
 
         if (convertView == null) {
             viewHolder =new SearchViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.single_search_list,null);
             viewHolder.userName=(TextView) view.findViewById(R.id.singleSearchItemName);
-            viewHolder.addBtn=(Button) view.findViewById(R.id.searchAdd);
+            viewHolder.requestButton=(Button) view.findViewById(R.id.searchAdd);
             //viewHolder.declineBtn=(Button) view.findViewById(R.id.searchDecline);
 
             view.setTag(viewHolder);
@@ -118,18 +122,29 @@ public class UserAdapter extends BaseAdapter {
         viewHolder.userName.setText(userList.get(position).getUsername());
         viewHolder.userName.setTextSize(30);
 
-        viewHolder.addBtn.setTag(position);
-        viewHolder.addBtn.setOnClickListener(new View.OnClickListener() {
+        viewHolder.requestButton.setTag(position);
+        viewHolder.requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View v){
-                Toast.makeText(context,"list view add button was clicked by Panchy in position "
-                        +position+" username is "+userList.get(position).getUsername(),Toast.LENGTH_SHORT).show();
-
-                //Intent intent=((Activity) context).getIntent();
-                //final String username= intent.getStringExtra("userNameBegin");
-
+                //todo implement ability to show send request button or following text depending on if user is already following
+                FollowController followController = new FollowController();
+                if(followController.sendPendingRequest(username, searchUsername)){
+                    // if it returns true....
 
 
+                    // change button displayed
+                    //todo need to implement check for what button to display on this screen
+                    viewHolder.requestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
+                    viewHolder.requestButton.setText("REQUEST SENT");
+                    viewHolder.requestButton.setEnabled(false);
+                    return;
+                }
+                else{
+                    // display message to warn user that they are not connected to the internet
+                    Toast.makeText(context, "Please check your internet connection",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
 
@@ -148,7 +163,7 @@ public class UserAdapter extends BaseAdapter {
     public class SearchViewHolder {
         //private ImageView userImag;
         public TextView userName;
-        public Button addBtn;
+        public Button requestButton;
 
 
 

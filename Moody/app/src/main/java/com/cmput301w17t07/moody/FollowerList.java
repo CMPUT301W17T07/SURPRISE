@@ -18,6 +18,8 @@ package com.cmput301w17t07.moody;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by mike on 2017-02-23.
  */
@@ -29,32 +31,48 @@ import java.util.ArrayList;
  */
 
 public class FollowerList {
-    public ArrayList<User> pendingFollowers = new ArrayList<User>();
-    public ArrayList<User> followerList = new ArrayList<User>();
+    String username;
+    public ArrayList<String> pendingFollowers = new ArrayList<String>();
+    public ArrayList<String> followerList = new ArrayList<String>();
 
+    @JestId
 
-    public void addPending(User user){
-        // When another user requests to follow the user
-        pendingFollowers.add(user);
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void deletePending(User user){
+
+    public FollowerList(String username) {
+        this.username = username;
+    }
+
+    public void addPending(String username){
+        // When another user requests to follow the user
+        pendingFollowers.add(username);
+    }
+
+    public void deletePending(String username){
         // When a user rejects another user's follow request
-        pendingFollowers.remove(user);
+        pendingFollowers.remove(username);
     }
 
     public int countPending(){
         return pendingFollowers.size();
     }
 
-    public User getPending(int index){
-        return pendingFollowers.get(index);
-    }
+//    public User getPending(int index){
+//        return pendingFollowers.get(index);
+//    }
 
-    public void addFollower(User user){
-        if(pendingFollowers.contains(user)) {
-            this.deletePending(user);
-            followerList.add(user);
+    public void addFollower(String username){
+        if(pendingFollowers.contains(username)) {
+            this.deletePending(username);
+            followerList.add(username);
         }
         else{
             // if attempting to add a follower who is not in the user's pending requests
@@ -62,25 +80,25 @@ public class FollowerList {
         }
     }
 
-    public void deleteFollower(User user){
+    public void deleteFollower(String username){
         // Current app design does not allow a user to delete a follower
-        followerList.remove(user);
+        followerList.remove(username);
     }
 
     public int countFollowers(){
         return followerList.size();
     }
 
-    public User getFollower(int index){
-        return followerList.get(index);
-    }
+//    public User getFollower(int index){
+//        return followerList.get(index);
+//    }
 
-    public boolean hasFollower(User user){
-        return followerList.contains(user);
-    }
-
-    public boolean hasPending(User user){
-        return pendingFollowers.contains(user);
-    }
+//    public boolean hasFollower(User user){
+//        return followerList.contains(user);
+//    }
+//
+//    public boolean hasPending(User user){
+//        return pendingFollowers.contains(user);
+//    }
 
 }

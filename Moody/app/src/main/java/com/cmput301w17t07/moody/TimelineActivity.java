@@ -107,6 +107,9 @@ public class TimelineActivity extends BarMenuActivity {
 //                            return;
 //                        }
                         userController.saveUsername(username.toLowerCase(), TimelineActivity.this);
+                        // creating follow/following lists for new user
+                        FollowController followController = new FollowController();
+                        followController.createFollowLists(username.toLowerCase());
 
 
                     }

@@ -38,6 +38,8 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/singleSearchItemName"
         android:layout_toRightOf="@+id/singleSearchItemName"
-        android:text="ADD" />
+        android:textColor="@color/redTheme"
+        android:background="@color/yellowTheme"
+        android:text="SEND REQUEST" />
 
 </RelativeLayout>
