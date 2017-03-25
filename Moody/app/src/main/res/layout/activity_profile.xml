@@ -105,14 +105,16 @@
         android:layout_alignStart="@+id/UserNameText" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/PendingRequests"
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:text="Pending request"
+        android:layout_height="35dp"
         android:background="@color/yellowTheme"
+        android:text="Pending request"
         android:layout_alignTop="@+id/imageView"
-        android:layout_alignLeft="@+id/Following"
-        android:layout_alignStart="@+id/Following" />
+        android:layout_toRightOf="@+id/UserNameText"
+        android:layout_toEndOf="@+id/UserNameText"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
 
 
 </RelativeLayout>

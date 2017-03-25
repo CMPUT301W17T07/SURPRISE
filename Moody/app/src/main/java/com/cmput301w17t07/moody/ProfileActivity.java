@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,15 @@ public class ProfileActivity extends BarMenuActivity {
         Following.setText("Following\n0");
         TextView Followers = (TextView) findViewById(R.id.Followers);
         Followers.setText("Followers\n0");
+        Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
+        PendingRequests.setText("PENDING REQUESTS(0)");
+        PendingRequests.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
 
