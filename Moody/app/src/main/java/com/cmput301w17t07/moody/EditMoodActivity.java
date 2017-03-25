@@ -82,7 +82,7 @@ public class EditMoodActivity extends BarMenuActivity {
                     Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                     startActivityForResult(intent, 1);
                 } catch (Exception e) {
-                    Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
                 }
             }
@@ -95,7 +95,7 @@ public class EditMoodActivity extends BarMenuActivity {
                     intent.setType("image/*");
                     startActivityForResult(intent, 0);
                 } catch (Exception e) {
-                    Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
                 }
                 return true;

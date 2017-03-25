@@ -16,14 +16,17 @@
 
 package com.cmput301w17t07.moody;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class PendingRequestsActivity extends AppCompatActivity {
+public class PendingRequestsActivity extends BarMenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_requests);
+        setUpMenuBar(this);
+        TextView PendingRequestsText = (TextView) findViewById(R.id.PendingRequestsText);
+        PendingRequestsText.setText("PendingRequests\n0");
     }
 }
