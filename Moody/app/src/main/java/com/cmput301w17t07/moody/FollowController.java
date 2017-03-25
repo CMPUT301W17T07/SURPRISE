@@ -18,6 +18,8 @@ package com.cmput301w17t07.moody;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by mike on 2017-03-25.
  */
@@ -104,7 +106,9 @@ public class FollowController {
                 Log.i("Error", "Was unable to retrieve follower list during acceptFollowRequest()");
             }
             // adding follower to the accepting user's follower list
-            followerList.addFollower(userAcceptingRequest);
+
+            //todo try catch this block
+            followerList.addFollower(userThatSentRequest);
 
             //----------------------- NOW UPDATING THE SERVER --------------------------------------
 
@@ -134,7 +138,8 @@ public class FollowController {
                 Log.i("Error", "Was unable to retrieve following list during acceptFollowRequest()");
             }
 
-            followingList.addFollowing(userThatSentRequest);
+            // todo try catch this block
+            followingList.addFollowing(userAcceptingRequest);
 
             //----------------------- NOW UPDATING THE SERVER --------------------------------------
 
@@ -157,9 +162,36 @@ public class FollowController {
         }
     }
 
+
+    public static ArrayList<String> getPendingRequests(String username){
+
+        FollowerList followerList = null;
+        ArrayList<String> userArrayList=new ArrayList<>();
+
+
+        // ElasticController to retrieve pending followers list
+        ElasticSearchFollowController.GetFollowerList getFollowerList =
+                new ElasticSearchFollowController.GetFollowerList();
+
+        getFollowerList.execute(username);
+
+        try {
+
+            followerList = getFollowerList.get();
+            userArrayList = followerList.getPendingFollowers();
+
+        } catch (Exception e) {
+            Log.i("error", "failed to get the FollowerList out of the async matched");
+        }
+
+        return userArrayList;
+    }
+
     private static boolean checkNetwork(){
         //todo implement a checkNetwork method/class to be called here
         return true;
     }
+
+
 
 }

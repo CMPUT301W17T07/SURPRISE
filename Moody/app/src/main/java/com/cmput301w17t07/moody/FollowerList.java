@@ -70,14 +70,16 @@ public class FollowerList {
 //    }
 
     public void addFollower(String username){
-        if(pendingFollowers.contains(username)) {
-            this.deletePending(username);
-            followerList.add(username);
-        }
-        else{
-            // if attempting to add a follower who is not in the user's pending requests
-            throw new IllegalArgumentException();
-        }
+        this.deletePending(username);
+        followerList.add(username);
+//        if(pendingFollowers.contains(username)) {
+//            this.deletePending(username);
+//            followerList.add(username);
+//        }
+//        else{
+//            // if attempting to add a follower who is not in the user's pending requests
+//            throw new IllegalArgumentException();
+//        }
     }
 
     public void deleteFollower(String username){
@@ -101,4 +103,12 @@ public class FollowerList {
 //        return pendingFollowers.contains(user);
 //    }
 
+
+    public ArrayList<String> getPendingFollowers() {
+        return pendingFollowers;
+    }
+
+    public ArrayList<String> getFollowerList() {
+        return followerList;
+    }
 }

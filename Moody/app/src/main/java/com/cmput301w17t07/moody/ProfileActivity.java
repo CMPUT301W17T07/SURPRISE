@@ -53,9 +53,12 @@ public class ProfileActivity extends BarMenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setUpMenuBar(this);
+
         UserController userController = new UserController();
 //        username = userController.getUsername();
         username = userController.readUsername(ProfileActivity.this).toString();
+
+
         TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
         TextView Following = (TextView) findViewById(R.id.Following);
