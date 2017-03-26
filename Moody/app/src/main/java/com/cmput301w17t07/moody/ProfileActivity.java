@@ -43,6 +43,7 @@ public class ProfileActivity extends BarMenuActivity {
     String username;
 
     private ArrayList<Mood> templist = new ArrayList<Mood>();
+    private boolean scrollFlag;
     int indexOfScroll=0;
     int lastItem;
 
@@ -54,9 +55,11 @@ public class ProfileActivity extends BarMenuActivity {
         setContentView(R.layout.activity_profile);
         setUpMenuBar(this);
 
+        //----------------------------- GETTING LOCAL USERNAME -------------------------------------
         UserController userController = new UserController();
         username = userController.readUsername(ProfileActivity.this).toString();
 
+        //--------------------- SETTING UP PROFILE INFO AT TOP OF SCREEN----------------------------
         FollowController followController = new FollowController();
 
 
@@ -76,9 +79,11 @@ public class ProfileActivity extends BarMenuActivity {
                 Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
+        // todo displaying username on screen. REMOVE IN FINAL VERSION
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
 
 
@@ -88,6 +93,10 @@ public class ProfileActivity extends BarMenuActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+        // set scroll flag to true because the user has not tried loading older moods yet and thus
+        // we cannot tell if they have all been loaded yet
+        scrollFlag = true;
 
 
         ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
@@ -114,21 +123,24 @@ public class ProfileActivity extends BarMenuActivity {
                 // 当不滚动时
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     // 判断是否滚动到底部
-                    Toast.makeText(getApplicationContext(), "Starting load new moody",Toast.LENGTH_SHORT).show();
-                    indexOfScroll=indexOfScroll+6;
-                    ElasticMoodController.GetUserMoods getUserMoodsAgain = new ElasticMoodController.GetUserMoods();
-                    getUserMoodsAgain.execute(username,String.valueOf(indexOfScroll));
-                    try {
-                        templist= getUserMoodsAgain.get();
+                    // added a test to see if all moods have been loaded
+                    if(scrollFlag) {
+                        Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
+                        indexOfScroll = indexOfScroll + 6;
+                        ElasticMoodController.GetUserMoods getUserMoodsAgain = new ElasticMoodController.GetUserMoods();
+                        getUserMoodsAgain.execute(username, String.valueOf(indexOfScroll));
+                        try {
+                            templist = getUserMoodsAgain.get();
+                            if (templist.size() == 0) {
+                                scrollFlag = false;
+                            }
 
-                    }catch (Exception e){
-                        Log.i("error","failed to get the mood out of the async matched");
+                        } catch (Exception e) {
+                            Log.i("error", "failed to get the mood out of the async matched");
+                        }
+                        moodArrayList.addAll(templist);
+                        adapter.notifyDataSetChanged();
                     }
-                    moodArrayList.addAll(templist);
-                    adapter.notifyDataSetChanged();
-
-
-
                 }
             }
             @Override
@@ -142,19 +154,18 @@ public class ProfileActivity extends BarMenuActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                // TODO Auto-generated method stub
                 try{
                     Mood viewMood = moodArrayList.get(position);
                     //System.out.println("location = " + position);//viewMood.getLocation().toString());
                    // System.out.println("location = " + viewMood);
-//                System.out.println("this is er");
-//                System.out.println("this is er"+viewMood.getLocation().getLongitude());
-                   Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
                     viewMoodIntent.putExtra("viewMood", viewMood);
-
-                startActivity(viewMoodIntent);}
-                catch(Exception e){}
-
+                    startActivity(viewMoodIntent);
+                    //todo this renders the back button kind of useless....
+                    finish();
+                }
+                catch(Exception e){
+                }
 
             }
 
@@ -163,8 +174,8 @@ public class ProfileActivity extends BarMenuActivity {
 
 
 
-
     }
+
 
 }
 
