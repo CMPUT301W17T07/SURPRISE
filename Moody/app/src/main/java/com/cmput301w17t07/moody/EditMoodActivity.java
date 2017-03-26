@@ -112,10 +112,10 @@ public class EditMoodActivity extends BarMenuActivity {
                         addresses.get(0).getLocality() + ", " +
                         addresses.get(0).getAdminArea() + ", " +
                         addresses.get(0).getCountryCode();
-            location.setText(address);
-
-            System.out.println(addresses.get(0));}
-        catch(Exception e){}
+            location.setText(address);}
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
 
         displayAttributes();
@@ -162,10 +162,10 @@ public class EditMoodActivity extends BarMenuActivity {
                                 addresses.get(0).getLocality() + ", " +
                                 addresses.get(0).getAdminArea() + ", " +
                                 addresses.get(0).getCountryCode();
-                    locationText.setText(address);
-
-                    System.out.println(addresses.get(0));}
-                catch(Exception e){}
+                    locationText.setText(address);}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 

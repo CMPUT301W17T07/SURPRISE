@@ -120,7 +120,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                                        int position, long id) {
                 SocialSituation = parent.getItemAtPosition(position).toString();
                 TextView sizeView = (TextView) findViewById(R.id.SocialText);
-                sizeView.setText("  "+SocialSituation);
+                sizeView.setText("  " + SocialSituation);
             }
 
             @Override
@@ -209,10 +209,10 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                             addresses.get(0).getLocality() + ", " +
                             addresses.get(0).getAdminArea() + ", " +
                             addresses.get(0).getCountryCode();
-                    locationText.setText(address);
-
-                    System.out.println(addresses.get(0));}
-                catch(Exception e){}
+                    locationText.setText(address);}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
 
             }
         });

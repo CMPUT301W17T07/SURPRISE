@@ -79,7 +79,9 @@ public class ViewMoodActivity extends BarMenuActivity {
                         addresses.get(0).getAdminArea() + ", " +
                         addresses.get(0).getCountryCode();
             location.setText(address);}
-        catch(Exception e){}
+        catch(Exception e){
+            e.printStackTrace();
+        }
 //
 
         // get username right
