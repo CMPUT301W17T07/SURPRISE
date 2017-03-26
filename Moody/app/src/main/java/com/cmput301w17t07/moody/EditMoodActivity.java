@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -40,8 +42,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
@@ -60,6 +62,7 @@ public class EditMoodActivity extends BarMenuActivity {
     private double lat;
     private double lon;
     private String provider;
+    private String address;
     Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
 
 //    private Date dateValue;
@@ -84,9 +87,9 @@ public class EditMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
-        String showLocation = intent.getExtras().getString("editLocation");
+        
         TextView location = (TextView) findViewById(R.id.locationText);
-        location.setText(showLocation);
+
         Bundle bundle = getIntent().getExtras();
         lat= bundle.getDouble("sendLat2");
         lon = bundle.getDouble("sendLon2");
@@ -99,7 +102,20 @@ public class EditMoodActivity extends BarMenuActivity {
         if(lat == 0 && lon == 0){
             location1 = null;
         }
+        Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+        try{
+            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
 
+            if (addresses.size() > 0)
+                address = "  " + addresses.get(0).getFeatureName() + " " +
+                        addresses.get(0).getThoroughfare() + ", " +
+                        addresses.get(0).getLocality() + ", " +
+                        addresses.get(0).getAdminArea() + ", " +
+                        addresses.get(0).getCountryCode();
+            location.setText(address);
+
+            System.out.println(addresses.get(0));}
+        catch(Exception e){}
 
 
         displayAttributes();
@@ -136,10 +152,20 @@ public class EditMoodActivity extends BarMenuActivity {
                     lat = location1.getLatitude();
                     lon = location1.getLongitude();
                 }
-                //System.out.println("this is loc "+location.getLongitude());
-                DecimalFormat decimalFormat = new DecimalFormat(".##");
-                locationText.setText("Latitude: " + decimalFormat.format(lat)
-                        + ",Longitude: " + decimalFormat.format(lon));
+                Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+                try{
+                    List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+
+                    if (addresses.size() > 0)
+                        address = "  " + addresses.get(0).getFeatureName() + " " +
+                                addresses.get(0).getThoroughfare() + ", " +
+                                addresses.get(0).getLocality() + ", " +
+                                addresses.get(0).getAdminArea() + ", " +
+                                addresses.get(0).getCountryCode();
+                    locationText.setText(address);
+
+                    System.out.println(addresses.get(0));}
+                catch(Exception e){}
             }
         });
 
