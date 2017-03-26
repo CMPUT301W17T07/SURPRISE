@@ -109,7 +109,7 @@ public class FilterActivity extends BarMenuActivity {
 
         // -------------------------Filter by Date------------------------------------------------
         Button dateFilterButton = (Button) findViewById(R.id.filterDateResults);
-        dateFilterButton.setEnabled(false);
+//        dateFilterButton.setEnabled(false);
 
 
         Spinner dropdownDate = (Spinner) findViewById(R.id.filterDate);
@@ -128,6 +128,19 @@ public class FilterActivity extends BarMenuActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(FilterActivity.this, "Please pick a date!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // on click of filter date results button
+        dateFilterButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedFilter = 1;
+                Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
+                //todo see if we need to pass this in or not (i.e. if we allow for other filter options aside from last week)
+//                filterResults.putExtra("dateFilter", dateText);
+                filterResults.putExtra("selectedFilter", selectedFilter);
+                startActivity(filterResults);
+                finish();
             }
         });
 
