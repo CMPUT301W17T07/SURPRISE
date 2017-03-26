@@ -29,14 +29,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import org.osmdroid.api.IMapController;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.Polyline;
-import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
+//import org.osmdroid.api.IMapController;
+//import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+//import org.osmdroid.util.GeoPoint;
+//import org.osmdroid.views.MapView;
+//import org.osmdroid.views.overlay.Overlay;
+//import org.osmdroid.views.overlay.OverlayItem;
+//import org.osmdroid.views.overlay.Polyline;
+//import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,54 +63,54 @@ import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
 
 public class MapViewActivity extends BarMenuActivity {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Cmput 301 lab 8 based on open resources.
-        // based on https://github.com/MKergall/osmbonuspack/wiki/Tutorial_0
-        // October 25th, 2016
-        // updated with http://stackoverflow.com/questions/38539637/osmbonuspack-roadmanager-networkonmainthreadexception
-        // October 25th, 2016
-        // answered by: yubaraj poudel
-        setContentView(R.layout.activity_map_view);
-        map = (MapView) findViewById(R.id.map);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
-        map.setMultiTouchControls(true);
-
-
-
-        Criteria criteria = new Criteria();
-        /*String bestProvider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(bestProvider);
-        locationManager.requestLocationUpdates(bestProvider, 0, 0, new TestLocationListener());*/
-        startPoint = new GeoPoint(48.13, -1.63);
-        destinationPoint = new GeoPoint(48.4, -1.9);
-
-        IMapController mapController = map.getController();
-        mapController.setZoom(9);
-        mapController.setCenter(startPoint);
-
-        // to get a key http://developer.mapquest.com/
-        //roadManager = new MapQuestRoadManager("--");
-        //roadManager = new OSRMRoadManager(myActivity);
-
-        ArrayList<OverlayItem> overlayItemArray;
-        overlayItemArray = new ArrayList<>();
-
-        overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
-        overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", destinationPoint));
-        //getRoadAsync();
-    }
-
-    // Global variables for testing
-    // TODO refactor
-    //RoadManager roadManager;
-    MapView map;
-    Activity myActivity = this;
-    //Road[] mRoads;
-    GeoPoint startPoint;
-    GeoPoint destinationPoint;
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        // Cmput 301 lab 8 based on open resources.
+//        // based on https://github.com/MKergall/osmbonuspack/wiki/Tutorial_0
+//        // October 25th, 2016
+//        // updated with http://stackoverflow.com/questions/38539637/osmbonuspack-roadmanager-networkonmainthreadexception
+//        // October 25th, 2016
+//        // answered by: yubaraj poudel
+//        setContentView(R.layout.activity_map_view);
+//        map = (MapView) findViewById(R.id.map);
+//        map.setTileSource(TileSourceFactory.MAPNIK);
+//        map.setBuiltInZoomControls(true);
+//        map.setMultiTouchControls(true);
+//
+//
+//
+//        Criteria criteria = new Criteria();
+//        /*String bestProvider = locationManager.getBestProvider(criteria, true);
+//        Location location = locationManager.getLastKnownLocation(bestProvider);
+//        locationManager.requestLocationUpdates(bestProvider, 0, 0, new TestLocationListener());*/
+//        startPoint = new GeoPoint(48.13, -1.63);
+//        destinationPoint = new GeoPoint(48.4, -1.9);
+//
+//        IMapController mapController = map.getController();
+//        mapController.setZoom(9);
+//        mapController.setCenter(startPoint);
+//
+//        // to get a key http://developer.mapquest.com/
+//        //roadManager = new MapQuestRoadManager("--");
+//        //roadManager = new OSRMRoadManager(myActivity);
+//
+//        ArrayList<OverlayItem> overlayItemArray;
+//        overlayItemArray = new ArrayList<>();
+//
+//        overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
+//        overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", destinationPoint));
+//        //getRoadAsync();
+//    }
+//
+//    // Global variables for testing
+//    // TODO refactor
+//    //RoadManager roadManager;
+//    MapView map;
+//    Activity myActivity = this;
+//    //Road[] mRoads;
+//    GeoPoint startPoint;
+//    GeoPoint destinationPoint;
 
     /*public void getRoadAsync() {
         mRoads = null;

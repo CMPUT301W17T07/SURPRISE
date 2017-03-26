@@ -119,7 +119,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@color/blueTheme"
-        app:srcCompat="@android:drawable/checkbox_on_background"
+        app:srcCompat="@drawable/ic_trophy"
         android:layout_above="@+id/Followers"
         android:layout_alignRight="@+id/Followers"
         android:layout_alignEnd="@+id/Followers" />
