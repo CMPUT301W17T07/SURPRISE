@@ -36,6 +36,8 @@ public class ViewMoodActivity extends BarMenuActivity {
     public Integer id;
     private MoodImage moodImage;
     private Bitmap bitmapImage;
+    private Intent intent;
+    private String trigger;
 
     private String viewMoodID;
 
@@ -47,11 +49,13 @@ public class ViewMoodActivity extends BarMenuActivity {
         setContentView(R.layout.activity_view_mood);
         setUpMenuBar(this);
         // get the mood object that was selected
-        Intent intent = getIntent();
+        intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
         Bundle bundle = getIntent().getExtras();
         final String hasLocation = intent.getExtras().getString("hasLocation");
         final String showLocation = intent.getExtras().getString("location");
+        trigger = intent.getExtras().getString("trigger");
+        System.out.println("trigger = "+ trigger);
         final double lat= bundle.getDouble("sendLatitude");
         final double lon = bundle.getDouble("sendLonditude");
         TextView location = (TextView) findViewById(R.id.LocationTV);
@@ -178,9 +182,16 @@ public class ViewMoodActivity extends BarMenuActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ViewMoodActivity.this, ProfileActivity.class);
-        startActivity(intent);
-        this.finish();
+        if(trigger.equals("profile")) {
+            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else{
+            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
     }
 
     }

@@ -140,6 +140,8 @@ public class ProfileActivity extends BarMenuActivity {
                 lastItem = firstVisibleItem + visibleItemCount - 1 ;
             }
         });
+
+
         moodTimelineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -180,6 +182,8 @@ public class ProfileActivity extends BarMenuActivity {
                         String passLocation = "";
                         viewMoodIntent.putExtra("location",passLocation);}
                     viewMoodIntent.putExtra("haslocation",hasLocation);
+                    String trigger = "profile";
+                    viewMoodIntent.putExtra("trigger",trigger);
                     startActivity(viewMoodIntent);
                     finish();
                 }catch(Exception e){}
