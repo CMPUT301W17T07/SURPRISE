@@ -132,9 +132,11 @@ public class PendingRequestsAdapter extends BaseAdapter {
                    viewHolder.acceptRequestButton.setText("ACCEPTED");
                    //                viewHolder.acceptRequestButton.setWidth(100);
                    //                viewHolder.acceptRequestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
-                   //                viewHolder.acceptRequestButton.setEnabled(false);
+
+                   viewHolder.acceptRequestButton.setEnabled(false);
                    //                viewHolder.declineRequestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
-                   //                viewHolder.declineRequestButton.setEnabled(false);
+                   viewHolder.declineRequestButton.setEnabled(false);
+
 
                }
                else{

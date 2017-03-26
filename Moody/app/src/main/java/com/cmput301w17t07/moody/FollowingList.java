@@ -46,6 +46,9 @@ public class FollowingList {
         this.id = id;
     }
 
+    public ArrayList<String> getFollowingList() {
+        return followingList;
+    }
 
 
     public FollowingList(String username) {

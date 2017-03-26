@@ -280,6 +280,60 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
+    public static class GetRecentWeekUserMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+        @Override
+        protected ArrayList<Mood> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Mood> moods = new ArrayList<Mood>();
+
+            String query;
+            //search param 0 = username FOR NOW
+            if (search_parameters[0]==""){
+                query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
+            }else {
+                query = "{ \"query\" : " +
+                            "{ \"filtered\" : " +
+                                 "{ \"filter\" : " +
+                                    "{ \"term\" : " +
+                                        "{\"username\": \"" + search_parameters[0] + "\"}}}}," +
+                                    " \"sort\" : " +
+                                        "{ \"date\" : " +
+                                            "{ \"order\" :" +
+                                                " \"desc\"}}," +
+                                        " \"filter\" :" +
+                                            " {\"range\" :" +
+                                                " { \"date\" :" +
+                                                    " { \"gte\" : \"now-1w\" }}}}";
+
+                System.out.println("this is recent week query" + query);
+            }
+
+            // TODO Build the query
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w17t07")
+                    .addType("mood").build();
+
+            try {
+                // TODO get the results of the query
+
+
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
+                    moods.addAll(foundMoods);
+                }
+                else {
+                    Log.i("Error", "The search query failed to find any tweets that matched, buddy");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return moods;
+        }
+    }
+
     /**
      * The GetUserMoods nested class object. Used to return a user's moodHistory on his or her
      * profile page.
@@ -299,8 +353,9 @@ public class ElasticMoodController extends ElasticController {
 
             String query;
             //search param 0 = username FOR NOW
+//            System.out.println("this is fff "+search_parameters[2]);
             if (search_parameters[0]==""){
-                query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
+                query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will   want
             }else {
                 query = "{\n" +
                         "    \"from\":\"" + search_parameters[1] + "\",\"size\":6, \n"+
@@ -310,7 +365,7 @@ public class ElasticMoodController extends ElasticController {
                         "     \"sort\" : {\n" +
                         "      \"date\"  : {\"order\" : \"desc\" }}\n" +
                         "    }";
-                System.out.println("this is query" + query);
+                System.out.println("this is query "+query);
             }
 
             // TODO Build the query
