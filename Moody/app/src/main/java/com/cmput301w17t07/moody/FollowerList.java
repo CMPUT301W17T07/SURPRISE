@@ -70,6 +70,7 @@ public class FollowerList {
 //    }
 
     public void addFollower(String username){
+        //todo implement if else check again
         this.deletePending(username);
         followerList.add(username);
 //        if(pendingFollowers.contains(username)) {

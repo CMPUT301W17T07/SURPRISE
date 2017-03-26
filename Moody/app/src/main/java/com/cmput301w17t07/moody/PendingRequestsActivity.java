@@ -39,7 +39,7 @@ public class PendingRequestsActivity extends BarMenuActivity {
         setContentView(R.layout.activity_pending_requests);
         setUpMenuBar(this);
         TextView PendingRequestsText = (TextView) findViewById(R.id.PendingRequestsText);
-        PendingRequestsText.setText("PendingRequests\n0");
+        PendingRequestsText.setText("Pending Requests");
 
 
 

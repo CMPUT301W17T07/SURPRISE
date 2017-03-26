@@ -55,18 +55,22 @@ public class ProfileActivity extends BarMenuActivity {
         setUpMenuBar(this);
 
         UserController userController = new UserController();
-//        username = userController.getUsername();
         username = userController.readUsername(ProfileActivity.this).toString();
+
+        FollowController followController = new FollowController();
 
 
         TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
         TextView Following = (TextView) findViewById(R.id.Following);
-        Following.setText("Following\n0");
+        Following.setText("Following\n"+followController.getNumberOfFollowing(username));
         TextView Followers = (TextView) findViewById(R.id.Followers);
-        Followers.setText("Followers\n0");
+        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username));
+
+        //------------------------------ PENDING REQUEST STUFF -------------------------------------
         Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
-        PendingRequests.setText("PENDING REQUESTS(0)");
+        PendingRequests.setText("PENDING REQUESTS ("+
+                followController.getNumberOfRequests(username) +")");
         PendingRequests.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();

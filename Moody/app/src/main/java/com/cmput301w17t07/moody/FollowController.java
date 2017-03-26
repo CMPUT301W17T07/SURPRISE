@@ -93,18 +93,21 @@ public class FollowController {
 
             //-------------------- UPDATING FOLLOWER LIST FOR ACCEPTING USER ----------------------
             // Get the FollowerList of the userAcceptingRequest the request from the server
-            FollowerList followerList = null;
+//            FollowerList followerList = null;
+//
+//            ElasticSearchFollowController.GetFollowerList getFollowerList =
+//                    new ElasticSearchFollowController.GetFollowerList();
+//            getFollowerList.execute(userAcceptingRequest);
 
-            ElasticSearchFollowController.GetFollowerList getFollowerList =
-                    new ElasticSearchFollowController.GetFollowerList();
-            getFollowerList.execute(userAcceptingRequest);
+//            // trying to retrieve the follower list
+//            try {
+//                followerList = getFollowerList.get();;
+//            } catch (Exception E){
+//                Log.i("Error", "Was unable to retrieve follower list during acceptFollowRequest()");
+//            }
 
-            // trying to retrieve the follower list
-            try {
-                followerList = getFollowerList.get();;
-            } catch (Exception E){
-                Log.i("Error", "Was unable to retrieve follower list during acceptFollowRequest()");
-            }
+            FollowerList followerList = getFollowerList(userAcceptingRequest);
+
             // adding follower to the accepting user's follower list
 
             //todo try catch this block
@@ -125,18 +128,20 @@ public class FollowController {
 
             //--------------- UPDATING FOLLOWING LIST FOR USER WHO SENT REQUEST --------------------
 
-            FollowingList followingList = null;
+//            FollowingList followingList = null;
+//
+//            ElasticSearchFollowController.GetFollowingList getFollowingList =
+//                    new ElasticSearchFollowController.GetFollowingList();
+//            getFollowingList.execute(userThatSentRequest);
+//
+//            // trying to retrieve following list
+//            try {
+//                followingList = getFollowingList.get();
+//            } catch (Exception E){
+//                Log.i("Error", "Was unable to retrieve following list during acceptFollowRequest()");
+//            }
 
-            ElasticSearchFollowController.GetFollowingList getFollowingList =
-                    new ElasticSearchFollowController.GetFollowingList();
-            getFollowingList.execute(userThatSentRequest);
-
-            // trying to retrieve following list
-            try {
-                followingList = getFollowingList.get();
-            } catch (Exception E){
-                Log.i("Error", "Was unable to retrieve following list during acceptFollowRequest()");
-            }
+            FollowingList followingList = getFollowingList(userThatSentRequest);
 
             // todo try catch this block
             followingList.addFollowing(userAcceptingRequest);
@@ -165,6 +170,8 @@ public class FollowController {
 
     public static ArrayList<String> getPendingRequests(String username){
 
+        // todo need to check for internet here
+
         FollowerList followerList = null;
         ArrayList<String> userArrayList=new ArrayList<>();
 
@@ -187,11 +194,64 @@ public class FollowController {
         return userArrayList;
     }
 
-    private static boolean checkNetwork(){
-        //todo implement a checkNetwork method/class to be called here
-        return true;
+    public static int getNumberOfRequests(String username){
+
+        //todo need to check for internet here?
+        ArrayList<String> userArrayList= getPendingRequests(username);
+
+        return userArrayList.size();
     }
 
+
+    public static FollowerList getFollowerList(String username){
+        FollowerList followerList = null;
+
+        ElasticSearchFollowController.GetFollowerList getFollowerList =
+                new ElasticSearchFollowController.GetFollowerList();
+        getFollowerList.execute(username);
+
+        // trying to retrieve the follower list
+        try {
+            followerList = getFollowerList.get();;
+        } catch (Exception E){
+            Log.i("Error", "Was unable to retrieve follower list during getFollowerList()");
+        }
+
+        return followerList;
+    }
+
+    public static FollowingList getFollowingList(String username){
+
+        FollowingList followingList = null;
+
+        ElasticSearchFollowController.GetFollowingList getFollowingList =
+                new ElasticSearchFollowController.GetFollowingList();
+        getFollowingList.execute(username);
+
+        // trying to retrieve following list
+        try {
+            followingList = getFollowingList.get();
+        } catch (Exception E){
+            Log.i("Error", "Was unable to retrieve following list during getFollowingList()");
+        }
+
+        return followingList;
+    }
+
+    public static int getNumberOfFollowers(String username){
+        FollowerList followerList = getFollowerList(username);
+        return followerList.countFollowers();
+    }
+
+    public static int getNumberOfFollowing(String username){
+        FollowingList followingList = getFollowingList(username);
+        return followingList.countFollowing();
+    }
+
+    private static boolean checkNetwork(){
+        //todo implement a checkNetwork method/class to be called here should have context as parameter so it can toast messages
+        return true;
+    }
 
 
 }
