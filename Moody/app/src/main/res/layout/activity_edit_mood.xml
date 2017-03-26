@@ -60,9 +60,8 @@
         android:id="@+id/editImageView"
         android:layout_width="300dp"
         android:layout_height="250dp"
-        android:layout_below="@+id/editDate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp" />
+        android:layout_above="@+id/button5"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/editCamera"
@@ -126,32 +125,32 @@
 
     <TextView
         android:id="@+id/locationText"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
         android:text="Location"
-        android:layout_alignBottom="@+id/editSocialText"
-        android:layout_toLeftOf="@+id/editSocialSituation"
-        android:layout_toStartOf="@+id/editSocialSituation" />
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/editSocialText"
+        android:layout_alignRight="@+id/editSocialText"
+        android:layout_alignEnd="@+id/editSocialText" />
 
     <TextView
         android:id="@+id/editSocialText"
         android:layout_width="150dp"
         android:layout_height="35dp"
         android:text="Social Situation"
-        android:layout_below="@+id/editDescription"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+
+        android:layout_alignTop="@+id/editDate"
+        android:layout_toRightOf="@+id/editSocialSituation"
+        android:layout_toEndOf="@+id/editSocialSituation" />
 
     <EditText
         android:id="@+id/editDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="Date"
-        android:layout_below="@+id/editSocialText"
-        android:layout_alignLeft="@+id/locationText"
-        android:layout_alignStart="@+id/locationText"
-        android:layout_alignRight="@+id/locationText"
-        android:layout_alignEnd="@+id/locationText" />
+        android:layout_above="@+id/editImageView"
+        android:layout_toLeftOf="@+id/editSocialSituation"
+        android:layout_toStartOf="@+id/editSocialSituation" />
 
 
 </RelativeLayout>

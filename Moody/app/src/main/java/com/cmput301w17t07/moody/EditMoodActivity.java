@@ -70,6 +70,9 @@ public class EditMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
+        String editLocation = intent.getExtras().getString("editLocation");
+        TextView location = (TextView) findViewById(R.id.locationText);
+        location.setText(editLocation);
 
         displayAttributes();
 

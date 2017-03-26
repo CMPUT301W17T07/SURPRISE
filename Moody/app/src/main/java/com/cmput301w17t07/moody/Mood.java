@@ -16,21 +16,9 @@
 
 package com.cmput301w17t07.moody;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.location.Location;
-import android.media.Image;
-import android.provider.ContactsContract;
-import android.util.Base64;
 
 import java.io.Serializable;
-
-import java.io.ByteArrayOutputStream;
-
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.searchbox.annotations.JestId;
@@ -46,8 +34,8 @@ import io.searchbox.annotations.JestId;
 
 public class Mood implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
+    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7060210544600464481L;
     private String moodMessage;
     private Date date;
     private Location location;
@@ -131,12 +119,6 @@ public class Mood implements Serializable {
         return location;
     }
 
-    @Override
-    public String toString( ){
-        DecimalFormat decimalFormat=new DecimalFormat(".##");
-        return "Latitude: "+decimalFormat.format(location.getLatitude())
-                +",Longitude: "+decimalFormat.format(location.getLongitude());
-    }
 
     public void setLocation(Location location) {
         this.location = location;
@@ -201,4 +183,13 @@ public class Mood implements Serializable {
     public void setMoodImageID(String moodImageID) {
         this.moodImageID = moodImageID;
     }
+    // @Override
+    public String toString( ){
+        return "Name: " + username + "\n" + "feeling: " + feeling + "\n" + "Moodmessage: " + moodMessage + "\n" +
+                "date: " + date + "\n"  + "location: " + location + "\n" + "sociation: " + socialSituation;
+//        DecimalFormat decimalFormat=new DecimalFormat(".##");
+//        return "Latitude: "+decimalFormat.format(location.getLatitude())
+//                +",Longitude: "+decimalFormat.format(location.getLongitude());
+    }
+
 }

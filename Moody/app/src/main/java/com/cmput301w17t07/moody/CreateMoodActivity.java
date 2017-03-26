@@ -215,6 +215,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     Toast.makeText(CreateMoodActivity.this,
                             "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
+                    System.out.println("loca = " + location);
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
                 }}

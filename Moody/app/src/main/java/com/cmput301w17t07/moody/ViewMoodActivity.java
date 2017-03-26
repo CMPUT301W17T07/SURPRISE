@@ -49,9 +49,11 @@ public class ViewMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
+        final String showLocation = intent.getExtras().getString("location");
+        TextView location = (TextView) findViewById(R.id.LocationTV);
+        location.setText(showLocation);
         // Get the database id for the selected mood
         viewMoodID = viewMood.getId();
-        System.out.println("location = " + viewMood.getFeeling().toString());
 //
 
         // get username right
@@ -83,6 +85,7 @@ public class ViewMoodActivity extends BarMenuActivity {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
                     editMoodIntent.putExtra("editMood", viewMood);
+                    editMoodIntent.putExtra("editLocation",showLocation);
                     startActivity(editMoodIntent);
                 }
             });
@@ -110,8 +113,7 @@ public class ViewMoodActivity extends BarMenuActivity {
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate().toString());
 
-//        TextView location = (TextView) findViewById(R.id.LocationTV);
-//        location.setText(viewMood.getLocation().toString());
+
 
         //TextView location = (TextView) findViewById(R.id.locationTV);
         //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));

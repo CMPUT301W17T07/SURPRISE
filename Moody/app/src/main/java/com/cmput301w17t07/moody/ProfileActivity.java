@@ -17,6 +17,7 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -137,16 +139,34 @@ public class ProfileActivity extends BarMenuActivity {
                                     long id) {
                 // TODO Auto-generated method stub
                 try{
-                    Mood viewMood = moodArrayList.get(position);
-                    //System.out.println("location = " + position);//viewMood.getLocation().toString());
-                   // System.out.println("location = " + viewMood);
-//                System.out.println("this is er");
-//                System.out.println("this is er"+viewMood.getLocation().getLongitude());
-                   Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
-                    viewMoodIntent.putExtra("viewMood", viewMood);
+                     Mood viewMood = moodArrayList.get(position);
+                     Location location = null;
+                     Mood send = new Mood(viewMood.getFeeling(),
+                             viewMood.getUsername(),
+                             viewMood.getMoodMessage(),
+                             location,
+                             viewMood.getMoodImageID(),
+                             viewMood.getSocialSituation());
 
-                startActivity(viewMoodIntent);}
-                catch(Exception e){}
+
+
+                    System.out.println("location = " + viewMood.toString());
+                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                    viewMoodIntent.setAction("action");
+                    viewMoodIntent.putExtra("viewMood", send);
+                    if(viewMood.getLocation()!=null){
+                        DecimalFormat decimalFormat=new DecimalFormat(".##");
+                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
+                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
+                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
+                        System.out.println("passlocation = "+passLocation);
+                        viewMoodIntent.putExtra("location",passLocation);}
+                    else{
+                        String passLocation = "";
+                        viewMoodIntent.putExtra("location",passLocation);}
+
+                    startActivity(viewMoodIntent);
+                }catch(Exception e){}
 
 
             }
