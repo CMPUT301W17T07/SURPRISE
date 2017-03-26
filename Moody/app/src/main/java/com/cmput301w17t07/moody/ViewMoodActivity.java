@@ -49,11 +49,15 @@ public class ViewMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
+        Bundle bundle = getIntent().getExtras();
+        final String hasLocation = intent.getExtras().getString("hasLocation");
         final String showLocation = intent.getExtras().getString("location");
+        final double lat= bundle.getDouble("sendLatitude");
+        final double lon = bundle.getDouble("sendLonditude");
         TextView location = (TextView) findViewById(R.id.LocationTV);
         location.setText(showLocation);
         // Get the database id for the selected mood
-        viewMoodID = viewMood.getId();
+        viewMoodID =viewMood.getId();
 //
 
         // get username right
@@ -86,6 +90,8 @@ public class ViewMoodActivity extends BarMenuActivity {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
                     editMoodIntent.putExtra("editMood", viewMood);
                     editMoodIntent.putExtra("editLocation",showLocation);
+                    editMoodIntent.putExtra("sendLat2",lat);
+                    editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
                 }
             });
@@ -169,7 +175,12 @@ public class ViewMoodActivity extends BarMenuActivity {
                 break;
         }
 
-
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
-}
+    }

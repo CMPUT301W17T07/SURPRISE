@@ -78,6 +78,7 @@ public class ProfileActivity extends BarMenuActivity {
                 Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -147,6 +148,7 @@ public class ProfileActivity extends BarMenuActivity {
                 // TODO Auto-generated method stub
                 try{
                      Mood viewMood = moodArrayList.get(position);
+                     String ID = viewMood.getId();
                      Location location = null;
                      Mood send = new Mood(viewMood.getFeeling(),
                              viewMood.getUsername(),
@@ -154,25 +156,32 @@ public class ProfileActivity extends BarMenuActivity {
                              location,
                              viewMood.getMoodImageID(),
                              viewMood.getSocialSituation());
-
-
+                    send.setId(viewMood.getId());
+                    String hasLocation = "0";
 
                     System.out.println("location = " + viewMood.toString());
                     Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
                     viewMoodIntent.setAction("action");
                     viewMoodIntent.putExtra("viewMood", send);
+                   // viewMoodIntent.putExtra("ID",ID);
                     if(viewMood.getLocation()!=null){
                         DecimalFormat decimalFormat=new DecimalFormat(".##");
                         String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
                         String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
                         String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
                         System.out.println("passlocation = "+passLocation);
+                        Location sendLocation = viewMood.getLocation();
+                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
+                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
+                        System.out.println("lat = " + sendLocation);
+                        hasLocation = "1";
                         viewMoodIntent.putExtra("location",passLocation);}
                     else{
                         String passLocation = "";
                         viewMoodIntent.putExtra("location",passLocation);}
-
+                    viewMoodIntent.putExtra("haslocation",hasLocation);
                     startActivity(viewMoodIntent);
+                    finish();
                 }catch(Exception e){}
 
 

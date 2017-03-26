@@ -17,10 +17,15 @@
 package com.cmput301w17t07.moody;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +40,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
@@ -47,7 +54,14 @@ public class EditMoodActivity extends BarMenuActivity {
     private String SocialSituation;
     private EditText Description;
     private EditText date;
+    private TextView locationText;
     private ImageView image;
+    private LocationManager locationManager;
+    private double lat;
+    private double lon;
+    private String provider;
+    Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
+
 //    private Date dateValue;
 
 //    Bitmap bitmap = null;
@@ -70,14 +84,75 @@ public class EditMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
-        String editLocation = intent.getExtras().getString("editLocation");
+        String showLocation = intent.getExtras().getString("editLocation");
         TextView location = (TextView) findViewById(R.id.locationText);
-        location.setText(editLocation);
+        location.setText(showLocation);
+        Bundle bundle = getIntent().getExtras();
+        lat= bundle.getDouble("sendLat2");
+        lon = bundle.getDouble("sendLon2");
+        System.out.println("lat = "+lat);
+        System.out.println("lat = "+lon);
+        location1.setLatitude(lat);
+        location1.setLongitude(lon);
+        System.out.println("lat = "+location1);
+
+        if(lat == 0 && lon == 0){
+            location1 = null;
+        }
+
+
 
         displayAttributes();
+        ImageButton editLocation = (ImageButton) findViewById(R.id.location);
+        editLocation.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                locationText = (TextView) findViewById(R.id.locationText);
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                //check available tools
+                List<String> locationList = locationManager.getProviders(true);
+                if (locationList.contains(LocationManager.GPS_PROVIDER)) {
+                    provider = LocationManager.GPS_PROVIDER;
+                } else if (locationList.contains(LocationManager.NETWORK_PROVIDER)) {
+                    provider = LocationManager.NETWORK_PROVIDER;
+                } else {
+                    Toast.makeText(getApplicationContext(), "No map to use", Toast.LENGTH_LONG).show();
+                }
+
+                //check the permission
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    Toast.makeText(getApplicationContext(), "Get location felled, Please check the Permission", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                location1 = locationManager.getLastKnownLocation(provider);
+                if (location1 == null) {
+                    lat = 0;
+                    lon = 0;
+                } else {
+                    lat = location1.getLatitude();
+                    lon = location1.getLongitude();
+                }
+                //System.out.println("this is loc "+location.getLongitude());
+                DecimalFormat decimalFormat = new DecimalFormat(".##");
+                locationText.setText("Latitude: " + decimalFormat.format(lat)
+                        + ",Longitude: " + decimalFormat.format(lon));
+            }
+        });
+
+        ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
+        deleteLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                location1 = null;
+                locationText = (TextView) findViewById(R.id.locationText);
+                locationText.setText(null);
+            }
+        });
 
         ImageButton editCameraButton = (ImageButton) findViewById(R.id.editCamera);
-
         editCameraButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -113,7 +188,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 MoodController moodController = new MoodController();
                 Bitmap editBitmapImage = bitmapImage;
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        null, editBitmapImage, SocialSituation, null, editMood ) == false) {
+                        location1, editBitmapImage, SocialSituation, null, editMood ) == false) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {
