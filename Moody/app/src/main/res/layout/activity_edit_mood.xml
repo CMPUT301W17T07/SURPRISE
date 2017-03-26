@@ -17,10 +17,21 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffffff"
     android:weightSum="1">
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/editImageView"
+        android:layout_alignStart="@+id/editImageView"
+        android:layout_alignTop="@+id/editImageView"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_deletepic" />
 
     <Spinner
         android:id="@+id/editEmotion"
@@ -60,9 +71,8 @@
         android:id="@+id/editImageView"
         android:layout_width="300dp"
         android:layout_height="250dp"
-        android:layout_above="@+id/editCamera"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp" />
+        android:layout_above="@+id/button5"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/editCamera"
@@ -104,11 +114,11 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@drawable/ic_social"
-        android:layout_below="@+id/editImageView"
-        android:layout_toRightOf="@+id/location"
-        android:layout_toEndOf="@+id/location"
         android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp" />
+        android:layout_marginStart="17dp"
+        android:layout_alignTop="@+id/location"
+        android:layout_toRightOf="@+id/location"
+        android:layout_toEndOf="@+id/location" />
 
 
 
@@ -126,31 +136,42 @@
 
     <TextView
         android:id="@+id/locationText"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:textSize="40px"
+        android:layout_marginBottom="15dp"
         android:text="Location"
-        android:layout_below="@+id/editDescription"
-        android:layout_toRightOf="@+id/toolbar2"
-        android:layout_toEndOf="@+id/toolbar2" />
+        android:layout_above="@+id/editSocialText"
+        android:layout_alignLeft="@+id/imageButton2"
+        android:layout_alignStart="@+id/imageButton2" />
 
     <TextView
         android:id="@+id/editSocialText"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:text="Social Situation"
-        android:layout_below="@+id/editDescription"
-        android:layout_alignRight="@+id/editImageView"
-        android:layout_alignEnd="@+id/editImageView" />
+        android:layout_alignTop="@+id/editDate"
+        android:layout_toRightOf="@+id/editSocialSituation"
+        android:layout_toEndOf="@+id/editSocialSituation" />
 
     <EditText
         android:id="@+id/editDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="Date"
-        android:layout_below="@+id/locationText"
-        android:layout_alignLeft="@+id/editDescription"
-        android:layout_alignStart="@+id/editDescription"
-        android:layout_marginTop="9dp" />
+        android:layout_above="@+id/editImageView"
+        android:layout_toLeftOf="@+id/editSocialSituation"
+        android:layout_toStartOf="@+id/editSocialSituation" />
+
+    <ImageButton
+        android:id="@+id/deleteLocation"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_deletepic"
+        android:layout_alignTop="@+id/locationText"
+        android:layout_alignLeft="@+id/editDate"
+        android:layout_alignStart="@+id/editDate" />
 
 
 </RelativeLayout>

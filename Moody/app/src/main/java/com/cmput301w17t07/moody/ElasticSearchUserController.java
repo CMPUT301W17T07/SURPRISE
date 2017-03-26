@@ -27,6 +27,7 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import io.searchbox.core.Update;
 
 /**
  * Created by mike on 2017-02-23.
@@ -111,7 +112,7 @@ public class ElasticSearchUserController extends ElasticController{
                     List<User> foundUsers=result.getSourceAsObjectList(User.class);
                     users.addAll(foundUsers);
                 }else {
-                    Log.i("erroe","the search quary failed to find any tweet that matched");
+                    Log.i("error","the search query failed to find any tweets that matched");
                 }
             }
             catch (Exception e) {
@@ -192,6 +193,9 @@ public class ElasticSearchUserController extends ElasticController{
         }
 
     }
+
+
+
 
 
 }

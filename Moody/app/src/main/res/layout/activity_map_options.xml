@@ -21,10 +21,6 @@
     android:id="@+id/activity_map_options"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cmput301w17t07.moody.MapOptionsActivity">
 
 
@@ -33,7 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blueTheme"
-        tools:context="com.cmput301w17t07.moody.FilterActivity">
+        tools:context="com.cmput301w17t07.moody.FilterActivity"
+        android:layout_alignTop="@+id/spinner2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -68,10 +67,10 @@
             android:id="@+id/filterFeeling"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/filterDate"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/filterUser"
-            android:layout_marginTop="31dp" />
+            android:layout_marginBottom="55dp" />
 
         <Button
             android:id="@+id/filterFeelingResults"
@@ -88,10 +87,9 @@
             android:id="@+id/filterDate"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/filterFeeling"
-            android:layout_marginTop="27dp" />
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/filterDateResults"
@@ -121,12 +119,12 @@
             android:id="@+id/myMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/filterDateResults"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="133dp"
             android:background="@color/yellowTheme"
             android:text="Map Results"
-            android:textColor="@color/redTheme" />
+            android:textColor="@color/redTheme"
+            android:layout_marginBottom="31dp"
+            android:layout_above="@+id/bottomNavigationView"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
@@ -182,10 +180,10 @@
         android:id="@+id/spinner3"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/filterFeeling"
-        android:layout_marginTop="27dp" />
+        android:layout_above="@+id/editText"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_toStartOf="@+id/button2"
+        android:layout_below="@+id/spinner2" />
 
     <Button
         android:id="@+id/button3"
@@ -203,12 +201,12 @@
         android:id="@+id/editText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
+        android:hint="(filter mood messages by specific word)"
+        android:textSize="14sp"
+        android:layout_below="@+id/spinner2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/filterDate"
-        android:layout_marginTop="25dp"
-        android:hint="(filter mood messages by specific word)"
-        android:textSize="14sp" />
+        android:layout_marginTop="60dp" />
 
     <Button
         android:id="@+id/button4"

@@ -16,6 +16,7 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_timeline"
     android:layout_width="match_parent"
@@ -32,10 +33,11 @@
     <ListView
         android:id="@+id/test_list"
         android:layout_width="wrap_content"
-        android:layout_height="510dp"
+        android:layout_height="390dp"
+        android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:background="@color/white" />
 
 
     <android.support.design.widget.BottomNavigationView
@@ -49,6 +51,78 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
+
+    <TextView
+        android:id="@+id/Followers"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:background="@color/yellowTheme"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignBottom="@+id/Following"
+        android:layout_alignRight="@+id/bottom_navigation"
+        android:layout_alignEnd="@+id/bottom_navigation"
+        android:layout_alignTop="@+id/Following" />
+
+    <TextView
+        android:id="@+id/Following"
+        android:gravity="center"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="14dp"
+        android:text="TextView"
+        android:background="@color/yellowTheme"
+        android:layout_marginRight="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_above="@+id/test_list"
+        android:layout_toLeftOf="@+id/Followers"
+        android:layout_toStartOf="@+id/Followers" />
+
+    <TextView
+        android:id="@+id/UserNameText"
+        android:gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:text="TextView"
+        android:background="@color/yellowTheme"
+        android:layout_alignBottom="@+id/Following"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/happy"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_above="@+id/Following"
+        android:layout_alignLeft="@+id/UserNameText"
+        android:layout_alignStart="@+id/UserNameText" />
+
+    <Button
+        android:id="@+id/PendingRequests"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:background="@color/yellowTheme"
+        android:text="Pending request"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toRightOf="@+id/UserNameText"
+        android:layout_toEndOf="@+id/UserNameText" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/blueTheme"
+        app:srcCompat="@android:drawable/checkbox_on_background"
+        android:layout_above="@+id/Followers"
+        android:layout_alignRight="@+id/Followers"
+        android:layout_alignEnd="@+id/Followers" />
 
 
 </RelativeLayout>

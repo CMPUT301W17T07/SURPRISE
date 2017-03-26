@@ -28,8 +28,9 @@
         android:layout_height="35dp"
         android:spinnerMode="@null"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/Description"
@@ -40,8 +41,10 @@
         android:hint="Description"
         android:inputType="textPersonName"
         android:layout_below="@+id/Emotion"
-        android:layout_alignLeft="@+id/Emotion"
-        android:layout_alignStart="@+id/Emotion" />
+        android:layout_alignRight="@+id/editImageView"
+        android:layout_alignEnd="@+id/editImageView"
+        android:layout_toEndOf="@+id/toolbar2"
+        android:layout_toRightOf="@+id/toolbar2" />
 
     <Button
         android:id="@+id/button5"
@@ -128,23 +131,36 @@
 
     <TextView
         android:id="@+id/locationText"
-        android:layout_width="100dp"
+        android:layout_width="350dp"
         android:layout_height="30dp"
-        android:layout_marginTop="14dp"
-        android:text="Location"
+        android:layout_alignLeft="@+id/Description"
+        android:layout_alignStart="@+id/Description"
         android:layout_below="@+id/Description"
-        android:layout_toRightOf="@+id/toolbar2"
-        android:layout_toEndOf="@+id/toolbar2" />
+        android:layout_marginTop="15dp"
+        android:text="   Location"
+        android:textSize="13dp"
+        android:layout_alignRight="@+id/Description"
+        android:layout_alignEnd="@+id/Description" />
 
     <TextView
         android:id="@+id/SocialText"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:text="Social Situation"
-        android:layout_alignBaseline="@+id/locationText"
-        android:layout_alignBottom="@+id/locationText"
-        android:layout_alignRight="@+id/editImageView"
-        android:layout_alignEnd="@+id/editImageView" />
+
+        android:layout_below="@+id/locationText"
+        android:layout_alignLeft="@+id/locationText"
+        android:layout_alignStart="@+id/locationText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="I'm Feeling: "
+        android:textSize="20dp"
+        android:layout_above="@+id/Description"
+        android:layout_toLeftOf="@+id/SocialSituation"
+        android:layout_toStartOf="@+id/SocialSituation" />
 
 
 </RelativeLayout>

@@ -85,6 +85,20 @@ public class FilterResultsActivity extends BarMenuActivity {
             }
 
         }
+        if(selectedFilter == 1){
+            ElasticMoodController.GetRecentWeekUserMoods getRecentWeekUserMoods =
+                    new ElasticMoodController.GetRecentWeekUserMoods();
+            //todo will have to change this elastic controller if we want other types of date filters
+            getRecentWeekUserMoods.execute(username);
+
+            try {
+                moodArrayList= getRecentWeekUserMoods.get();
+//               System.out.println("this is moodlist"+moodArrayList);
+
+            }catch (Exception e){
+                Log.i("error","failed to get the recent week moods out of the async matched");
+            }
+        }
         if(selectedFilter == 2){
             filterMessage = intent.getStringExtra("messageFilter");
             ElasticMoodController.GetMessageFilterMoods getMessageFilterMoods =

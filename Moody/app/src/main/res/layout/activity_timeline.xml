@@ -20,8 +20,9 @@
     android:id="@+id/activity_timeline"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blueTheme"
+    android:background="#efffff"
     tools:context="com.cmput301w17t07.moody.TimelineActivity">
+
     <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
     <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
     <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
@@ -30,12 +31,12 @@
     <!--tools:context="com.cmput301w17t07.moody.TimelineActivity">-->
 
     <ListView
-        android:layout_width="wrap_content"
         android:id="@+id/list_view"
-        android:layout_height="440dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="510dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 
     <android.support.design.widget.BottomNavigationView
@@ -50,18 +51,18 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignEnd="@+id/bottom_navigation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/bottom_navigation"
-        android:layout_below="@+id/list_view"
-        android:layout_marginTop="12dp"
-        android:text="Main Timeline Activity Coming Soon In Project Part 5 ..."
-        android:textSize="50px"/>
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignEnd="@+id/bottom_navigation"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignRight="@+id/bottom_navigation"-->
+        <!--android:layout_below="@+id/list_view"-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:text="Main Timeline Activity Coming Soon In Project Part 5 ..."-->
+        <!--android:textSize="50px"/>-->
 
 
 </RelativeLayout>
