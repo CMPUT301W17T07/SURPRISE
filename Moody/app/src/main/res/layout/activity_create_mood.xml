@@ -145,6 +145,8 @@
         android:text="Social Situation"
 
         android:layout_below="@+id/locationText"
+        android:layout_alignRight="@+id/SocialSituation"
+        android:layout_alignEnd="@+id/SocialSituation"
         android:layout_alignLeft="@+id/locationText"
         android:layout_alignStart="@+id/locationText" />
 

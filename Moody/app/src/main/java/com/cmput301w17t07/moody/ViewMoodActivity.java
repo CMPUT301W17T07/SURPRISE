@@ -73,14 +73,12 @@ public class ViewMoodActivity extends BarMenuActivity {
             List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
 
             if (addresses.size() > 0)
-                address = " " + addresses.get(0).getFeatureName() + " " +
+                address = addresses.get(0).getFeatureName() + " " +
                         addresses.get(0).getThoroughfare() + ", " +
                         addresses.get(0).getLocality() + ", " +
                         addresses.get(0).getAdminArea() + ", " +
                         addresses.get(0).getCountryCode();
-            location.setText(address);
-
-            System.out.println(addresses.get(0));}
+            location.setText(address);}
         catch(Exception e){}
 //
 
