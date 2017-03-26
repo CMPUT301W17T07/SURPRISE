@@ -18,12 +18,17 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
@@ -38,6 +43,7 @@ public class ViewMoodActivity extends BarMenuActivity {
     private Bitmap bitmapImage;
     private Intent intent;
     private String trigger;
+    private String address;
 
     private String viewMoodID;
 
@@ -59,9 +65,23 @@ public class ViewMoodActivity extends BarMenuActivity {
         final double lat= bundle.getDouble("sendLatitude");
         final double lon = bundle.getDouble("sendLonditude");
         TextView location = (TextView) findViewById(R.id.LocationTV);
-        location.setText(showLocation);
+        //location.setText(showLocation);
         // Get the database id for the selected mood
         viewMoodID =viewMood.getId();
+        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
+        try{
+            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+
+            if (addresses.size() > 0)
+                address = " " + addresses.get(0).getFeatureName() + " " +
+                        addresses.get(0).getThoroughfare() + ", " +
+                        addresses.get(0).getLocality() + ", " +
+                        addresses.get(0).getAdminArea() + ", " +
+                        addresses.get(0).getCountryCode();
+            location.setText(address);
+
+            System.out.println(addresses.get(0));}
+        catch(Exception e){}
 //
 
         // get username right
