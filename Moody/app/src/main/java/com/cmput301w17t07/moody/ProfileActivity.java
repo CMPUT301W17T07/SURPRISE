@@ -17,6 +17,7 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -149,24 +151,52 @@ public class ProfileActivity extends BarMenuActivity {
                 lastItem = firstVisibleItem + visibleItemCount - 1 ;
             }
         });
+
+
         moodTimelineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 try{
-                    Mood viewMood = moodArrayList.get(position);
-                    //System.out.println("location = " + position);//viewMood.getLocation().toString());
-                   // System.out.println("location = " + viewMood);
-                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
-                    viewMoodIntent.putExtra("viewMood", viewMood);
-                    startActivity(viewMoodIntent);
-                    //todo this renders the back button kind of useless....
-                    finish();
-                }
-                catch(Exception e){
-                }
+                     Mood viewMood = moodArrayList.get(position);
+                     String ID = viewMood.getId();
+                     Location location = null;
+                     Mood send = new Mood(viewMood.getFeeling(),
+                             viewMood.getUsername(),
+                             viewMood.getMoodMessage(),
+                             location,
+                             viewMood.getMoodImageID(),
+                             viewMood.getSocialSituation());
+                    send.setId(viewMood.getId());
+                    String hasLocation = "0";
 
+                    System.out.println("location = " + viewMood.toString());
+                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                    viewMoodIntent.setAction("action");
+                    viewMoodIntent.putExtra("viewMood", send);
+                   // viewMoodIntent.putExtra("ID",ID);
+                    if(viewMood.getLocation()!=null){
+                        DecimalFormat decimalFormat=new DecimalFormat(".##");
+                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
+                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
+                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
+                        System.out.println("passlocation = "+passLocation);
+                        Location sendLocation = viewMood.getLocation();
+                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
+                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
+                        System.out.println("lat = " + sendLocation);
+                        hasLocation = "1";
+                        viewMoodIntent.putExtra("location",passLocation);}
+                    else{
+                        String passLocation = "";
+                        viewMoodIntent.putExtra("location",passLocation);}
+                    viewMoodIntent.putExtra("haslocation",hasLocation);
+                    String trigger = "profile";
+                    viewMoodIntent.putExtra("trigger",trigger);
+                    startActivity(viewMoodIntent);
+                    finish();
+                }catch(Exception e){}
             }
 
 

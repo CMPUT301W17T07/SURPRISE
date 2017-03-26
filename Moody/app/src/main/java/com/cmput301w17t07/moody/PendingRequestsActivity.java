@@ -18,7 +18,6 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -68,5 +67,11 @@ public class PendingRequestsActivity extends BarMenuActivity {
         requestList.setAdapter(pendingRequestsAdapter);
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PendingRequestsActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

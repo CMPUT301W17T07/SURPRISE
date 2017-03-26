@@ -36,6 +36,8 @@ public class ViewMoodActivity extends BarMenuActivity {
     public Integer id;
     private MoodImage moodImage;
     private Bitmap bitmapImage;
+    private Intent intent;
+    private String trigger;
 
     private String viewMoodID;
 
@@ -47,11 +49,19 @@ public class ViewMoodActivity extends BarMenuActivity {
         setContentView(R.layout.activity_view_mood);
         setUpMenuBar(this);
         // get the mood object that was selected
-        Intent intent = getIntent();
+        intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
+        Bundle bundle = getIntent().getExtras();
+        final String hasLocation = intent.getExtras().getString("hasLocation");
+        final String showLocation = intent.getExtras().getString("location");
+        trigger = intent.getExtras().getString("trigger");
+        System.out.println("trigger = "+ trigger);
+        final double lat= bundle.getDouble("sendLatitude");
+        final double lon = bundle.getDouble("sendLonditude");
+        TextView location = (TextView) findViewById(R.id.LocationTV);
+        location.setText(showLocation);
         // Get the database id for the selected mood
-        viewMoodID = viewMood.getId();
-        System.out.println("location = " + viewMood.getFeeling().toString());
+        viewMoodID =viewMood.getId();
 //
 
         // get username right
@@ -83,6 +93,9 @@ public class ViewMoodActivity extends BarMenuActivity {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
                     editMoodIntent.putExtra("editMood", viewMood);
+                    editMoodIntent.putExtra("editLocation",showLocation);
+                    editMoodIntent.putExtra("sendLat2",lat);
+                    editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
                 }
             });
@@ -110,8 +123,7 @@ public class ViewMoodActivity extends BarMenuActivity {
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate().toString());
 
-//        TextView location = (TextView) findViewById(R.id.LocationTV);
-//        location.setText(viewMood.getLocation().toString());
+
 
         //TextView location = (TextView) findViewById(R.id.locationTV);
         //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));
@@ -167,7 +179,19 @@ public class ViewMoodActivity extends BarMenuActivity {
                 break;
         }
 
-
+    }
+    @Override
+    public void onBackPressed() {
+        if(trigger.equals("profile")) {
+            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else{
+            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
     }
 
-}
+    }

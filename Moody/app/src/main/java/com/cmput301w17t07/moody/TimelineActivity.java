@@ -21,25 +21,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActivityChooserView;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
-import java.sql.Time;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -195,6 +188,72 @@ public class TimelineActivity extends BarMenuActivity {
         }catch (Exception e){
             System.out.println("this is fff"+e);
         }
+
+
+
+
+        oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                // TODO Auto-generated method stub
+                try{
+                    Mood viewMood = moodArrayList.get(position);
+                    String ID = viewMood.getId();
+                    Location location = null;
+                    Mood send = new Mood(viewMood.getFeeling(),
+                            viewMood.getUsername(),
+                            viewMood.getMoodMessage(),
+                            location,
+                            viewMood.getMoodImageID(),
+                            viewMood.getSocialSituation());
+                    send.setId(viewMood.getId());
+                    String hasLocation = "0";
+
+                    System.out.println("location = " + viewMood.toString());
+                    Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
+                    viewMoodIntent.setAction("action");
+                    viewMoodIntent.putExtra("viewMood", send);
+                    // viewMoodIntent.putExtra("ID",ID);
+                    if(viewMood.getLocation()!=null){
+                        DecimalFormat decimalFormat=new DecimalFormat(".##");
+                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
+                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
+                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
+                        System.out.println("passlocation = "+passLocation);
+                        Location sendLocation = viewMood.getLocation();
+                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
+                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
+                        System.out.println("lat = " + sendLocation);
+                        hasLocation = "1";
+                        viewMoodIntent.putExtra("location",passLocation);}
+                    else{
+                        String passLocation = "";
+                        viewMoodIntent.putExtra("location",passLocation);}
+                    viewMoodIntent.putExtra("haslocation",hasLocation);
+                    String trigger = "Timeline";
+                    viewMoodIntent.putExtra("trigger",trigger);
+                    startActivity(viewMoodIntent);
+                    finish();
+                }catch(Exception e){}
+            }
+        });
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
 
 }
