@@ -299,6 +299,7 @@ public class ElasticMoodController extends ElasticController {
 
             String query;
             //search param 0 = username FOR NOW
+//            System.out.println("this is fff "+search_parameters[2]);
             if (search_parameters[0]==""){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
@@ -310,7 +311,7 @@ public class ElasticMoodController extends ElasticController {
                         "     \"sort\" : {\n" +
                         "      \"date\"  : {\"order\" : \"desc\" }}\n" +
                         "    }";
-                System.out.println("this is query" + query);
+                System.out.println("this is query "+query);
             }
 
             // TODO Build the query
