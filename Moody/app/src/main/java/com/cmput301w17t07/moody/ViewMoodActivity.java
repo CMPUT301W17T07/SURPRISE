@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,7 +94,7 @@ public class ViewMoodActivity extends BarMenuActivity {
 
             displayAttributes();
 
-            Button deleteButton = (Button) findViewById(R.id.deleteButton);
+            ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
@@ -101,6 +102,8 @@ public class ViewMoodActivity extends BarMenuActivity {
                     //todo implement this functionality through the mood controller, so that offline
                     // deletion can be handled
                     ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+                    Intent intent = new Intent(ViewMoodActivity.this,ProfileActivity.class);
+                    startActivity(intent);
                     deleteMood.execute(viewMoodID);
                     finish();
                 }
@@ -108,7 +111,7 @@ public class ViewMoodActivity extends BarMenuActivity {
 
 
             // edit mood stuff ...
-            Button editButton = (Button) findViewById(R.id.editButton);
+            ImageButton editButton = (ImageButton) findViewById(R.id.editButton);
             editButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
@@ -122,9 +125,9 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
         // else we disable and don't show the edit/delete button
         else {
-            Button edit = (Button) findViewById(R.id.deleteButton);
+            ImageButton edit = (ImageButton) findViewById(R.id.deleteButton);
             edit.setVisibility(Button.GONE);
-            Button delete = (Button) findViewById(R.id.editButton);
+            ImageButton delete = (ImageButton) findViewById(R.id.editButton);
             delete.setVisibility(Button.GONE);
             displayAttributes();
         }
