@@ -92,19 +92,7 @@ public class FollowController {
             // if connection is present....
 
             //-------------------- UPDATING FOLLOWER LIST FOR ACCEPTING USER ----------------------
-            // Get the FollowerList of the userAcceptingRequest the request from the server
-//            FollowerList followerList = null;
-//
-//            ElasticSearchFollowController.GetFollowerList getFollowerList =
-//                    new ElasticSearchFollowController.GetFollowerList();
-//            getFollowerList.execute(userAcceptingRequest);
 
-//            // trying to retrieve the follower list
-//            try {
-//                followerList = getFollowerList.get();;
-//            } catch (Exception E){
-//                Log.i("Error", "Was unable to retrieve follower list during acceptFollowRequest()");
-//            }
 
             FollowerList followerList = getFollowerList(userAcceptingRequest);
 

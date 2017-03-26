@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
@@ -54,6 +55,16 @@ public class TimelineActivity extends BarMenuActivity {
     ConnectivityManager manager;
     private EditText usernameText;
     Integer createUserFlag = null;
+
+    String username;
+
+    ArrayList nameList=new ArrayList();
+
+    int indexOfScroll=0;
+    int lastItem;
+    private ListView oldUserList;
+    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    private MoodAdapter adapter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -81,9 +92,6 @@ public class TimelineActivity extends BarMenuActivity {
                     else {
                         String username = usernameText.getText().toString();
 
-                        //Intent intent= new Intent(TimelineActivity.this,UserAdapter.class);
-                        //intent.putExtra("userNameBegin",username);
-                        //startActivity(intent);
 
                         //todo get image from user and createUser with image parameter
                         UserController userController = new UserController();
@@ -101,11 +109,7 @@ public class TimelineActivity extends BarMenuActivity {
                             return;
                         }
                         //todo use this internet checking method instead of one inside the activity
-//                        else if(createUserFlag.equals(3)){
-//                            Toast.makeText(TimelineActivity.this,
-//                                    "Please check your internet connection", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
+
                         userController.saveUsername(username.toLowerCase(), TimelineActivity.this);
                         // creating follow/following lists for new user
                         FollowController followController = new FollowController();
@@ -155,8 +159,42 @@ public class TimelineActivity extends BarMenuActivity {
      * with menubar.
      */
     private void timelineActivity(){
+
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
+
+        UserController userController = new UserController();
+        username = userController.readUsername(TimelineActivity.this).toString();
+
+        FollowController followController = new FollowController();
+        FollowingList followingList = followController.getFollowingList(username);
+        System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
+
+        nameList.addAll(followingList.getFollowingList());
+        try {
+
+            for (int i = 0; i < nameList.size(); i++) {
+                System.out.println("this is fff" + nameList.get(i).toString());
+                ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
+                getUserMoods.execute(nameList.get(i).toString(), String.valueOf(indexOfScroll));
+
+                oldUserList = (ListView) findViewById(R.id.list_view);
+
+                try {
+                    moodArrayList.addAll(getUserMoods.get());
+//                    System.out.println("this is fff moodlist"+moodArrayList);
+
+                } catch (Exception e) {
+                    System.out.println("this is fff" + e);
+                }
+            }
+//                System.out.println("this is fff moodlist"+moodArrayList);
+                adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
+                oldUserList.setAdapter(adapter);
+           // }
+        }catch (Exception e){
+            System.out.println("this is fff"+e);
+        }
     }
 
 }

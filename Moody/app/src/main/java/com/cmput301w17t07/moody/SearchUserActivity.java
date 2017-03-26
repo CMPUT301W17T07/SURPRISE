@@ -60,7 +60,7 @@ public class SearchUserActivity extends BarMenuActivity {
         Intent intent = getIntent();
         // username of searched user
         final String searchUsername = intent.getStringExtra("editUsername");
-        System.out.printf("this is xin in after " + searchUsername);
+        //System.out.printf("this is xin in after " + searchUsername);
         getUser.execute(searchUsername);
 
         try {
