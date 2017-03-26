@@ -83,7 +83,6 @@ public class EditMoodActivity extends BarMenuActivity {
 
         image = (ImageView) findViewById(R.id.editImageView);
 
-
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
@@ -412,9 +411,6 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         }
         image.setImageBitmap(bitmapImage);
-
-
-
     }
 
 
