@@ -38,7 +38,7 @@ public class MapOptionsActivity extends AppCompatActivity {
         resultMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mapIntent = new Intent(MapOptionsActivity.this, MapViewActivity.class);
+                Intent mapIntent = new Intent(MapOptionsActivity.this, MapsActivity.class);
                 startActivity(mapIntent);
                 finish();
             }
