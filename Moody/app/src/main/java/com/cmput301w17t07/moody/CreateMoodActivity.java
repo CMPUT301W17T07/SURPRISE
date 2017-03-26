@@ -23,8 +23,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -78,6 +76,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         UserController userController = new UserController();
         userName = userController.readUsername(CreateMoodActivity.this).toString();
         setUpMenuBar(this);
+        location = null;
 
 
 
@@ -210,6 +209,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
+                if(location != null){
                 if (moodController.createMood(EmotionText, userName,
                         moodMessage_text, location, bitmap, SocialSituation) == false) {
                     Toast.makeText(CreateMoodActivity.this,
@@ -217,7 +217,17 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 } else {
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
-                }
+                }}
+                else{
+                    if (moodController.createMood(EmotionText, userName,
+                            moodMessage_text, null, bitmap, SocialSituation) == false) {
+                        Toast.makeText(CreateMoodActivity.this,
+                                "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
+                        startActivity(intent);
+                    }}
+
             }
         });
 

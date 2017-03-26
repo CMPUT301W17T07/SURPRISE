@@ -143,13 +143,17 @@ public class ProfileActivity extends BarMenuActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 // TODO Auto-generated method stub
-                Mood viewMood = moodArrayList.get(position);
+                try{
+                    Mood viewMood = moodArrayList.get(position);
+                    //System.out.println("location = " + position);//viewMood.getLocation().toString());
+                   // System.out.println("location = " + viewMood);
 //                System.out.println("this is er");
 //                System.out.println("this is er"+viewMood.getLocation().getLongitude());
-                Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
-                viewMoodIntent.putExtra("viewMood", viewMood);
+                   Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                    viewMoodIntent.putExtra("viewMood", viewMood);
 
-                startActivity(viewMoodIntent);
+                startActivity(viewMoodIntent);}
+                catch(Exception e){}
 
 
             }
