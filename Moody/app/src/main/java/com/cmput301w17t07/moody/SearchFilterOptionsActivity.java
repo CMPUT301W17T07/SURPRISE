@@ -72,7 +72,7 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
         searchMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mapIntent = new Intent(SearchFilterOptionsActivity.this, MapsActivity.class);
+                Intent mapIntent = new Intent(SearchFilterOptionsActivity.this, MapOptionsActivity.class);
                 startActivity(mapIntent);
                 finish();
             }

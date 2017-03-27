@@ -53,6 +53,7 @@ public class FilterResultsActivity extends BarMenuActivity {
         setContentView(R.layout.activity_filter_results);
 
         setUpMenuBar(this);
+
         UserController userController = new UserController();
         username = userController.readUsername(FilterResultsActivity.this).toString();
 
@@ -78,7 +79,7 @@ public class FilterResultsActivity extends BarMenuActivity {
 
             try {
                 moodArrayList= getFeelingFilterMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
+               System.out.println("this is moodlist"+moodArrayList);
 
             }catch (Exception e){
                 Log.i("error","failed to get the mood out of the async matched");

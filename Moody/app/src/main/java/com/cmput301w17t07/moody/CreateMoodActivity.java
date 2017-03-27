@@ -238,7 +238,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 }}
                 else{
                     if (moodController.createMood(EmotionText, userName,
-                            moodMessage_text, null, bitmap, SocialSituation) == false) {
+                            moodMessage_text, location, bitmap, SocialSituation) == false) {
                         Toast.makeText(CreateMoodActivity.this,
                                 "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                     } else {

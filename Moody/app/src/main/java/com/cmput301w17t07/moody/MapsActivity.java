@@ -16,8 +16,11 @@
 
 package com.cmput301w17t07.moody;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,15 +29,28 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    String username;
+    private String filterFeeling;
+    private Intent intent;
+    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMenuBar(this);
+
+        UserController userController = new UserController();
+        username = userController.readUsername(MapsActivity.this).toString();
+
+        intent = getIntent();
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -55,9 +71,45 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        filterFeeling = intent.getStringExtra("feelingFilter");
+        Toast.makeText(MapsActivity.this, filterFeeling, Toast.LENGTH_SHORT).show();
+        ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                new ElasticMoodController.GetFeelingFilterMoods();
+        getFeelingFilterMoods.execute(username, filterFeeling);
+
+        try {
+            moodArrayList= getFeelingFilterMoods.get();
+            System.out.println("this is moodlist " + moodArrayList);
+
+        }catch (Exception e){
+            Log.i("error","failed to get the mood out of the async matched");
+        }
+
+        for (int i = 0; i < moodArrayList.size(); i++) {
+            if (moodArrayList.get(i).getLocation() == null) {
+                break;
+            }
+            else {
+                double longitude;
+                double latitude;
+                longitude = moodArrayList.get(i).getLocation().getLongitude();
+                latitude = moodArrayList.get(i).getLocation().getLatitude();
+                LatLng tmp = new LatLng(latitude,longitude);
+                mMap.addMarker(new MarkerOptions().position(tmp).title(filterFeeling));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+            }
+
+        }
+
+
+
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//
+//        LatLng uofa = new LatLng(-122.084, 37.422);
+//        mMap.addMarker(new MarkerOptions().position(uofa).title("Marker in UofA"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(uofa));
     }
 }

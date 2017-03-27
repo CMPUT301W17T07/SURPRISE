@@ -228,7 +228,7 @@ public class EditMoodActivity extends BarMenuActivity {
         final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
         deletePicture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                ImageView image = (ImageView) findViewById(R.id.editImageView);
+                ImageView image = (ImageView) findViewById(R.id.editImageView);
                 image.setImageDrawable(null);
                 deletePicture.setImageResource(android.R.color.transparent);
                 bitmapImage = null;
