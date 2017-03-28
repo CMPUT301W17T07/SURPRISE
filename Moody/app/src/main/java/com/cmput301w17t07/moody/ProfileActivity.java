@@ -100,25 +100,19 @@ public class ProfileActivity extends BarMenuActivity {
         // we cannot tell if they have all been loaded yet
         scrollFlag = true;
 
-
-        ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-        getUserMoods.execute(username,String.valueOf(indexOfScroll));
-
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
-        try {
-            moodArrayList= getUserMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
+        // Getting the user's moods
+        final MoodController moodController = new MoodController();
+        moodArrayList = moodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
 
-        }catch (Exception e){
-            Log.i("error","failed to get the mood out of the async matched");
-        }
-
+        // creating the adapter that will display the moods
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-//        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
-
+        // setting the adapter to display the moods
         moodTimelineListView.setAdapter(adapter);
 
+        // listener that checks if user has reached the bottom of the screen and then attempts to load
+        // older moods
         moodTimelineListView.setOnScrollListener(new AbsListView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState){
@@ -129,16 +123,12 @@ public class ProfileActivity extends BarMenuActivity {
                     if(scrollFlag) {
                         Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
                         indexOfScroll = indexOfScroll + 6;
-                        ElasticMoodController.GetUserMoods getUserMoodsAgain = new ElasticMoodController.GetUserMoods();
-                        getUserMoodsAgain.execute(username, String.valueOf(indexOfScroll));
-                        try {
-                            templist = getUserMoodsAgain.get();
-                            if (templist.size() == 0) {
-                                scrollFlag = false;
-                            }
-
-                        } catch (Exception e) {
-                            Log.i("error", "failed to get the mood out of the async matched");
+                        // Getting the extra moods after the scroll
+                        templist = moodController.getUserMoods(username,
+                                String.valueOf(indexOfScroll), ProfileActivity.this);
+                        // determining if there any old moods to find
+                        if (templist.size() == 0) {
+                            scrollFlag = false;
                         }
                         moodArrayList.addAll(templist);
                         adapter.notifyDataSetChanged();
@@ -152,51 +142,18 @@ public class ProfileActivity extends BarMenuActivity {
             }
         });
 
-
+        // logic for when a user clicks on a mood item
         moodTimelineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                try{
-                     Mood viewMood = moodArrayList.get(position);
-                     String ID = viewMood.getId();
-                     Location location = null;
-                     Mood send = new Mood(viewMood.getFeeling(),
-                             viewMood.getUsername(),
-                             viewMood.getMoodMessage(),
-                             location,
-                             viewMood.getMoodImageID(),
-                             viewMood.getSocialSituation());
-                    send.setId(viewMood.getId());
-                    String hasLocation = "0";
+                Mood viewMood = moodArrayList.get(position);
+                Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                viewMoodIntent.putExtra("viewMood", viewMood);
 
-                    System.out.println("location = " + viewMood.toString());
-                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
-                    viewMoodIntent.setAction("action");
-                    viewMoodIntent.putExtra("viewMood", send);
-                   // viewMoodIntent.putExtra("ID",ID);
-                    if(viewMood.getLocation()!=null){
-                        DecimalFormat decimalFormat=new DecimalFormat(".##");
-                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
-                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
-                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
-                        System.out.println("passlocation = "+passLocation);
-                        Location sendLocation = viewMood.getLocation();
-                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
-                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
-                        System.out.println("lat = " + sendLocation);
-                        hasLocation = "1";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    else{
-                        String passLocation = "";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    viewMoodIntent.putExtra("haslocation",hasLocation);
-                    String trigger = "profile";
-                    viewMoodIntent.putExtra("trigger",trigger);
-                    startActivity(viewMoodIntent);
-                    finish();
-                }catch(Exception e){}
+                startActivity(viewMoodIntent);
+                finish();
             }
 
 

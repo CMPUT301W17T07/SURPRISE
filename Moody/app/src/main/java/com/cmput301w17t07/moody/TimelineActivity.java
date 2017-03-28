@@ -67,7 +67,6 @@ public class TimelineActivity extends BarMenuActivity {
         if (isFirstIn) {
             sp.edit().putBoolean("isFirstIn", false).apply();
             setContentView(R.layout.activity_create_user);
-            Toast.makeText(TimelineActivity.this, " Welcome to Moody! ", Toast.LENGTH_SHORT).show();
             Button registerButton = (Button) findViewById(R.id.register);
 
             usernameText = (EditText) findViewById(R.id.enterUsername);
@@ -113,11 +112,13 @@ public class TimelineActivity extends BarMenuActivity {
 
 
                     Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-
-                    timelineActivity();
+                    Intent intent = new Intent(TimelineActivity.this, SearchFilterOptionsActivity.class);
+                    startActivity(intent);
+                    finish();
 
                 }
             });
+
         }else {
             timelineActivity();
         }
@@ -159,89 +160,90 @@ public class TimelineActivity extends BarMenuActivity {
         UserController userController = new UserController();
         username = userController.readUsername(TimelineActivity.this).toString();
 
+        MoodController moodController = new MoodController();
+
         FollowController followController = new FollowController();
         FollowingList followingList = followController.getFollowingList(username);
         System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
 
         nameList.addAll(followingList.getFollowingList());
+
+        oldUserList = (ListView) findViewById(R.id.list_view);
         try {
 
             for (int i = 0; i < nameList.size(); i++) {
                 System.out.println("this is fff" + nameList.get(i).toString());
-                ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-                getUserMoods.execute(nameList.get(i).toString(), String.valueOf(indexOfScroll));
 
-                oldUserList = (ListView) findViewById(R.id.list_view);
-
-                try {
-                    moodArrayList.addAll(getUserMoods.get());
-//                    System.out.println("this is fff moodlist"+moodArrayList);
-
-                } catch (Exception e) {
-                    System.out.println("this is fff" + e);
-                }
+                moodArrayList.addAll(moodController.getUserMoods(username,
+                        String.valueOf(indexOfScroll),TimelineActivity.this));
             }
-//                System.out.println("this is fff moodlist"+moodArrayList);
-                adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-                oldUserList.setAdapter(adapter);
            // }
         }catch (Exception e){
-            System.out.println("this is fff"+e);
+            System.out.println("this is outer catch exception"+e);
         }
+        adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
+        oldUserList.setAdapter(adapter);
 
 
 
-
-        oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                // TODO Auto-generated method stub
-                try{
-                    Mood viewMood = moodArrayList.get(position);
-                    String ID = viewMood.getId();
-                    Location location = null;
-                    Mood send = new Mood(viewMood.getFeeling(),
-                            viewMood.getUsername(),
-                            viewMood.getMoodMessage(),
-                            location,
-                            viewMood.getMoodImageID(),
-                            viewMood.getSocialSituation());
-                    send.setId(viewMood.getId());
-                    String hasLocation = "0";
-
-                    System.out.println("location = " + viewMood.toString());
-                    Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
-                    viewMoodIntent.setAction("action");
-                    viewMoodIntent.putExtra("viewMood", send);
-                    // viewMoodIntent.putExtra("ID",ID);
-                    if(viewMood.getLocation()!=null){
-                        DecimalFormat decimalFormat=new DecimalFormat(".##");
-                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
-                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
-                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
-                        System.out.println("passlocation = "+passLocation);
-                        Location sendLocation = viewMood.getLocation();
-                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
-                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
-                        System.out.println("lat = " + sendLocation);
-                        hasLocation = "1";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    else{
-                        String passLocation = "";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    viewMoodIntent.putExtra("haslocation",hasLocation);
-                    String trigger = "Timeline";
-                    viewMoodIntent.putExtra("trigger",trigger);
-                    startActivity(viewMoodIntent);
-                    finish();
-                }catch(Exception e){}
-            }
-        });
-
-
-
+//
+//        oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position,
+//                                    long id) {
+////                // TODO Auto-generated method stub
+////                try{
+////                    Mood viewMood = moodArrayList.get(position);
+////                    String ID = viewMood.getId();
+////                    Location location = null;
+////                    Mood send = new Mood(viewMood.getFeeling(),
+////                            viewMood.getUsername(),
+////                            viewMood.getMoodMessage(),
+////                            location,
+////                            viewMood.getMoodImageID(),
+////                            viewMood.getSocialSituation());
+////                    send.setId(viewMood.getId());
+////                    String hasLocation = "0";
+////
+////                    System.out.println("location = " + viewMood.toString());
+////                    Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
+////                    viewMoodIntent.setAction("action");
+////                    viewMoodIntent.putExtra("viewMood", send);
+////                    // viewMoodIntent.putExtra("ID",ID);
+////                    if(viewMood.getLocation()!=null){
+////                        DecimalFormat decimalFormat=new DecimalFormat(".##");
+////                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
+////                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
+////                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
+////                        System.out.println("passlocation = "+passLocation);
+////                        Location sendLocation = viewMood.getLocation();
+////                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
+////                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
+////                        System.out.println("lat = " + sendLocation);
+////                        hasLocation = "1";
+////                        viewMoodIntent.putExtra("location",passLocation);}
+////                    else{
+////                        String passLocation = "";
+////                        viewMoodIntent.putExtra("location",passLocation);}
+////                    viewMoodIntent.putExtra("haslocation",hasLocation);
+////                    String trigger = "Timeline";
+////                    viewMoodIntent.putExtra("trigger",trigger);
+////                    startActivity(viewMoodIntent);
+////                    finish();
+////                }catch(Exception e){}
+//
+//                Mood viewMood = moodArrayList.get(position);
+//                Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
+//                viewMoodIntent.putExtra("viewMood", viewMood);
+//
+//                startActivity(viewMoodIntent);
+//                finish();
+//            }
+//        });
+//
+//
+//
 
 
 

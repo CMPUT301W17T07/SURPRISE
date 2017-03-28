@@ -16,6 +16,7 @@
 
 package com.cmput301w17t07.moody;
 
+import android.icu.text.DecimalFormat;
 import android.location.Location;
 
 import java.io.Serializable;
@@ -45,6 +46,7 @@ public class Mood implements Serializable {
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
     private String displayUsername;
+    private String displayLocation;
 
     private String encodedImage;
 
@@ -88,6 +90,7 @@ public class Mood implements Serializable {
         this.moodMessage = moodMessage;
         this.date = new Date();
         this.location = location;
+        this.displayLocation = setDisplayLocation();
         this.moodImageID = imageID;
         this.socialSituation = socialSituation;
         //        this.moodImage = encodeImage(image);
@@ -192,4 +195,19 @@ public class Mood implements Serializable {
 //                +",Longitude: "+decimalFormat.format(location.getLongitude());
     }
 
+    public String setDisplayLocation() {
+        if (this.location == null){
+            return null;
+        }
+        else {
+            DecimalFormat decimalFormat = new DecimalFormat(".##");
+            String latitude = decimalFormat.format(this.getLocation().getLatitude());
+            String longitude = decimalFormat.format(this.getLocation().getLongitude());
+            return "Latitude:" + latitude + ",Longitude:" + longitude;
+        }
+    }
+
+    public String getDisplayLocation() {
+        return displayLocation;
+    }
 }

@@ -16,11 +16,18 @@
 
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.media.Image;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -36,6 +43,9 @@ import java.util.Date;
 public class MoodController {
 
     private static Mood mood = null;
+    private static MoodList moodList = null;
+    ConnectivityManager manager;
+
 
     /**
      * createMood method that will create a new Mood object if the mood message is determined
@@ -189,6 +199,72 @@ public class MoodController {
         return true;
 
     }
+
+    public ArrayList<Mood> getUserMoods(String username, String indexOfScroll, Context context){
+
+        ArrayList<Mood> moodArrayList = null;
+
+        if(checkNetwork(context)) {
+            // if the user is connected to the network...
+            ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
+            getUserMoods.execute(username, String.valueOf(indexOfScroll));
+
+            try {
+                moodArrayList = getUserMoods.get();
+//               System.out.println("this is moodlist"+moodArrayList);
+
+            } catch (Exception e) {
+                Log.i("error", "failed to get the mood out of the async matched");
+            }
+
+            return moodArrayList;
+        }
+        else{
+            return moodArrayList;
+        }
+    }
+
+    static public MoodList getOfflineMoodList(){
+        if (moodList == null){
+            try {
+                /* Seeing if a previous recordList was saved */
+                moodList = MoodManager.getManager().loadMoodList();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            }
+        }
+        return moodList;
+    }
+
+    /* saveRecordList method*/
+    static public void saveMoodList(){
+        try {
+            MoodManager.getManager().saveMoodList(getOfflineMoodList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("MoodList cannot be de-serialized from recordListManager");
+        }
+    }
+
+
+    public Boolean checkNetwork(Context context){
+        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info == null) {
+            Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+
 
 
     public String getMoodMessage() {

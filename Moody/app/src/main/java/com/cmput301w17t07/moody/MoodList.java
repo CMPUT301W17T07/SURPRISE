@@ -16,6 +16,7 @@
 
 package com.cmput301w17t07.moody;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -29,7 +30,7 @@ import java.util.ArrayList;
  *
  */
 
-public class MoodList {
+public class MoodList implements Serializable{
 
     public ArrayList<Mood> moodList = new ArrayList<Mood>();
 
@@ -65,15 +66,14 @@ public class MoodList {
     public boolean hasMood(Mood mood){
         return moodList.contains(mood);
     }
-//
-//    public ArrayList<Mood> getMoodList(){
-//        // return moodList from database?
-//        return moodList;
-//    }
-//
-//    public void setMoodList(){
-//        // something in here potentially
-//    }
+
+    public ArrayList<Mood> getMoodList(){
+        return moodList;
+    }
+
+    public void setMoodList(ArrayList<Mood> moods){
+        moodList = moods;
+    }
 
 
 }

@@ -18,6 +18,7 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,15 +52,15 @@ public class ViewMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
-        Bundle bundle = getIntent().getExtras();
-        final String hasLocation = intent.getExtras().getString("hasLocation");
-        final String showLocation = intent.getExtras().getString("location");
-        trigger = intent.getExtras().getString("trigger");
-        System.out.println("trigger = "+ trigger);
-        final double lat= bundle.getDouble("sendLatitude");
-        final double lon = bundle.getDouble("sendLonditude");
-        TextView location = (TextView) findViewById(R.id.LocationTV);
-        location.setText(showLocation);
+//        Bundle bundle = getIntent().getExtras();
+//        final String hasLocation = intent.getExtras().getString("hasLocation");
+//        final String showLocation = intent.getExtras().getString("location");
+//        trigger = intent.getExtras().getString("trigger");
+//        System.out.println("trigger = "+ trigger);
+//        final double lat= bundle.getDouble("sendLatitude");
+//        final double lon = bundle.getDouble("sendLonditude");
+//        TextView location = (TextView) findViewById(R.id.LocationTV);
+//        location.setText(showLocation);
         // Get the database id for the selected mood
         viewMoodID =viewMood.getId();
 //
@@ -93,9 +94,9 @@ public class ViewMoodActivity extends BarMenuActivity {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
                     editMoodIntent.putExtra("editMood", viewMood);
-                    editMoodIntent.putExtra("editLocation",showLocation);
-                    editMoodIntent.putExtra("sendLat2",lat);
-                    editMoodIntent.putExtra("sendLon2",lon);
+//                    editMoodIntent.putExtra("editLocation",showLocation);
+//                    editMoodIntent.putExtra("sendLat2",lat);
+//                    editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
                 }
             });
@@ -125,9 +126,15 @@ public class ViewMoodActivity extends BarMenuActivity {
 
 
 
-        //TextView location = (TextView) findViewById(R.id.locationTV);
-        //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));
-        //location.setText(viewMood.toString());
+//        TextView location = (TextView) findViewById(R.id.LocationTV);
+//        DecimalFormat decimalFormat=new DecimalFormat(".##");
+//        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
+//        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
+//        String displayLocation = "Latitude:" + latitude +",Londitude:" + longitude;
+//        String latitude = String.valueOf(viewMood.getLocation().getLatitude());
+//        String longitude = String.valueOf(viewMood.getLocation().getLongitude());
+
+
 
         ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
 //        //todo handle no image case!!
