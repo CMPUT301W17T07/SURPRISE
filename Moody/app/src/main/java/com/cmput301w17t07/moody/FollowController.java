@@ -52,16 +52,8 @@ public class FollowController {
             // Get the FollowerList of the userReceiving the request from the server
             FollowerList followerList = null;
 
-            ElasticSearchFollowController.GetFollowerList getFollowerList =
-                    new ElasticSearchFollowController.GetFollowerList();
-            getFollowerList.execute(userReceivingRequest);
+            followerList = getFollowerList(userReceivingRequest);
 
-            // trying to retrieve the follower list
-            try {
-                followerList = getFollowerList.get();;
-            } catch (Exception E){
-                Log.i("Error", "Was unable to retrieve follower list during sendPendingRequest()");
-            }
             // adding the pending username to the followerlist
             followerList.addPending(userSendingRequest);
 
@@ -81,9 +73,33 @@ public class FollowController {
             return true;
         }
         else{
-            // todo notify user that they are not connected to the internet!
+            // user will be notified that he/she needs to connect to the internet
             return false;
         }
+    }
+
+    public static boolean canRequestBeSent(String userSendingRequest, String userReceivingRequest){
+        //method determines if a request can be sent between userSendingRequest and userReceivingRequest
+        // can modify method to return int values if we want context specific responses for each situation
+
+        if(userSendingRequest.equals(userReceivingRequest)){
+            return false;
+        }
+
+        FollowerList followerList = null;
+        // getting the follower list of the user who will be receiving the request
+        followerList = getFollowerList(userReceivingRequest);
+
+        if(followerList.hasPending(userSendingRequest)){
+            return false;
+        }
+
+        if(followerList.hasFollower(userSendingRequest)){
+            return false;
+        }
+
+        return true;
+
     }
 
 
@@ -116,19 +132,6 @@ public class FollowController {
 
             //--------------- UPDATING FOLLOWING LIST FOR USER WHO SENT REQUEST --------------------
 
-//            FollowingList followingList = null;
-//
-//            ElasticSearchFollowController.GetFollowingList getFollowingList =
-//                    new ElasticSearchFollowController.GetFollowingList();
-//            getFollowingList.execute(userThatSentRequest);
-//
-//            // trying to retrieve following list
-//            try {
-//                followingList = getFollowingList.get();
-//            } catch (Exception E){
-//                Log.i("Error", "Was unable to retrieve following list during acceptFollowRequest()");
-//            }
-
             FollowingList followingList = getFollowingList(userThatSentRequest);
 
             // todo try catch this block
@@ -153,6 +156,41 @@ public class FollowController {
             // todo notify user that they are not connected to the internet!
             return false;
         }
+    }
+
+    public static boolean declineFollowRequest(String userDecliningRequest, String userThatSentRequest){
+
+        if(checkNetwork()){
+
+            //----------------------- REMOVING PENDING USER --------------------------------------
+
+            FollowerList followerList = getFollowerList(userDecliningRequest);
+
+            // removing the requester from the user's pending lust
+            followerList.deletePending(userThatSentRequest);
+
+
+            //----------------------- NOW UPDATING THE SERVER --------------------------------------
+
+            ElasticSearchFollowController.DeleteFollowerList deleteFollowerList =
+                    new ElasticSearchFollowController.DeleteFollowerList();
+            ElasticSearchFollowController.AddFollowerList addFollowerList =
+                    new ElasticSearchFollowController.AddFollowerList();
+
+            // deleting old followerlist
+            deleteFollowerList.execute(userDecliningRequest);
+            // adding updated one
+            addFollowerList.execute(followerList);
+
+            //------------------------------ DONE --------------------------------------------------
+
+            return true;
+        }
+        else{
+            //todo notify the user that he or she is not connected to the internet
+            return false;
+        }
+
     }
 
 

@@ -105,7 +105,6 @@ public class PendingRequestsAdapter extends BaseAdapter {
             viewHolder.acceptRequestButton=(Button) view.findViewById(R.id.acceptRequest);
             viewHolder.declineRequestButton=(Button) view.findViewById(R.id.declineRequest);
 
-            //viewHolder.declineBtn=(Button) view.findViewById(R.id.searchDecline);
 
             view.setTag(viewHolder);
         }else {
@@ -151,7 +150,15 @@ public class PendingRequestsAdapter extends BaseAdapter {
         viewHolder.declineRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View v){
-                //todo implement decline follow request
+                if(followController.declineFollowRequest(username, userList.get(position))) {
+                    //todo improve the look of this
+                    viewHolder.declineRequestButton.setText("DECLINED");
+                    viewHolder.acceptRequestButton.setEnabled(false);
+                    viewHolder.declineRequestButton.setEnabled(false);
+                }
+                else{
+                    Toast.makeText(context, "please check network connection", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
 

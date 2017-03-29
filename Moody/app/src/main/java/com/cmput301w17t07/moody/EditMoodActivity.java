@@ -188,6 +188,7 @@ public class EditMoodActivity extends BarMenuActivity {
 //                String dateValue = date.getText().toString();
                 MoodController moodController = new MoodController();
                 Bitmap editBitmapImage = bitmapImage;
+                //todo need to pass the date in so we edited moods don't move to the top
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
                         location1, editBitmapImage, SocialSituation, null, editMood ) == false) {
                     Toast.makeText(EditMoodActivity.this,
