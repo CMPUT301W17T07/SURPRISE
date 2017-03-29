@@ -20,26 +20,83 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-import static com.cmput301w17t07.moody.R.id.myMap;
-import static com.cmput301w17t07.moody.R.id.searchMap;
 
-public class MapOptionsActivity extends AppCompatActivity {
+public class MapOptionsActivity extends BarMenuActivity {
+
+    private String userText;
+    private String feelingText;
+    private Integer selectedFilter;
+
+    private Intent intent;
 
     private Button resultMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_options);
 
-        resultMap = (Button) findViewById(myMap);
-        resultMap.setOnClickListener(new View.OnClickListener() {
+
+        setContentView(R.layout.activity_map_options);
+        setUpMenuBar(this);
+
+        Button feelingMapButton = (Button) findViewById(R.id.filterFeelingMap);
+
+        // ---------------------Filter by User--------------------------------------
+        Spinner dropdownUser = (Spinner) findViewById(R.id.filterMapUser);
+
+        String[] users = new String[]{"My Moods", "TimeLine Moods"};
+        ArrayAdapter<String> adapterUsers = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, users);
+        dropdownUser.setAdapter(adapterUsers);
+
+        dropdownUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                userText = "Filter: " + parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(MapOptionsActivity.this, "Please pick a user!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        // -------------------------Filter by Feeling-------------------------------------------
+        Spinner dropdownFeeling = (Spinner) findViewById(R.id.filterMapFeeling);
+
+        String[] feelings = new String[]{"any","anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        ArrayAdapter<String> adapterFeelings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
+        dropdownFeeling.setAdapter(adapterFeelings);
+
+        dropdownFeeling.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                feelingText = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(MapOptionsActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        feelingMapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent mapIntent = new Intent(MapOptionsActivity.this, MapViewActivity.class);
-                startActivity(mapIntent);
+                //selectedFilter = 0;
+                Intent createMap = new Intent(MapOptionsActivity.this, MapsActivity.class);
+                createMap.putExtra("feelingFilter", feelingText);
+                Toast.makeText(MapOptionsActivity.this, feelingText, Toast.LENGTH_SHORT).show();
+                //createMap.putExtra("selectedFilter", selectedFilter);
+                startActivity(createMap);
                 finish();
             }
         });

@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -42,8 +44,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -62,6 +64,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     private String provider;
     private TextView locationText;
     private Location location;
+    private String address;
 
 
 
@@ -195,12 +198,26 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                 }
-                //System.out.println("this is loc "+location.getLongitude());
-                DecimalFormat decimalFormat = new DecimalFormat(".##");
-                locationText.setText("Latitude: " + decimalFormat.format(latitude)
-                        + ",Longitude: " + decimalFormat.format(longitude));
+
+                Geocoder gcd = new Geocoder(CreateMoodActivity.this, Locale.getDefault());
+                try{
+                    List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+
+                if (addresses.size() > 0)
+                    address = "  " + addresses.get(0).getFeatureName() + " " +
+                            addresses.get(0).getThoroughfare() + ", " +
+                            addresses.get(0).getLocality() + ", " +
+                            addresses.get(0).getAdminArea() + ", " +
+                            addresses.get(0).getCountryCode();
+                    locationText.setText(address);
+
+                    System.out.println(addresses.get(0));}
+                catch(Exception e){}
+
             }
         });
+
+
 
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +238,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 }}
                 else{
                     if (moodController.createMood(EmotionText, userName,
-                            moodMessage_text, null, bitmap, SocialSituation) == false) {
+                            moodMessage_text, location, bitmap, SocialSituation) == false) {
                         Toast.makeText(CreateMoodActivity.this,
                                 "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                     } else {

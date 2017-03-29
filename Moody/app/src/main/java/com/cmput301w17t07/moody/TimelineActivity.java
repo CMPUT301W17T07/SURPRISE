@@ -175,7 +175,7 @@ public class TimelineActivity extends BarMenuActivity {
 
         UserController userController = new UserController();
         username = userController.readUsername(TimelineActivity.this).toString();
-
+        
         FollowController followController = new FollowController();
         FollowingList followingList = followController.getFollowingList(username);
         System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
@@ -226,6 +226,7 @@ public class TimelineActivity extends BarMenuActivity {
                 }
             }
         }
+
 
         return L;
     }
