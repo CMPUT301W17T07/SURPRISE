@@ -17,6 +17,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/anicn/Moodyv5.0/SURPRISE/Moody/app/src/debug/res/values/google_maps_api.xml')
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -34,7 +39,6 @@ android {
         }
     }
     sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/emojis'] } }
-
     defaultConfig {
         // Enabling multidex support.
         multiDexEnabled true

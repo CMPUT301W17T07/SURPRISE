@@ -96,7 +96,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 longitude = moodArrayList.get(i).getLocation().getLongitude();
                 latitude = moodArrayList.get(i).getLocation().getLatitude();
                 LatLng tmp = new LatLng(latitude,longitude);
-                mMap.addMarker(new MarkerOptions().position(tmp).title(filterFeeling).icon(BitmapDescriptorFactory.fromResource(R.drawable.happy)));
+                mMap.addMarker(new MarkerOptions().position(tmp).title(username).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
             }
 
