@@ -16,9 +16,14 @@
 
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
 import android.util.Log;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+
+import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
  * Created by mike on 2017-03-25.
@@ -220,12 +225,12 @@ public class FollowController {
         return userArrayList;
     }
 
-    public static int getNumberOfRequests(String username){
+    public static String getNumberOfRequests(String username){
 
         //todo need to check for internet here?
         ArrayList<String> userArrayList= getPendingRequests(username);
 
-        return userArrayList.size();
+        return String.valueOf(userArrayList.size());
     }
 
 
@@ -264,20 +269,61 @@ public class FollowController {
         return followingList;
     }
 
-    public static int getNumberOfFollowers(String username){
+    public static String getNumberOfFollowers(String username){
         FollowerList followerList = getFollowerList(username);
-        return followerList.countFollowers();
+        return String.valueOf(followerList.countFollowers());
     }
 
-    public static int getNumberOfFollowing(String username){
+    public static String getNumberOfFollowing(String username){
         FollowingList followingList = getFollowingList(username);
-        return followingList.countFollowing();
+        return String.valueOf(followingList.countFollowing());
     }
 
     private static boolean checkNetwork(){
         //todo implement a checkNetwork method/class to be called here should have context as parameter so it can toast messages
         return true;
     }
+
+
+//    public static void saveFollowInfo(String followers, String following, String pending, Context ctx) {
+//        FileOutputStream outputStream;
+//        try {
+//            outputStream = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//            outputStream.write(followers.getBytes());
+//            outputStream.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    /**
+//     * Method that returns the locally saved username.
+//     *
+//     * Logic for reading a locally saved file from:
+//     * link: http://stackoverflow.com/questions/9095610/android-fileinputstream-read-txt-file-to-string
+//     * Author: user370305  Feb 1 '12 at 12:19
+//     * Taken by: Nick Anic 2017/03/09
+//     * @param ctx
+//     * @return  fileContent         StringBuffer of the saved username
+//     */
+//    public StringBuffer readFollowInfo(Context ctx) {
+//        FileInputStream inputStream;
+//        StringBuffer fileContent = new StringBuffer("");
+//        int n;
+//        byte[] buffer = new byte[1024];
+//        try {
+//            inputStream = ctx.openFileInput(FILENAME);
+//            while ((n = inputStream.read(buffer)) != -1)
+//            {
+//                fileContent.append(new String(buffer, 0, n));
+//            }
+//            inputStream.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return fileContent;
+//    }
 
 
 }

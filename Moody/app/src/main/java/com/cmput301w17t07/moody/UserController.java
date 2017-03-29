@@ -115,9 +115,6 @@ public class UserController {
             return 2; // timeline activity will check to see if profilePicture meets size requirements
         }
         else{
-//            User newUser = new User(username);
-//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
-//            addUser.execute(newUser);
             user = new User(username);
             ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);
