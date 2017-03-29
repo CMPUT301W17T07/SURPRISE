@@ -16,12 +16,22 @@
 
 package com.cmput301w17t07.moody;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.media.Image;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+
+import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
  * Created by mike on 2017-02-23.
@@ -36,6 +46,9 @@ import java.util.Date;
 public class MoodController {
 
     private static Mood mood = null;
+    private static MoodList moodList = null;
+    private static ConnectivityManager manager;
+
 
     /**
      * createMood method that will create a new Mood object if the mood message is determined
@@ -137,7 +150,7 @@ public class MoodController {
      * @return
      */
     public static Boolean editMood(String feeling, String username, String moodMessage,
-                           Location location, Bitmap image, String socialSituation, Date date, Mood oldMood){
+                                   Location location, Bitmap image, String socialSituation, Date date, Mood oldMood){
 
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
@@ -189,6 +202,85 @@ public class MoodController {
         return true;
 
     }
+
+    static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll, Context context){
+
+        ArrayList<Mood> moodArrayList = null;
+
+        if(checkNetwork(context)) {
+            // if the user is connected to the network...
+            ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
+            getUserMoods.execute(username, String.valueOf(indexOfScroll));
+
+            try {
+                moodArrayList = getUserMoods.get();
+                // If moods are retrieved from server set them to the local moodList
+                System.out.println("this is moodlist"+moodList.getMoods().get(0));
+                moodList.setMoods(moodArrayList);
+
+
+            } catch (Exception e) {
+                Log.i("error", "failed to get the mood out of the async matched");
+            }
+
+            return moodArrayList;
+        }
+        else{
+//            return null;
+            return moodList.getMoods();
+        }
+    }
+
+    static public MoodList getOfflineMoodList(){
+        if (moodList == null){
+            try {
+                /* Seeing if a previous recordList was saved */
+                moodList = MoodManager.getManager().loadMoodList();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            }
+        }
+        return moodList;
+    }
+
+    /* saveRecordList method*/
+    static public void saveMoodList(){
+//        FileOutputStream outputStream;
+//        try {
+//            outputStream = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//            outputStream.write(moods.getBytes());
+//            outputStream.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        try {
+            MoodManager.getManager().saveMoodList(getOfflineMoodList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("MoodList cannot be de-serialized from recordListManager");
+        }
+    }
+
+
+    static public Boolean checkNetwork(Context context){
+        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info == null) {
+            Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+
 
 
     public String getMoodMessage() {

@@ -57,6 +57,11 @@ public class ProfileActivity extends BarMenuActivity {
         setContentView(R.layout.activity_profile);
         setUpMenuBar(this);
 
+        //----------------------------- INITIALIZE MANAGER -----------------------------------------
+
+        MoodManager.initManager(ProfileActivity.this);
+
+
         //----------------------------- GETTING LOCAL USERNAME -------------------------------------
         UserController userController = new UserController();
         username = userController.readUsername(ProfileActivity.this).toString();
@@ -101,18 +106,14 @@ public class ProfileActivity extends BarMenuActivity {
         scrollFlag = true;
 
 
-        ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-        getUserMoods.execute(username,String.valueOf(indexOfScroll));
 
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
-        try {
-            moodArrayList= getUserMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
+        // Getting the user's moods
+        moodArrayList = MoodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
+        // Save the moodlist locally
+        MoodController.saveMoodList();
 
-        }catch (Exception e){
-            Log.i("error","failed to get the mood out of the async matched");
-        }
 
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
 //        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
@@ -129,17 +130,14 @@ public class ProfileActivity extends BarMenuActivity {
                     if(scrollFlag) {
                         Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
                         indexOfScroll = indexOfScroll + 6;
-                        ElasticMoodController.GetUserMoods getUserMoodsAgain = new ElasticMoodController.GetUserMoods();
-                        getUserMoodsAgain.execute(username, String.valueOf(indexOfScroll));
-                        try {
-                            templist = getUserMoodsAgain.get();
-                            if (templist.size() == 0) {
-                                scrollFlag = false;
-                            }
-
-                        } catch (Exception e) {
-                            Log.i("error", "failed to get the mood out of the async matched");
+                        templist = MoodController.getUserMoods(username,
+                                String.valueOf(indexOfScroll), ProfileActivity.this);
+                        MoodController.saveMoodList();
+                        // determining if there any old moods to find
+                        if (templist.size() == 0) {
+                            scrollFlag = false;
                         }
+
                         moodArrayList.addAll(templist);
                         adapter.notifyDataSetChanged();
                     }
