@@ -33,7 +33,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 /**
  *  The Timeline Activity handles the user interface logic for when the user has first installed
@@ -58,6 +63,9 @@ public class TimelineActivity extends BarMenuActivity {
     private ListView oldUserList;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
     private MoodAdapter adapter;
+
+    private ArrayList<Mood> sortArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> sortArrayList2 = new ArrayList<Mood>();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -114,11 +122,11 @@ public class TimelineActivity extends BarMenuActivity {
 
                     Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
-                    timelineActivity();
-
+                    firstime();
                 }
             });
         }else {
+
             timelineActivity();
         }
 
@@ -147,6 +155,15 @@ public class TimelineActivity extends BarMenuActivity {
         }
     }
 
+
+    private void firstime() {
+
+        setContentView(R.layout.activity_timeline);
+        setUpMenuBar(this);
+
+
+    }
+
     /**
      * Current implementation of timelineActivity method. Just displays blank xml content screen
      * with menubar.
@@ -162,98 +179,58 @@ public class TimelineActivity extends BarMenuActivity {
         FollowController followController = new FollowController();
         FollowingList followingList = followController.getFollowingList(username);
         System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
-
+        oldUserList = (ListView) findViewById(R.id.list_view);
         nameList.addAll(followingList.getFollowingList());
         try {
 
-            for (int i = 0; i < nameList.size(); i++) {
-                System.out.println("this is fff" + nameList.get(i).toString());
+            for (int i = 0; i <nameList.size(); i++) {
+                System.out.println("this is fff name infor " + nameList.get(i).toString());
                 ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
                 getUserMoods.execute(nameList.get(i).toString(), String.valueOf(indexOfScroll));
 
-                oldUserList = (ListView) findViewById(R.id.list_view);
-
                 try {
                     moodArrayList.addAll(getUserMoods.get());
-//                    System.out.println("this is fff moodlist"+moodArrayList);
+                    //System.out.println("this is fff moodlist"+moodArrayList.get(0));
 
                 } catch (Exception e) {
                     System.out.println("this is fff" + e);
                 }
             }
-//                System.out.println("this is fff moodlist"+moodArrayList);
-                adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-                oldUserList.setAdapter(adapter);
-           // }
+            System.out.println("this is fff moodlist "+moodArrayList.size());
+            sortArrayList2=invertOrderList(moodArrayList);
+            adapter = new MoodAdapter(this, R.layout.timeline_list, sortArrayList2);
+            oldUserList.setAdapter(adapter);
+
         }catch (Exception e){
-            System.out.println("this is fff"+e);
+            System.out.println("this is fff error"+e);
         }
-
-
-
-
-        oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                // TODO Auto-generated method stub
-                try{
-                    Mood viewMood = moodArrayList.get(position);
-                    String ID = viewMood.getId();
-                    Location location = null;
-                    Mood send = new Mood(viewMood.getFeeling(),
-                            viewMood.getUsername(),
-                            viewMood.getMoodMessage(),
-                            location,
-                            viewMood.getMoodImageID(),
-                            viewMood.getSocialSituation());
-                    send.setId(viewMood.getId());
-                    String hasLocation = "0";
-
-                    System.out.println("location = " + viewMood.toString());
-                    Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
-                    viewMoodIntent.setAction("action");
-                    viewMoodIntent.putExtra("viewMood", send);
-                    // viewMoodIntent.putExtra("ID",ID);
-                    if(viewMood.getLocation()!=null){
-                        DecimalFormat decimalFormat=new DecimalFormat(".##");
-                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
-                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
-                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
-                        System.out.println("passlocation = "+passLocation);
-                        Location sendLocation = viewMood.getLocation();
-                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
-                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
-                        System.out.println("lat = " + sendLocation);
-                        hasLocation = "1";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    else{
-                        String passLocation = "";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    viewMoodIntent.putExtra("haslocation",hasLocation);
-                    String trigger = "Timeline";
-                    viewMoodIntent.putExtra("trigger",trigger);
-                    startActivity(viewMoodIntent);
-                    finish();
-                }catch(Exception e){}
-            }
-        });
-
-
-
-
-
-
-
-
-
 
     }
 
+    private ArrayList<Mood> invertOrderList(ArrayList<Mood> L) {
 
+        Date d1;
+        Date d2;
+        Mood mood;
+        //pop sort maybe binary sort....
+        System.out.println("this is fff lll size "+L.size());
+        for (int i = 0; i < L.size() - 1; i++) {
+            for (int j = i + 1; j < L.size(); j++) {
 
+                d1=L.get(i).getDate();
+                d2=L.get(j).getDate();
+                if (d1.before(d2)) {
+                    mood = L.get(i);
+                    L.set(i,L.get(j));
+                    L.set(j,mood);
+                }
+            }
+        }
 
-
+        return L;
+    }
 
 }
+
+
+

@@ -52,6 +52,10 @@ public class Mood implements Serializable {
 
     private String id;
 
+    public Mood(Date date) {
+        this.date = date;
+    }
+
     /**
      * Function used by jestDroid to retrieve the unique id of the mood object on the server
      * @return id

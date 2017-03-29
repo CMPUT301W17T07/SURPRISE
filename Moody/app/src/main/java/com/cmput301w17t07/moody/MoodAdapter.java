@@ -35,6 +35,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
 
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
 
