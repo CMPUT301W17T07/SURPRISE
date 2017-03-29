@@ -17,10 +17,17 @@
 package com.cmput301w17t07.moody;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +42,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
@@ -47,7 +56,15 @@ public class EditMoodActivity extends BarMenuActivity {
     private String SocialSituation;
     private EditText Description;
     private EditText date;
+    private TextView locationText;
     private ImageView image;
+    private LocationManager locationManager;
+    private double lat;
+    private double lon;
+    private String provider;
+    private String address;
+    Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
+
 //    private Date dateValue;
 
 //    Bitmap bitmap = null;
@@ -70,11 +87,98 @@ public class EditMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
+        
+        TextView location = (TextView) findViewById(R.id.locationText);
+
+        Bundle bundle = getIntent().getExtras();
+        lat= bundle.getDouble("sendLat2");
+        lon = bundle.getDouble("sendLon2");
+        System.out.println("lat = "+lat);
+        System.out.println("lat = "+lon);
+        location1.setLatitude(lat);
+        location1.setLongitude(lon);
+        System.out.println("lat = "+location1);
+
+        if(lat == 0 && lon == 0){
+            location1 = null;
+        }
+        Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+        try{
+            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+
+            if (addresses.size() > 0)
+                address = "  " + addresses.get(0).getFeatureName() + " " +
+                        addresses.get(0).getThoroughfare() + ", " +
+                        addresses.get(0).getLocality() + ", " +
+                        addresses.get(0).getAdminArea() + ", " +
+                        addresses.get(0).getCountryCode();
+            location.setText(address);
+
+            System.out.println(addresses.get(0));}
+        catch(Exception e){}
+
 
         displayAttributes();
+        ImageButton editLocation = (ImageButton) findViewById(R.id.location);
+        editLocation.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                locationText = (TextView) findViewById(R.id.locationText);
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                //check available tools
+                List<String> locationList = locationManager.getProviders(true);
+                if (locationList.contains(LocationManager.GPS_PROVIDER)) {
+                    provider = LocationManager.GPS_PROVIDER;
+                } else if (locationList.contains(LocationManager.NETWORK_PROVIDER)) {
+                    provider = LocationManager.NETWORK_PROVIDER;
+                } else {
+                    Toast.makeText(getApplicationContext(), "No map to use", Toast.LENGTH_LONG).show();
+                }
+
+                //check the permission
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    Toast.makeText(getApplicationContext(), "Get location felled, Please check the Permission", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                location1 = locationManager.getLastKnownLocation(provider);
+                if (location1 == null) {
+                    lat = 0;
+                    lon = 0;
+                } else {
+                    lat = location1.getLatitude();
+                    lon = location1.getLongitude();
+                }
+                Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+                try{
+                    List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+
+                    if (addresses.size() > 0)
+                        address = "  " + addresses.get(0).getFeatureName() + " " +
+                                addresses.get(0).getThoroughfare() + ", " +
+                                addresses.get(0).getLocality() + ", " +
+                                addresses.get(0).getAdminArea() + ", " +
+                                addresses.get(0).getCountryCode();
+                    locationText.setText(address);
+
+                    System.out.println(addresses.get(0));}
+                catch(Exception e){}
+            }
+        });
+
+        ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
+        deleteLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                location1 = null;
+                locationText = (TextView) findViewById(R.id.locationText);
+                locationText.setText(null);
+            }
+        });
 
         ImageButton editCameraButton = (ImageButton) findViewById(R.id.editCamera);
-
         editCameraButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -82,7 +186,7 @@ public class EditMoodActivity extends BarMenuActivity {
                     Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                     startActivityForResult(intent, 1);
                 } catch (Exception e) {
-                    Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
                 }
             }
@@ -95,7 +199,7 @@ public class EditMoodActivity extends BarMenuActivity {
                     intent.setType("image/*");
                     startActivityForResult(intent, 0);
                 } catch (Exception e) {
-                    Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
                 }
                 return true;
@@ -110,7 +214,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 MoodController moodController = new MoodController();
                 Bitmap editBitmapImage = bitmapImage;
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        null, editBitmapImage, SocialSituation, null, editMood ) == false) {
+                        location1, editBitmapImage, SocialSituation, null, editMood ) == false) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {
@@ -124,7 +228,7 @@ public class EditMoodActivity extends BarMenuActivity {
         final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
         deletePicture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                ImageView image = (ImageView) findViewById(R.id.editImageView);
+                ImageView image = (ImageView) findViewById(R.id.editImageView);
                 image.setImageDrawable(null);
                 deletePicture.setImageResource(android.R.color.transparent);
                 bitmapImage = null;

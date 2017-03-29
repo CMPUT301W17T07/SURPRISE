@@ -53,6 +53,7 @@ public class FilterResultsActivity extends BarMenuActivity {
         setContentView(R.layout.activity_filter_results);
 
         setUpMenuBar(this);
+
         UserController userController = new UserController();
         username = userController.readUsername(FilterResultsActivity.this).toString();
 
@@ -78,12 +79,26 @@ public class FilterResultsActivity extends BarMenuActivity {
 
             try {
                 moodArrayList= getFeelingFilterMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
+               System.out.println("this is moodlist"+moodArrayList);
 
             }catch (Exception e){
                 Log.i("error","failed to get the mood out of the async matched");
             }
 
+        }
+        if(selectedFilter == 1){
+            ElasticMoodController.GetRecentWeekUserMoods getRecentWeekUserMoods =
+                    new ElasticMoodController.GetRecentWeekUserMoods();
+            //todo will have to change this elastic controller if we want other types of date filters
+            getRecentWeekUserMoods.execute(username);
+
+            try {
+                moodArrayList= getRecentWeekUserMoods.get();
+//               System.out.println("this is moodlist"+moodArrayList);
+
+            }catch (Exception e){
+                Log.i("error","failed to get the recent week moods out of the async matched");
+            }
         }
         if(selectedFilter == 2){
             filterMessage = intent.getStringExtra("messageFilter");

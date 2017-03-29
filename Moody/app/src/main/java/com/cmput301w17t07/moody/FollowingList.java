@@ -18,6 +18,8 @@ package com.cmput301w17t07.moody;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by mike on 2017-02-23.
  */
@@ -29,67 +31,79 @@ import java.util.ArrayList;
  */
 
 public class FollowingList {
-    public ArrayList<User> pendingFollowing = new ArrayList<User>();
-    public ArrayList<User> followingList = new ArrayList<User>();
+    String username;
+//    public ArrayList<User> pendingFollowing = new ArrayList<User>();
+    public ArrayList<String> followingList = new ArrayList<String>();
 
+    @JestId
 
-    public void addPending(User user){
-        // When a user sends a follow request to another user
-        pendingFollowing.add(user);
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void deletePending(User user){
-        // When a user's follow request is rejected by another user
-        pendingFollowing.remove(user);
+    public ArrayList<String> getFollowingList() {
+        return followingList;
     }
 
-    public int countPending(){
-        // method should not be used, as the number of pending requests a user sends out is not kept track of
-        return pendingFollowing.size();
+
+    public FollowingList(String username) {
+        this.username = username;
     }
 
-    public User getPending(int index){
-        return pendingFollowing.get(index);
-    }
+    //
+//    public void addPending(User user){
+//        // When a user sends a follow request to another user
+//        pendingFollowing.add(user);
+//    }
+//
+//    public void deletePending(User user){
+//        // When a user's follow request is rejected by another user
+//        pendingFollowing.remove(user);
+//    }
+//
+//    public int countPending(){
+//        // method should not be used, as the number of pending requests a user sends out is not kept track of
+//        return pendingFollowing.size();
+//    }
+//
+//    public User getPending(int index){
+//        return pendingFollowing.get(index);
+//    }
 
-    public void addFollowing(User user){
+    public void addFollowing(String username){
         // add a user to the user's following list
-        if(pendingFollowing.contains(user) && !(followingList.contains(user))){
-            // only adds user
-            this.deletePending(user);
-            followingList.add(user);
-        }
-        else{
-            // throw an exception if the user being added to the list is not contained in the pending list
-            // or if the user is already in the followinglist
-            throw new IllegalArgumentException();
-        }
+        followingList.add(username);
 
     }
 
-    public void deleteFollowing(User user){
+    public void deleteFollowing(String username){
         // remove a user from the user's following list. Current app design does not allow a user
         // to remove another user from their following list
-        followingList.remove(user);
+        followingList.remove(username);
     }
 
     public int countFollowing(){
         return followingList.size();
     }
 
-    public User getFollowing(int index){
-        // get specific user from following list
-        return followingList.get(index);
+//    public User getFollowing(int index){
+//        // get specific user from following list
+//        return followingList.get(index);
+//    }
+
+
+
+    public boolean hasFollowing(String username){
+        return followingList.contains(username);
     }
 
-
-
-    public boolean hasFollowing(User user){
-        return followingList.contains(user);
-    }
-
-    public boolean hasPending(User user){
-        return pendingFollowing.contains(user);
-    }
+//    public boolean hasPending(User user){
+//        return pendingFollowing.contains(user);
+//    }
 
 }

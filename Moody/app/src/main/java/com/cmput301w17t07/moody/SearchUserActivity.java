@@ -21,7 +21,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /**
@@ -47,13 +51,17 @@ public class SearchUserActivity extends BarMenuActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // loading the username of the user
+        UserController userController = new UserController();
+        final String username = userController.readUsername(SearchUserActivity.this).toString();
 
         ElasticSearchUserController.GetUser getUser = new ElasticSearchUserController.GetUser();
         oldUserList = (ListView) findViewById(R.id.listSearch);
         Intent intent = getIntent();
-        final String username = intent.getStringExtra("editUsername");
-        System.out.printf("this is xin in after " + username);
-        getUser.execute(username);
+        // username of searched user
+        final String searchUsername = intent.getStringExtra("editUsername");
+        //System.out.printf("this is xin in after " + searchUsername);
+        getUser.execute(searchUsername);
 
         try {
 
@@ -63,7 +71,7 @@ public class SearchUserActivity extends BarMenuActivity {
         } catch (Exception e) {
             Log.i("error", "failed to get the User out of the async matched");
         }
-        userAdapter = new UserAdapter(this, userArrayList);
+        userAdapter = new UserAdapter(this, userArrayList, username, searchUsername);
         oldUserList.setAdapter(userAdapter);
         //System.out.println("this is error"+e);
 

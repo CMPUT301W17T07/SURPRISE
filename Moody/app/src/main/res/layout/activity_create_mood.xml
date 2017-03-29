@@ -128,23 +128,26 @@
 
     <TextView
         android:id="@+id/locationText"
-        android:layout_width="100dp"
+        android:layout_width="350dp"
         android:layout_height="30dp"
-        android:layout_marginTop="14dp"
-        android:text="Location"
+        android:layout_alignEnd="@+id/bottom_navigation"
+        android:layout_alignLeft="@+id/Description"
+        android:layout_alignRight="@+id/bottom_navigation"
+        android:layout_alignStart="@+id/Description"
         android:layout_below="@+id/Description"
-        android:layout_toRightOf="@+id/toolbar2"
-        android:layout_toEndOf="@+id/toolbar2" />
+        android:layout_marginTop="15dp"
+        android:text="   Location" />
 
     <TextView
         android:id="@+id/SocialText"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:text="Social Situation"
-        android:layout_alignBaseline="@+id/locationText"
-        android:layout_alignBottom="@+id/locationText"
-        android:layout_alignRight="@+id/editImageView"
-        android:layout_alignEnd="@+id/editImageView" />
+
+        android:layout_below="@+id/locationText"
+        android:layout_alignLeft="@+id/locationText"
+        android:layout_alignStart="@+id/locationText" />
+
 
 
 </RelativeLayout>

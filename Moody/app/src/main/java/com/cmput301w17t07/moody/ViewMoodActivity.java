@@ -18,13 +18,17 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
@@ -37,6 +41,9 @@ public class ViewMoodActivity extends BarMenuActivity {
     public Integer id;
     private MoodImage moodImage;
     private Bitmap bitmapImage;
+    private Intent intent;
+    private String trigger;
+    private String address;
 
     private String viewMoodID;
 
@@ -48,16 +55,41 @@ public class ViewMoodActivity extends BarMenuActivity {
         setContentView(R.layout.activity_view_mood);
         setUpMenuBar(this);
         // get the mood object that was selected
-        Intent intent = getIntent();
+        intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
+        Bundle bundle = getIntent().getExtras();
+        final String hasLocation = intent.getExtras().getString("hasLocation");
+        final String showLocation = intent.getExtras().getString("location");
+        trigger = intent.getExtras().getString("trigger");
+        System.out.println("trigger = "+ trigger);
+        final double lat= bundle.getDouble("sendLatitude");
+        final double lon = bundle.getDouble("sendLonditude");
+        TextView location = (TextView) findViewById(R.id.LocationTV);
+        //location.setText(showLocation);
         // Get the database id for the selected mood
-        viewMoodID = viewMood.getId();
+        viewMoodID =viewMood.getId();
+        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
+        try{
+            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+
+            if (addresses.size() > 0)
+                address = " " + addresses.get(0).getFeatureName() + " " +
+                        addresses.get(0).getThoroughfare() + ", " +
+                        addresses.get(0).getLocality() + ", " +
+                        addresses.get(0).getAdminArea() + ", " +
+                        addresses.get(0).getCountryCode();
+            location.setText(address);
+
+            System.out.println(addresses.get(0));}
+        catch(Exception e){}
+//
 
         // get username right
         UserController userController = new UserController();
         username = userController.readUsername(ViewMoodActivity.this).toString();
         // if the mood was from user profile allow edit/delete
         if (viewMood.getUsername().equals(username)) {
+            //System.out.println("this is erro" +viewMood.getLocation());
 
             displayAttributes();
 
@@ -81,6 +113,9 @@ public class ViewMoodActivity extends BarMenuActivity {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
                     editMoodIntent.putExtra("editMood", viewMood);
+                    editMoodIntent.putExtra("editLocation",showLocation);
+                    editMoodIntent.putExtra("sendLat2",lat);
+                    editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
                 }
             });
@@ -107,6 +142,12 @@ public class ViewMoodActivity extends BarMenuActivity {
 
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate().toString());
+
+
+
+        //TextView location = (TextView) findViewById(R.id.locationTV);
+        //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));
+        //location.setText(viewMood.toString());
 
         ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
 //        //todo handle no image case!!
@@ -158,7 +199,19 @@ public class ViewMoodActivity extends BarMenuActivity {
                 break;
         }
 
-
+    }
+    @Override
+    public void onBackPressed() {
+        if(trigger.equals("profile")) {
+            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else{
+            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
     }
 
-}
+    }

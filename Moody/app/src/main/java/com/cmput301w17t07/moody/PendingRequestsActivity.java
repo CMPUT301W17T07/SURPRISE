@@ -16,14 +16,62 @@
 
 package com.cmput301w17t07.moody;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.TextView;
 
-public class PendingRequestsActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class PendingRequestsActivity extends BarMenuActivity {
+
+    private String username;
+//    private FollowerList followerList = null;
+    private ArrayList<String> userArrayList=new ArrayList<>();
+    private ListView requestList;
+    private PendingRequestsAdapter pendingRequestsAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_requests);
+        setUpMenuBar(this);
+        TextView PendingRequestsText = (TextView) findViewById(R.id.PendingRequestsText);
+        PendingRequestsText.setText("Pending Requests");
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //todo technically we should implement infinite scroll here too, right...?
+
+
+        // loading the username of the user
+        UserController userController = new UserController();
+        username = userController.readUsername(PendingRequestsActivity.this).toString();
+
+        // UI listview in pending_requests_activity that will display the list
+        requestList = (ListView) findViewById(R.id.pendingList);
+
+        // getting the list of pending requests
+        FollowController followController = new FollowController();
+        userArrayList = followController.getPendingRequests(username);
+
+        // setting the adapter
+        pendingRequestsAdapter = new PendingRequestsAdapter(this, userArrayList, username);
+        requestList.setAdapter(pendingRequestsAdapter);
+
+
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PendingRequestsActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

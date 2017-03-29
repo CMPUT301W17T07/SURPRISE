@@ -34,7 +34,13 @@ android {
         }
     }
     sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/emojis'] } }
+
+    defaultConfig {
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
 }
+
 
 
 dependencies {
@@ -43,11 +49,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
+    compile 'com.google.android:multidex:0.1'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.google.android.gms:play-services-maps:10.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
     compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
+    testCompile 'junit:junit:4.12'
 }
