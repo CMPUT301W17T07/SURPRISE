@@ -26,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -95,7 +96,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 longitude = moodArrayList.get(i).getLocation().getLongitude();
                 latitude = moodArrayList.get(i).getLocation().getLatitude();
                 LatLng tmp = new LatLng(latitude,longitude);
-                mMap.addMarker(new MarkerOptions().position(tmp).title(filterFeeling));
+                mMap.addMarker(new MarkerOptions().position(tmp).title(filterFeeling).icon(BitmapDescriptorFactory.fromResource(R.drawable.happy)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
             }
 
@@ -112,4 +113,5 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 //        mMap.addMarker(new MarkerOptions().position(uofa).title("Marker in UofA"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(uofa));
     }
+
 }

@@ -54,7 +54,6 @@
         <activity android:name=".FilterActivity" />
         <activity android:name=".SearchUserActivity" />
         <activity android:name=".MapOptionsActivity" />
-        <activity android:name=".MapViewActivity" />
         <activity android:name=".MoodGraphActivity" />
         <activity android:name=".FilterResultsActivity" />
         <!--
