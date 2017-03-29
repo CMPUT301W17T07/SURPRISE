@@ -43,7 +43,7 @@ public class MoodManager {
  * */
 
         static final String prefFile = "MoodList";
-        static final String rlkey = "moodList";
+        static final String mlkey = "moodList";
 
         Context context;
 
@@ -76,7 +76,7 @@ public class MoodManager {
          *  referenced above*/
         public MoodList loadMoodList() throws IOException, ClassNotFoundException {
             SharedPreferences settings = context.getSharedPreferences(prefFile, context.MODE_PRIVATE);
-            String moodListData = settings.getString(rlkey, "");
+            String moodListData = settings.getString(mlkey, "");
             if(moodListData.equals("")){
             /* Returning a new MoodList if one does not exist */
                 return new MoodList();
@@ -98,7 +98,7 @@ public class MoodManager {
         public void saveMoodList(MoodList ml) throws IOException {
             SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
-            editor.putString(rlkey, moodListToString(ml));
+            editor.putString(mlkey, moodListToString(ml));
             editor.commit();
         }
         /* moodListToString method. Following implementation detailed by Abram Hindle in video

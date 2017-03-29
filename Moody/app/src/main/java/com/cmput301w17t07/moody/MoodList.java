@@ -32,12 +32,16 @@ import java.util.ArrayList;
 
 public class MoodList implements Serializable{
 
-    public ArrayList<Mood> moodList = new ArrayList<Mood>();
+//    private static final long serialVersionUID =  6673446047991058932L;
+    private static final long serialVersionUID =  2L;
 
 
-//    public MoodList(ArrayList<Mood> moodList) {
-//        moodList = new ArrayList<Mood>();
-//    }
+    public ArrayList<Mood> moodList = null;
+
+
+    public MoodList() {
+        moodList = new ArrayList<Mood>();
+    }
 
     public void addMood(Mood mood){
         // add mood to database?
@@ -67,12 +71,13 @@ public class MoodList implements Serializable{
         return moodList.contains(mood);
     }
 
-    public ArrayList<Mood> getMoodList(){
+    public ArrayList<Mood> getMoods(){
         return moodList;
     }
 
-    public void setMoodList(ArrayList<Mood> moods){
-        moodList = moods;
+    public void setMoods(ArrayList<Mood> moods){
+        moodList.clear();
+        moodList.addAll(moods);
     }
 
 

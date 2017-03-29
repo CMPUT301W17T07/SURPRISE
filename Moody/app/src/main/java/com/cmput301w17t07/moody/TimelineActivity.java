@@ -157,32 +157,32 @@ public class TimelineActivity extends BarMenuActivity {
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
 
-        UserController userController = new UserController();
-        username = userController.readUsername(TimelineActivity.this).toString();
-
-        MoodController moodController = new MoodController();
-
-        FollowController followController = new FollowController();
-        FollowingList followingList = followController.getFollowingList(username);
-        System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
-
-        nameList.addAll(followingList.getFollowingList());
-
-        oldUserList = (ListView) findViewById(R.id.list_view);
-        try {
-
-            for (int i = 0; i < nameList.size(); i++) {
-                System.out.println("this is fff" + nameList.get(i).toString());
-
-                moodArrayList.addAll(moodController.getUserMoods(username,
-                        String.valueOf(indexOfScroll),TimelineActivity.this));
-            }
-           // }
-        }catch (Exception e){
-            System.out.println("this is outer catch exception"+e);
-        }
-        adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-        oldUserList.setAdapter(adapter);
+//        UserController userController = new UserController();
+//        username = userController.readUsername(TimelineActivity.this).toString();
+//
+//        MoodController moodController = new MoodController();
+//
+//        FollowController followController = new FollowController();
+//        FollowingList followingList = followController.getFollowingList(username);
+//        System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
+//
+//        nameList.addAll(followingList.getFollowingList());
+//
+//        oldUserList = (ListView) findViewById(R.id.list_view);
+//        try {
+//
+//            for (int i = 0; i < nameList.size(); i++) {
+//                System.out.println("this is fff" + nameList.get(i).toString());
+//
+//                moodArrayList.addAll(moodController.getUserMoods(username,
+//                        String.valueOf(indexOfScroll),TimelineActivity.this));
+//            }
+//           // }
+//        }catch (Exception e){
+//            System.out.println("this is outer catch exception"+e);
+//        }
+//        adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
+//        oldUserList.setAdapter(adapter);
 
 
 

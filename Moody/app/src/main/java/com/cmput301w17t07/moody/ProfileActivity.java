@@ -57,33 +57,37 @@ public class ProfileActivity extends BarMenuActivity {
         setContentView(R.layout.activity_profile);
         setUpMenuBar(this);
 
+        //----------------------------- INITIALIZE MANAGER -----------------------------------------
+
+        MoodManager.initManager(ProfileActivity.this);
+
         //----------------------------- GETTING LOCAL USERNAME -------------------------------------
         UserController userController = new UserController();
         username = userController.readUsername(ProfileActivity.this).toString();
 
         //--------------------- SETTING UP PROFILE INFO AT TOP OF SCREEN----------------------------
-        FollowController followController = new FollowController();
-
-
-        TextView userName = (TextView) findViewById(R.id.UserNameText);
-        userName.setText(username);
-        TextView Following = (TextView) findViewById(R.id.Following);
-        Following.setText("Following\n"+followController.getNumberOfFollowing(username));
-        TextView Followers = (TextView) findViewById(R.id.Followers);
-        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username));
+//        FollowController followController = new FollowController();
+//
+//
+//        TextView userName = (TextView) findViewById(R.id.UserNameText);
+//        userName.setText(username);
+//        TextView Following = (TextView) findViewById(R.id.Following);
+//        Following.setText("Following\n"+followController.getNumberOfFollowing(username));
+//        TextView Followers = (TextView) findViewById(R.id.Followers);
+//        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username));
 
         //------------------------------ PENDING REQUEST STUFF -------------------------------------
-        Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
-        PendingRequests.setText("PENDING REQUESTS ("+
-                followController.getNumberOfRequests(username) +")");
-        PendingRequests.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
+//        PendingRequests.setText("PENDING REQUESTS ("+
+//                followController.getNumberOfRequests(username) +")");
+//        PendingRequests.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
         // todo displaying username on screen. REMOVE IN FINAL VERSION
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
@@ -103,12 +107,14 @@ public class ProfileActivity extends BarMenuActivity {
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
         // Getting the user's moods
-        final MoodController moodController = new MoodController();
-        moodArrayList = moodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
+        moodArrayList = MoodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
+        // Save the moodlist locally
+        MoodController.saveMoodList();
+
 
         // creating the adapter that will display the moods
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-        // setting the adapter to display the moods
+//        // setting the adapter to display the moods
         moodTimelineListView.setAdapter(adapter);
 
         // listener that checks if user has reached the bottom of the screen and then attempts to load
@@ -121,11 +127,12 @@ public class ProfileActivity extends BarMenuActivity {
                     // 判断是否滚动到底部
                     // added a test to see if all moods have been loaded
                     if(scrollFlag) {
-                        Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Starting loading new moody", Toast.LENGTH_SHORT).show();
                         indexOfScroll = indexOfScroll + 6;
                         // Getting the extra moods after the scroll
-                        templist = moodController.getUserMoods(username,
+                        templist = MoodController.getUserMoods(username,
                                 String.valueOf(indexOfScroll), ProfileActivity.this);
+                        MoodController.saveMoodList();
                         // determining if there any old moods to find
                         if (templist.size() == 0) {
                             scrollFlag = false;
@@ -142,7 +149,7 @@ public class ProfileActivity extends BarMenuActivity {
             }
         });
 
-        // logic for when a user clicks on a mood item
+//         logic for when a user clicks on a mood item
         moodTimelineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

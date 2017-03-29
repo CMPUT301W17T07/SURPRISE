@@ -26,9 +26,12 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
  * Created by mike on 2017-02-23.
@@ -44,7 +47,7 @@ public class MoodController {
 
     private static Mood mood = null;
     private static MoodList moodList = null;
-    ConnectivityManager manager;
+    private static ConnectivityManager manager;
 
 
     /**
@@ -200,7 +203,7 @@ public class MoodController {
 
     }
 
-    public ArrayList<Mood> getUserMoods(String username, String indexOfScroll, Context context){
+    static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll, Context context){
 
         ArrayList<Mood> moodArrayList = null;
 
@@ -211,7 +214,10 @@ public class MoodController {
 
             try {
                 moodArrayList = getUserMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
+                // If moods are retrieved from server set them to the local moodList
+                System.out.println("this is moodlist"+moodList.getMoods().get(0));
+                moodList.setMoods(moodArrayList);
+
 
             } catch (Exception e) {
                 Log.i("error", "failed to get the mood out of the async matched");
@@ -220,7 +226,8 @@ public class MoodController {
             return moodArrayList;
         }
         else{
-            return moodArrayList;
+//            return null;
+            return moodList.getMoods();
         }
     }
 
@@ -242,6 +249,15 @@ public class MoodController {
 
     /* saveRecordList method*/
     static public void saveMoodList(){
+//        FileOutputStream outputStream;
+//        try {
+//            outputStream = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//            outputStream.write(moods.getBytes());
+//            outputStream.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
         try {
             MoodManager.getManager().saveMoodList(getOfflineMoodList());
         } catch (IOException e) {
@@ -251,7 +267,7 @@ public class MoodController {
     }
 
 
-    public Boolean checkNetwork(Context context){
+    static public Boolean checkNetwork(Context context){
         manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         if (info == null) {
