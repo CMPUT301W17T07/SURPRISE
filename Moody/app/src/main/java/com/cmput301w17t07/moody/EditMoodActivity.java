@@ -175,6 +175,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 } catch (Exception e) {
                     Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
+
                 }
                 return true;
             }
@@ -194,6 +195,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 } else {
                     Intent intent = new Intent(EditMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

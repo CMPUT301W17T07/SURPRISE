@@ -82,6 +82,9 @@ public class ViewMoodActivity extends BarMenuActivity {
                     // deletion can be handled
                     ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
                     deleteMood.execute(viewMoodID);
+                    Intent intent=new Intent(ViewMoodActivity.this, TimelineActivity.class);
+                    startActivity(intent);
+                    //intent.setClass(ViewMoodActivity.this,TimelineActivity.class);
                     finish();
                 }
             });
@@ -97,6 +100,7 @@ public class ViewMoodActivity extends BarMenuActivity {
                     editMoodIntent.putExtra("sendLat2",lat);
                     editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
+                    finish();
                 }
             });
         }

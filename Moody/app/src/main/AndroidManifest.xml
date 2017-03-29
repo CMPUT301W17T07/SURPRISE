@@ -38,6 +38,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".TimelineActivity"
+            android:noHistory="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,18 +50,22 @@
         <activity android:name=".EditMoodActivity" />
         <activity android:name=".ViewMoodActivity" />
         <activity android:name=".FollowingListActivity" />
-        <activity android:name=".CreateUserActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".CreateUserActivity"
+            android:noHistory="true"/>
+        <activity android:name=".ProfileActivity"
+            android:noHistory="true"/>
         <activity android:name=".PendingRequestsActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".FollowerListActivity" />
-        <activity android:name=".SearchFilterOptionsActivity" />
+        <activity android:name=".SearchFilterOptionsActivity"
+            android:noHistory="true"/>
         <activity android:name=".FilterActivity" />
         <activity android:name=".SearchUserActivity" />
         <activity android:name=".MapOptionsActivity" />
         <activity android:name=".MapViewActivity" />
         <activity android:name=".MoodGraphActivity" />
         <activity android:name=".FilterResultsActivity"></activity>
+
     </application>
 
 </manifest>

@@ -58,6 +58,7 @@ public class BarMenuActivity extends AppCompatActivity {
                                 }
                                 else{
                                     Intent home = new Intent (currentContext, timelineActivity);
+//                                    home.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                     startActivity(home);
                                     //setContentView(R.layout.activity_timeline);
                                     break;
@@ -80,6 +81,8 @@ public class BarMenuActivity extends AppCompatActivity {
                                 }
                                 else {
                                     Intent profile = new Intent(currentContext, profileActivity);
+//                                    profile.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
                                     startActivity(profile);
                                     //setContentView(R.layout.activity_profile);
                                     break;

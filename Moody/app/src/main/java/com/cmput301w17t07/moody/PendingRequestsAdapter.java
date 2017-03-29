@@ -136,8 +136,6 @@ public class PendingRequestsAdapter extends BaseAdapter {
                    viewHolder.acceptRequestButton.setEnabled(false);
                    //                viewHolder.declineRequestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
                    viewHolder.declineRequestButton.setEnabled(false);
-
-
                }
                else{
                    Toast.makeText(context, "please check network connection", Toast.LENGTH_SHORT).show();

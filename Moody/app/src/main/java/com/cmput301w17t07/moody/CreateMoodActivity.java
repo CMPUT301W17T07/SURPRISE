@@ -218,6 +218,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     System.out.println("loca = " + location);
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
+                    finish();
                 }}
                 else{
                     if (moodController.createMood(EmotionText, userName,
@@ -227,6 +228,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     } else {
                         Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                         startActivity(intent);
+                        finish();
                     }}
 
             }
