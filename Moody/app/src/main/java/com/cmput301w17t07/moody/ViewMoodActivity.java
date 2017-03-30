@@ -100,7 +100,7 @@ public class ViewMoodActivity extends BarMenuActivity {
                     editMoodIntent.putExtra("sendLat2",lat);
                     editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
-                    finish();
+
                 }
             });
         }
@@ -184,18 +184,18 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
 
     }
-    @Override
-    public void onBackPressed() {
-        if(trigger.equals("profile")) {
-            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
-            startActivity(intentBack);
-            this.finish();
-        }
-        else{
-            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
-            startActivity(intentBack);
-            this.finish();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(trigger.equals("profile")) {
+//            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+//            startActivity(intentBack);
+//            this.finish();
+//        }
+//        else{
+//            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+//            startActivity(intentBack);
+//            this.finish();
+//        }
+//    }
 
     }
