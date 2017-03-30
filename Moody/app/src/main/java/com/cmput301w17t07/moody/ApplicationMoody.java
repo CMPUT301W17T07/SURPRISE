@@ -27,8 +27,9 @@ import java.io.FileOutputStream;
 
 public class ApplicationMoody extends Application {
     public static final String FILENAME = "users";
-    public static final String FOLLOWERS = "users";
-    public static final String FOLLOWING = "users";
+    public static final String FOLLOWERS = "followers";
+    public static final String FOLLOWING = "following";
+    public static final String PENDING = "pending";
 
 
 }

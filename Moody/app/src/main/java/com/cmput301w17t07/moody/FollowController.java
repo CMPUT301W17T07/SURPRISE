@@ -17,6 +17,8 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import java.io.FileInputStream;
@@ -24,12 +26,17 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
+import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWERS;
+import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWING;
+import static com.cmput301w17t07.moody.ApplicationMoody.PENDING;
 
 /**
  * Created by mike on 2017-03-25.
  */
 
 public class FollowController {
+
+    private static ConnectivityManager manager;
 
     public static void createFollowLists(String username){
         // method is only invoked when user first registers his/her account
@@ -225,12 +232,17 @@ public class FollowController {
         return userArrayList;
     }
 
-    public static String getNumberOfRequests(String username){
-
-        //todo need to check for internet here?
-        ArrayList<String> userArrayList= getPendingRequests(username);
-
-        return String.valueOf(userArrayList.size());
+    public static String getNumberOfRequests(String username, Context context){
+        String pendingCount;
+        if(checkNetwork()) {
+            ArrayList<String> userArrayList = getPendingRequests(username);
+            pendingCount = String.valueOf(userArrayList.size());
+            savePendingInfo(pendingCount, context);
+        }
+        else{
+            pendingCount = readPendingInfo(context).toString();
+        }
+        return pendingCount;
     }
 
 
@@ -269,61 +281,137 @@ public class FollowController {
         return followingList;
     }
 
-    public static String getNumberOfFollowers(String username){
-        FollowerList followerList = getFollowerList(username);
-        return String.valueOf(followerList.countFollowers());
+    public static String getNumberOfFollowers(String username, Context context){
+        String followerCount;
+        if(checkNetwork()) {
+            FollowerList followerList = getFollowerList(username);
+            followerCount = String.valueOf(followerList.countFollowers());
+            saveFollowerInfo(followerCount, context);
+        }
+        else{
+            followerCount = readFollowerInfo(context).toString();
+        }
+        return followerCount;
     }
 
-    public static String getNumberOfFollowing(String username){
-        FollowingList followingList = getFollowingList(username);
-        return String.valueOf(followingList.countFollowing());
+    public static String getNumberOfFollowing(String username, Context context){
+        String followingCount;
+        if(checkNetwork()) {
+            FollowingList followingList = getFollowingList(username);
+            followingCount = String.valueOf(followingList.countFollowing());
+            saveFollowingInfo(followingCount, context);
+        }
+        else{
+            followingCount = readFollowingInfo(context).toString();
+
+        }
+        return followingCount;
     }
 
     private static boolean checkNetwork(){
-        //todo implement a checkNetwork method/class to be called here should have context as parameter so it can toast messages
+//        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo info = manager.getActiveNetworkInfo();
+//        if (info == null) {
+//            return false;
+//        } else {
+//            return true;
+//        }
         return true;
     }
 
 
-//    public static void saveFollowInfo(String followers, String following, String pending, Context ctx) {
-//        FileOutputStream outputStream;
-//        try {
-//            outputStream = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-//            outputStream.write(followers.getBytes());
-//            outputStream.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//    /**
-//     * Method that returns the locally saved username.
-//     *
-//     * Logic for reading a locally saved file from:
-//     * link: http://stackoverflow.com/questions/9095610/android-fileinputstream-read-txt-file-to-string
-//     * Author: user370305  Feb 1 '12 at 12:19
-//     * Taken by: Nick Anic 2017/03/09
-//     * @param ctx
-//     * @return  fileContent         StringBuffer of the saved username
-//     */
-//    public StringBuffer readFollowInfo(Context ctx) {
-//        FileInputStream inputStream;
-//        StringBuffer fileContent = new StringBuffer("");
-//        int n;
-//        byte[] buffer = new byte[1024];
-//        try {
-//            inputStream = ctx.openFileInput(FILENAME);
-//            while ((n = inputStream.read(buffer)) != -1)
-//            {
-//                fileContent.append(new String(buffer, 0, n));
-//            }
-//            inputStream.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return fileContent;
-//    }
+    //todo make two generic functions because having 6 functions is a dumb way to go
+    public static void saveFollowerInfo(String followers, Context ctx) {
+        FileOutputStream outputFollowerStream;
+        try {
+            // saving data to files
+            outputFollowerStream = ctx.openFileOutput(FOLLOWERS, Context.MODE_PRIVATE);
+            outputFollowerStream.write(followers.getBytes());
+            outputFollowerStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    public static StringBuffer readFollowerInfo(Context ctx) {
+        FileInputStream inputFollowerStream;
+        StringBuffer fileFollowerContent = new StringBuffer("");
+        int n;
+        byte[] buffer = new byte[1024];
+        try {
+            inputFollowerStream = ctx.openFileInput(FOLLOWERS);
+            while ((n = inputFollowerStream.read(buffer)) != -1)
+            {
+                fileFollowerContent.append(new String(buffer, 0, n));
+            }
+            inputFollowerStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileFollowerContent;
+    }
+
+    public static void saveFollowingInfo(String following, Context ctx) {
+        FileOutputStream outputFollowingStream;
+        try {
+            // saving data to files
+            outputFollowingStream = ctx.openFileOutput(FOLLOWING, Context.MODE_PRIVATE);
+            outputFollowingStream.write(following.getBytes());
+            outputFollowingStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static StringBuffer readFollowingInfo(Context ctx) {
+        FileInputStream inputFollowingStream;
+        StringBuffer fileFollowingContent = new StringBuffer("");
+        int n;
+        byte[] buffer = new byte[1024];
+        try {
+            inputFollowingStream = ctx.openFileInput(FOLLOWING);
+            while ((n = inputFollowingStream.read(buffer)) != -1)
+            {
+                fileFollowingContent.append(new String(buffer, 0, n));
+            }
+            inputFollowingStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileFollowingContent;
+    }
+
+    public static void savePendingInfo(String pending, Context ctx) {
+        FileOutputStream outputPendingStream;
+        try {
+            // saving data to file
+            outputPendingStream = ctx.openFileOutput(PENDING, Context.MODE_PRIVATE);
+            outputPendingStream.write(pending.getBytes());
+            outputPendingStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static StringBuffer readPendingInfo(Context ctx) {
+        FileInputStream inputPendingStream;
+        StringBuffer filePendingContent = new StringBuffer("");
+        int n;
+        byte[] buffer = new byte[1024];
+        try {
+            inputPendingStream = ctx.openFileInput(PENDING);
+            while ((n = inputPendingStream.read(buffer)) != -1)
+            {
+                filePendingContent.append(new String(buffer, 0, n));
+            }
+            inputPendingStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return filePendingContent;
+    }
 
 }
