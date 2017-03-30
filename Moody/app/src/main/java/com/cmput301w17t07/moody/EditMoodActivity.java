@@ -40,6 +40,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
@@ -48,7 +57,7 @@ import java.util.Locale;
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
  */
-public class EditMoodActivity extends BarMenuActivity {
+public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallback {
     public Mood editMood;
     private Bitmap bitmapImage = null;
     private String userName;
@@ -63,6 +72,7 @@ public class EditMoodActivity extends BarMenuActivity {
     private double longitude;
     private String provider;
     private String address;
+    private GoogleMap mMap;
     Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
 
 //    private Date dateValue;
@@ -162,6 +172,16 @@ public class EditMoodActivity extends BarMenuActivity {
                 }
             }
         });
+
+
+        editLocation.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+                openMap(latitude,longitude);
+
+                return true;
+            }
+        });
+
 
         ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
         deleteLocation.setOnClickListener(new View.OnClickListener() {
@@ -412,6 +432,50 @@ public class EditMoodActivity extends BarMenuActivity {
 
 
     }
+    public void openMap(double latitude,double longitude) {
+        setContentView(R.layout.activity_edit_location);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.edit_map);
+        mapFragment.getMapAsync(this);
+
+
+
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng tmp = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().draggable(true).position(tmp).title("Select location").icon(BitmapDescriptorFactory.defaultMarker()));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                LatLng mMarkerPosition;
+                mMarkerPosition = marker.getPosition();
+                System.out.println("Position: " + mMarkerPosition);
+            }
+        });
+
+        Button OKButton = (Button) findViewById(R.id.OK);
+        OKButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                
+                //finish();
+            }
+        });
+    }
+
+
+
 
 
 }

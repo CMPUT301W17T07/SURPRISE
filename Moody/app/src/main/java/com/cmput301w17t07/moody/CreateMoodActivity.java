@@ -16,6 +16,7 @@
 
 package com.cmput301w17t07.moody;
 
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -202,6 +203,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 Geocoder gcd = new Geocoder(CreateMoodActivity.this, Locale.getDefault());
                 try{
                     List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+                    System.out.println("this is my location: " + addresses);
 
                     if (addresses.size() > 0)
                         address = "  " + addresses.get(0).getFeatureName() + " " +
