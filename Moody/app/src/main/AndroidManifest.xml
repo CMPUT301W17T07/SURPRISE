@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2017 CMPUT301W17T07
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,7 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301w17t07.moody">
 
@@ -23,12 +21,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 
     <application
         android:allowBackup="true"
@@ -49,20 +45,38 @@
         <activity android:name=".EditMoodActivity" />
         <activity android:name=".ViewMoodActivity" />
         <activity android:name=".FollowingListActivity" />
-        <activity android:name=".CreateUserActivity"
-            android:noHistory="true"/>
+        <activity
+            android:name=".CreateUserActivity"
+            android:noHistory="true" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".PendingRequestsActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".FollowerListActivity" />
-        <activity android:name=".SearchFilterOptionsActivity"
-            android:noHistory="true"/>
+        <activity
+            android:name=".SearchFilterOptionsActivity"
+            android:noHistory="true" />
         <activity android:name=".FilterActivity" />
         <activity android:name=".SearchUserActivity" />
         <activity android:name=".MapOptionsActivity" />
-        <activity android:name=".MapViewActivity" />
         <activity android:name=".MoodGraphActivity" />
-        <activity android:name=".FilterResultsActivity"></activity>
+        <activity android:name=".FilterResultsActivity" />
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCTLJi9-czPR4B8EmFV_CT9TH5YvK5QLa0" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps">
+        </activity>
 
     </application>
 
