@@ -42,8 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateMoodActivity"/>
-        <activity android:name=".EditMoodActivity" />
+        <activity android:name=".CreateMoodActivity" />
+        <activity android:name=".EditMoodActivity"
+            android:noHistory="true"/>
         <activity android:name=".ViewMoodActivity" />
         <activity android:name=".FollowingListActivity" />
         <activity android:name=".CreateUserActivity"

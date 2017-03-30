@@ -247,6 +247,28 @@ public class MoodController {
         return moodList;
     }
 
+    static public ArrayList<Mood> sortMoods(ArrayList<Mood> moods){
+        Date d1;
+        Date d2;
+        Mood mood;
+        //pop sort maybe binary sort....
+        System.out.println("this is fff lll size "+moods.size());
+        for (int i = 0; i < moods.size() - 1; i++) {
+            for (int j = i + 1; j < moods.size(); j++) {
+
+                d1 = moods.get(i).getDate();
+                d2 = moods.get(j).getDate();
+                if (d1.before(d2)) {
+                    mood = moods.get(i);
+                    moods.set(i, moods.get(j));
+                    moods.set(j, mood);
+                }
+            }
+        }
+
+        return moods;
+    }
+
     /* saveRecordList method*/
     static public void saveMoodList(){
 //        FileOutputStream outputStream;

@@ -73,14 +73,14 @@ public class ProfileActivity extends BarMenuActivity {
         TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
         TextView Following = (TextView) findViewById(R.id.Following);
-        Following.setText("Following\n"+followController.getNumberOfFollowing(username));
+        Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
         TextView Followers = (TextView) findViewById(R.id.Followers);
-        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username));
+        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username, ProfileActivity.this));
 
         //------------------------------ PENDING REQUEST STUFF -------------------------------------
         Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
         PendingRequests.setText("PENDING REQUESTS ("+
-                followController.getNumberOfRequests(username) +")");
+                followController.getNumberOfRequests(username, ProfileActivity.this) +")");
         PendingRequests.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
@@ -112,7 +112,6 @@ public class ProfileActivity extends BarMenuActivity {
         // Getting the user's moods
         moodArrayList = MoodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
         // Save the moodlist locally
-        MoodController.saveMoodList();
 
 
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
@@ -132,7 +131,6 @@ public class ProfileActivity extends BarMenuActivity {
                         indexOfScroll = indexOfScroll + 6;
                         templist = MoodController.getUserMoods(username,
                                 String.valueOf(indexOfScroll), ProfileActivity.this);
-                        MoodController.saveMoodList();
                         // determining if there any old moods to find
                         if (templist.size() == 0) {
                             scrollFlag = false;

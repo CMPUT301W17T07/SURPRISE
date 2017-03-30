@@ -237,7 +237,7 @@ public class FollowController {
         if(checkNetwork()) {
             ArrayList<String> userArrayList = getPendingRequests(username);
             pendingCount = String.valueOf(userArrayList.size());
-            savePendingInfo(pendingCount, context);
+//            savePendingInfo(pendingCount, context);
         }
         else{
             pendingCount = readPendingInfo(context).toString();
@@ -286,7 +286,7 @@ public class FollowController {
         if(checkNetwork()) {
             FollowerList followerList = getFollowerList(username);
             followerCount = String.valueOf(followerList.countFollowers());
-            saveFollowerInfo(followerCount, context);
+//            saveFollowerInfo(followerCount, context);
         }
         else{
             followerCount = readFollowerInfo(context).toString();
@@ -299,7 +299,7 @@ public class FollowController {
         if(checkNetwork()) {
             FollowingList followingList = getFollowingList(username);
             followingCount = String.valueOf(followingList.countFollowing());
-            saveFollowingInfo(followingCount, context);
+//            saveFollowingInfo(followingCount, context);
         }
         else{
             followingCount = readFollowingInfo(context).toString();

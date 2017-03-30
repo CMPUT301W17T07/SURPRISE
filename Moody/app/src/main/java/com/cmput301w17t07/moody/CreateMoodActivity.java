@@ -253,7 +253,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {
-            finish();   //no data return
+            finish();
         }
         if (requestCode == 0) {
             //get pic from local photo
