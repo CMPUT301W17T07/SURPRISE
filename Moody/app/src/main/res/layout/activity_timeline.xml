@@ -35,7 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:divider="@color/white"
+        android:dividerHeight="8px"
+        android:background="@color/blueTheme" />
 
 
     <android.support.design.widget.BottomNavigationView

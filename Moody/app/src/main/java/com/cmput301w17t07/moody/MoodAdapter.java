@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -70,7 +72,13 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         viewHolder.messageTest.setTextSize(20);
         //        feelingText.setTypeface(font);
 
-        viewHolder.dataText.setText(mood.getDate().toString());
+        //http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
+        // Date: answered Apr 16 '11 at 1:02
+        // Author: Charlie Salts
+        Format formatter = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
+        String testDate = formatter.format(mood.getDate());
+
+        viewHolder.dataText.setText(testDate);
         viewHolder.dataText.setTextSize(20);
         //        dateText.setTypeface(font);
 
@@ -97,7 +105,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
                 viewHolder.emojiImage.setImageResource(R.drawable.sad);
                 break;
             case "shame":
-                viewHolder.emojiImage.setImageResource(R.drawable.shame2);
+                viewHolder.emojiImage.setImageResource(R.drawable.shame);
                 break;
             case "surprise":
                 viewHolder.emojiImage.setImageResource(R.drawable.surprise2);

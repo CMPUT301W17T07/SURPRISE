@@ -23,7 +23,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/profilePicture"
@@ -32,14 +32,14 @@
             android:adjustViewBounds="true"
             android:maxHeight="60dp"
             android:maxWidth="70dp"
-            android:paddingBottom = "10dp" />
+            android:paddingBottom="10dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/profilePicture" >
+            android:layout_toRightOf="@+id/profilePicture">
 
             <TextView
                 android:id="@+id/usernameTV"
@@ -60,7 +60,8 @@
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/messageTV"
-            android:layout_below="@+id/messageTV" >
+            android:layout_below="@+id/messageTV">
+
             <TextView
                 android:id="@+id/dateTV"
                 android:layout_width="wrap_content"
@@ -72,7 +73,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/linearLayout1" >
+            android:layout_toRightOf="@id/linearLayout1">
 
             <ImageView
                 android:id="@+id/feelingEmoji"
@@ -89,7 +90,6 @@
 
 
     </RelativeLayout>
-
 
 
 </LinearLayout>
