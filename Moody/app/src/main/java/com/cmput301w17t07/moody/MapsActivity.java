@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -40,6 +41,10 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     private Intent intent;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
 
+    private String selectedUser; // equals My Moods/Timeline Moods
+    private Integer user; // user = 0 if My Moods else user = 1 if Timeline Moods
+    ArrayList nameList = new ArrayList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +52,18 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_maps);
         setUpMenuBar(this);
 
+
         UserController userController = new UserController();
         username = userController.readUsername(MapsActivity.this).toString();
 
         intent = getIntent();
+
+        selectedUser = intent.getStringExtra("selectedUser");
+        if (selectedUser.equals("My Moods")) {
+            user = 0;
+        } else {
+            user = 1;
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -74,34 +87,75 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
         filterFeeling = intent.getStringExtra("feelingFilter");
         Toast.makeText(MapsActivity.this, filterFeeling, Toast.LENGTH_SHORT).show();
-        ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
-                new ElasticMoodController.GetFeelingFilterMoods();
-        getFeelingFilterMoods.execute(username, filterFeeling);
+        if (user == 0) {
+            ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                    new ElasticMoodController.GetFeelingFilterMoods();
+            getFeelingFilterMoods.execute(username, filterFeeling);
 
-        try {
-            moodArrayList= getFeelingFilterMoods.get();
-            System.out.println("this is moodlist " + moodArrayList);
+            try {
+                moodArrayList = getFeelingFilterMoods.get();
+                System.out.println("this is moodlist " + moodArrayList);
 
-        }catch (Exception e){
-            Log.i("error","failed to get the mood out of the async matched");
-        }
-
-        for (int i = 0; i < moodArrayList.size(); i++) {
-            if (moodArrayList.get(i).getLocation() == null) {
-                break;
-            }
-            else {
-                double longitude;
-                double latitude;
-                longitude = moodArrayList.get(i).getLocation().getLongitude();
-                latitude = moodArrayList.get(i).getLocation().getLatitude();
-                LatLng tmp = new LatLng(latitude,longitude);
-                mMap.addMarker(new MarkerOptions().position(tmp).title(username).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+            } catch (Exception e) {
+                Log.i("error", "failed to get the mood out of the async matched");
             }
 
-        }
+            for (int i = 0; i < moodArrayList.size(); i++) {
+                if (moodArrayList.get(i).getLocation() == null) {
+                    break;
+                } else {
+                    double longitude;
+                    double latitude;
+                    longitude = moodArrayList.get(i).getLocation().getLongitude();
+                    latitude = moodArrayList.get(i).getLocation().getLatitude();
+                    LatLng tmp = new LatLng(latitude, longitude);
+                    mMap.addMarker(new MarkerOptions().position(tmp).title(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+                }
+            }
 
+        } else {
+            // do timeline stuff ...
+            UserController userController = new UserController();
+            username = userController.readUsername(MapsActivity.this).toString();
+
+            FollowController followController = new FollowController();
+            FollowingList followingList = followController.getFollowingList(username);
+
+            nameList.addAll(followingList.getFollowingList());
+            try {
+                for (int i = 0; i < nameList.size(); i++) {
+
+                    ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                            new ElasticMoodController.GetFeelingFilterMoods();
+                    getFeelingFilterMoods.execute(nameList.get(i).toString(), filterFeeling);
+
+                    try {
+                        moodArrayList.addAll(getFeelingFilterMoods.get());
+
+                    } catch (Exception e) {
+                        System.out.println("this is fff" + e);
+                    }
+                    for (int j = 0; j < moodArrayList.size(); j++) {
+                        if (moodArrayList.get(j).getLocation() == null) {
+                            break;
+                        } else {
+                            double longitude;
+                            double latitude;
+                            longitude = moodArrayList.get(j).getLocation().getLongitude();
+                            latitude = moodArrayList.get(j).getLocation().getLatitude();
+                            LatLng tmp = new LatLng(latitude, longitude);
+                            mMap.addMarker(new MarkerOptions().position(tmp).title(nameList.get(i).toString()).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println("this is fff error" + e);
+            }
+
+        }
 
 
 //        // Add a marker in Sydney and move the camera
@@ -114,4 +168,37 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(uofa));
     }
 
+
+    public Float setMarkerColor(String feeling) {
+        double d = 0.0;
+        float markerColor = (float) d;
+        switch (feeling) {
+            case "anger":
+                markerColor = BitmapDescriptorFactory.HUE_RED;
+                break;
+            case "confusion":
+                markerColor = BitmapDescriptorFactory.HUE_ORANGE;
+                break;
+            case "disgust":
+                markerColor = BitmapDescriptorFactory.HUE_GREEN;
+                break;
+            case "fear":
+                markerColor = BitmapDescriptorFactory.HUE_CYAN;
+                break;
+            case "happiness":
+                markerColor = BitmapDescriptorFactory.HUE_YELLOW;
+                break;
+            case "sadness":
+                markerColor = BitmapDescriptorFactory.HUE_AZURE;
+                break;
+            case "shame":
+                markerColor = BitmapDescriptorFactory.HUE_MAGENTA;
+                break;
+            case "surprise":
+                markerColor = BitmapDescriptorFactory.HUE_BLUE;
+                break;
+        }
+        return markerColor;
+
+    }
 }

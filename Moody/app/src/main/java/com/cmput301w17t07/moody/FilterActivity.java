@@ -27,6 +27,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by anicn on 2017-03-12.
  */
@@ -44,6 +47,8 @@ public class FilterActivity extends BarMenuActivity {
     private Button messageFilterButton;
     private Integer selectedFilter;
     private EditText messageFilter;
+
+    private String selectedUser;
 
 
     @Override
@@ -68,6 +73,7 @@ public class FilterActivity extends BarMenuActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 userText = "Filter: " + parent.getItemAtPosition(position).toString();
+                selectedUser = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -102,6 +108,7 @@ public class FilterActivity extends BarMenuActivity {
                 Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
                 filterResults.putExtra("feelingFilter", feelingText);
                 filterResults.putExtra("selectedFilter", selectedFilter);
+                filterResults.putExtra("selectedUser", selectedUser);
                 startActivity(filterResults);
                 finish();
             }
@@ -139,6 +146,7 @@ public class FilterActivity extends BarMenuActivity {
                 //todo see if we need to pass this in or not (i.e. if we allow for other filter options aside from last week)
 //                filterResults.putExtra("dateFilter", dateText);
                 filterResults.putExtra("selectedFilter", selectedFilter);
+                filterResults.putExtra("selectedUser", selectedUser);
                 startActivity(filterResults);
                 finish();
             }
@@ -159,12 +167,11 @@ public class FilterActivity extends BarMenuActivity {
                 Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
                 filterResults.putExtra("messageFilter", filterMessage);
                 filterResults.putExtra("selectedFilter", selectedFilter);
+                filterResults.putExtra("selectedUser", selectedUser);
                 startActivity(filterResults);
                 finish();
             }
         });
-
-
 
 
     }

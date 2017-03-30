@@ -34,6 +34,8 @@ public class MapOptionsActivity extends BarMenuActivity {
     private String feelingText;
     private Integer selectedFilter;
 
+    private String selectedUser;
+
     private Intent intent;
 
     private Button resultMap;
@@ -61,6 +63,7 @@ public class MapOptionsActivity extends BarMenuActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 userText = "Filter: " + parent.getItemAtPosition(position).toString();
+                selectedUser = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -92,11 +95,10 @@ public class MapOptionsActivity extends BarMenuActivity {
 
         feelingMapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //selectedFilter = 0;
                 Intent createMap = new Intent(MapOptionsActivity.this, MapsActivity.class);
                 createMap.putExtra("feelingFilter", feelingText);
-                Toast.makeText(MapOptionsActivity.this, feelingText, Toast.LENGTH_SHORT).show();
-                //createMap.putExtra("selectedFilter", selectedFilter);
+                createMap.putExtra("selectedUser", selectedUser);
+                //Toast.makeText(MapOptionsActivity.this, feelingText, Toast.LENGTH_SHORT).show();
                 startActivity(createMap);
                 finish();
             }
