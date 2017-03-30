@@ -148,8 +148,8 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                         } else {
                             double longitude;
                             double latitude;
-                            longitude = moodArrayList.get(j).getLongitude();
-                            latitude = moodArrayList.get(j).getLatitude();
+                            longitude = moodArrayList.get(i).getLongitude();
+                            latitude = moodArrayList.get(i).getLatitude();
                             Toast.makeText(MapsActivity.this, ""+longitude, Toast.LENGTH_SHORT).show();
                             LatLng tmp = new LatLng(latitude, longitude);
                             mMap.addMarker(new MarkerOptions().position(tmp).title(nameList.get(i).toString()).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
