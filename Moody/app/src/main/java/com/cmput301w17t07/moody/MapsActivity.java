@@ -90,7 +90,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         filterFeeling = intent.getStringExtra("feelingFilter");
-        Toast.makeText(MapsActivity.this, filterFeeling, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MapsActivity.this, filterFeeling, Toast.LENGTH_SHORT).show();
         if (user == 0) {
             ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
                     new ElasticMoodController.GetFeelingFilterMoods();
@@ -126,6 +126,8 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
             FollowController followController = new FollowController();
             FollowingList followingList = followController.getFollowingList(username);
 
+            Toast.makeText(MapsActivity.this, "timeline", Toast.LENGTH_SHORT).show();
+
             nameList.addAll(followingList.getFollowingList());
             try {
                 for (int i = 0; i < nameList.size(); i++) {
@@ -141,13 +143,14 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                         System.out.println("this is fff" + e);
                     }
                     for (int j = 0; j < moodArrayList.size(); j++) {
-                        if (moodArrayList.get(j).getLongitude() == 0) {
+                        if (moodArrayList.get(j).getLongitude() == 0 && moodArrayList.get(j).getLatitude() == 0) {
                             break;
                         } else {
                             double longitude;
                             double latitude;
                             longitude = moodArrayList.get(j).getLongitude();
                             latitude = moodArrayList.get(j).getLatitude();
+                            Toast.makeText(MapsActivity.this, ""+longitude, Toast.LENGTH_SHORT).show();
                             LatLng tmp = new LatLng(latitude, longitude);
                             mMap.addMarker(new MarkerOptions().position(tmp).title(nameList.get(i).toString()).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
@@ -160,6 +163,8 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
             }
 
         } else if (user == 2) {
+
+            Toast.makeText(MapsActivity.this, "hello", Toast.LENGTH_SHORT).show();
 //            UserController userController = new UserController();
 //            username = userController.readUsername(MapsActivity.this).toString();
 //

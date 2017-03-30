@@ -54,7 +54,7 @@ public class MapOptionsActivity extends BarMenuActivity {
         // ---------------------Filter by User--------------------------------------
         Spinner dropdownUser = (Spinner) findViewById(R.id.filterMapUser);
 
-        String[] users = new String[]{"My Moods", "TimeLine Moods"};
+        String[] users = new String[]{"My Moods", "Timeline Moods"};
         ArrayAdapter<String> adapterUsers = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, users);
         dropdownUser.setAdapter(adapterUsers);
 
@@ -94,14 +94,6 @@ public class MapOptionsActivity extends BarMenuActivity {
         });
 
 
-        usersNearMe.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent createMap2 = new Intent(MapOptionsActivity.this, MapsActivity.class);
-                createMap2.putExtra("selectedUser", "nearMe");
-                startActivity(createMap2);
-                finish();
-            }
-        });
 
 
         feelingMapButton.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +102,16 @@ public class MapOptionsActivity extends BarMenuActivity {
                 createMap.putExtra("feelingFilter", feelingText);
                 createMap.putExtra("selectedUser", selectedUser);
                 startActivity(createMap);
+                finish();
+            }
+        });
+
+
+        usersNearMe.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent createMap2 = new Intent(MapOptionsActivity.this, MapsActivity.class);
+                createMap2.putExtra("selectedUser", "nearMe");
+                startActivity(createMap2);
                 finish();
             }
         });
