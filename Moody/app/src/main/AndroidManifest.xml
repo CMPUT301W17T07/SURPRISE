@@ -58,7 +58,6 @@
         <activity android:name=".FilterActivity" />
         <activity android:name=".SearchUserActivity" />
         <activity android:name=".MapOptionsActivity" />
-        <activity android:name=".MoodGraphActivity" />
         <activity android:name=".FilterResultsActivity" />
 
         <!--
@@ -71,7 +70,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCTLJi9-czPR4B8EmFV_CT9TH5YvK5QLa0" />
+            android:value="AIzaSyBdGGoTUX5FXbMB_fibd5nsdj1qEXnutXc" />
 
         <activity
             android:name=".MapsActivity"
