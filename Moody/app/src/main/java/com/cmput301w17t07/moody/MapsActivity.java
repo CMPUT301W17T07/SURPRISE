@@ -61,8 +61,12 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
         selectedUser = intent.getStringExtra("selectedUser");
         if (selectedUser.equals("My Moods")) {
             user = 0;
-        } else {
+        }
+        else if (selectedUser.equals("Timeline Moods")) {
             user = 1;
+        }
+        else {
+            user = 2;
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -114,7 +118,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 }
             }
 
-        } else {
+        } else if (user == 1) {
             // do timeline stuff ...
             UserController userController = new UserController();
             username = userController.readUsername(MapsActivity.this).toString();
@@ -154,6 +158,15 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
             } catch (Exception e) {
                 System.out.println("this is fff error" + e);
             }
+
+        } else if (user == 2) {
+//            UserController userController = new UserController();
+//            username = userController.readUsername(MapsActivity.this).toString();
+//
+//            ElasticMoodController.FilterMapByLocation filterMapByLocation =
+//                    new ElasticMoodController.FilterMapByLocation();
+//            filterMapByLocation.execute(, filterFeeling);
+
 
         }
 

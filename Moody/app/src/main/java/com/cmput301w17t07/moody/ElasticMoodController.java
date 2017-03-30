@@ -16,6 +16,7 @@
 
 package com.cmput301w17t07.moody;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -252,7 +253,7 @@ public class ElasticMoodController extends ElasticController {
                         "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
                         "{\"term\": {\"moodMessage\": \""+ search_parameters[1] +"\"}}\n" +
                         "]\n" +
-                        "}}}";
+                        "}}},";
                 System.out.println("this is query" + query);
             }
 
@@ -428,6 +429,59 @@ public class ElasticMoodController extends ElasticController {
 
             return null;
         }
+    }
+
+    /**
+     * Nested FilterMapByLocation class object. Used to find all moods within 5km of me.
+     */
+    public static class FilterMapByLocation extends AsyncTask<Location, Void, ArrayList<Mood>> {
+        /**
+         * doInBackground finds moods within 5km of my current location
+         * @param locations        unique server ID of the moods posted by me
+         * @return null
+         */
+        @Override
+        protected ArrayList<Mood> doInBackground(Location... locations) {
+            verifySettings();
+
+            String query ="{\n" +
+                    "\"query\" : {\n" +
+                    "\"bool\" : {\n" +
+                    "\"must\" : {\n" +
+                    " \"match_all\" : {}\n" +
+                    "}," +
+                    "\"filter\" : {\n" +
+                        "\"geo_distance\" : {\n" +
+                            "\"distance : 5km\",\n" +
+                                    "\"location\" : [" + locations[0].getLongitude() + ", "
+                                                       + locations[0].getLatitude() + "]\n" +
+                            "}}}";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w17t07")
+                    .addType("mood")
+                    .build();
+
+            ArrayList<Mood> allLocations = new ArrayList<> ();
+
+            try {
+
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
+                    allLocations.addAll(foundMoods);
+                }
+                else {
+                    Log.i("Error", "The search query failed to find any tweets that matched, buddy");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return allLocations;
+        }
+
     }
 
     //todo part 5 implement EditMood nested class, as opposed to relying on add and delete for editing

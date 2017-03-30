@@ -50,6 +50,7 @@ public class MapOptionsActivity extends BarMenuActivity {
         setUpMenuBar(this);
 
         Button feelingMapButton = (Button) findViewById(R.id.filterFeelingMap);
+        Button usersNearMe = (Button) findViewById(R.id.filterNearUser);
 
         // ---------------------Filter by User--------------------------------------
         Spinner dropdownUser = (Spinner) findViewById(R.id.filterMapUser);
@@ -76,7 +77,7 @@ public class MapOptionsActivity extends BarMenuActivity {
         // -------------------------Filter by Feeling-------------------------------------------
         Spinner dropdownFeeling = (Spinner) findViewById(R.id.filterMapFeeling);
 
-        String[] feelings = new String[]{"any", "anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        String[] feelings = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapterFeelings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
         dropdownFeeling.setAdapter(adapterFeelings);
 
@@ -93,15 +94,26 @@ public class MapOptionsActivity extends BarMenuActivity {
             }
         });
 
+
+        usersNearMe.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent createMap2 = new Intent(MapOptionsActivity.this, MapsActivity.class);
+                createMap2.putExtra("selectedUser", "nearMe");
+                startActivity(createMap2);
+                finish();
+            }
+        });
+
+
         feelingMapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent createMap = new Intent(MapOptionsActivity.this, MapsActivity.class);
                 createMap.putExtra("feelingFilter", feelingText);
                 createMap.putExtra("selectedUser", selectedUser);
-                //Toast.makeText(MapOptionsActivity.this, feelingText, Toast.LENGTH_SHORT).show();
                 startActivity(createMap);
                 finish();
             }
         });
+
     }
 }
