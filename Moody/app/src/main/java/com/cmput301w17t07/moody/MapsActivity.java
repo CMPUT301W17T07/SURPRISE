@@ -210,10 +210,10 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 markerColor = BitmapDescriptorFactory.HUE_AZURE;
                 break;
             case "shame":
-                markerColor = BitmapDescriptorFactory.HUE_MAGENTA;
+                markerColor = BitmapDescriptorFactory.HUE_ROSE;
                 break;
             case "surprise":
-                markerColor = BitmapDescriptorFactory.HUE_BLUE;
+                markerColor = BitmapDescriptorFactory.HUE_VIOLET;
                 break;
         }
         return markerColor;

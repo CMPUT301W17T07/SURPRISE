@@ -97,7 +97,7 @@
         android:id="@+id/imageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:srcCompat="@drawable/happy"
+        app:srcCompat="@drawable/ic_profile"
         android:layout_marginLeft="17dp"
         android:layout_marginStart="17dp"
         android:layout_above="@+id/Following"

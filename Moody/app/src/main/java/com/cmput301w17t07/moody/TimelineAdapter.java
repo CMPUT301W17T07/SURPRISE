@@ -118,7 +118,7 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
                 viewHolder.emojiImage.setImageResource(R.drawable.disgust);
                 break;
             case "fear":
-                viewHolder.emojiImage.setImageResource(R.drawable.fear);
+                viewHolder.emojiImage.setImageResource(R.drawable.fear3);
                 break;
             case "happiness":
                 viewHolder.emojiImage.setImageResource(R.drawable.happy);
@@ -127,10 +127,10 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
                 viewHolder.emojiImage.setImageResource(R.drawable.sad);
                 break;
             case "shame":
-                viewHolder.emojiImage.setImageResource(R.drawable.shame);
+                viewHolder.emojiImage.setImageResource(R.drawable.shame2);
                 break;
             case "surprise":
-                viewHolder.emojiImage.setImageResource(R.drawable.surprise);
+                viewHolder.emojiImage.setImageResource(R.drawable.surprise2);
                 break;
         }
 

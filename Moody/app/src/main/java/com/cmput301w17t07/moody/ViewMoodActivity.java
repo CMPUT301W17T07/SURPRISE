@@ -179,7 +179,7 @@ public class ViewMoodActivity extends BarMenuActivity {
                 emoji.setImageResource(R.drawable.disgust);
                 break;
             case "fear":
-                emoji.setImageResource(R.drawable.fear);
+                emoji.setImageResource(R.drawable.fear3);
                 break;
             case "happiness":
                 emoji.setImageResource(R.drawable.happy);
@@ -188,10 +188,10 @@ public class ViewMoodActivity extends BarMenuActivity {
                 emoji.setImageResource(R.drawable.sad);
                 break;
             case "shame":
-                emoji.setImageResource(R.drawable.shame);
+                emoji.setImageResource(R.drawable.shame2);
                 break;
             case "surprise":
-                emoji.setImageResource(R.drawable.surprise);
+                emoji.setImageResource(R.drawable.surprise2);
                 break;
         }
 
