@@ -105,7 +105,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
                 viewHolder.emojiImage.setImageResource(R.drawable.sad);
                 break;
             case "shame":
-                viewHolder.emojiImage.setImageResource(R.drawable.shame);
+                viewHolder.emojiImage.setImageResource(R.drawable.shame2);
                 break;
             case "surprise":
                 viewHolder.emojiImage.setImageResource(R.drawable.surprise2);
