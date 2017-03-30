@@ -51,8 +51,7 @@
         <activity android:name=".FollowingListActivity" />
         <activity android:name=".CreateUserActivity"
             android:noHistory="true"/>
-        <activity android:name=".ProfileActivity"
-            android:noHistory="true"/>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".PendingRequestsActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".FollowerListActivity" />

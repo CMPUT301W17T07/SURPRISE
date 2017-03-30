@@ -68,14 +68,14 @@ public class ProfileActivity extends BarMenuActivity {
         TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
         TextView Following = (TextView) findViewById(R.id.Following);
-        Following.setText("Following\n"+followController.getNumberOfFollowing(username));
+        Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
         TextView Followers = (TextView) findViewById(R.id.Followers);
-        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username));
+        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username, ProfileActivity.this));
 
         //------------------------------ PENDING REQUEST STUFF -------------------------------------
         Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
         PendingRequests.setText("PENDING REQUESTS ("+
-                followController.getNumberOfRequests(username) +")");
+                followController.getNumberOfRequests(username, ProfileActivity.this) +")");
         PendingRequests.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
@@ -101,18 +101,13 @@ public class ProfileActivity extends BarMenuActivity {
         scrollFlag = true;
 
 
-        ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-        getUserMoods.execute(username,String.valueOf(indexOfScroll));
 
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
-        try {
-            moodArrayList= getUserMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
+        // Getting the user's moods
+        moodArrayList = MoodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
+        // Save the moodlist locally
 
-        }catch (Exception e){
-            Log.i("error","failed to get the mood out of the async matched");
-        }
 
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
 //        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
@@ -158,45 +153,51 @@ public class ProfileActivity extends BarMenuActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                try{
-                     Mood viewMood = moodArrayList.get(position);
-                     String ID = viewMood.getId();
-                     Location location = null;
-                     Mood send = new Mood(viewMood.getFeeling(),
-                             viewMood.getUsername(),
-                             viewMood.getMoodMessage(),
-                             location,
-                             viewMood.getMoodImageID(),
-                             viewMood.getSocialSituation());
-                    send.setId(viewMood.getId());
-                    String hasLocation = "0";
+//                try{
+//                     Mood viewMood = moodArrayList.get(position);
+//                     String ID = viewMood.getId();
+//                     Location location = null;
+//                     Mood send = new Mood(viewMood.getFeeling(),
+//                             viewMood.getUsername(),
+//                             viewMood.getMoodMessage(),
+//                             location,
+//                             viewMood.getMoodImageID(),
+//                             viewMood.getSocialSituation());
+//                    send.setId(viewMood.getId());
+//                    String hasLocation = "0";
+//
+//                    System.out.println("location = " + viewMood.toString());
+//                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+//                    viewMoodIntent.setAction("action");
+//                    viewMoodIntent.putExtra("viewMood", send);
+//                   // viewMoodIntent.putExtra("ID",ID);
+//                    if(viewMood.getLocation()!=null){
+//                        DecimalFormat decimalFormat=new DecimalFormat(".##");
+//                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
+//                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
+//                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
+//                        System.out.println("passlocation = "+passLocation);
+//                        Location sendLocation = viewMood.getLocation();
+//                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
+//                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
+//                        System.out.println("lat = " + sendLocation);
+//                        hasLocation = "1";
+//                        viewMoodIntent.putExtra("location",passLocation);}
+//                    else{
+//                        String passLocation = "";
+//                        viewMoodIntent.putExtra("location",passLocation);}
+//                    viewMoodIntent.putExtra("haslocation",hasLocation);
+//                    String trigger = "profile";
+//                    viewMoodIntent.putExtra("trigger",trigger);
+//                    startActivity(viewMoodIntent);
+//                    finish();
+//                }catch(Exception e){}
+                Mood viewMood = moodArrayList.get(position);
+                Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
+                viewMoodIntent.putExtra("viewMood", viewMood);
 
-                    System.out.println("location = " + viewMood.toString());
-                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
-                    viewMoodIntent.setAction("action");
-                    viewMoodIntent.putExtra("viewMood", send);
-                   // viewMoodIntent.putExtra("ID",ID);
-                    if(viewMood.getLocation()!=null){
-                        DecimalFormat decimalFormat=new DecimalFormat(".##");
-                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
-                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
-                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
-                        System.out.println("passlocation = "+passLocation);
-                        Location sendLocation = viewMood.getLocation();
-                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
-                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
-                        System.out.println("lat = " + sendLocation);
-                        hasLocation = "1";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    else{
-                        String passLocation = "";
-                        viewMoodIntent.putExtra("location",passLocation);}
-                    viewMoodIntent.putExtra("haslocation",hasLocation);
-                    String trigger = "profile";
-                    viewMoodIntent.putExtra("trigger",trigger);
-                    startActivity(viewMoodIntent);
-                    finish();
-                }catch(Exception e){}
+                startActivity(viewMoodIntent);
+                finish();
             }
 
 

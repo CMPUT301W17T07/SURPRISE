@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2017 CMPUT301W17T07
  *
@@ -16,6 +17,7 @@
 
 package com.cmput301w17t07.moody;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -29,14 +31,18 @@ import java.util.ArrayList;
  *
  */
 
-public class MoodList {
+public class MoodList implements Serializable{
 
-    public ArrayList<Mood> moodList = new ArrayList<Mood>();
+    //    private static final long serialVersionUID =  6673446047991058932L;
+    private static final long serialVersionUID =  2L;
 
 
-//    public MoodList(ArrayList<Mood> moodList) {
-//        moodList = new ArrayList<Mood>();
-//    }
+    public ArrayList<Mood> moodList = null;
+
+
+    public MoodList() {
+        moodList = new ArrayList<Mood>();
+    }
 
     public void addMood(Mood mood){
         // add mood to database?
@@ -65,15 +71,15 @@ public class MoodList {
     public boolean hasMood(Mood mood){
         return moodList.contains(mood);
     }
-//
-//    public ArrayList<Mood> getMoodList(){
-//        // return moodList from database?
-//        return moodList;
-//    }
-//
-//    public void setMoodList(){
-//        // something in here potentially
-//    }
+
+    public ArrayList<Mood> getMoods(){
+        return moodList;
+    }
+
+    public void setMoods(ArrayList<Mood> moods){
+        moodList.clear();
+        moodList.addAll(moods);
+    }
 
 
 }

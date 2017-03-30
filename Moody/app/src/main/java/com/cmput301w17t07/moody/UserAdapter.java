@@ -104,13 +104,19 @@ public class UserAdapter extends BaseAdapter {
         View view;
         final SearchViewHolder viewHolder;
 
-
         if (convertView == null) {
             viewHolder =new SearchViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.single_search_list,null);
             viewHolder.userName=(TextView) view.findViewById(R.id.singleSearchItemName);
             viewHolder.requestButton=(Button) view.findViewById(R.id.searchAdd);
-            //viewHolder.declineBtn=(Button) view.findViewById(R.id.searchDecline);
+
+            // determining whether to display send request button
+            if(!FollowController.canRequestBeSent(username, searchUsername)){
+                viewHolder.requestButton.setEnabled(false);
+                viewHolder.requestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
+                viewHolder.requestButton.setText("");
+            }
+
 
             view.setTag(viewHolder);
         }else {
@@ -127,8 +133,7 @@ public class UserAdapter extends BaseAdapter {
             @Override
             public  void onClick(View v){
                 //todo implement ability to show send request button or following text depending on if user is already following
-                FollowController followController = new FollowController();
-                if(followController.sendPendingRequest(username, searchUsername)){
+                if(FollowController.sendPendingRequest(username, searchUsername)){
                     // if it returns true....
 
 
@@ -148,14 +153,6 @@ public class UserAdapter extends BaseAdapter {
             }
         });
 
-//        viewHolder.declineBtn.setTag(position+1);
-//        viewHolder.declineBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public  void onClick(View v){
-//                Toast.makeText(context,"list view decline was clicked by Panchy in position "
-//                        +position+" username is "+userList.get(position).getUsername(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return view;
     }

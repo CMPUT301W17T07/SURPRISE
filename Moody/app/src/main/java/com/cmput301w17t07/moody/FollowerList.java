@@ -96,13 +96,13 @@ public class FollowerList {
 //        return followerList.get(index);
 //    }
 
-//    public boolean hasFollower(User user){
-//        return followerList.contains(user);
-//    }
-//
-//    public boolean hasPending(User user){
-//        return pendingFollowers.contains(user);
-//    }
+    public boolean hasFollower(String username){
+        return followerList.contains(username);
+    }
+    //
+    public boolean hasPending(String username){
+        return pendingFollowers.contains(username);
+    }
 
 
     public ArrayList<String> getPendingFollowers() {
