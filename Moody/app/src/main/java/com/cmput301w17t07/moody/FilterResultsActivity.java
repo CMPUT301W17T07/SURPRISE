@@ -40,8 +40,6 @@ public class FilterResultsActivity extends BarMenuActivity {
     private ListView moodTimeline;
     private TimelineAdapter adapter;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
-    private Button feelingFilterButton;
-    private Button messageFilterButton;
     private Integer selectedFilter;
     private String filterFeeling;
     private String filterMessage;
@@ -129,6 +127,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                 }
             }
         }
+        //------------------------------ TIMELINE FILTERING ----------------------------------------
         else {
             // do timeline stuff ...
             UserController userController = new UserController();
@@ -151,15 +150,15 @@ public class FilterResultsActivity extends BarMenuActivity {
                             moodArrayList.addAll(getFeelingFilterMoods.get());
 
                         } catch (Exception e) {
-                            System.out.println("this is fff" + e);
+                            System.out.println("failed to get the feeling filter moods out of the async matched" + e);
                         }
                     }
-                    sortArrayList2=invertOrderList(moodArrayList);
+                    sortArrayList2 = MoodController.sortMoods(moodArrayList);
                     adapter = new TimelineAdapter(this, R.layout.timeline_list, sortArrayList2);
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
-                    System.out.println("this is fff error"+e);
+                    System.out.println("this is a timeline feeling filter error"+e);
                 }
 
             }
@@ -179,12 +178,12 @@ public class FilterResultsActivity extends BarMenuActivity {
                             Log.i("error", "failed to get the recent week moods out of the async matched");
                         }
                     }
-                    sortArrayList2=invertOrderList(moodArrayList);
+                    sortArrayList2 = MoodController.sortMoods(moodArrayList);
                     adapter = new TimelineAdapter(this, R.layout.timeline_list, sortArrayList2);
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
-                    System.out.println("this is fff error"+e);
+                    System.out.println("this is a timeline recent week moods error"+e);
                 }
             }
             if (selectedFilter == 2) {
@@ -203,12 +202,12 @@ public class FilterResultsActivity extends BarMenuActivity {
                         }
 
                     }
-                    sortArrayList2=invertOrderList(moodArrayList);
+                    sortArrayList2= MoodController.sortMoods(moodArrayList);
                     adapter = new TimelineAdapter(this, R.layout.timeline_list, sortArrayList2);
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
-                    System.out.println("this is fff error"+e);
+                    System.out.println("this is a timeline message filter moods error"+e);
                 }
             }
         }
@@ -235,31 +234,18 @@ public class FilterResultsActivity extends BarMenuActivity {
         });
 
 
-    }
+        moodTimeline.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-    // function to sort the timeline moods by date
-    // taken from TimelineActivity
-    private ArrayList<Mood> invertOrderList(ArrayList<Mood> L) {
-
-        Date d1;
-        Date d2;
-        Mood mood;
-        //pop sort maybe binary sort....
-        System.out.println("this is fff lll size "+L.size());
-        for (int i = 0; i < L.size() - 1; i++) {
-            for (int j = i + 1; j < L.size(); j++) {
-
-                d1=L.get(i).getDate();
-                d2=L.get(j).getDate();
-                if (d1.before(d2)) {
-                    mood = L.get(i);
-                    L.set(i,L.get(j));
-                    L.set(j,mood);
-                }
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Mood viewMood = moodArrayList.get(position);
+                Intent viewMoodIntent = new Intent(FilterResultsActivity.this, ViewMoodActivity.class);
+                viewMoodIntent.putExtra("viewMood", viewMood);
+                startActivity(viewMoodIntent);
             }
-        }
+        });
 
-        return L;
     }
 
 }

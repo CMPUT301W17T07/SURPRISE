@@ -17,6 +17,7 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,6 +66,9 @@ public class ProfileActivity extends BarMenuActivity {
 
         TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
+        userName.setTextColor(getResources().getColor(R.color.redTheme));
+        userName.setTypeface(null, Typeface.BOLD_ITALIC);
+
         TextView Following = (TextView) findViewById(R.id.Following);
         Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
         TextView Followers = (TextView) findViewById(R.id.Followers);
