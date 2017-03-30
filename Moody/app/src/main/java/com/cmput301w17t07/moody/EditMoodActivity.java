@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -40,8 +42,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
@@ -57,9 +59,10 @@ public class EditMoodActivity extends BarMenuActivity {
     private TextView locationText;
     private ImageView image;
     private LocationManager locationManager;
-    private double lat;
-    private double lon;
+    private double latitude;
+    private double longitude;
     private String provider;
+    private String address;
     Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
 
 //    private Date dateValue;
@@ -80,23 +83,29 @@ public class EditMoodActivity extends BarMenuActivity {
 
         image = (ImageView) findViewById(R.id.editImageView);
 
-
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
-        String showLocation = intent.getExtras().getString("editLocation");
-        TextView location = (TextView) findViewById(R.id.locationText);
-        location.setText(showLocation);
-        Bundle bundle = getIntent().getExtras();
-        lat= bundle.getDouble("sendLat2");
-        lon = bundle.getDouble("sendLon2");
-        System.out.println("lat = "+lat);
-        System.out.println("lat = "+lon);
-        location1.setLatitude(lat);
-        location1.setLongitude(lon);
-        System.out.println("lat = "+location1);
+        latitude = editMood.getLatitude();
+        longitude = editMood.getLongitude();
 
-        if(lat == 0 && lon == 0){
+        TextView location = (TextView) findViewById(R.id.locationText);
+        Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+        try{
+            List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+
+            if (addresses.size() > 0)
+                address = "  " + addresses.get(0).getFeatureName() + " " +
+                        addresses.get(0).getThoroughfare() + ", " +
+                        addresses.get(0).getLocality() + ", " +
+                        addresses.get(0).getAdminArea() + ", " +
+                        addresses.get(0).getCountryCode();
+            location.setText(address);}
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        if(latitude == 0 && longitude == 0){
             location1 = null;
         }
 
@@ -130,16 +139,27 @@ public class EditMoodActivity extends BarMenuActivity {
 
                 location1 = locationManager.getLastKnownLocation(provider);
                 if (location1 == null) {
-                    lat = 0;
-                    lon = 0;
+                    latitude = 0;
+                    longitude = 0;
                 } else {
-                    lat = location1.getLatitude();
-                    lon = location1.getLongitude();
+                    latitude = location1.getLatitude();
+                    longitude = location1.getLongitude();
                 }
                 //System.out.println("this is loc "+location.getLongitude());
-                DecimalFormat decimalFormat = new DecimalFormat(".##");
-                locationText.setText("Latitude: " + decimalFormat.format(lat)
-                        + ",Longitude: " + decimalFormat.format(lon));
+                Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+                try{
+                    List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+
+                    if (addresses.size() > 0)
+                        address = "  " + addresses.get(0).getFeatureName() + " " +
+                                addresses.get(0).getThoroughfare() + ", " +
+                                addresses.get(0).getLocality() + ", " +
+                                addresses.get(0).getAdminArea() + ", " +
+                                addresses.get(0).getCountryCode();
+                    locationText.setText(address);}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -189,7 +209,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 MoodController moodController = new MoodController();
                 Bitmap editBitmapImage = bitmapImage;
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        location1, editBitmapImage, SocialSituation, null, editMood ) == false) {
+                        latitude,longitude, editBitmapImage, SocialSituation, null, editMood ) == false) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {

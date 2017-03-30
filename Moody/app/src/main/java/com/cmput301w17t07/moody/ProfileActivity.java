@@ -17,7 +17,6 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +27,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -195,7 +193,6 @@ public class ProfileActivity extends BarMenuActivity {
                 Mood viewMood = moodArrayList.get(position);
                 Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
                 viewMoodIntent.putExtra("viewMood", viewMood);
-
                 startActivity(viewMoodIntent);
                 finish();
             }

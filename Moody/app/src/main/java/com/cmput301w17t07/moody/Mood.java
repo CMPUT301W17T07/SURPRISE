@@ -16,8 +16,6 @@
 
 package com.cmput301w17t07.moody;
 
-import android.location.Location;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,7 +36,9 @@ public class Mood implements Serializable {
     private static final long serialVersionUID = -7060210544600464481L;
     private String moodMessage;
     private Date date;
-    private Location location;
+    //private Location location;
+    private double latitude;
+    private double longitude;
 
     private String moodImageID; //use getMoodImage to decode string into Bitmap
     private String socialSituation;
@@ -73,6 +73,22 @@ public class Mood implements Serializable {
     }
 
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     /**
      * Constructor for the mood object. Takes in a mandatory feeling and username, and "optional"
      * parameters such as location, imageID, mood message, and social situation. "Optional" parameters
@@ -80,18 +96,21 @@ public class Mood implements Serializable {
      * @param feeling               The associated feeling of a mood (happiness, confusion, etc.)
      * @param username              The user's username
      * @param moodMessage           The textual explanation for a user's mood
-     * @param location              The user's pinned location (Will be null in part 4, as it's not yet implemented)
+     * @param latitude              The user's pinned location (Will be null in part 4, as it's not yet implemented)
+     * @param longitude
      * @param imageID               The unique server ID of the mood's associated image
      * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.)
      */
-    public Mood(String feeling, String username, String moodMessage, Location location,
+    public Mood(String feeling, String username, String moodMessage, double latitude,double longitude,
                 String imageID, String socialSituation){
         this.feeling = feeling;
         this.username = username.toLowerCase();
         this.displayUsername = username;
         this.moodMessage = moodMessage;
         this.date = new Date();
-        this.location = location;
+        //this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.moodImageID = imageID;
         this.socialSituation = socialSituation;
         //        this.moodImage = encodeImage(image);
@@ -119,14 +138,14 @@ public class Mood implements Serializable {
         this.date = date;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+//    public Location getLocation() {
+//        return location;
+//    }
+//
+//
+//    public void setLocation(Location location) {
+//        this.location = location;
+//    }
 
     // todo might be utilized for offline functionality
 //    public Bitmap getMoodImage() {
@@ -190,7 +209,7 @@ public class Mood implements Serializable {
     // @Override
     public String toString( ){
         return "Name: " + username + "\n" + "feeling: " + feeling + "\n" + "Moodmessage: " + moodMessage + "\n" +
-                "date: " + date + "\n"  + "location: " + location + "\n" + "sociation: " + socialSituation;
+                "date: " + date + "\n"  + "location: " + latitude + " " + longitude + "\n" + "sociation: " + socialSituation;
 //        DecimalFormat decimalFormat=new DecimalFormat(".##");
 //        return "Latitude: "+decimalFormat.format(location.getLatitude())
 //                +",Longitude: "+decimalFormat.format(location.getLongitude());

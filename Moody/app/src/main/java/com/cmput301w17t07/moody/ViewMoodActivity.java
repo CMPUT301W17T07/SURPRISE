@@ -18,12 +18,17 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
@@ -40,6 +45,7 @@ public class ViewMoodActivity extends BarMenuActivity {
     private String trigger;
 
     private String viewMoodID;
+    private String address;
 
 
     @Override
@@ -51,15 +57,24 @@ public class ViewMoodActivity extends BarMenuActivity {
         // get the mood object that was selected
         intent = getIntent();
         viewMood = (Mood) intent.getSerializableExtra("viewMood");
-        Bundle bundle = getIntent().getExtras();
-        final String hasLocation = intent.getExtras().getString("hasLocation");
-        final String showLocation = intent.getExtras().getString("location");
         trigger = intent.getExtras().getString("trigger");
         System.out.println("trigger = "+ trigger);
-        final double lat= bundle.getDouble("sendLatitude");
-        final double lon = bundle.getDouble("sendLonditude");
         TextView location = (TextView) findViewById(R.id.LocationTV);
-        location.setText(showLocation);
+        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
+        try{
+            List<Address> addresses = gcd.getFromLocation(viewMood.getLatitude(), viewMood.getLongitude(), 1);
+
+            if (addresses.size() > 0)
+                address = "  " + addresses.get(0).getFeatureName() + " " +
+                        addresses.get(0).getThoroughfare() + ", " +
+                        addresses.get(0).getLocality() + ", " +
+                        addresses.get(0).getAdminArea() + ", " +
+                        addresses.get(0).getCountryCode();
+            location.setText(address);}
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
         // Get the database id for the selected mood
         viewMoodID =viewMood.getId();
 //
@@ -96,9 +111,6 @@ public class ViewMoodActivity extends BarMenuActivity {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
                     editMoodIntent.putExtra("editMood", viewMood);
-                    editMoodIntent.putExtra("editLocation",showLocation);
-                    editMoodIntent.putExtra("sendLat2",lat);
-                    editMoodIntent.putExtra("sendLon2",lon);
                     startActivity(editMoodIntent);
 
                 }

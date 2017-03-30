@@ -68,7 +68,7 @@ public class MoodController {
      * @return                  a boolean value indicating whether the mood was created
      */
     public static Boolean createMood(String feeling, String username, String moodMessage,
-                                     Location location, Bitmap image, String socialSituation){
+                                     double latitude, double longitude, Bitmap image, String socialSituation){
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
             return false;
@@ -103,7 +103,7 @@ public class MoodController {
         // ID to link mood to image
         System.out.println("test ID"+ moodID);
 
-        Mood newMood = new Mood(feeling, username, moodMessage, location, moodID, socialSituation);
+        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation);
 
         ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
         addMood.execute(newMood);
@@ -150,7 +150,7 @@ public class MoodController {
      * @return
      */
     public static Boolean editMood(String feeling, String username, String moodMessage,
-                                   Location location, Bitmap image, String socialSituation, Date date, Mood oldMood){
+                                   double latitude,double longitude, Bitmap image, String socialSituation, Date date, Mood oldMood){
 
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
@@ -189,7 +189,7 @@ public class MoodController {
         // ID to link mood to image
         System.out.println("EDIT test ID"+ moodID);
 
-        Mood editMood = new Mood(feeling, username, moodMessage, location, moodID, socialSituation);
+        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation);
         editMood.setDate(oldMood.getDate());
 //        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 
@@ -312,13 +312,32 @@ public class MoodController {
         mood.setDate(date);
     }
 
-    public Location getLocation() {
-        return mood.getLocation();
+//    public Location getLocation() {
+//        return mood.getLocation();
+//    }
+//
+//    public void setLocation(Location location) {
+//        mood.setLocation(location);
+//    }
+
+
+    public double getLatitude() {
+        return mood.getLatitude();
     }
 
-    public void setLocation(Location location) {
-        mood.setLocation(location);
+    public void setLatitude(double latitude) {
+        mood.setLatitude(latitude);
     }
+
+    public double getLongitude() {
+        return mood.getLongitude();
+    }
+
+    public void setLongitude(double longitude) {
+        mood.setLongitude(longitude);
+    }
+
+
 
 //    public Bitmap getMoodImage() {
 //        return mood.getMoodImage();
