@@ -18,7 +18,6 @@ package com.cmput301w17t07.moody;
 
 import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.ImageView;
 
 import org.junit.Test;
 

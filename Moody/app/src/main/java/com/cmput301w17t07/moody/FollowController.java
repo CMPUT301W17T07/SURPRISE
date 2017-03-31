@@ -18,14 +18,12 @@ package com.cmput301w17t07.moody;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWERS;
 import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWING;
 import static com.cmput301w17t07.moody.ApplicationMoody.PENDING;

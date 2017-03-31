@@ -18,28 +18,15 @@ package com.cmput301w17t07.moody;
 
 import android.content.Context;
 
-import android.content.res.AssetManager;
 import android.media.Image;
 
 
-import com.google.gson.Gson;
-
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.nio.ByteBuffer;
+
 
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
-import android.media.Image;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.concurrent.ExecutionException;
 
 
 /**

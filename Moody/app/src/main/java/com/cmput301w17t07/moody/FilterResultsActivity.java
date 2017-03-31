@@ -17,17 +17,13 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * FilterResultsActivity class. User interface logic for the view that allows the user

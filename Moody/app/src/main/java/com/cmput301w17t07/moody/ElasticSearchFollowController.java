@@ -19,16 +19,11 @@ package com.cmput301w17t07.moody;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
 /**
  * Created by mike on 2017-03-25.

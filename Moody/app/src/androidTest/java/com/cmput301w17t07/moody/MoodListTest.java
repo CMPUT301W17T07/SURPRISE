@@ -16,7 +16,6 @@
 
 package com.cmput301w17t07.moody;
 
-import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * Created by Panchy on 2017/2/24.

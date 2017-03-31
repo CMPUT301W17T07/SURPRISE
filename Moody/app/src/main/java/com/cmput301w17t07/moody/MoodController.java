@@ -18,20 +18,14 @@ package com.cmput301w17t07.moody;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.location.Location;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
  * Created by mike on 2017-02-23.

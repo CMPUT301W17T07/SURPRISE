@@ -17,9 +17,6 @@
 package com.cmput301w17t07.moody;
 
 
-
-import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 import org.junit.Test;

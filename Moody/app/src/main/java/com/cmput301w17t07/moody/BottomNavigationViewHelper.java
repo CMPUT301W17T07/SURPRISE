@@ -16,13 +16,10 @@
 
 package com.cmput301w17t07.moody;
 
-import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 
 import java.lang.reflect.Field;
 
