@@ -490,7 +490,7 @@ public class EditMoodActivity extends BarMenuActivity{
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 currentYear = year;
-                currentMonth = monthOfYear;
+                currentMonth = monthOfYear+1;
                 currentDay = dayOfMonth;
             }
         });
