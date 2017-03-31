@@ -38,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_above="@+id/bottom_navigation"
         android:divider="@color/white"
-        android:dividerHeight="8px"
+        android:dividerHeight="8dp"
         android:background="@color/blueTheme" />
 
 

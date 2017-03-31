@@ -89,7 +89,7 @@ public class AchievementManager {
         SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(akey, achievementsToString(a));
-        editor.commit();
+        editor.apply();
     }
     /* recordListToString method. Following implementation detailed by Abram Hindle in video
      *  referenced above*/

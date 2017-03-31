@@ -96,7 +96,7 @@ public class MoodManager {
         SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(mlkey, moodListToString(ml));
-        editor.commit();
+        editor.apply();
     }
     /* moodListToString method. Following implementation detailed by Abram Hindle in video
      *  referenced above*/

@@ -51,7 +51,7 @@
         android:text="Send"
         android:textAllCaps="false"
         android:textColor="#66CD00"
-        android:textSize="23dp"
+        android:textSize="23sp"
         android:layout_alignTop="@+id/SocialSituation"
         android:layout_alignRight="@+id/editImageView"
         android:layout_alignEnd="@+id/editImageView" />
@@ -70,8 +70,8 @@
         android:id="@+id/Camera"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_x="50px"
-        android:layout_y="100px"
+        android:layout_x="50dp"
+        android:layout_y="100dp"
         android:background="#00000000"
         app:srcCompat="@drawable/ic_camera"
         android:layout_marginBottom="17dp"
@@ -136,7 +136,7 @@
         android:layout_below="@+id/Description"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/toolbar2"
-        android:textSize="40px"
+        android:textSize="40sp"
         android:text="Location" />
 
     <TextView

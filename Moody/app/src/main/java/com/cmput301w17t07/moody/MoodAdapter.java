@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by mike on 2017-03-08.
@@ -75,7 +76,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         //http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
         // Date: answered Apr 16 '11 at 1:02
         // Author: Charlie Salts
-        Format formatter = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
+        Format formatter = new SimpleDateFormat("hh:mm a dd/MM/yyyy", Locale.CANADA);
         String testDate = formatter.format(mood.getDate());
 
         viewHolder.dataText.setText(testDate);
