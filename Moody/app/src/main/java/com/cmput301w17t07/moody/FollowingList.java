@@ -33,7 +33,7 @@ import io.searchbox.annotations.JestId;
 public class FollowingList {
     String username;
 //    public ArrayList<User> pendingFollowing = new ArrayList<User>();
-    public ArrayList<String> followingList = new ArrayList<String>();
+    public ArrayList<String> followingList = new ArrayList<>();
 
     @JestId
 

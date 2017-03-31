@@ -62,7 +62,7 @@ public class FilterActivity extends BarMenuActivity {
         Spinner dropdownUser = (Spinner) findViewById(R.id.filterUser);
 
         String[] users = new String[]{"My Moods", "TimeLine Moods"};
-        ArrayAdapter<String> adapterUsers = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, users);
+        ArrayAdapter<String> adapterUsers = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, users);
         dropdownUser.setAdapter(adapterUsers);
 
         dropdownUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -83,7 +83,7 @@ public class FilterActivity extends BarMenuActivity {
         Spinner dropdownFeeling = (Spinner) findViewById(R.id.filterFeeling);
 
         String[] feelings = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
-        ArrayAdapter<String> adapterFeelings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
+        ArrayAdapter<String> adapterFeelings = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
         dropdownFeeling.setAdapter(adapterFeelings);
 
         dropdownFeeling.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -119,7 +119,7 @@ public class FilterActivity extends BarMenuActivity {
         Spinner dropdownDate = (Spinner) findViewById(R.id.filterDate);
 
         String[] dates = new String[]{"Last Week"};
-        ArrayAdapter<String> adapterDates = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dates);
+        ArrayAdapter<String> adapterDates = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dates);
         dropdownDate.setAdapter(adapterDates);
 
         dropdownDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

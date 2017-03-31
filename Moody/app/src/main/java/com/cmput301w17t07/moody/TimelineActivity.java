@@ -53,15 +53,15 @@ public class TimelineActivity extends BarMenuActivity {
     Boolean scrollFlag;
 
     ArrayList nameList=new ArrayList();
-    private ArrayList<Mood> templist = new ArrayList<Mood>();
+    private ArrayList<Mood> templist = new ArrayList<>();
 
     int indexOfScroll=0;
     int lastItem;
     private ListView oldUserList;
-    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> moodArrayList = new ArrayList<>();
     private MoodAdapter adapter;
 
-    private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> sortedArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -147,9 +147,8 @@ public class TimelineActivity extends BarMenuActivity {
         NetworkInfo info = manager.getActiveNetworkInfo();
         if (info == null) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
 

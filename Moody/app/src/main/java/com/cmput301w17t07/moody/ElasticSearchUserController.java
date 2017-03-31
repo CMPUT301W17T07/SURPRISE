@@ -85,9 +85,9 @@ public class ElasticSearchUserController extends ElasticController{
             verifySettings();
 
 
-            ArrayList<User> users = new ArrayList<User>();
+            ArrayList<User> users = new ArrayList<>();
             String query;
-            if (params[0]==""){
+            if (params[0].equals("")){
                 query="{\"from\":0,\"size\":20}";
 
             }else {

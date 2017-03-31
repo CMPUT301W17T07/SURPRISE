@@ -37,7 +37,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     String username;
     private String filterFeeling;
     private Intent intent;
-    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> moodArrayList = new ArrayList<>();
 
     private String selectedUser; // equals My Moods/Timeline Moods
     private Integer user; // user = 0 if My Moods else user = 1 if Timeline Moods

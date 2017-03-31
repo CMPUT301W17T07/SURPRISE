@@ -41,7 +41,7 @@ public class MoodList implements Serializable{
 
 
     public MoodList() {
-        moodList = new ArrayList<Mood>();
+        moodList = new ArrayList<>();
     }
 
     public void addMood(Mood mood){

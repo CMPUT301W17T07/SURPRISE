@@ -32,8 +32,8 @@ import io.searchbox.annotations.JestId;
 
 public class FollowerList {
     String username;
-    public ArrayList<String> pendingFollowers = new ArrayList<String>();
-    public ArrayList<String> followerList = new ArrayList<String>();
+    public ArrayList<String> pendingFollowers = new ArrayList<>();
+    public ArrayList<String> followerList = new ArrayList<>();
 
     @JestId
 

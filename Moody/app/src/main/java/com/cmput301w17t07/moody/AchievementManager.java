@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by mike on 2017-03-30.
  */
@@ -65,7 +67,7 @@ public class AchievementManager {
     /* loadRecordList method. Following implementation detailed by Abram Hindle in video
      *  referenced above*/
     public Achievements loadAchievements() throws IOException, ClassNotFoundException {
-        SharedPreferences settings = context.getSharedPreferences(prefFile, context.MODE_PRIVATE);
+        SharedPreferences settings = context.getSharedPreferences(prefFile, MODE_PRIVATE);
         String achievementData = settings.getString(akey, "");
         if(achievementData.equals("")){
             /* Returning a new Achievements if one does not exist */
@@ -86,7 +88,7 @@ public class AchievementManager {
     /* saveRecordList method. Following implementation detailed by Abram Hindle in video
     *  referenced above*/
     public void saveAchievements(Achievements a) throws IOException {
-        SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
+        SharedPreferences settings = context.getSharedPreferences(prefFile, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(akey, achievementsToString(a));
         editor.apply();

@@ -135,7 +135,7 @@ public class ElasticMoodController extends ElasticController {
 
             String query;
             //search param 0 = username FOR NOW
-            if (search_parameters[0]==""){
+            if (search_parameters[0].equals("")){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\n" +
@@ -186,10 +186,10 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<Mood> moods = new ArrayList<Mood>();
+            ArrayList<Mood> moods = new ArrayList<>();
 
             String query;
-            if ((search_parameters[0]=="") && (search_parameters[1]=="") && search_parameters[2]==""){
+            if ((search_parameters[0].equals("")) && (search_parameters[1].equals("")) && search_parameters[2].equals("")){
                 query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\"query\":\n" +
@@ -241,10 +241,10 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<Mood> moods = new ArrayList<Mood>();
+            ArrayList<Mood> moods = new ArrayList<>();
 
             String query;
-            if ((search_parameters[0]=="") && (search_parameters[1]=="") && search_parameters[2]==""){
+            if ((search_parameters[0].equals("")) && (search_parameters[1].equals("")) && search_parameters[2].equals("")){
                 query="{\"from\":0,\"size\":100}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\"query\":\n" +
@@ -286,11 +286,11 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<Mood> moods = new ArrayList<Mood>();
+            ArrayList<Mood> moods = new ArrayList<>();
 
             String query;
             //search param 0 = username FOR NOW
-            if (search_parameters[0]==""){
+            if (search_parameters[0].equals("")){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{ \"query\" : " +
@@ -350,12 +350,12 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<Mood> moods = new ArrayList<Mood>();
+            ArrayList<Mood> moods = new ArrayList<>();
 
             String query;
             //search param 0 = username FOR NOW
 //            System.out.println("this is fff "+search_parameters[2]);
-            if (search_parameters[0]==""){
+            if (search_parameters[0].equals("")){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will   want
             }else {
                 query = "{\n" +

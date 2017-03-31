@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by mike on 2017-03-28.
  */
@@ -72,7 +74,7 @@ public class MoodManager {
     /* loadMoodList method. Following implementation detailed by Abram Hindle in video
      *  referenced above*/
     public MoodList loadMoodList() throws IOException, ClassNotFoundException {
-        SharedPreferences settings = context.getSharedPreferences(prefFile, context.MODE_PRIVATE);
+        SharedPreferences settings = context.getSharedPreferences(prefFile, MODE_PRIVATE);
         String moodListData = settings.getString(mlkey, "");
         if(moodListData.equals("")){
             /* Returning a new MoodList if one does not exist */
@@ -93,7 +95,7 @@ public class MoodManager {
     /* saveMoodList method. Following implementation detailed by Abram Hindle in video
     *  referenced above*/
     public void saveMoodList(MoodList ml) throws IOException {
-        SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
+        SharedPreferences settings = context.getSharedPreferences(prefFile, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(mlkey, moodListToString(ml));
         editor.apply();

@@ -102,7 +102,7 @@ public class ElasticSearchFollowController extends ElasticMoodController {
 
             String query;
             //search param 0 = username FOR NOW
-            if (search_parameters[0]==""){
+            if (search_parameters[0].equals("")){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\n" +
@@ -145,7 +145,7 @@ public class ElasticSearchFollowController extends ElasticMoodController {
 
             String query;
             //search param 0 = username FOR NOW
-            if (search_parameters[0]==""){
+            if (search_parameters[0].equals("")){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will want
             }else {
                 query = "{\n" +

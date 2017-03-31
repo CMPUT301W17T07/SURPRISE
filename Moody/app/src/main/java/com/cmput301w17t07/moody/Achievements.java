@@ -33,7 +33,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class Achievements implements Serializable {
 
     private static final long serialVersionUID = 3L;
-    private ArrayList<String> achievements = new ArrayList<String >();
+    private ArrayList<String> achievements = new ArrayList<>();
 
     // Achievement String
     String firstMood = "Posted your first mood!";

@@ -51,7 +51,7 @@ public class GetUserMoodsTest extends ActivityInstrumentationTestCase2 {
 
         for(int i = 0; i < 3;i++){
             mood = moods.get(i);
-            if( mood.getFeeling() == "sad" ){
+            if( mood.getFeeling().equals("sad")){
                 assertTrue(true);
                 return;
             }

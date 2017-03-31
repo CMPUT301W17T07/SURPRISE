@@ -91,7 +91,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
 
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -110,7 +110,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         Spinner dropdown_SocialSituation = (Spinner) findViewById(R.id.SocialSituation);
         String[] item_SocialSituation = new String[]{"", "alone", "with one other person",
                 "with two people", "with several people", "with a crowd"};
-        ArrayAdapter<String> adapter_SocialSituation = new ArrayAdapter<String>
+        ArrayAdapter<String> adapter_SocialSituation = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_dropdown_item, item_SocialSituation);
         dropdown_SocialSituation.setAdapter(adapter_SocialSituation);
 

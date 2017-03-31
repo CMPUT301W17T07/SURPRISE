@@ -54,7 +54,7 @@ public class MapOptionsActivity extends BarMenuActivity {
         Spinner dropdownUser = (Spinner) findViewById(R.id.filterMapUser);
 
         String[] users = new String[]{"My Moods", "Timeline Moods"};
-        ArrayAdapter<String> adapterUsers = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, users);
+        ArrayAdapter<String> adapterUsers = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, users);
         dropdownUser.setAdapter(adapterUsers);
 
         dropdownUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,7 +76,7 @@ public class MapOptionsActivity extends BarMenuActivity {
         Spinner dropdownFeeling = (Spinner) findViewById(R.id.filterMapFeeling);
 
         String[] feelings = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
-        ArrayAdapter<String> adapterFeelings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
+        ArrayAdapter<String> adapterFeelings = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
         dropdownFeeling.setAdapter(adapterFeelings);
 
         dropdownFeeling.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

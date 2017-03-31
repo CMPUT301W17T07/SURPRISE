@@ -35,7 +35,7 @@ public class FilterResultsActivity extends BarMenuActivity {
     String username;
     private ListView moodTimeline;
     private TimelineAdapter adapter;
-    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> moodArrayList = new ArrayList<>();
     private Integer selectedFilter;
     private String filterFeeling;
     private String filterMessage;
@@ -43,7 +43,7 @@ public class FilterResultsActivity extends BarMenuActivity {
     private String selectedUser; // equals My Moods/Timeline Moods
     private Integer user; // user = 0 if My Moods else user = 1 if Timeline Moods
     ArrayList nameList=new ArrayList();
-    private ArrayList<Mood> sortArrayList2 = new ArrayList<Mood>();
+    private ArrayList<Mood> sortArrayList2 = new ArrayList<>();
 
     private Intent intent;
 

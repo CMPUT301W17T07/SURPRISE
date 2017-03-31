@@ -40,10 +40,10 @@ public class ProfileActivity extends BarMenuActivity {
 
     private ListView moodTimeline;
     private MoodAdapter adapter;
-    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> moodArrayList = new ArrayList<>();
     String username;
 
-    private ArrayList<Mood> templist = new ArrayList<Mood>();
+    private ArrayList<Mood> templist = new ArrayList<>();
     private boolean scrollFlag;
     int indexOfScroll=0;
     int lastItem;
