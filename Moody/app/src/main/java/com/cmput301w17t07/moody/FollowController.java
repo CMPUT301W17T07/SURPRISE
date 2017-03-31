@@ -57,8 +57,8 @@ public class FollowController {
 
     }
 
-    public static boolean sendPendingRequest(String userSendingRequest, String userReceivingRequest){
-        if(checkNetwork()){
+    public static boolean sendPendingRequest(String userSendingRequest, String userReceivingRequest, Context context){
+        if(checkNetwork(context)){
             // if connection is present....
 
             // Get the FollowerList of the userReceiving the request from the server
@@ -115,8 +115,8 @@ public class FollowController {
     }
 
 
-    public static boolean acceptFollowRequest(String userAcceptingRequest, String userThatSentRequest){
-        if(checkNetwork()){
+    public static boolean acceptFollowRequest(String userAcceptingRequest, String userThatSentRequest, Context context){
+        if(checkNetwork(context)){
             // if connection is present....
 
             //-------------------- UPDATING FOLLOWER LIST FOR ACCEPTING USER ----------------------
@@ -170,9 +170,9 @@ public class FollowController {
         }
     }
 
-    public static boolean declineFollowRequest(String userDecliningRequest, String userThatSentRequest){
+    public static boolean declineFollowRequest(String userDecliningRequest, String userThatSentRequest, Context context){
 
-        if(checkNetwork()){
+        if(checkNetwork(context)){
 
             //----------------------- REMOVING PENDING USER --------------------------------------
 
@@ -234,10 +234,10 @@ public class FollowController {
 
     public static String getNumberOfRequests(String username, Context context){
         String pendingCount;
-        if(checkNetwork()) {
+        if(checkNetwork(context)) {
             ArrayList<String> userArrayList = getPendingRequests(username);
             pendingCount = String.valueOf(userArrayList.size());
-//            savePendingInfo(pendingCount, context);
+            savePendingInfo(pendingCount, context);
         }
         else{
             pendingCount = readPendingInfo(context).toString();
@@ -283,10 +283,10 @@ public class FollowController {
 
     public static String getNumberOfFollowers(String username, Context context){
         String followerCount;
-        if(checkNetwork()) {
+        if(checkNetwork(context)) {
             FollowerList followerList = getFollowerList(username);
             followerCount = String.valueOf(followerList.countFollowers());
-//            saveFollowerInfo(followerCount, context);
+            saveFollowerInfo(followerCount, context);
         }
         else{
             followerCount = readFollowerInfo(context).toString();
@@ -296,10 +296,10 @@ public class FollowController {
 
     public static String getNumberOfFollowing(String username, Context context){
         String followingCount;
-        if(checkNetwork()) {
+        if(checkNetwork(context)) {
             FollowingList followingList = getFollowingList(username);
             followingCount = String.valueOf(followingList.countFollowing());
-//            saveFollowingInfo(followingCount, context);
+            saveFollowingInfo(followingCount, context);
         }
         else{
             followingCount = readFollowingInfo(context).toString();
@@ -308,15 +308,14 @@ public class FollowController {
         return followingCount;
     }
 
-    private static boolean checkNetwork(){
-//        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo info = manager.getActiveNetworkInfo();
-//        if (info == null) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-        return true;
+    private static boolean checkNetwork(Context context){
+        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

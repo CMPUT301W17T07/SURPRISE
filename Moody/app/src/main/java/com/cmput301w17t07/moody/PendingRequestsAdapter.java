@@ -93,7 +93,7 @@ public class PendingRequestsAdapter extends BaseAdapter {
      * @return
      */
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         View view;
         final SearchViewHolder viewHolder;
 
@@ -125,7 +125,7 @@ public class PendingRequestsAdapter extends BaseAdapter {
             public  void onClick(View v){
                 Toast.makeText(context, userList.get(position), Toast.LENGTH_SHORT).show();
 
-                if(followController.acceptFollowRequest(username, userList.get(position))) {
+                if(followController.acceptFollowRequest(username, userList.get(position), context)) {
                     // if true.. connected to the internet
                     //todo change color to whatever background color is
                     viewHolder.acceptRequestButton.setText("ACCEPTED");
@@ -150,7 +150,7 @@ public class PendingRequestsAdapter extends BaseAdapter {
         viewHolder.declineRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View v){
-                if(followController.declineFollowRequest(username, userList.get(position))) {
+                if(followController.declineFollowRequest(username, userList.get(position), context)) {
                     //todo improve the look of this
                     viewHolder.declineRequestButton.setText("DECLINED");
                     viewHolder.acceptRequestButton.setEnabled(false);

@@ -224,7 +224,12 @@ public class MoodController {
                 moodArrayList = getUserMoods.get();
                 // If moods are retrieved from server set them to the local moodList
                 if(profileMoods) {
-                    moodList.setMoods(moodArrayList);
+                    if(indexOfScroll.equals("0")) {
+                        moodList.setMoods(moodArrayList);
+                    }
+                    else{
+                        moodList.setLoadedMoods(moodArrayList);
+                    }
                 }
                 System.out.println("this is moodlist"+moodList.getMoods().get(0));
 
@@ -238,7 +243,13 @@ public class MoodController {
             return moodArrayList;
         }
         else{
-            return getOfflineMoodList().getMoods();
+            //to prevent doubling of list with infinite scroll when offline
+            if(indexOfScroll.equals("0")) {
+                return getOfflineMoodList().getMoods();
+            }
+            else{
+                return new ArrayList<Mood>();
+            }
         }
     }
 
@@ -262,14 +273,15 @@ public class MoodController {
                     moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
                             String.valueOf(indexOfScroll), context, false));
                 }
-                System.out.println("this is fff moodlist " + moodArrayList.size());
+                System.out.println("this is NEW moodlist " + moodArrayList.size());
                 // sorting the tweets
                 moodArrayList = MoodController.sortMoods(moodArrayList);
                 // updating local timeline moodlist
                 timelineMoodList.setMoods(moodArrayList);
                 saveTimelineMoodList();
             } catch (Exception e) {
-                System.out.println("this is an error with the timeline moods in MoodController" + e);
+                System.out.println("this is a SAD! error with the timeline moods in MoodController" + e);
+                return getOfflineTimelineMoodList().getMoods();
             }
             // returning the sorted array of moods
             return moodArrayList;

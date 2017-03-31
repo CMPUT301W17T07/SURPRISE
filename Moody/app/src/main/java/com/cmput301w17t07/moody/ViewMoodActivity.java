@@ -60,21 +60,21 @@ public class ViewMoodActivity extends BarMenuActivity {
         trigger = intent.getExtras().getString("trigger");
         System.out.println("trigger = "+ trigger);
         TextView location = (TextView) findViewById(R.id.LocationTV);
-        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
-        try{
-            List<Address> addresses = gcd.getFromLocation(viewMood.getLatitude(), viewMood.getLongitude(), 1);
-
-            if (addresses.size() > 0)
-                address = "  " + addresses.get(0).getFeatureName() + " " +
-                        addresses.get(0).getThoroughfare() + ", " +
-                        addresses.get(0).getLocality() + ", " +
-                        addresses.get(0).getAdminArea() + ", " +
-                        addresses.get(0).getCountryCode();
-            location.setText(address);}
-
-        catch(Exception e){
-            e.printStackTrace();
-        }
+//        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
+//        try{
+//            List<Address> addresses = gcd.getFromLocation(viewMood.getLatitude(), viewMood.getLongitude(), 1);
+//
+//            if (addresses.size() > 0)
+//                address = "  " + addresses.get(0).getFeatureName() + " " +
+//                        addresses.get(0).getThoroughfare() + ", " +
+//                        addresses.get(0).getLocality() + ", " +
+//                        addresses.get(0).getAdminArea() + ", " +
+//                        addresses.get(0).getCountryCode();
+//            location.setText(address);}
+//
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
         // Get the database id for the selected mood
         viewMoodID =viewMood.getId();
 //
@@ -196,18 +196,22 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
 
     }
-//    @Override
-//    public void onBackPressed() {
-//        if(trigger.equals("profile")) {
-//            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
-//            startActivity(intentBack);
-//            this.finish();
-//        }
-//        else{
-//            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
-//            startActivity(intentBack);
-//            this.finish();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        //todo add logic for this scenario
+//        Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+//        startActivity(intentBack);
+//        this.finish();
+        if(trigger.equals("profile")) {
+            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else{
+            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+    }
 
     }

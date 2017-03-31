@@ -59,13 +59,11 @@ public class TimelineActivity extends BarMenuActivity {
     String username;
     Boolean scrollFlag;
 
-    ArrayList nameList=new ArrayList();
     private ArrayList<Mood> templist = new ArrayList<Mood>();
 
     int indexOfScroll=0;
     int lastItem;
     private ListView oldUserList;
-    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
     private MoodAdapter adapter;
 
     private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
@@ -191,41 +189,41 @@ public class TimelineActivity extends BarMenuActivity {
             sortedArrayList = MoodController.getTimelineMoods(username,
                     String.valueOf(indexOfScroll), TimelineActivity.this);
         } catch (Exception E){
-            System.out.println("this is an error in the TimelineActivity "+E);
+            System.out.println("this is a NEW error in the TimelineActivity "+E);
         }
 
         adapter = new MoodAdapter(this, R.layout.timeline_list, sortedArrayList);
         oldUserList.setAdapter(adapter);
 
-//        oldUserList.setOnScrollListener(new AbsListView.OnScrollListener(){
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState){
-//                // 当不滚动时
-//                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-//                    // 判断是否滚动到底部
-//                    // added a test to see if all moods have been loaded
-//                    if(scrollFlag) {
-//                        Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
-//                        indexOfScroll = indexOfScroll + 6;
-//                        templist = MoodController.getUserMoods(username,
-//                                String.valueOf(indexOfScroll), TimelineActivity.this);
-//                        // determining if there any old moods to find
-//                        if (templist.size() == 0) {
-//                            scrollFlag = false;
-//                        }
-//
-//                        moodArrayList.addAll(templist);
-//                        sortedArrayList = MoodController.sortMoods(moodArrayList);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem,
-//                                 int visibleItemCount, int totalItemCount) {
-//                lastItem = firstVisibleItem + visibleItemCount - 1 ;
-//            }
-//        });
+        oldUserList.setOnScrollListener(new AbsListView.OnScrollListener(){
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState){
+                // 当不滚动时
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    // 判断是否滚动到底部
+                    // added a test to see if all moods have been loaded
+                    if(scrollFlag) {
+                        Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
+                        indexOfScroll = indexOfScroll + 6;
+                        templist = MoodController.getUserMoods(username,
+                                String.valueOf(indexOfScroll), TimelineActivity.this, false);
+                        // determining if there any old moods to find
+                        if (templist.size() == 0) {
+                            scrollFlag = false;
+                        }
+
+                        sortedArrayList.addAll(templist);
+                        sortedArrayList = MoodController.sortMoods(sortedArrayList);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                lastItem = firstVisibleItem + visibleItemCount - 1 ;
+            }
+        });
 
 
 
@@ -233,17 +231,19 @@ public class TimelineActivity extends BarMenuActivity {
 
         oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Mood viewMood = moodArrayList.get(position);
-                Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
-                viewMoodIntent.putExtra("viewMood", viewMood);
-                startActivity(viewMoodIntent);
-                finish();
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+                        Mood viewMood = sortedArrayList.get(position);
+                        Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
+                        viewMoodIntent.putExtra("viewMood", viewMood);
+                        String trigger = "timeline";
+                        viewMoodIntent.putExtra("trigger",trigger);
+                        startActivity(viewMoodIntent);
+                        finish();
+                    }
+                });
 
-            }
-        });
 
 
 

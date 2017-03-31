@@ -81,5 +81,9 @@ public class MoodList implements Serializable{
         moodList.addAll(moods);
     }
 
+    public void setLoadedMoods(ArrayList<Mood> moods){
+        moodList.addAll(moods);
+    }
+
 
 }

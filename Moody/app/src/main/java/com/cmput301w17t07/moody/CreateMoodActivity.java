@@ -100,6 +100,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         userName = userController.readUsername(CreateMoodActivity.this).toString();
         setUpMenuBar(this);
         location = null;
+        date = new Date();
 
 
 
