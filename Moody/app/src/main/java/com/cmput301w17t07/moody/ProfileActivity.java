@@ -56,36 +56,41 @@ public class ProfileActivity extends BarMenuActivity {
         setContentView(R.layout.activity_profile);
         setUpMenuBar(this);
 
+
+        //----------------------------- INITIALIZE MANAGER -----------------------------------------
+
+        MoodManager.initManager(this.getApplicationContext());
+
         //----------------------------- GETTING LOCAL USERNAME -------------------------------------
         UserController userController = new UserController();
         username = userController.readUsername(ProfileActivity.this).toString();
 
-        //--------------------- SETTING UP PROFILE INFO AT TOP OF SCREEN----------------------------
-        FollowController followController = new FollowController();
-
-
-        TextView userName = (TextView) findViewById(R.id.UserNameText);
-        userName.setText(username);
-        userName.setTextColor(getResources().getColor(R.color.redTheme));
-        userName.setTypeface(null, Typeface.BOLD_ITALIC);
-
-        TextView Following = (TextView) findViewById(R.id.Following);
-        Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
-        TextView Followers = (TextView) findViewById(R.id.Followers);
-        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username, ProfileActivity.this));
-
-        //------------------------------ PENDING REQUEST STUFF -------------------------------------
-        Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
-        PendingRequests.setText("PENDING REQUESTS ("+
-                followController.getNumberOfRequests(username, ProfileActivity.this) +")");
-        PendingRequests.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        //--------------------- SETTING UP PROFILE INFO AT TOP OF SCREEN----------------------------
+//        FollowController followController = new FollowController();
+//
+//
+//        TextView userName = (TextView) findViewById(R.id.UserNameText);
+//        userName.setText(username);
+//        userName.setTextColor(getResources().getColor(R.color.redTheme));
+//        userName.setTypeface(null, Typeface.BOLD_ITALIC);
+//
+//        TextView Following = (TextView) findViewById(R.id.Following);
+//        Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
+//        TextView Followers = (TextView) findViewById(R.id.Followers);
+//        Followers.setText("Followers\n"+followController.getNumberOfFollowers(username, ProfileActivity.this));
+//
+//        //------------------------------ PENDING REQUEST STUFF -------------------------------------
+//        Button PendingRequests = (Button) findViewById(R.id.PendingRequests);
+//        PendingRequests.setText("PENDING REQUESTS ("+
+//                followController.getNumberOfRequests(username, ProfileActivity.this) +")");
+//        PendingRequests.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Toast.makeText(ProfileActivity.this, "Pending Requests", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(ProfileActivity.this, PendingRequestsActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
         // todo displaying username on screen. REMOVE IN FINAL VERSION
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
@@ -107,8 +112,15 @@ public class ProfileActivity extends BarMenuActivity {
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
         // Getting the user's moods
-        moodArrayList = MoodController.getUserMoods(username, String.valueOf(indexOfScroll), ProfileActivity.this);
-        // Save the moodlist locally
+        try {
+            moodArrayList = MoodController.getUserMoods(username,
+                    String.valueOf(indexOfScroll), ProfileActivity.this, true);
+            // Save the moodlist locally
+            MoodController.saveMoodList();
+        } catch (Exception E){
+            System.out.println("this is an error in the Profile Activity "+E);
+        }
+
 
 
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
@@ -116,38 +128,38 @@ public class ProfileActivity extends BarMenuActivity {
 
         moodTimelineListView.setAdapter(adapter);
 
-        moodTimelineListView.setOnScrollListener(new AbsListView.OnScrollListener(){
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState){
-                // 当不滚动时
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    // 判断是否滚动到底部
-                    // added a test to see if all moods have been loaded
-                    if(scrollFlag) {
-                        Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
-                        indexOfScroll = indexOfScroll + 6;
-                        ElasticMoodController.GetUserMoods getUserMoodsAgain = new ElasticMoodController.GetUserMoods();
-                        getUserMoodsAgain.execute(username, String.valueOf(indexOfScroll));
-                        try {
-                            templist = getUserMoodsAgain.get();
-                            if (templist.size() == 0) {
-                                scrollFlag = false;
-                            }
-
-                        } catch (Exception e) {
-                            Log.i("error", "failed to get the mood out of the async matched");
-                        }
-                        moodArrayList.addAll(templist);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
-                lastItem = firstVisibleItem + visibleItemCount - 1 ;
-            }
-        });
+//        moodTimelineListView.setOnScrollListener(new AbsListView.OnScrollListener(){
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState){
+//                // 当不滚动时
+//                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+//                    // 判断是否滚动到底部
+//                    // added a test to see if all moods have been loaded
+//                    if(scrollFlag) {
+//                        Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
+//                        indexOfScroll = indexOfScroll + 6;
+//                        ElasticMoodController.GetUserMoods getUserMoodsAgain = new ElasticMoodController.GetUserMoods();
+//                        getUserMoodsAgain.execute(username, String.valueOf(indexOfScroll));
+//                        try {
+//                            templist = getUserMoodsAgain.get();
+//                            if (templist.size() == 0) {
+//                                scrollFlag = false;
+//                            }
+//
+//                        } catch (Exception e) {
+//                            Log.i("error", "failed to get the mood out of the async matched");
+//                        }
+//                        moodArrayList.addAll(templist);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem,
+//                                 int visibleItemCount, int totalItemCount) {
+//                lastItem = firstVisibleItem + visibleItemCount - 1 ;
+//            }
+//        });
 
 
         moodTimelineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -155,45 +167,6 @@ public class ProfileActivity extends BarMenuActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-//                try{
-//                     Mood viewMood = moodArrayList.get(position);
-//                     String ID = viewMood.getId();
-//                     Location location = null;
-//                     Mood send = new Mood(viewMood.getFeeling(),
-//                             viewMood.getUsername(),
-//                             viewMood.getMoodMessage(),
-//                             location,
-//                             viewMood.getMoodImageID(),
-//                             viewMood.getSocialSituation());
-//                    send.setId(viewMood.getId());
-//                    String hasLocation = "0";
-//
-//                    System.out.println("location = " + viewMood.toString());
-//                    Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
-//                    viewMoodIntent.setAction("action");
-//                    viewMoodIntent.putExtra("viewMood", send);
-//                   // viewMoodIntent.putExtra("ID",ID);
-//                    if(viewMood.getLocation()!=null){
-//                        DecimalFormat decimalFormat=new DecimalFormat(".##");
-//                        String latitude = decimalFormat.format(viewMood.getLocation().getLatitude());
-//                        String longitude = decimalFormat.format(viewMood.getLocation().getLongitude());
-//                        String passLocation = "Latitude:" + latitude +",Londitude:" + longitude;
-//                        System.out.println("passlocation = "+passLocation);
-//                        Location sendLocation = viewMood.getLocation();
-//                        viewMoodIntent.putExtra("sendLatitude",sendLocation.getLatitude());
-//                        viewMoodIntent.putExtra("sendLonditude",sendLocation.getLongitude());
-//                        System.out.println("lat = " + sendLocation);
-//                        hasLocation = "1";
-//                        viewMoodIntent.putExtra("location",passLocation);}
-//                    else{
-//                        String passLocation = "";
-//                        viewMoodIntent.putExtra("location",passLocation);}
-//                    viewMoodIntent.putExtra("haslocation",hasLocation);
-//                    String trigger = "profile";
-//                    viewMoodIntent.putExtra("trigger",trigger);
-//                    startActivity(viewMoodIntent);
-//                    finish();
-//                }catch(Exception e){}
                 Mood viewMood = moodArrayList.get(position);
                 Intent viewMoodIntent = new Intent(ProfileActivity.this, ViewMoodActivity.class);
                 viewMoodIntent.putExtra("viewMood", viewMood);

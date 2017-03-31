@@ -26,11 +26,19 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
@@ -46,7 +54,8 @@ import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 public class MoodController {
 
     private static Mood mood = null;
-    private static MoodList moodList = null;
+    static MoodList moodList = null;
+    private static MoodList timelineMoodList = null;
     private static ConnectivityManager manager;
 
 
@@ -62,7 +71,6 @@ public class MoodController {
      * @param feeling           user's selected feeling
      * @param username          user's username
      * @param moodMessage       user's textual explanation for their mood
-     * @param location          user's location
      * @param image             bitmap of user's attached image
      * @param socialSituation   user's socialSituation
      * @return                  a boolean value indicating whether the mood was created
@@ -142,7 +150,6 @@ public class MoodController {
      * @param feeling
      * @param username
      * @param moodMessage
-     * @param location
      * @param image
      * @param socialSituation
      * @param date
@@ -203,7 +210,8 @@ public class MoodController {
 
     }
 
-    static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll, Context context){
+    static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll,
+                                               Context context, Boolean profileMoods){
 
         ArrayList<Mood> moodArrayList = null;
 
@@ -215,37 +223,93 @@ public class MoodController {
             try {
                 moodArrayList = getUserMoods.get();
                 // If moods are retrieved from server set them to the local moodList
+                if(profileMoods) {
+                    moodList.setMoods(moodArrayList);
+                }
                 System.out.println("this is moodlist"+moodList.getMoods().get(0));
-                moodList.setMoods(moodArrayList);
 
 
             } catch (Exception e) {
-                Log.i("error", "failed to get the mood out of the async matched");
+
+                System.out.println("Error in getUserMoods catch"+e);
+                getOfflineMoodList().getMoods();
             }
 
             return moodArrayList;
         }
         else{
-//            return null;
-            return moodList.getMoods();
+            return getOfflineMoodList().getMoods();
         }
     }
 
-//    static public MoodList getOfflineMoodList(){
-//        if (moodList == null){
-//            try {
-//                /* Seeing if a previous recordList was saved */
-//                moodList = MoodManager.getManager().loadMoodList();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
-//            }
-//        }
-//        return moodList;
-//    }
+
+    static public ArrayList<Mood> getTimelineMoods(String username, String indexOfScroll, Context context){
+
+        if(checkNetwork(context)) {
+
+            // setting up array lists for moods and people the user follows
+            ArrayList nameList = new ArrayList();
+            ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+
+            // retrieving the list of users the user follows
+            FollowController followController = new FollowController();
+            FollowingList followingList = followController.getFollowingList(username);
+
+            // getting all the tweets for the timeline
+            nameList.addAll(followingList.getFollowingList());
+            try {
+                for (int i = 0; i < nameList.size(); i++) {
+                    moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
+                            String.valueOf(indexOfScroll), context, false));
+                }
+                System.out.println("this is fff moodlist " + moodArrayList.size());
+                // sorting the tweets
+                moodArrayList = MoodController.sortMoods(moodArrayList);
+                // updating local timeline moodlist
+                timelineMoodList.setMoods(moodArrayList);
+                saveTimelineMoodList();
+            } catch (Exception e) {
+                System.out.println("this is an error with the timeline moods in MoodController" + e);
+            }
+            // returning the sorted array of moods
+            return moodArrayList;
+        }
+        else{
+            return getOfflineTimelineMoodList().getMoods();
+        }
+    }
+
+    static public MoodList getOfflineMoodList(){
+        if (moodList == null){
+            try {
+                /* Seeing if a previous recordList was saved */
+                moodList = MoodManager.getManager().loadMoodList();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            }
+        }
+        return moodList;
+    }
+
+    static public MoodList getOfflineTimelineMoodList(){
+        if (timelineMoodList == null){
+            try {
+                /* Seeing if a previous recordList was saved */
+                timelineMoodList = MoodManager.getManager().loadTimelineMoodList();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Timeline MoodList cannot be de-serialized from MoodManager");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Timeline MoodList cannot be de-serialized from MoodManager");
+            }
+        }
+        return timelineMoodList;
+    }
 
     static public ArrayList<Mood> sortMoods(ArrayList<Mood> moods){
         Date d1;
@@ -265,37 +329,45 @@ public class MoodController {
                 }
             }
         }
-
         return moods;
     }
 
     /* saveRecordList method*/
-//    static public void saveMoodList(){
-//        try {
-//            MoodManager.getManager().saveMoodList(getOfflineMoodList());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("MoodList cannot be de-serialized from recordListManager");
-//        }
-//    }
+    static public void saveMoodList(){
+        try {
+            MoodManager.getManager().saveMoodList(getOfflineMoodList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("MoodList cannot be de-serialized from recordListManager");
+        }
+    }
+
+    static public void saveTimelineMoodList(){
+        try {
+            MoodManager.getManager().saveTimelineMoodList(getOfflineTimelineMoodList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Timeline MoodList cannot be de-serialized from recordListManager");
+        }
+    }
 
 
     static public Boolean checkNetwork(Context context){
         manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         if (info == null) {
+            // setting to true because now offline and will be going back to online
+            ElasticController.connectionFlag = true;
             Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
             return false;
         } else {
+//            ElasticController.connectionFlag = false;
             return true;
         }
 
     }
 
-
-
-
-
+    
     public String getMoodMessage() {
         return mood.getMoodMessage();
     }

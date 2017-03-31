@@ -39,14 +39,19 @@ public class MoodManager {
  *
  * */
 
+    //todo condense save and load methods for timeline and profile moods into single more general methods
+
     static final String prefFile = "MoodList";
     static final String mlkey = "moodList";
+
+    static final String tlprefFile = "TimelineMoodList";
+    static final String tlkey = "timelinemoodList";
 
     Context context;
 
     static private MoodManager moodManager = null;
 
-    /* intialization method of the object*/
+    /* initialization method of the object*/
     public static void initManager(Context context){
         if(moodManager == null){
             if(context == null){
@@ -82,6 +87,17 @@ public class MoodManager {
         }
     }
 
+    public MoodList loadTimelineMoodList() throws IOException, ClassNotFoundException {
+        SharedPreferences settings = context.getSharedPreferences(tlprefFile, context.MODE_PRIVATE);
+        String moodListData = settings.getString(tlkey, "");
+        if(moodListData.equals("")){
+            /* Returning a new MoodList if one does not exist */
+            return new MoodList();
+        } else{
+            return moodListFromString(moodListData);
+        }
+    }
+
     /* moodListFromString method. Following implementation detailed by Abram Hindle in video
     *  referenced above*/
     static public MoodList moodListFromString(String moodListData) throws IOException, ClassNotFoundException {
@@ -98,6 +114,15 @@ public class MoodManager {
         editor.putString(mlkey, moodListToString(ml));
         editor.commit();
     }
+
+    public void saveTimelineMoodList(MoodList tl) throws IOException {
+        SharedPreferences settings = context.getSharedPreferences(tlprefFile, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(tlkey, moodListToString(tl));
+        editor.commit();
+    }
+
+
     /* moodListToString method. Following implementation detailed by Abram Hindle in video
      *  referenced above*/
     static public String moodListToString(MoodList ml) throws IOException {
