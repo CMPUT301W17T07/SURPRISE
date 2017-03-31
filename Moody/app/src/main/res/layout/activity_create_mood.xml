@@ -72,10 +72,10 @@
         android:layout_y="100px"
         android:background="#00000000"
         app:srcCompat="@drawable/ic_camera"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="11dp"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_alignLeft="@+id/editImageView"
-        android:layout_alignStart="@+id/editImageView" />
+        android:layout_alignLeft="@+id/Description"
+        android:layout_alignStart="@+id/Description" />
 
     <ImageButton
         android:id="@+id/location"
@@ -146,6 +146,14 @@
         android:layout_alignLeft="@+id/locationText"
         android:layout_alignStart="@+id/locationText" />
 
+    <ImageButton
+        android:id="@+id/Picker"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="#00000000"
+        app:srcCompat="@android:drawable/ic_menu_month"
+        android:layout_below="@+id/editImageView"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
