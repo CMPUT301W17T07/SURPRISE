@@ -115,7 +115,7 @@
         android:layout_toEndOf="@+id/UserNameText" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/achievementButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@color/blueTheme"

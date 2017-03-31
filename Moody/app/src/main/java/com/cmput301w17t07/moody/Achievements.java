@@ -35,7 +35,11 @@ public class Achievements implements Serializable {
     private static final long serialVersionUID = 3L;
     private ArrayList<String> achievements = new ArrayList<String >();
 
+    // user's total score counter
+    int score = 0;
+
     // Achievement String
+    String moodyUser = "Registered an account!";
     String firstMood = "Posted your first mood!";
 
     // follow attributes
@@ -66,6 +70,13 @@ public class Achievements implements Serializable {
         }
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public void displayAchievement(Context context, String achievement){
             NotificationCompat.Builder b = new NotificationCompat.Builder(context);

@@ -217,7 +217,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                         && ActivityCompat.checkSelfPermission(getApplicationContext(),
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
-                    Toast.makeText(getApplicationContext(), "Get location felled, Please check the Permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Get location failed, Please check the Permission", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

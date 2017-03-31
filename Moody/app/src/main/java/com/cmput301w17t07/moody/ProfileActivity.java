@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +65,7 @@ public class ProfileActivity extends BarMenuActivity {
         FollowController followController = new FollowController();
 
 
-        TextView userName = (TextView) findViewById(R.id.UserNameText);
+        final TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
         userName.setTextColor(getResources().getColor(R.color.redTheme));
         userName.setTypeface(null, Typeface.BOLD_ITALIC);
@@ -89,6 +90,20 @@ public class ProfileActivity extends BarMenuActivity {
 
         // todo displaying username on screen. REMOVE IN FINAL VERSION
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
+
+
+        // ############################ achievements ###################################
+
+        ImageButton achievements = (ImageButton) findViewById(R.id.achievementButton);
+        achievements.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(ProfileActivity.this, "Show me the money", Toast.LENGTH_SHORT).show();
+                Intent showMeTheMoney = new Intent(ProfileActivity.this, AchievementActivity.class);
+                startActivity(showMeTheMoney);
+                finish();
+
+            }
+        });
 
 
 
