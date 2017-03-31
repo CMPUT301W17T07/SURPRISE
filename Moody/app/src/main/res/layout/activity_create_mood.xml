@@ -146,6 +146,17 @@
         android:layout_alignLeft="@+id/locationText"
         android:layout_alignStart="@+id/locationText" />
 
+    <ImageButton
+        android:id="@+id/Picker"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/editImageView"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/SocialText"
+        android:layout_toRightOf="@+id/SocialText"
+        android:background="#00000000"
+        app:srcCompat="@android:drawable/ic_menu_month" />
 
 
 </RelativeLayout>

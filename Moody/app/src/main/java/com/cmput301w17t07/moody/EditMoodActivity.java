@@ -40,15 +40,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
@@ -57,7 +48,7 @@ import java.util.Locale;
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
  */
-public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallback {
+public class EditMoodActivity extends BarMenuActivity{
     public Mood editMood;
     private Bitmap bitmapImage = null;
     private String userName;
@@ -72,7 +63,9 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
     private double longitude;
     private String provider;
     private String address;
-    private GoogleMap mMap;
+    private String moodMessage_text;
+    private Bitmap editBitmapImage = null;
+
     Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
 
 //    private Date dateValue;
@@ -96,6 +89,9 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
+        Bitmap bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+        editBitmapImage = bitmap;
+        System.out.println("bitmap1: "+editBitmapImage);
         latitude = editMood.getLatitude();
         longitude = editMood.getLongitude();
 
@@ -176,8 +172,14 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
 
         editLocation.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View view) {
-                openMap(latitude,longitude);
-
+                moodMessage_text = Description.getText().toString();
+                editMood.setMoodMessage(moodMessage_text);
+                if(editBitmapImage == null){
+                editMood.setMoodImageID(editMood.getMoodImageID());}
+                Intent editLocation = new Intent(EditMoodActivity.this,EditLocation.class);
+                editLocation.putExtra("EditMood", editMood);
+                editLocation.putExtra("bitmap",bitmapImage);
+                startActivity(editLocation);
                 return true;
             }
         });
@@ -221,13 +223,14 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
             }
         });
 
+
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String moodMessage_text = Description.getText().toString();
+                moodMessage_text = Description.getText().toString();
 //                String dateValue = date.getText().toString();
                 MoodController moodController = new MoodController();
-                Bitmap editBitmapImage = bitmapImage;
+
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
                         latitude,longitude, editBitmapImage, SocialSituation, null, editMood ) == false) {
                     Toast.makeText(EditMoodActivity.this,
@@ -303,6 +306,7 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EmotionText = parent.getItemAtPosition(position).toString();
+                editMood.setFeeling(EmotionText);
             }
 
             @Override
@@ -341,6 +345,7 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 SocialSituation = parent.getItemAtPosition(position).toString();
+                editMood.setSocialSituation(SocialSituation);
                 TextView sizeView = (TextView) findViewById(R.id.editSocialText);
                 sizeView.setText("Feeling " + editMood.getFeeling() + " "  + SocialSituation);
             }
@@ -371,7 +376,13 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
             Log.i("error","failed to get the moodImage"+imageID);
         }
 
-        image.setImageBitmap(bitmapImage);
+
+        if(editBitmapImage!= null){
+            image.setImageBitmap(editBitmapImage);
+        }
+        else{
+            image.setImageBitmap(bitmapImage);
+        }
 
 
     }
@@ -428,51 +439,12 @@ public class EditMoodActivity extends BarMenuActivity implements OnMapReadyCallb
             }
         }
         image.setImageBitmap(bitmapImage);
+        editBitmapImage = bitmapImage;;
 
 
 
     }
-    public void openMap(double latitude,double longitude) {
-        setContentView(R.layout.activity_edit_location);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.edit_map);
-        mapFragment.getMapAsync(this);
 
-
-
-    }
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng tmp = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().draggable(true).position(tmp).title("Select location").icon(BitmapDescriptorFactory.defaultMarker()));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
-        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                LatLng mMarkerPosition;
-                mMarkerPosition = marker.getPosition();
-                System.out.println("Position: " + mMarkerPosition);
-            }
-        });
-
-        Button OKButton = (Button) findViewById(R.id.OK);
-        OKButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                
-                //finish();
-            }
-        });
-    }
 
 
 

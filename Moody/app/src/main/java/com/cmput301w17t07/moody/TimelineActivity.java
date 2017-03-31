@@ -114,7 +114,7 @@ public class TimelineActivity extends BarMenuActivity {
                             return;
                         }
                         //todo use this internet checking method instead of one inside the activity
-
+                        
                         userController.saveUsername(username.toLowerCase(), TimelineActivity.this);
                         // creating follow/following lists for new user
                         FollowController followController = new FollowController();
