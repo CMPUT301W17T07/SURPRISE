@@ -100,6 +100,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         userName = userController.readUsername(CreateMoodActivity.this).toString();
         setUpMenuBar(this);
         location = null;
+        date = new Date();
 
 
 
@@ -390,7 +391,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 currentYear = year;
-                currentMonth = monthOfYear;
+                currentMonth = monthOfYear+1;
                 currentDay = dayOfMonth;
             }
         });
@@ -399,12 +400,14 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dateString = currentYear+"-"+currentMonth+"-"+currentDay+" "+currentHour+":"+currentMinte;
+
+                        dateString = currentYear + "-" + currentMonth + "-" + currentDay + " " + currentHour+":"+currentMinte;
                         try {
                             java.text.SimpleDateFormat formatter = new SimpleDateFormat(
                                 "yyyy-MM-dd HH:mm");
                         date = formatter.parse(dateString);}
                         catch (Exception e){e.printStackTrace();}
+                        System.out.println("month: " + currentMonth);
                         Toast.makeText(CreateMoodActivity.this, ""+date, Toast.LENGTH_LONG).show();
                     }
                 })
