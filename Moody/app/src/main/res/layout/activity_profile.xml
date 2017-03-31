@@ -94,6 +94,7 @@
         android:layout_alignParentStart="true" />
 
     <ImageView
+        android:contentDescription="profilePic"
         android:id="@+id/imageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -115,6 +116,7 @@
         android:layout_toEndOf="@+id/UserNameText" />
 
     <ImageButton
+        android:contentDescription="editProfilePic"
         android:id="@+id/imageButton"
         android:layout_width="40dp"
         android:layout_height="40dp"

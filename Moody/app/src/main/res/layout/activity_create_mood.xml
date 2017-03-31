@@ -57,6 +57,7 @@
         android:layout_alignEnd="@+id/editImageView" />
 
     <ImageView
+        android:contentDescription="showsImage"
         android:id="@+id/editImageView"
         android:layout_width="300dp"
         android:layout_height="250dp"
@@ -65,6 +66,7 @@
         android:layout_marginBottom="14dp" />
 
     <ImageButton
+        android:contentDescription="cameraButton"
         android:id="@+id/Camera"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -78,6 +80,7 @@
         android:layout_alignStart="@+id/editImageView" />
 
     <ImageButton
+        android:contentDescription="locationButton"
         android:id="@+id/location"
         android:layout_width="35dp"
         android:layout_height="35dp"

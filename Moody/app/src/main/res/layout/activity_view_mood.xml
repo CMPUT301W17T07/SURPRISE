@@ -23,6 +23,7 @@
     android:orientation="vertical" >
 
     <ImageView
+        android:contentDescription="profilePic"
         android:id="@+id/userProfilePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
         android:textSize="40px" />
 
     <ImageView
+        android:contentDescription="currentFeeling"
         android:id="@+id/userFeelingEmoji"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -66,9 +68,9 @@
         app:menu="@menu/menubar" />
 
     <ImageView
+        android:contentDescription="deleteMoodImage"
         android:id="@+id/viewMoodImage"
         android:layout_width="match_parent"
-
         android:layout_height="250dp"
         android:layout_above="@+id/deleteButton"
         android:scaleType="fitCenter"

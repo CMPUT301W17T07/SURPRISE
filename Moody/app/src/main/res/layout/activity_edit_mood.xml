@@ -17,13 +17,13 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffffff"
     android:weightSum="1">
 
     <ImageButton
+        android:contentDescription="changePic"
         android:id="@+id/imageButton2"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -68,6 +68,7 @@
         android:layout_alignEnd="@+id/editImageView" />
 
     <ImageView
+        android:contentDescription="editImage"
         android:id="@+id/editImageView"
         android:layout_width="300dp"
         android:layout_height="250dp"
@@ -75,6 +76,7 @@
         android:layout_centerHorizontal="true" />
 
     <ImageButton
+        android:contentDescription="editCamera"
         android:id="@+id/editCamera"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -88,6 +90,7 @@
         android:layout_alignStart="@+id/editImageView" />
 
     <ImageButton
+        android:contentDescription="deleteImage"
         android:id="@+id/deletePicture"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -98,6 +101,7 @@
         app:srcCompat="@drawable/ic_deletepic" />
 
     <ImageButton
+        android:contentDescription="changeLocation"
         android:id="@+id/location"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -166,6 +170,7 @@
         android:layout_toStartOf="@+id/editSocialSituation" />
 
     <ImageButton
+        android:contentDescription="deleteLocation"
         android:id="@+id/deleteLocation"
         android:layout_width="35dp"
         android:layout_height="35dp"

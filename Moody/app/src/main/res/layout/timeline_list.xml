@@ -26,6 +26,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:contentDescription="ProfilePic"
             android:id="@+id/profilePicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,6 +77,7 @@
             android:layout_toRightOf="@id/linearLayout1">
 
             <ImageView
+                android:contentDescription="emoji"
                 android:id="@+id/feelingEmoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -62,7 +62,6 @@ public class MoodController {
      * @param feeling           user's selected feeling
      * @param username          user's username
      * @param moodMessage       user's textual explanation for their mood
-     * @param location          user's location
      * @param image             bitmap of user's attached image
      * @param socialSituation   user's socialSituation
      * @return                  a boolean value indicating whether the mood was created
@@ -142,7 +141,6 @@ public class MoodController {
      * @param feeling
      * @param username
      * @param moodMessage
-     * @param location
      * @param image
      * @param socialSituation
      * @param date
