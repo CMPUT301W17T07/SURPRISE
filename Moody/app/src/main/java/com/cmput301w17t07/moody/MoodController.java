@@ -118,12 +118,10 @@ public class MoodController {
      */
     public static Boolean checkMoodMessage(String moodMessage){
         String wordCheck = moodMessage.trim();
-        if(wordCheck.split("\\s+").length > 3){
+        if((wordCheck.split("\\s+").length > 3)||(moodMessage.length() > 20)){
             return false;
         }
-        else if(moodMessage.length() > 20){
-            return false;
-        }else{
+        else{
             return true;
         }
     }

@@ -40,7 +40,7 @@
         android:layout_alignStart="@+id/userUsernameTV"
         android:layout_below="@+id/userUsernameTV"
         android:text="TextView"
-        android:textSize="40sp" />
+        android:textSize="40px" />
 
     <ImageView
         android:contentDescription="currentFeeling"
@@ -82,7 +82,7 @@
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:text="TextView"
-        android:textSize="65sp"
+        android:textSize="65px"
         android:layout_below="@+id/userDateTV"
         android:layout_alignLeft="@+id/userDateTV"
         android:layout_alignStart="@+id/userDateTV" />
@@ -97,7 +97,7 @@
         android:layout_toEndOf="@+id/userProfilePicture"
         android:layout_toRightOf="@+id/userProfilePicture"
         android:text="TextView"
-        android:textSize="65sp"
+        android:textSize="65px"
         android:textStyle="bold" />
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:text="TextView"
-        android:textSize="65sp"
+        android:textSize="65px"
         android:layout_below="@+id/userFeelingTV"
         android:layout_alignLeft="@+id/userFeelingTV"
         android:layout_alignStart="@+id/userFeelingTV" />

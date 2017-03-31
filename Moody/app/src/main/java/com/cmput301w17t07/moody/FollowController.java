@@ -255,7 +255,7 @@ public class FollowController {
 
         // trying to retrieve the follower list
         try {
-            followerList = getFollowerList.get();;
+            followerList = getFollowerList.get();
         } catch (Exception E){
             Log.i("Error", "Was unable to retrieve follower list during getFollowerList()");
         }

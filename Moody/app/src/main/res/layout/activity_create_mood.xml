@@ -51,7 +51,7 @@
         android:text="Send"
         android:textAllCaps="false"
         android:textColor="#66CD00"
-        android:textSize="23sp"
+        android:textSize="23dp"
         android:layout_alignTop="@+id/SocialSituation"
         android:layout_alignRight="@+id/editImageView"
         android:layout_alignEnd="@+id/editImageView" />
@@ -136,7 +136,7 @@
         android:layout_below="@+id/Description"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/toolbar2"
-        android:textSize="40sp"
+        android:textSize="40px"
         android:text="Location" />
 
     <TextView

@@ -89,7 +89,7 @@ public class TimelineActivity extends BarMenuActivity {
              */
             registerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    if (checkNetworkState() == false) {
+                    if (!(checkNetworkState())) {
                         Toast.makeText(TimelineActivity.this, "Internet not available \n" +
                                 "Please check internet", Toast.LENGTH_SHORT).show();
                         return;

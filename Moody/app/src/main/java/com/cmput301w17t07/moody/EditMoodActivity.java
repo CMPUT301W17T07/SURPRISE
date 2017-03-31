@@ -63,7 +63,7 @@ public class EditMoodActivity extends BarMenuActivity {
     private double longitude;
     private String provider;
     private String address;
-    Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
+    Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);
 
 //    private Date dateValue;
 
@@ -208,8 +208,8 @@ public class EditMoodActivity extends BarMenuActivity {
 //                String dateValue = date.getText().toString();
                 MoodController moodController = new MoodController();
                 Bitmap editBitmapImage = bitmapImage;
-                if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        latitude,longitude, editBitmapImage, SocialSituation, null, editMood ) == false) {
+                if (!(moodController.editMood(EmotionText, userName, moodMessage_text,
+                        latitude,longitude, editBitmapImage, SocialSituation, null, editMood ))) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {
