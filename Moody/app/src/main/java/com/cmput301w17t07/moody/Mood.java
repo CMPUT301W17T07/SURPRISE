@@ -102,12 +102,12 @@ public class Mood implements Serializable {
      * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.)
      */
     public Mood(String feeling, String username, String moodMessage, double latitude,double longitude,
-                String imageID, String socialSituation){
+                String imageID, String socialSituation,Date date){
         this.feeling = feeling;
         this.username = username.toLowerCase();
         this.displayUsername = username;
         this.moodMessage = moodMessage;
-        this.date = new Date();
+        this.date = date;
         //this.location = location;
         this.latitude = latitude;
         this.longitude = longitude;

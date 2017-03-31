@@ -257,7 +257,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 MoodController moodController = new MoodController();
                 if(location != null){
                 if (moodController.createMood(EmotionText, userName,
-                        moodMessage_text, latitude,longitude, bitmap, SocialSituation) == false) {
+                        moodMessage_text, latitude,longitude, bitmap, SocialSituation,date) == false) {
                     Toast.makeText(CreateMoodActivity.this,
                             "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -268,7 +268,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 }}
                 else{
                     if (moodController.createMood(EmotionText, userName,
-                            moodMessage_text, 0,0, bitmap, SocialSituation) == false) {
+                            moodMessage_text, 0,0, bitmap, SocialSituation,date) == false) {
                         Toast.makeText(CreateMoodActivity.this,
                                 "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                     } else {

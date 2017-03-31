@@ -68,7 +68,7 @@ public class MoodController {
      * @return                  a boolean value indicating whether the mood was created
      */
     public static Boolean createMood(String feeling, String username, String moodMessage,
-                                     double latitude, double longitude, Bitmap image, String socialSituation){
+                                     double latitude, double longitude, Bitmap image, String socialSituation,Date date){
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
             return false;
@@ -103,7 +103,7 @@ public class MoodController {
         // ID to link mood to image
         System.out.println("test ID"+ moodID);
 
-        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation);
+        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation,date);
 
         ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
         addMood.execute(newMood);
@@ -189,8 +189,8 @@ public class MoodController {
         // ID to link mood to image
         System.out.println("EDIT test ID"+ moodID);
 
-        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation);
-        editMood.setDate(oldMood.getDate());
+        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation,date);
+        //editMood.setDate(oldMood.getDate());
 //        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 
         ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
@@ -364,6 +364,7 @@ public class MoodController {
     public void setFeeling(String feeling) {
         mood.setFeeling(feeling);
     }
+
 
     public String getUsername() {
         return mood.getUsername();
