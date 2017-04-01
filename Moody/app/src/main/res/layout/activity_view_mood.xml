@@ -103,22 +103,24 @@
 
     <TextView
         android:id="@+id/userSocialTV"
-        android:layout_width="280dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:text="TextView"
-        android:textSize="65px"
+        android:textSize="40px"
         android:layout_below="@+id/userFeelingTV"
         android:layout_alignLeft="@+id/userFeelingTV"
         android:layout_alignStart="@+id/userFeelingTV" />
 
     <TextView
         android:id="@+id/LocationTV"
-        android:layout_width="280dp"
+        android:layout_width="200dp"
         android:layout_height="40dp"
+        android:text="TextView"
+        android:layout_below="@+id/userSocialTV"
         android:layout_alignLeft="@+id/userSocialTV"
         android:layout_alignStart="@+id/userSocialTV"
-        android:layout_below="@+id/userSocialTV"
-        android:text="TextView" />
+        android:layout_alignRight="@+id/deleteButton"
+        android:layout_alignEnd="@+id/deleteButton" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -127,8 +129,8 @@
         app:srcCompat="@drawable/ic_newmood"
         android:background="#00000000"
         android:layout_above="@+id/viewMoodImage"
-        android:layout_alignRight="@+id/LocationTV"
-        android:layout_alignEnd="@+id/LocationTV" />
+        android:layout_alignRight="@+id/userFeelingTV"
+        android:layout_alignEnd="@+id/userFeelingTV" />
 
     <ImageButton
         android:id="@+id/deleteButton"
