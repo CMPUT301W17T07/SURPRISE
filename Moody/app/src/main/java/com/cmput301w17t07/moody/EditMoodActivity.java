@@ -88,6 +88,15 @@ public class EditMoodActivity extends BarMenuActivity {
     String dateString;
     Date date;
 
+<<<<<<< HEAD
+=======
+    private Achievements achievements;
+
+//    private Date dateValue;
+
+//    Bitmap bitmap = null;
+
+>>>>>>> cb2bf79aea79a39ff7a4db4e26558c048615ea9e
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,9 +263,23 @@ public class EditMoodActivity extends BarMenuActivity {
                 MoodController moodController = new MoodController();
                 editBitmapImage = bitmapImage;
 
+                AchievementManager.initManager(EditMoodActivity.this);
+                AchievementController achievementController = new AchievementController();
+                achievements = achievementController.getAchievements();
+
+                achievements.firstTimeEditFlag = 1;
+
+                achievementController.saveAchievements();
+
                 if (!moodController.editMood(EmotionText, userName, moodMessage_text,
+<<<<<<< HEAD
                         latitude, longitude, editBitmapImage, SocialSituation,
                         date, address, editMood, EditMoodActivity.this)) {
+=======
+                        latitude,longitude, editBitmapImage, SocialSituation,
+                        date, address,editMood, EditMoodActivity.this )) {
+
+>>>>>>> cb2bf79aea79a39ff7a4db4e26558c048615ea9e
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {

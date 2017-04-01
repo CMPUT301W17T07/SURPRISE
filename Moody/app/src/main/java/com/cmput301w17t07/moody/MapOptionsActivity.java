@@ -40,6 +40,8 @@ public class MapOptionsActivity extends BarMenuActivity {
     private Button resultMap;
 
 
+    private Achievements achievements;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +78,7 @@ public class MapOptionsActivity extends BarMenuActivity {
         // -------------------------Filter by Feeling-------------------------------------------
         Spinner dropdownFeeling = (Spinner) findViewById(R.id.filterMapFeeling);
 
-        String[] feelings = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        String[] feelings = new String[]{"all","anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapterFeelings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, feelings);
         dropdownFeeling.setAdapter(adapterFeelings);
 
@@ -92,7 +94,6 @@ public class MapOptionsActivity extends BarMenuActivity {
                 Toast.makeText(MapOptionsActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
 

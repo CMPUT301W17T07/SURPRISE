@@ -57,6 +57,10 @@ public class MoodController {
      * @param feeling           user's selected feeling
      * @param username          user's username
      * @param moodMessage       user's textual explanation for their mood
+<<<<<<< HEAD
+=======
+     * @param
+>>>>>>> 4462e10f3290e4b4be28e9995fd7fe9dc8792a88
      * @param image             bitmap of user's attached image
      * @param socialSituation   user's socialSituation
      * @return                  a boolean value indicating whether the mood was created
@@ -98,6 +102,7 @@ public class MoodController {
 //        System.out.println("test ID"+ moodID);
 
         Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, image, socialSituation, date,displayLocation);
+
 
         if(checkNetwork(context)) {
             ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
@@ -204,16 +209,8 @@ public class MoodController {
             deleteMood.execute(oldMood.getId());
         }
         else{
-//            getOfflineMoodList();
-            //todo check if id is jest or if id is offline
-            if (editMood.idType == true) {
-                editMood.setId(oldMood.getId());
-            }
-            else{
-                editMood.setId(UUID.randomUUID().toString());
-                editMood.idType = false;
-            }
-            moodList.editMood(editMood, oldMood.getId());
+            editMood.setId(oldMood.getId());
+            moodList.editMood(editMood, oldMood);
             saveMoodList();
         }
 
@@ -237,14 +234,15 @@ public class MoodController {
     }
 
     static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll,
-                                               Context context, Boolean profileMoods){
+                                               Context context, Boolean profileMoods,
+                                               String numberOfMoods){
 
         ArrayList<Mood> moodArrayList = null;
 
         if(checkNetwork(context)) {
             // if the user is connected to the network...
             ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-            getUserMoods.execute(username, String.valueOf(indexOfScroll));
+            getUserMoods.execute(username, indexOfScroll, numberOfMoods);
 
             try {
                 moodArrayList = getUserMoods.get();
@@ -297,7 +295,7 @@ public class MoodController {
             try {
                 for (int i = 0; i < nameList.size(); i++) {
                     moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
-                            String.valueOf(indexOfScroll), context, false));
+                            String.valueOf(indexOfScroll), context, false, String.valueOf(6)));
                 }
                 System.out.println("this is NEW moodlist " + moodArrayList.size());
                 // sorting the tweets
@@ -406,7 +404,7 @@ public class MoodController {
                 ElasticController.connectionFlag = false;
             }
             //todo determine if setting the flag to false here is causing any errors
-            ElasticController.connectionFlag = false;
+//            ElasticController.connectionFlag = false;
             return true;
         }
 
@@ -444,15 +442,17 @@ public class MoodController {
             for(int i = 0; i < numberEdited; i++){
                 try{
                     ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
-                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+//                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
 
                     Mood editedMood = moodList.editedOffline.get(i);
                     addMood.execute(editedMood);
-                    deleteMood.execute(moodList.getOldIDs().get(i));
+//                    deleteMood.execute(moodList.getOldIDs().get(i));
                 }catch(Exception e){
                     System.out.println("Error when synching deleted moods with the server"+ e);
                 }
             }
+            moodList.editedOffline.clear();
+            moodList.oldIDs.clear();
         }
     }
 

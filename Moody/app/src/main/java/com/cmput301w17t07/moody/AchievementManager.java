@@ -33,7 +33,7 @@ import java.io.ObjectOutputStream;
 public class AchievementManager {
 
     static final String prefFile = "Achievements";
-    static final String akey = "achievements";
+    static final String akey = "activity_achievements";
 
     Context context;
 

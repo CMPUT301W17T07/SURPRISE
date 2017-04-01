@@ -74,6 +74,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     private Location location;
     private String address;
 
+    private static Achievements achievements;
 
 
     Bitmap bitmap = null;
@@ -217,7 +218,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                         && ActivityCompat.checkSelfPermission(getApplicationContext(),
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
-                    Toast.makeText(getApplicationContext(), "Get location felled, Please check the Permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Get location failed, Please check the Permission", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -255,6 +256,22 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
 
                 String moodMessage_text = Description.getText().toString();
+
+                MoodController moodController = new MoodController();
+
+                // --------------------------- achievements -------------------------------------
+                AchievementManager.initManager(CreateMoodActivity.this);
+                AchievementController achievementController = new AchievementController();
+                achievements = achievementController.getAchievements();
+
+                achievements.moodCount += 1;
+
+                achievementController.incrementMoodCounter(EmotionText);
+
+                achievementController.saveAchievements();
+                // ------------------------------------------------------------------------------
+
+
                 if(location != null){
                     //todo can remove these if/else statements that toast message too long. They could
                     // be handled in the controller

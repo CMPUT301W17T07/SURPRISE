@@ -57,6 +57,7 @@ public class MoodList implements Serializable{
 
     public void deleteMood(Mood mood){
 //        moodList.remove(mood);
+
         deletedOffline.add(mood.getId());
         for(int i = 0; i < moodList.size(); i++) {
             if (moodList.get(i).getId().equals(mood.getId())) {
@@ -66,13 +67,30 @@ public class MoodList implements Serializable{
         }
         }
 
-    public void editMood(Mood mood, String oldMoodID){
-        editedOffline.add(mood);
-        oldIDs.add(oldMoodID);
+    public void editMood(Mood mood, Mood oldMood){
+//        deleteMood(oldMood);
+//        addMood(mood);
+       editedOffline.add(mood);
+//       oldIDs.add(oldMood.getId());
         for(int i = 0; i < moodList.size(); i++){
-            if(moodList.get(i).getId().equals(oldMoodID)){
+            if(moodList.get(i).getId().equals(oldMood.getId())){
+
+                if(addedOffline.contains(mood)){
+                    moodList.remove(i);
+                    moodList.add(i, mood);
+                    addedOffline.remove(mood);
+                    return;
+                }
+                if(editedOffline.contains(mood)){
+                    moodList.remove(i);
+                    moodList.add(i, mood);
+                    editedOffline.remove(mood);
+                    return;
+                }
                 moodList.remove(i);
                 moodList.add(i, mood);
+
+
                 return;
             }
         }

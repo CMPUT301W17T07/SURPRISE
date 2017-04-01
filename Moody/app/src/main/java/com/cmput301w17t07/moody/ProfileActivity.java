@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,11 +70,12 @@ public class ProfileActivity extends BarMenuActivity {
         FollowController followController = new FollowController();
 
 
-        TextView userName = (TextView) findViewById(R.id.UserNameText);
+        final TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
+
         userName.setTextColor(getResources().getColor(R.color.redTheme));
         userName.setTypeface(null, Typeface.BOLD_ITALIC);
-//
+
         TextView Following = (TextView) findViewById(R.id.Following);
         Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
         TextView Followers = (TextView) findViewById(R.id.Followers);
@@ -102,6 +104,20 @@ public class ProfileActivity extends BarMenuActivity {
         Toast.makeText(ProfileActivity.this, userController.readUsername(ProfileActivity.this).toString(), Toast.LENGTH_SHORT).show();
 
 
+        // ############################ achievements ###################################
+
+        ImageButton achievements = (ImageButton) findViewById(R.id.achievementButton);
+        achievements.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(ProfileActivity.this, "Show me the money", Toast.LENGTH_SHORT).show();
+                Intent showMeTheMoney = new Intent(ProfileActivity.this, AchievementActivity.class);
+                startActivity(showMeTheMoney);
+                finish();
+
+            }
+        });
+
+
 
     }
 
@@ -121,7 +137,8 @@ public class ProfileActivity extends BarMenuActivity {
         // Getting the user's moods
         try {
             moodArrayList = MoodController.getUserMoods(username,
-                    String.valueOf(indexOfScroll), ProfileActivity.this, true);
+                    String.valueOf(indexOfScroll),
+                    ProfileActivity.this, true, String.valueOf(8));
             // Save the moodlist locally
             MoodController.saveMoodList();
         } catch (Exception E){
@@ -148,7 +165,8 @@ public class ProfileActivity extends BarMenuActivity {
                         // Getting the extra moods after the scroll
                         try {
                             templist = MoodController.getUserMoods(username,
-                                    String.valueOf(indexOfScroll), ProfileActivity.this, true);
+                                    String.valueOf(indexOfScroll), ProfileActivity.this,
+                                    true, String.valueOf(8));
                             MoodController.saveMoodList();
                         } catch(Exception e){
                             System.out.println("this is an error in the Profile Activity when loading extra moods"+e);

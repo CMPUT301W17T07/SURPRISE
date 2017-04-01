@@ -359,7 +359,7 @@ public class ElasticMoodController extends ElasticController {
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will   want
             }else {
                 query = "{\n" +
-                        "    \"from\":\"" + search_parameters[1] + "\",\"size\":6, \n"+
+                        "    \"from\":\"" + search_parameters[1] + "\",\"size\":\"" + search_parameters[2] + "\", \n"+
                         "    \"query\" : {\n" +
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
                         "    },\n" +
@@ -444,18 +444,82 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(Location... locations) {
             verifySettings();
 
-            String query ="{\n" +
+            String DISTANCE = "5";
+
+            String query = "{\n" +
                     "\"query\" : {\n" +
-                    "\"bool\" : {\n" +
-                    "\"must\" : {\n" +
-                    " \"match_all\" : {}\n" +
-                    "}," +
+                        "\"match_all\" : {}\n" +
+                            "},\n" +
                     "\"filter\" : {\n" +
-                    "\"geo_distance\" : {\n" +
-                    "\"distance : 5km\",\n" +
-                    "\"location\" : [" + locations[0].getLongitude() + ", "
-                    + locations[0].getLatitude() + "]\n" +
-                    "}}}";
+                        "\"bool\" : {\n" +
+                            "\"must\" : [\n" +
+                    "{\n" +
+                        "\"geo_distance\" : {\n" +
+                            "\"distance\" : \"5km\",\n" +
+                                "\"random\" : [" + locations[0].getLongitude() + ", "
+                                    + locations[0].getLatitude() + "]\n" +
+                    "}\n" +
+                    "} ,\n" +
+                    "] ,\n" +
+                    "}\n" +
+                    "}\n" +
+                    "}";
+
+
+
+//                    "{\n" +
+//                    "\"query\" : {\n" +
+//                        "\"match_all\" : {}\n" +
+//                            "},\n" +
+//                    "\"filter\" : {\n" +
+//                    "        \"geo_distance\" : {\n" +
+//                    "          \"distance\" : \"" + DISTANCE + "km\",\n" +
+//                    "          \"random\" : [" + locations[0].getLongitude() + ", "
+//                    + locations[0].getLatitude() + "]\n" +
+//                    "}\n" +
+//                    "}\n" +
+//                    "}\n";
+
+
+//                    "{\n" +
+//                    "\"query\" : {\n" +
+//                    "\"filter\" : {\n" +
+//                        "\"geo_distance\" : {\n" +
+//                            "\"distance\" : \"5km\",\n" +
+//                    "\"pin\" : {\n" +
+//                        "\"random\" : [" + locations[0].getLongitude() + ", "
+//                    + locations[0].getLatitude() + "]\n" +
+//                    "}\n" +
+//                    "}\n" +
+//                                    "}\n" +
+//                                        "}\n" +
+//                                            "}\n";
+//
+
+
+
+//            "\"filtered\" : {\n" +
+//                    "\"query\" : {\n" +
+//                    "\"match_all\" : {}\n" +
+//                    "},\n" +
+
+
+
+
+//                    "{\n" +
+//                    "\"query\" : {\n" +
+//                    "\"bool\" : {\n" +
+//                    "\"must\" : {\n" +
+//                    " \"match_all\" : {}\n" +
+//                    "}," +
+//                    "\"filter\" : {\n" +
+//                    "\"geo_distance\" : {\n" +
+//                    "\"distance : 5km\",\n" +
+//                    "\"location\" : [" + locations[0].getLongitude() + ", "
+//                    + locations[0].getLatitude() + "]\n" +
+//                    "}}}";
+
+            System.out.println("this is location query "+query);
 
 
             Search search = new Search.Builder(query)
