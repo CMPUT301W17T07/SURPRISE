@@ -19,7 +19,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffffff"
+    android:background="@color/blueTheme"
     android:weightSum="1">
 
     <Spinner
@@ -52,12 +52,13 @@
         android:id="@+id/button5"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:background="#00000000"
+        android:background="#3C849C"
         android:text="Send"
+        android:textStyle="bold"
         android:textAllCaps="false"
-        android:textColor="#66CD00"
+        android:textColor="@color/redTheme"
         android:textSize="23dp"
-        android:layout_alignTop="@+id/SocialSituation"
+        android:layout_alignBottom="@+id/Picker"
         android:layout_alignRight="@+id/editImageView"
         android:layout_alignEnd="@+id/editImageView" />
 

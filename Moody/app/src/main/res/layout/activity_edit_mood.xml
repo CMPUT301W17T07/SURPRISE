@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffffff"
+    android:background="@color/blueTheme"
     android:weightSum="1">
 
     <ImageButton
@@ -58,11 +58,12 @@
         android:id="@+id/button5"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:background="#00000000"
         android:text="Send"
         android:textAllCaps="false"
-        android:textColor="#66CD00"
         android:textSize="23dp"
+        android:background="#3C849C"
+        android:textStyle="bold"
+        android:textColor="@color/redTheme"
         android:layout_alignTop="@+id/editSocialSituation"
         android:layout_alignRight="@+id/editImageView"
         android:layout_alignEnd="@+id/editImageView" />

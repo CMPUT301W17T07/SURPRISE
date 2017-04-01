@@ -83,12 +83,13 @@ public class TimelineActivity extends BarMenuActivity {
 
 
 
+        UserController userController = new UserController();
+        username = userController.readUsername(TimelineActivity.this).toString();
 
-
-        SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
-        boolean isFirstIn = sp.getBoolean("isFirstIn", true);
-        if (isFirstIn) {
-            sp.edit().putBoolean("isFirstIn", false).apply();
+//        SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
+//        boolean isFirstIn = sp.getBoolean("isFirstIn", true);
+        if (username.equals("")) {
+//            sp.edit().putBoolean("isFirstIn", false).apply();
             setContentView(R.layout.activity_create_user);
             Toast.makeText(TimelineActivity.this, " Welcome to Moody! ", Toast.LENGTH_SHORT).show();
             Button registerButton = (Button) findViewById(R.id.register);
