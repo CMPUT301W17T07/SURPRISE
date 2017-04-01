@@ -137,7 +137,8 @@ public class ProfileActivity extends BarMenuActivity {
         // Getting the user's moods
         try {
             moodArrayList = MoodController.getUserMoods(username,
-                    String.valueOf(indexOfScroll), ProfileActivity.this, true);
+                    String.valueOf(indexOfScroll),
+                    ProfileActivity.this, true, String.valueOf(8));
             // Save the moodlist locally
             MoodController.saveMoodList();
         } catch (Exception E){
@@ -164,7 +165,8 @@ public class ProfileActivity extends BarMenuActivity {
                         // Getting the extra moods after the scroll
                         try {
                             templist = MoodController.getUserMoods(username,
-                                    String.valueOf(indexOfScroll), ProfileActivity.this, true);
+                                    String.valueOf(indexOfScroll), ProfileActivity.this,
+                                    true, String.valueOf(8));
                             MoodController.saveMoodList();
                         } catch(Exception e){
                             System.out.println("this is an error in the Profile Activity when loading extra moods"+e);

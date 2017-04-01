@@ -47,6 +47,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/enterUsername"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "
         android:layout_above="@+id/register"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

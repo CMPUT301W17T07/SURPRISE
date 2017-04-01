@@ -228,8 +228,8 @@ public class TimelineActivity extends BarMenuActivity {
                     if(scrollFlag) {
                         Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
                         indexOfScroll = indexOfScroll + 6;
-                        templist = MoodController.getUserMoods(username,
-                                String.valueOf(indexOfScroll), TimelineActivity.this, false);
+                        templist = MoodController.getTimelineMoods(username,
+                                String.valueOf(indexOfScroll), TimelineActivity.this);
                         // determining if there any old moods to find
                         if (templist.size() == 0) {
                             scrollFlag = false;

@@ -111,27 +111,39 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 && ActivityCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-            Toast.makeText(getApplicationContext(), "Get location failed, Please check the Permission", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Unable to access location." +
+                    " Please check your permissions", Toast.LENGTH_SHORT).show();
             return;
         }
 
         filterFeeling = intent.getStringExtra("feelingFilter");
-        //Toast.makeText(MapsActivity.this, filterFeeling, Toast.LENGTH_SHORT).show();
+        //------------------------- MAP FILTERS FOR USER'S MOODS -----------------------------------
         if (user == 0) {
-            ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
-                    new ElasticMoodController.GetFeelingFilterMoods();
-            getFeelingFilterMoods.execute(username, filterFeeling);
 
-            try {
-                moodArrayList = getFeelingFilterMoods.get();
-                System.out.println("this is moodlist " + moodArrayList);
-
-            } catch (Exception e) {
-                Log.i("error", "failed to get the mood out of the async matched");
+            if(filterFeeling.equals("all")){
+                try {
+                    moodArrayList = MoodController.getUserMoods(username,
+                            String.valueOf(0), MapsActivity.this, false, String.valueOf(50));
+                } catch (Exception e){
+                    System.out.println("Error when trying to retrieve user's " +
+                            "location based mood history for all feelings" + e);
+                }
             }
+            else {
+                ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                        new ElasticMoodController.GetFeelingFilterMoods();
+                getFeelingFilterMoods.execute(username, filterFeeling);
 
+                try {
+                    moodArrayList = getFeelingFilterMoods.get();
+                } catch (Exception e) {
+                    Log.i("error", "failed to get filtered feeling moods in map activity");
+                }
+            }
+            // Plotting of location based points on map
             for (int i = 0; i < moodArrayList.size(); i++) {
-                if (moodArrayList.get(i).getLongitude() == 0 && moodArrayList.get(i).getLatitude() == 0) {
+                Mood mood = moodArrayList.get(i);
+                if (mood.getLongitude() == 0 && mood.getLatitude() == 0) {
                     break;
                 } else {
                     double longitude;
@@ -139,20 +151,33 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                     longitude = moodArrayList.get(i).getLongitude();
                     latitude = moodArrayList.get(i).getLatitude();
                     LatLng tmp = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(tmp).title(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
+                    mMap.addMarker(new MarkerOptions().position(tmp).title(mood.getFeeling()).
+                            icon(BitmapDescriptorFactory.
+                                    defaultMarker(setMarkerColor(mood.getFeeling()))));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
                 }
             }
 
-        } else if (user == 1) {
+        }
+        //--------------------- MAP FILTERS FOR USER'S TIMELINE'S MOODS ----------------------------
+        else if (user == 1) {
             // do timeline stuff ...
-            UserController userController = new UserController();
-            username = userController.readUsername(MapsActivity.this).toString();
+//            UserController userController = new UserController();
+//            username = userController.readUsername(MapsActivity.this).toString();
 
             FollowController followController = new FollowController();
             FollowingList followingList = followController.getFollowingList(username);
 
-            Toast.makeText(MapsActivity.this, "timeline", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MapsActivity.this, "timeline", Toast.LENGTH_SHORT).show();
+            if(filterFeeling.equals("all")){
+                try {
+                    moodArrayList = MoodController.getTimelineMoods(username,
+                            String.valueOf(0), MapsActivity.this);
+                } catch(Exception e){
+                    System.out.println("Error with getting timeline mood in MapsActivity" + e);
+
+                }
+            }
 
             nameList.addAll(followingList.getFollowingList());
             try {
@@ -166,19 +191,25 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                         moodArrayList.addAll(getFeelingFilterMoods.get());
 
                     } catch (Exception e) {
-                        System.out.println("this is fff" + e);
+                        System.out.println("Error with getting filtered" +
+                                " timeline moods in MapsActivity" + e);
                     }
                     for (int j = 0; j < moodArrayList.size(); j++) {
-                        if (moodArrayList.get(j).getLongitude() == 0 && moodArrayList.get(j).getLatitude() == 0) {
+                        Mood mood = moodArrayList.get(i);
+                        if (mood.getLongitude() == 0 && mood.getLatitude() == 0) {
                             break;
                         } else {
                             double longitude;
                             double latitude;
-                            longitude = moodArrayList.get(i).getLongitude();
-                            latitude = moodArrayList.get(i).getLatitude();
+                            longitude = mood.getLongitude();
+                            latitude = mood.getLatitude();
                             Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
                             LatLng tmp = new LatLng(latitude, longitude);
-                            mMap.addMarker(new MarkerOptions().position(tmp).title(nameList.get(i).toString()).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
+                            mMap.addMarker(new MarkerOptions().position(tmp).
+                                    title(nameList.get(i).toString()).
+                                    snippet(mood.getFeeling()).
+                                    icon(BitmapDescriptorFactory.
+                                            defaultMarker(setMarkerColor(mood.getFeeling()))));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
 
                         }
@@ -189,7 +220,9 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 System.out.println("this is fff error" + e);
             }
 
-        } else if (user == 2) {
+        }
+        //--------------------------- ALL MOODS WITHIN 5KM OF THE USER -----------------------------
+        else if (user == 2) {
 
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             //check available tools
@@ -227,16 +260,20 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 System.out.println("this is fff" + e);
             }
             for (int j = 0; j < currLocationArrayList.size(); j++) {
-                if (currLocationArrayList.get(j).getLongitude() == 0 && currLocationArrayList.get(j).getLatitude() == 0) {
+                Mood mood = currLocationArrayList.get(j);
+                if (mood.getLongitude() == 0 && mood.getLatitude() == 0) {
                     break;
                 } else {
                     double longitude;
                     double latitude;
-                    longitude = moodArrayList.get(j).getLongitude();
-                    latitude = moodArrayList.get(j).getLatitude();
+                    longitude = mood.getLongitude();
+                    latitude = mood.getLatitude();
                     Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
                     LatLng tmp = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(tmp).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
+                    mMap.addMarker(new MarkerOptions().position(tmp).
+                            snippet(mood.getFeeling()).
+                            icon(BitmapDescriptorFactory.
+                                    defaultMarker(setMarkerColor(mood.getFeeling()))));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
                 }
             }

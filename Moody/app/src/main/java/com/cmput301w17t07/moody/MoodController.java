@@ -234,14 +234,15 @@ public class MoodController {
     }
 
     static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll,
-                                               Context context, Boolean profileMoods){
+                                               Context context, Boolean profileMoods,
+                                               String numberOfMoods){
 
         ArrayList<Mood> moodArrayList = null;
 
         if(checkNetwork(context)) {
             // if the user is connected to the network...
             ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-            getUserMoods.execute(username, String.valueOf(indexOfScroll));
+            getUserMoods.execute(username, indexOfScroll, numberOfMoods);
 
             try {
                 moodArrayList = getUserMoods.get();
@@ -294,7 +295,7 @@ public class MoodController {
             try {
                 for (int i = 0; i < nameList.size(); i++) {
                     moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
-                            String.valueOf(indexOfScroll), context, false));
+                            String.valueOf(indexOfScroll), context, false, String.valueOf(6)));
                 }
                 System.out.println("this is NEW moodlist " + moodArrayList.size());
                 // sorting the tweets

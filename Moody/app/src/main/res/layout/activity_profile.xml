@@ -98,8 +98,7 @@
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:textColor="@android:color/black" />
 
     <ImageView
         android:id="@+id/imageView"
