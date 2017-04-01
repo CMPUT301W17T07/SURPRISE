@@ -65,6 +65,12 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_maps);
         setUpMenuBar(this);
 
+        AchievementManager.initManager(MapsActivity.this);
+        Achievements achievements = AchievementController.getAchievements();
+        achievements.launchMapsFlag = 1;
+        AchievementController.checkForMoodAchievements(MapsActivity.this);
+        AchievementController.saveAchievements();
+
 
         UserController userController = new UserController();
         username = userController.readUsername(MapsActivity.this).toString();

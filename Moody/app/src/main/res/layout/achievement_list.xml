@@ -16,9 +16,10 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -35,12 +36,12 @@ android:orientation="horizontal" >
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/achievement_short_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:textSize="12sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/achievement_short_description"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:textSize="12sp" />-->
     </LinearLayout>
 
 
@@ -49,6 +50,7 @@ android:orientation="horizontal" >
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
+        app:srcCompat="@android:drawable/ic_menu_camera"
         android:paddingEnd="10dp"
         android:paddingRight="10dp"/>
 

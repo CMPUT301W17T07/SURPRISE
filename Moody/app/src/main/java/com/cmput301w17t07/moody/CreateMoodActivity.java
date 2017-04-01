@@ -74,6 +74,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     private Location location;
     private String address;
 
+    private static Achievements achievements;
 
 
     Bitmap bitmap = null;
@@ -256,6 +257,19 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
                 String moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
+
+                // --------------------------- achievements -------------------------------------
+                AchievementManager.initManager(CreateMoodActivity.this);
+                AchievementController achievementController = new AchievementController();
+                achievements = achievementController.getAchievements();
+
+                achievements.moodCount += 1;
+
+                achievementController.incrementMoodCounter(EmotionText);
+
+                achievementController.saveAchievements();
+                // ------------------------------------------------------------------------------
+
                 if(location != null){
                 if (moodController.createMood(EmotionText, userName,
                         moodMessage_text, latitude,longitude, bitmap, SocialSituation,date) == false) {

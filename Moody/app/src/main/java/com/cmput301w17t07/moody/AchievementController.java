@@ -16,9 +16,14 @@
 
 package com.cmput301w17t07.moody;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.support.v4.app.NotificationCompat;
 
 import java.io.IOException;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by mike on 2017-03-30.
@@ -54,7 +59,159 @@ public class AchievementController {
         }
     }
 
-    public void checkForMoodAchievements(Context context){
+    public static void checkForMoodAchievements(Context context){
+        achievements = getAchievements();
+        if(!achievements.moodCountEarned){
+            if(achievements.moodCount >= 1){
+                displayAchievement(context, achievements.firstMood21);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.firstMood21);
+                achievements.achievementsDescriptionArray.add(achievements.firstMood22);
+                achievements.moodCountEarned = true;
+                achievements.score = achievements.score + 10;
+            }
+        }
+        if (!achievements.fiveHappyMoodCountEarned) {
+            if (achievements.fiveHappyMoodCount >= 5) {
+                displayAchievement(context, achievements.fiveHappy31);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.fiveHappy31);
+                achievements.achievementsDescriptionArray.add(achievements.fiveHappy32);
+                achievements.fiveHappyMoodCountEarned = true;
+                achievements.score = achievements.score + 10;
+            }
+        }
+        if (!achievements.fiveAngryMoodCountEarned) {
+            if (achievements.fiveAngryMoodCount >= 5) {
+                displayAchievement(context, achievements.fiveAngry41);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.fiveAngry41);
+                achievements.achievementsDescriptionArray.add(achievements.fiveAngry42);
+                achievements.fiveAngryMoodCountEarned = true;
+                achievements.score = achievements.score + 10;
+            }
+        }
+        if (!achievements.fiveSadMoodCountEarned) {
+            if (achievements.fiveSadMoodCount >= 5) {
+                displayAchievement(context, achievements.fiveSad51);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.fiveSad51);
+                achievements.achievementsDescriptionArray.add(achievements.fiveSad52);
+                achievements.fiveSadMoodCountEarned = true;
+                achievements.score = achievements.score + 10;
+            }
+        }
+        if (!achievements.firstTimeRegFlagEarned) {
+            if (achievements.firstTimeRegFlag != 0) {
+                displayAchievement(context, achievements.signUpMoody11);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.signUpMoody11);
+                achievements.achievementsDescriptionArray.add(achievements.signUpMoody12);
+                achievements.firstTimeRegFlagEarned = true;
+                achievements.score = achievements.score + 10;
+            }
+        }
+        if (!achievements.firstTimeEditFlagEarned) {
+            if (achievements.firstTimeEditFlag != 0) {
+                displayAchievement(context, achievements.editAMood61);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.editAMood61);
+                achievements.achievementsDescriptionArray.add(achievements.editAMood62);
+                achievements.firstTimeEditFlagEarned = true;
+                achievements.score = achievements.score + 10;
+            }
+        }
+        if (!achievements.followCountEarned) {
+            if (achievements.followCount != 0) {
+                displayAchievement(context, achievements.followThem71);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.followThem71);
+                achievements.achievementsDescriptionArray.add(achievements.followThem72);
+                achievements.followCountEarned = true;
+                achievements.score = achievements.score + 10;
+
+            }
+        }
+        if (!achievements.followerCountEarned) {
+            if (achievements.followerCount != 0) {
+                displayAchievement(context, achievements.followMe81);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.followMe81);
+                achievements.achievementsDescriptionArray.add(achievements.followMe82);
+                achievements.followerCountEarned = true;
+                achievements.score = achievements.score + 10;
+
+            }
+        }
+        if (!achievements.launchMapsFlagEarned) {
+            if (achievements.launchMapsFlag != 0) {
+                displayAchievement(context, achievements.showMeTheWay91);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.showMeTheWay91);
+                achievements.achievementsDescriptionArray.add(achievements.showMeTheWay92);
+                achievements.launchMapsFlagEarned = true;
+                achievements.score = achievements.score + 10;
+
+            }
+        }
+        if (!achievements.fearMoodCountEarned) {
+            if (achievements.fearMoodCount != 0) {
+                displayAchievement(context, achievements.scaredyCat101);
+                //add achievement to list and increment score
+                achievements.achievementsTitleArray.add(achievements.scaredyCat101);
+                achievements.achievementsDescriptionArray.add(achievements.scaredyCat102);
+                achievements.fearMoodCountEarned = true;
+                achievements.score = achievements.score + 10;
+
+            }
+        }
+    }
+
+
+    public void incrementMoodCounter (String feeling) {
+        switch (feeling) {
+            case "anger":
+                achievements.fiveAngryMoodCount += 1;
+                break;
+            case "confusion":
+                break;
+            case "disgust":
+                break;
+            case "fear":
+                achievements.fearMoodCount += 1;
+                break;
+            case "happiness":
+                achievements.fiveHappyMoodCount += 1;
+                break;
+            case "sadness":
+                achievements.fiveSadMoodCount += 1;
+                break;
+            case "shame":
+                break;
+            case "surprise":
+                break;
+        }
+
+
+
+
+    }
+
+
+    public static void displayAchievement(Context context, String achievement){
+        NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+        b.setAutoCancel(true)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.achievement2)
+                .setTicker("{your tiny message}")
+                .setContentTitle("Moody")
+                .setContentText(achievement)
+                .setContentInfo("INFO")
+                .setPriority(Notification.PRIORITY_MAX);
+
+        NotificationManager nm = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(1, b.build());
     }
 
 

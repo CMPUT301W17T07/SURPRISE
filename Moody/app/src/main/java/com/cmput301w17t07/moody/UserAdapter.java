@@ -50,6 +50,8 @@ public class UserAdapter extends BaseAdapter {
     private String username;
     private String searchUsername;
 
+    private Achievements achievements;
+
 
     /**
      * Constructor for the UserAdapter
@@ -100,7 +102,7 @@ public class UserAdapter extends BaseAdapter {
      * @return
      */
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         View view;
         final SearchViewHolder viewHolder;
 
@@ -135,6 +137,14 @@ public class UserAdapter extends BaseAdapter {
                 //todo implement ability to show send request button or following text depending on if user is already following
                 if(FollowController.sendPendingRequest(username, searchUsername)){
                     // if it returns true....
+
+                    AchievementManager.initManager(context);
+                    achievements = AchievementController.getAchievements();
+                    achievements.followCount += 1;
+                    AchievementController.checkForMoodAchievements(context);
+                    AchievementController.saveAchievements();
+
+
 
 
                     // change button displayed

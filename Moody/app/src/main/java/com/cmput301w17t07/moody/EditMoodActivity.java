@@ -87,6 +87,8 @@ public class EditMoodActivity extends BarMenuActivity{
     String dateString;
     Date date;
 
+    private Achievements achievements;
+
 //    private Date dateValue;
 
 //    Bitmap bitmap = null;
@@ -260,6 +262,14 @@ public class EditMoodActivity extends BarMenuActivity{
             public void onClick(View v) {
                 moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
+
+                AchievementManager.initManager(EditMoodActivity.this);
+                AchievementController achievementController = new AchievementController();
+                achievements = achievementController.getAchievements();
+
+                achievements.firstTimeEditFlag = 1;
+
+                achievementController.saveAchievements();
 
                 if (moodController.editMood(EmotionText, userName, moodMessage_text,
                         latitude,longitude, editBitmapImage, SocialSituation, date, editMood ) == false) {

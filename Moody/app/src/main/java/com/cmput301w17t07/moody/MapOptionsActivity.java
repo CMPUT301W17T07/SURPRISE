@@ -40,6 +40,8 @@ public class MapOptionsActivity extends BarMenuActivity {
     private Button resultMap;
 
 
+    private Achievements achievements;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +94,6 @@ public class MapOptionsActivity extends BarMenuActivity {
                 Toast.makeText(MapOptionsActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
 

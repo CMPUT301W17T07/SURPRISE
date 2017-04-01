@@ -64,29 +64,33 @@ public class AchievementActivity extends BarMenuActivity {
 
         // display the users score
         final TextView userScore = (TextView) findViewById(R.id.scoreText);
-        userScore.setText("Score: " + String.valueOf(achievements.getScore()));
+        userScore.setText("Score: " + String.valueOf(achievements.score));
         userScore.setTextColor(getResources().getColor(R.color.redTheme));
         userScore.setTypeface(null, Typeface.BOLD_ITALIC);
 
 
 
-        List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
+//        List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
+//
+//        for (int i = 0; i < achievements.achievementsTitleArray.size(); i++) {
+//            HashMap<String, String> hm = new HashMap<String, String>();
+//            hm.put("achievement_title", achievements.achievementsTitleArray.get(i));
+//            hm.put("achievement_description", achievements.achievementsDescriptionArray.get(i));
+//            hm.put("achievement_image", Integer.toString(listviewImage[i]));
+//            aList.add(hm);
+//        }
 
-        for (int i = 0; i < 1; i++) {
-            HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("achievement_title", listviewTitle[i]);
-            hm.put("achievement_description", listviewShortDescription[i]);
-            hm.put("achievement_image", Integer.toString(listviewImage[i]));
-            aList.add(hm);
-        }
-
-
-        String[] from = {"achievement_image", "achievement_title", "achievement_description"};
-        int[] to = {R.id.achievement_image, R.id.achievement_title, R.id.achievement_short_description};
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.achievement_list, from, to);
+//
+//        String[] from = {"achievement_image", "achievement_title", "achievement_description"};
+//        int[] to = {R.id.achievement_image, R.id.achievement_title, R.id.achievement_short_description};
+////
+//        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.achievement_list, from, to);
         ListView androidListView = (ListView) findViewById(R.id.test3_list);
-        androidListView.setAdapter(simpleAdapter);
+
+
+
+        AchievementsAdapter achievementsAdapter = new AchievementsAdapter(AchievementActivity.this, R.layout.achievement_list, achievements.achievementsTitleArray);
+        androidListView.setAdapter(achievementsAdapter);
 
 
     }
