@@ -18,17 +18,12 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
-import java.util.Locale;
 
 /**
  *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
@@ -60,25 +55,10 @@ public class ViewMoodActivity extends BarMenuActivity {
         trigger = intent.getExtras().getString("trigger");
         System.out.println("trigger = "+ trigger);
         TextView location = (TextView) findViewById(R.id.LocationTV);
-//        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
-//        try{
-//            List<Address> addresses = gcd.getFromLocation(viewMood.getLatitude(), viewMood.getLongitude(), 1);
-//
-//            if (addresses.size() > 0)
-//                address = "  " + addresses.get(0).getFeatureName() + " " +
-//                        addresses.get(0).getThoroughfare() + ", " +
-//                        addresses.get(0).getLocality() + ", " +
-//                        addresses.get(0).getAdminArea() + ", " +
-//                        addresses.get(0).getCountryCode();
-//            location.setText(address);}
-//
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
+        location.setText(viewMood.getDisplayLocation());
+
         // Get the database id for the selected mood
         viewMoodID =viewMood.getId();
-//
-
         // get username right
         UserController userController = new UserController();
         username = userController.readUsername(ViewMoodActivity.this).toString();
@@ -88,7 +68,7 @@ public class ViewMoodActivity extends BarMenuActivity {
 
             displayAttributes();
 
-            Button deleteButton = (Button) findViewById(R.id.deleteButton);
+            ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
@@ -103,7 +83,7 @@ public class ViewMoodActivity extends BarMenuActivity {
 
 
             // edit mood stuff ...
-            Button editButton = (Button) findViewById(R.id.editButton);
+            ImageButton editButton = (ImageButton) findViewById(R.id.editButton);
             editButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
@@ -115,9 +95,9 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
         // else we disable and don't show the edit/delete button
         else {
-            Button edit = (Button) findViewById(R.id.deleteButton);
+            ImageButton edit = (ImageButton) findViewById(R.id.deleteButton);
             edit.setVisibility(Button.GONE);
-            Button delete = (Button) findViewById(R.id.editButton);
+            ImageButton delete = (ImageButton) findViewById(R.id.editButton);
             delete.setVisibility(Button.GONE);
             displayAttributes();
         }

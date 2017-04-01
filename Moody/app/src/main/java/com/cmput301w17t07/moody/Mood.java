@@ -45,6 +45,17 @@ public class Mood implements Serializable {
     private String feeling; //anger, confusion, disgust, fear, happy,sad, shame, surprise
     private String username;
     private String displayUsername;
+    private String displayLocation;
+
+    public String getDisplayLocation() {
+        return displayLocation;
+    }
+
+    public void setDisplayLocation(String displayLocation) {
+        this.displayLocation = displayLocation;
+    }
+
+
 
     private String encodedImage;
     protected Boolean idType = true;
@@ -102,7 +113,7 @@ public class Mood implements Serializable {
      * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.)
      */
     public Mood(String feeling, String username, String moodMessage, double latitude,double longitude,
-                String imageID, String socialSituation,Date date){
+                String imageID, String socialSituation,Date date,String displayLocation){
         this.feeling = feeling;
         this.username = username.toLowerCase();
         this.displayUsername = username;
@@ -113,6 +124,7 @@ public class Mood implements Serializable {
         this.longitude = longitude;
         this.moodImageID = imageID;
         this.socialSituation = socialSituation;
+        this.displayLocation = displayLocation;
         //        this.moodImage = encodeImage(image);
 
     }
