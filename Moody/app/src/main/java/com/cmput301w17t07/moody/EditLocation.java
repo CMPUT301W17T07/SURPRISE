@@ -46,44 +46,67 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
     public Bitmap bitmap;
     public String address;
     public int deleteImage = 0;
+    public int fromCreate = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        editMood = (Mood) intent.getSerializableExtra("EditMood");
-        bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
-        System.out.println("bitmap:"+ bitmap);
         setContentView(R.layout.activity_edit_location);
-        newLatitude = editMood.getLatitude();
-        newLongitude = editMood.getLongitude();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_map);
         mapFragment.getMapAsync(this);
         Button OKButton = (Button) findViewById(R.id.OK);
-        OKButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                editMood.setLatitude(newLatitude);
-                editMood.setLongitude(newLongitude);
-                Intent editLocation = new Intent(EditLocation.this,EditMoodActivity.class);
-                editLocation.putExtra("editMood", editMood);
-                if(bitmap == null){
-                    deleteImage = 1;
+        fromCreate = intent.getExtras().getInt("fromCreate");
+        if(fromCreate == 123) {
+            editMood = (Mood) intent.getSerializableExtra("EditMood");
+            bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+            newLatitude = editMood.getLatitude();
+            newLongitude = editMood.getLongitude();
+            OKButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    editMood.setLatitude(newLatitude);
+                    editMood.setLongitude(newLongitude);
+                    editMood.setDisplayLocation(address);
+                    Intent editLocation = new Intent(EditLocation.this, CreateMoodActivity.class);
+                    editLocation.putExtra("editMood", editMood);
+                    editLocation.putExtra("bitmapback", bitmap);
+                    editLocation.putExtra("pickLocation",1);
+                    startActivity(editLocation);
+                    finish();
                 }
-                else{
-                    editLocation.putExtra("bitmapback",bitmap);}
-                editLocation.putExtra("bitmapdelete",deleteImage);
-                System.out.println("Bitmapdelete = " + deleteImage);
-                startActivity(editLocation);
-                finish();
-            }
-        });
-
-
+            });
+        }
+        else {
+            editMood = (Mood) intent.getSerializableExtra("EditMood");
+            bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+            System.out.println("bitmap:" + bitmap);
+            newLatitude = editMood.getLatitude();
+            newLongitude = editMood.getLongitude();
+            OKButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    editMood.setLatitude(newLatitude);
+                    editMood.setLongitude(newLongitude);
+                    Intent editLocation = new Intent(EditLocation.this, EditMoodActivity.class);
+                    editLocation.putExtra("editMood", editMood);
+                    if (bitmap == null) {
+                        deleteImage = 1;
+                    } else {
+                        editLocation.putExtra("bitmapback", bitmap);
+                    }
+                    editLocation.putExtra("bitmapdelete", deleteImage);
+                    System.out.println("Bitmapdelete = " + deleteImage);
+                    startActivity(editLocation);
+                    finish();
+                }
+            });
+        }
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng tmp = new LatLng(editMood.getLatitude(), editMood.getLongitude());
+        LatLng tmp = new LatLng(53.5444,113.4909);
+        if(fromCreate != 123){
+        tmp = new LatLng(editMood.getLatitude(), editMood.getLongitude());}
         mMap.addMarker(new MarkerOptions().draggable(true).position(tmp).title("Select location").icon(BitmapDescriptorFactory.defaultMarker()));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));

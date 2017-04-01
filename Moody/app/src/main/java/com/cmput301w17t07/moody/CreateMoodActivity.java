@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -60,19 +61,22 @@ import java.util.Locale;
  * The CreateMoodActivity for handles the user interface logic for when a user is creating a mood.
  */
 
-public class CreateMoodActivity extends BarMenuActivity implements LocationListener {
+public class CreateMoodActivity extends BarMenuActivity implements LocationListener{
     private ImageView mImageView;
-    private String EmotionText;
-    private String SocialSituation;
+    private String EmotionText = "";
+    private String SocialSituation = "";
     private EditText Description;
     private String userName;
-
     private LocationManager locationManager;
-    private double latitude, longitude;
+    private double latitude = 0;
+    private double longitude = 0;
     private String provider;
     private TextView locationText;
     private Location location;
     private String address;
+    private Mood tempMood;
+    private String moodMessage_text = "";
+    private int pickLocation = 0;
 
     private static Achievements achievements;
 
@@ -102,6 +106,27 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         setUpMenuBar(this);
         location = null;
         date = new Date();
+        Intent intent = getIntent();
+        locationText = (TextView) findViewById(R.id.locationText);
+        Description = (EditText) findViewById(R.id.Description);
+        mImageView = (ImageView) findViewById(R.id.editImageView);
+
+        try{
+            pickLocation = (int) intent.getExtras().getInt("pickLocation");}
+        catch(Exception e){e.printStackTrace();
+        }
+        if(pickLocation == 1){
+            tempMood = (Mood) intent.getSerializableExtra("editMood");
+            bitmap = (Bitmap) intent.getParcelableExtra("bitmapback");
+            latitude = tempMood.getLatitude();
+            longitude = tempMood.getLongitude();
+            address = tempMood.getDisplayLocation();
+            locationText.setText(address);
+            Description.setText(tempMood.getMoodMessage());
+            mImageView.setImageBitmap(bitmap);
+            date = tempMood.getDate();
+            displayAttributes();
+        }
 
 
 
@@ -110,6 +135,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
          * Author: Nicolas Tyler, 2013/07/15 8:47
          * taken by Xin Huang 2017/03/10
          */
+        if(pickLocation == 0) {
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
 
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
@@ -129,30 +155,30 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         });
 
 
-        Spinner dropdown_SocialSituation = (Spinner) findViewById(R.id.SocialSituation);
-        String[] item_SocialSituation = new String[]{"", "alone", "with one other person",
-                "with two people", "with several people", "with a crowd"};
-        ArrayAdapter<String> adapter_SocialSituation = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, item_SocialSituation);
-        dropdown_SocialSituation.setAdapter(adapter_SocialSituation);
 
-        dropdown_SocialSituation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                SocialSituation = parent.getItemAtPosition(position).toString();
-                TextView sizeView = (TextView) findViewById(R.id.SocialText);
-                sizeView.setText("  "+SocialSituation);
-            }
+            Spinner dropdown_SocialSituation = (Spinner) findViewById(R.id.SocialSituation);
+            String[] item_SocialSituation = new String[]{"", "alone", "with one other person",
+                    "with two people", "with several people", "with a crowd"};
+            ArrayAdapter<String> adapter_SocialSituation = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, item_SocialSituation);
+            dropdown_SocialSituation.setAdapter(adapter_SocialSituation);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+            dropdown_SocialSituation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                    SocialSituation = parent.getItemAtPosition(position).toString();
+                    TextView sizeView = (TextView) findViewById(R.id.SocialText);
+                    sizeView.setText("  " + SocialSituation);
+                }
 
-        Description = (EditText) findViewById(R.id.Description);
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        }
 
-        mImageView = (ImageView) findViewById(R.id.editImageView);
+
 
         ImageButton chooseButton = (ImageButton) findViewById(R.id.Camera);
 
@@ -201,7 +227,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         locationButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                locationText = (TextView) findViewById(R.id.locationText);
+
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 //check available tools
                 List<String> locationList = locationManager.getProviders(true);
@@ -250,12 +276,28 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             }
         });
 
+        locationButton.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+                int fromCreate = 123;
+                moodMessage_text = Description.getText().toString();
+                tempMood = new Mood(EmotionText, userName,
+                        moodMessage_text, latitude,longitude, null,
+                        SocialSituation,date, address);
+                Intent editLocation = new Intent(CreateMoodActivity.this, EditLocation.class);
+                editLocation.putExtra("EditMood", tempMood);
+                editLocation.putExtra("fromCreate",fromCreate);
+                editLocation.putExtra("bitmap", compress(bitmap));
+                startActivity(editLocation);
+                return true;
+            }
+        });
+
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
 
-                String moodMessage_text = Description.getText().toString();
+                moodMessage_text = Description.getText().toString();
 
                 MoodController moodController = new MoodController();
 
@@ -272,7 +314,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 // ------------------------------------------------------------------------------
 
 
-                if(location != null){
+                if(location != null || pickLocation == 1){
                     //todo can remove these if/else statements that toast message too long. They could
                     // be handled in the controller
                 if (!MoodController.createMood(EmotionText, userName,
@@ -297,7 +339,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                         startActivity(intent);
                         finish();
                     }}
-
             }
         });
 
@@ -453,6 +494,130 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     }
                 })
                 .create();
+
+    }
+    public Bitmap compress(Bitmap image) {
+        try {
+            // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
+            // for compressing the image to meet the project storage requirements
+            while (((image.getRowBytes() * image.getHeight()) / 8) > 65536) {
+                System.out.println("Image size is too big! " + ((image.getRowBytes() * image.getHeight()) / 8));
+
+                BitmapFactory.Options options2 = new BitmapFactory.Options();
+                options2.inPreferredConfig = Bitmap.Config.RGB_565;
+
+                Matrix matrix = new Matrix();
+                matrix.setScale(0.5f, 0.5f);
+                image = Bitmap.createBitmap(image, 0, 0, image.getWidth(),
+                        image.getHeight(), matrix, true);
+
+                System.out.println("Image size is too big! " + ((image.getRowBytes() * image.getHeight()) / 8));
+
+            }
+        } catch (Exception E) {
+
+        }
+        return image;
+    }
+
+    private void displayAttributes() {
+
+
+        /**
+         * Spinner dropdown logic taken from
+         * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
+         * Author: Nicolas Tyler, 2013/07/15 8:47
+         * taken by Xin Huang 2017-03-04 15:30 (used and swith function written by Nick 2017/03/12 14:30)
+         */
+        Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
+
+        String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+
+        switch (tempMood.getFeeling()) {
+            case "anger":
+                dropdown.setSelection(0);
+                break;
+            case "confusion":
+                dropdown.setSelection(1);
+                break;
+            case "disgust":
+                dropdown.setSelection(2);
+                break;
+            case "fear":
+                dropdown.setSelection(3);
+                break;
+            case "happiness":
+                dropdown.setSelection(4);
+                break;
+            case "sadness":
+                dropdown.setSelection(5);
+                break;
+            case "shame":
+                dropdown.setSelection(6);
+                break;
+            case "surprise":
+                dropdown.setSelection(7);
+                break;
+
+        }
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                EmotionText = parent.getItemAtPosition(position).toString();
+                tempMood.setFeeling(EmotionText);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(CreateMoodActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Spinner dropdown_SocialSituation = (Spinner) findViewById(R.id.SocialSituation);
+        String[] item_SocialSituation = new String[]{"", "alone", "with one other person",
+                "with two people", "with several people", "with a crowd"};
+        ArrayAdapter<String> adapter_SocialSituation = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_dropdown_item, item_SocialSituation);
+        dropdown_SocialSituation.setAdapter(adapter_SocialSituation);
+        switch (tempMood.getSocialSituation()) {
+            case "alone":
+                dropdown_SocialSituation.setSelection(1);
+                break;
+            case "with one other person":
+                dropdown_SocialSituation.setSelection(2);
+                break;
+            case "with two people":
+                dropdown_SocialSituation.setSelection(3);
+                break;
+            case "with several people":
+                dropdown_SocialSituation.setSelection(4);
+                break;
+            case "with a crowd":
+                dropdown_SocialSituation.setSelection(5);
+                break;
+
+        }
+
+        dropdown_SocialSituation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                SocialSituation = parent.getItemAtPosition(position).toString();
+                tempMood.setSocialSituation(SocialSituation);
+                TextView sizeView = (TextView) findViewById(R.id.SocialText);
+                sizeView.setText("  " + SocialSituation);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+
 
     }
 }
