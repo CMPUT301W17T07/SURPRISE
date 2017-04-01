@@ -219,16 +219,8 @@ public class MoodController {
             deleteMood.execute(oldMood.getId());
         }
         else{
-//            getOfflineMoodList();
-            //todo check if id is jest or if id is offline
-            if (editMood.idType == true) {
-                editMood.setId(oldMood.getId());
-            }
-            else{
-                editMood.setId(UUID.randomUUID().toString());
-                editMood.idType = false;
-            }
-            moodList.editMood(editMood, oldMood.getId());
+            editMood.setId(oldMood.getId());
+            moodList.editMood(editMood, oldMood);
             saveMoodList();
         }
 
@@ -421,7 +413,7 @@ public class MoodController {
                 ElasticController.connectionFlag = false;
             }
             //todo determine if setting the flag to false here is causing any errors
-            ElasticController.connectionFlag = false;
+//            ElasticController.connectionFlag = false;
             return true;
         }
 
@@ -459,15 +451,17 @@ public class MoodController {
             for(int i = 0; i < numberEdited; i++){
                 try{
                     ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
-                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+//                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
 
                     Mood editedMood = moodList.editedOffline.get(i);
                     addMood.execute(editedMood);
-                    deleteMood.execute(moodList.getOldIDs().get(i));
+//                    deleteMood.execute(moodList.getOldIDs().get(i));
                 }catch(Exception e){
                     System.out.println("Error when synching deleted moods with the server"+ e);
                 }
             }
+            moodList.editedOffline.clear();
+            moodList.oldIDs.clear();
         }
     }
 
