@@ -101,6 +101,8 @@ public class EditMoodActivity extends BarMenuActivity {
         setContentView(R.layout.activity_edit_mood);
         setUpMenuBar(this);
 
+        //TextView sizeView = (TextView) findViewById(R.id.editSocialText);
+
 
         // get the mood object that was selected
         Intent intent = getIntent();
@@ -177,6 +179,11 @@ public class EditMoodActivity extends BarMenuActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                final ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
+
+                deleteLocation.setVisibility(View.VISIBLE);
+                deleteLocation.setEnabled(true);
             }
         });
 
@@ -196,7 +203,7 @@ public class EditMoodActivity extends BarMenuActivity {
         });
 
 
-        ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
+        final ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
         deleteLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 location1 = null;
@@ -205,6 +212,8 @@ public class EditMoodActivity extends BarMenuActivity {
                 locationText.setText(address);
                 latitude = 0;
                 longitude = 0;
+                deleteLocation.setVisibility(View.INVISIBLE);
+                deleteLocation.setEnabled(false);
             }
         });
 
@@ -215,6 +224,8 @@ public class EditMoodActivity extends BarMenuActivity {
                 try {
                     Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                     startActivityForResult(intent, 1);
+
+
                 } catch (Exception e) {
                     Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
@@ -278,14 +289,21 @@ public class EditMoodActivity extends BarMenuActivity {
 
         // TODO button needs only display when image present in Mood
         final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
+        if (editBitmapImage == null ||  deletedPic == 1) {
+            deletePicture.setVisibility(View.INVISIBLE);
+            deletePicture.setEnabled(false);
+        }
         deletePicture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 bitmapImage = null;
                 editBitmapImage = null;
                 //editBitmapImage = null;
-                ImageView image = (ImageView) findViewById(R.id.editImageView);
+                //ImageView image = (ImageView) findViewById(R.id.editImageView);
                 image.setImageDrawable(null);
-                //deletePicture.setImageResource(android.R.color.transparent);
+                //ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
+                //deletePicture.setVisibility(View.INVISIBLE);
+                deletePicture.setVisibility(View.INVISIBLE);
+                deletePicture.setEnabled(false);
 
 
             }
@@ -303,6 +321,12 @@ public class EditMoodActivity extends BarMenuActivity {
          * Author: Nicolas Tyler, 2013/07/15 8:47
          * taken by Xin Huang 2017-03-04 15:30 (used and swith function written by Nick 2017/03/12 14:30)
          */
+        final ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
+        if(address == null){
+            deleteLocation.setVisibility(View.INVISIBLE);
+            deleteLocation.setEnabled(false);
+        }
+
         Spinner dropdown = (Spinner) findViewById(R.id.editEmotion);
 
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
@@ -342,6 +366,8 @@ public class EditMoodActivity extends BarMenuActivity {
                                        int position, long id) {
                 EmotionText = parent.getItemAtPosition(position).toString();
                 editMood.setFeeling(EmotionText);
+                TextView sizeView = (TextView) findViewById(R.id.editSocialText);
+                sizeView.setText("Feeling " + EmotionText + " " + SocialSituation);
             }
 
             @Override
@@ -382,7 +408,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 SocialSituation = parent.getItemAtPosition(position).toString();
                 editMood.setSocialSituation(SocialSituation);
                 TextView sizeView = (TextView) findViewById(R.id.editSocialText);
-                sizeView.setText("Feeling " + editMood.getFeeling() + " " + SocialSituation);
+                sizeView.setText("Feeling " + EmotionText + " " + SocialSituation);
             }
 
             @Override
@@ -474,6 +500,17 @@ public class EditMoodActivity extends BarMenuActivity {
         }
         image.setImageBitmap(bitmapImage);
         editBitmapImage = bitmapImage;
+
+        if (editBitmapImage == null) {
+            final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
+            deletePicture.setVisibility(View.INVISIBLE);
+            deletePicture.setEnabled(false);
+        }
+        else{
+            final ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
+            deletePicture.setVisibility(View.VISIBLE);
+            deletePicture.setEnabled(true);
+        }
 
 
     }
