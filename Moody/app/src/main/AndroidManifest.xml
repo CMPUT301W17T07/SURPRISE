@@ -70,13 +70,13 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBdGGoTUX5FXbMB_fibd5nsdj1qEXnutXc" />
+            android:value="AIzaSyBQLBJjFiWP1QjmtH7eH3jWhMWLJVRL3-o" />
+
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
-
+            android:label="@string/title_activity_maps"></activity>
+        <activity android:name=".EditLocation"></activity>
     </application>
 
 </manifest>

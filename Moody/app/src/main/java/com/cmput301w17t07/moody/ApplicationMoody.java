@@ -32,5 +32,4 @@ public class ApplicationMoody extends Application {
     public static final String FOLLOWING = "following";
     public static final String PENDING = "pending";
 
-
 }

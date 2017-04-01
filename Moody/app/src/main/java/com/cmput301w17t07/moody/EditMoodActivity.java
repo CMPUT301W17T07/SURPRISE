@@ -17,7 +17,9 @@
 package com.cmput301w17t07.moody;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -28,34 +30,37 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 /**
  * The EditMoodActivity handles the user interface logic for when a user is editing a mood object.
  */
-public class EditMoodActivity extends BarMenuActivity {
+public class EditMoodActivity extends BarMenuActivity{
     public Mood editMood;
     private Bitmap bitmapImage = null;
     private String userName;
     private String EmotionText;
     private String SocialSituation;
     private EditText Description;
-    private EditText date;
     private TextView locationText;
     private ImageView image;
     private LocationManager locationManager;
@@ -63,7 +68,23 @@ public class EditMoodActivity extends BarMenuActivity {
     private double longitude;
     private String provider;
     private String address;
-    Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);;
+    private String moodMessage_text;
+    private Bitmap editBitmapImage = null;
+
+    Location location1 =  new Location(LocationManager.NETWORK_PROVIDER);
+
+    //________________________________
+
+    AlertDialog TimeDialog;
+    AlertDialog DateDialog;
+    Calendar calendar = Calendar.getInstance();
+    int currentYear = calendar.get(Calendar.YEAR);
+    int currentMonth = calendar.get(Calendar.MONTH);
+    int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+    int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+    int currentMinte = calendar.get(Calendar.MINUTE);
+    String dateString;
+    Date date;
 
 //    private Date dateValue;
 
@@ -81,29 +102,23 @@ public class EditMoodActivity extends BarMenuActivity {
         setContentView(R.layout.activity_edit_mood);
         setUpMenuBar(this);
 
+
         image = (ImageView) findViewById(R.id.editImageView);
 
         // get the mood object that was selected
         Intent intent = getIntent();
         editMood = (Mood) intent.getSerializableExtra("editMood");
+        date = editMood.getDate();
+        Bitmap bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+        editBitmapImage = bitmap;
+        System.out.println("bitmap1: "+editBitmapImage);
         latitude = editMood.getLatitude();
         longitude = editMood.getLongitude();
 
-        TextView location = (TextView) findViewById(R.id.locationText);
-        Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
-        try{
-            List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
-
-            if (addresses.size() > 0)
-                address = "  " + addresses.get(0).getFeatureName() + " " +
-                        addresses.get(0).getThoroughfare() + ", " +
-                        addresses.get(0).getLocality() + ", " +
-                        addresses.get(0).getAdminArea() + ", " +
-                        addresses.get(0).getCountryCode();
-            location.setText(address);}
-        catch(Exception e){
-            e.printStackTrace();
-        }
+        final TextView location = (TextView) findViewById(R.id.locationText);
+        address = editMood.getDisplayLocation();
+        System.out.println("location = " + address);
+        location.setText(address);
 
         if(latitude == 0 && longitude == 0){
             location1 = null;
@@ -145,6 +160,7 @@ public class EditMoodActivity extends BarMenuActivity {
                     latitude = location1.getLatitude();
                     longitude = location1.getLongitude();
                 }
+
                 //System.out.println("this is loc "+location.getLongitude());
                 Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
                 try{
@@ -156,19 +172,38 @@ public class EditMoodActivity extends BarMenuActivity {
                                 addresses.get(0).getLocality() + ", " +
                                 addresses.get(0).getAdminArea() + ", " +
                                 addresses.get(0).getCountryCode();
-                    locationText.setText(address);}
+                    location.setText(address);}
                 catch(Exception e){
                     e.printStackTrace();
                 }
             }
         });
 
+
+        editLocation.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+                moodMessage_text = Description.getText().toString();
+                editMood.setMoodMessage(moodMessage_text);
+                if(editBitmapImage == null){
+                editMood.setMoodImageID(editMood.getMoodImageID());}
+                Intent editLocation = new Intent(EditMoodActivity.this,EditLocation.class);
+                editLocation.putExtra("EditMood", editMood);
+                editLocation.putExtra("bitmap",bitmapImage);
+                startActivity(editLocation);
+                return true;
+            }
+        });
+
+
         ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
         deleteLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 location1 = null;
                 locationText = (TextView) findViewById(R.id.locationText);
-                locationText.setText(null);
+                address = null;
+                locationText.setText(address);
+                latitude =0;
+                longitude = 0;
             }
         });
 
@@ -201,15 +236,26 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         });
 
+        ImageButton PickerButton = (ImageButton) findViewById(R.id.EditDate);
+
+        PickerButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                innit();
+                TimeDialog.show();
+            }
+        });
+
+
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String moodMessage_text = Description.getText().toString();
-//                String dateValue = date.getText().toString();
+                moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
-                Bitmap editBitmapImage = bitmapImage;
-                if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        latitude,longitude, editBitmapImage, SocialSituation, null, editMood ) == false) {
+
+                if (!moodController.editMood(EmotionText, userName, moodMessage_text,
+                        latitude,longitude, editBitmapImage, SocialSituation,
+                        date, address,editMood, EditMoodActivity.this )) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {
@@ -283,6 +329,7 @@ public class EditMoodActivity extends BarMenuActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EmotionText = parent.getItemAtPosition(position).toString();
+                editMood.setFeeling(EmotionText);
             }
 
             @Override
@@ -321,6 +368,7 @@ public class EditMoodActivity extends BarMenuActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 SocialSituation = parent.getItemAtPosition(position).toString();
+                editMood.setSocialSituation(SocialSituation);
                 TextView sizeView = (TextView) findViewById(R.id.editSocialText);
                 sizeView.setText("Feeling " + editMood.getFeeling() + " "  + SocialSituation);
             }
@@ -330,8 +378,6 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         });
 
-//        date = (EditText) findViewById(R.id.editDate);
-//        date.setText(editMood.getDate());
 
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
@@ -340,18 +386,24 @@ public class EditMoodActivity extends BarMenuActivity {
 
         String imageID = editMood.getMoodImageID();
 
-        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-        getMoodImage.execute(imageID);
+//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
+//        getMoodImage.execute(imageID);
+//
+//
+//        // retrieving the image
+//        try {
+//            bitmapImage = getMoodImage.get().decodeImage();
+//        }catch (Exception e){
+//            Log.i("error","failed to get the moodImage"+imageID);
+//        }
 
 
-        // retrieving the image
-        try {
-            bitmapImage = getMoodImage.get().decodeImage();
-        }catch (Exception e){
-            Log.i("error","failed to get the moodImage"+imageID);
+        if(editBitmapImage!= null){
+            image.setImageBitmap(editBitmapImage);
         }
-
-        image.setImageBitmap(bitmapImage);
+        else{
+            image.setImageBitmap(bitmapImage);
+        }
 
 
     }
@@ -408,10 +460,75 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         }
         image.setImageBitmap(bitmapImage);
+        editBitmapImage = bitmapImage;;
 
 
 
     }
+    //http://blog.csdn.net/hzflogo/article/details/62423240
+    private void innit() {
+        final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
+        final View timeView = View.inflate(getApplicationContext(), R.layout.timepicker, null);
+        TimePicker timePicker = (TimePicker) timeView.findViewById(R.id.time);
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                currentHour = hourOfDay;
+                currentMinte = minute;
+            }
+        });
+        DatePicker datePicker = (DatePicker) dateView.findViewById(R.id.pick);
+        datePicker.setDrawingCacheBackgroundColor(getResources().getColor(R.color.colorAccent));
+        datePicker.init(currentYear, currentMonth, currentDay, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                currentYear = year;
+                currentMonth = monthOfYear+1;
+                currentDay = dayOfMonth;
+            }
+        });
+        DateDialog = new AlertDialog.Builder(EditMoodActivity.this)
+                .setView(dateView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dateString = currentYear+"-"+currentMonth+"-"+currentDay+" "+currentHour+":"+currentMinte;
+                        try {
+                            java.text.SimpleDateFormat formatter = new SimpleDateFormat(
+                                    "yyyy-MM-dd HH:mm");
+                            date = formatter.parse(dateString);}
+                        catch (Exception e){e.printStackTrace();}
+                        Toast.makeText(EditMoodActivity.this, ""+date, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DateDialog.dismiss();
+                    }
+                })
+                .create();
+        TimeDialog = new AlertDialog.Builder(EditMoodActivity.this)
+                .setView(timeView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DateDialog.show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TimeDialog.dismiss();
+                    }
+                })
+                .create();
+
+    }
+
+
+
+
 
 
 }

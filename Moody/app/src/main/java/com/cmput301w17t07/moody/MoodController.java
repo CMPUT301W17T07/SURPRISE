@@ -18,20 +18,14 @@ package com.cmput301w17t07.moody;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.location.Location;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-
-import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
+import java.util.UUID;
 
 /**
  * Created by mike on 2017-02-23.
@@ -46,7 +40,8 @@ import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 public class MoodController {
 
     private static Mood mood = null;
-    private static MoodList moodList = null;
+    static MoodList moodList = null;
+    private static MoodList timelineMoodList = null;
     private static ConnectivityManager manager;
 
 
@@ -62,13 +57,13 @@ public class MoodController {
      * @param feeling           user's selected feeling
      * @param username          user's username
      * @param moodMessage       user's textual explanation for their mood
-     * @param location          user's location
      * @param image             bitmap of user's attached image
      * @param socialSituation   user's socialSituation
      * @return                  a boolean value indicating whether the mood was created
      */
     public static Boolean createMood(String feeling, String username, String moodMessage,
-                                     double latitude, double longitude, Bitmap image, String socialSituation){
+                                     double latitude, double longitude, Bitmap image,
+                                     String socialSituation,Date date,String displayLocation, Context context){
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
             return false;
@@ -79,34 +74,42 @@ public class MoodController {
         // ID that will link mood to its respective image
         String moodID = null;
 
-        // checking to see if there is an image to add to the database
-        if(image != null){
-            // Creating a new image object that will be linked to the proper mood; greasy workaround
-            // to prevent slow loading of timeline
-            ElasticMoodController.AddImage addImage = new ElasticMoodController.AddImage();
-            MoodImage newImage = new MoodImage();
-            // encoding image
-            newImage.encodeImage(image);
+            // checking to see if there is an image to add to the database
+//        if(image != null){
+//            // Creating a new image object that will be linked to the proper mood; greasy workaround
+//            // to prevent slow loading of timeline
+//            ElasticMoodController.AddImage addImage = new ElasticMoodController.AddImage();
+//            MoodImage newImage = new MoodImage();
+//            // encoding image
+//            newImage.encodeImage(image);
+//
+//            //adding image to database
+//            addImage.execute(newImage);
+//            try {
+//                moodID = addImage.get().getId();
+//            } catch (Exception E){
+//                Log.i("Error", "Weird method resulted in error because method is weird and sucks");
+//            }
+//
+//        }
 
-            //adding image to database
-            addImage.execute(newImage);
-            try {
-                moodID = addImage.get().getId();
-            } catch (Exception E){
-                Log.i("Error", "Weird method resulted in error because method is weird and sucks");
-            }
 
+            // ID to link mood to image
+//        System.out.println("test ID"+ moodID);
+
+        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation, date,displayLocation);
+
+        if(checkNetwork(context)) {
+            ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+            addMood.execute(newMood);
         }
-
-
-
-        // ID to link mood to image
-        System.out.println("test ID"+ moodID);
-
-        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation);
-
-        ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
-        addMood.execute(newMood);
+        else{
+//            getOfflineMoodList();
+            newMood.setId(UUID.randomUUID().toString());
+            newMood.idType = false;
+            moodList.addMood(newMood);
+            saveMoodList();
+        }
 
         return true;
     }
@@ -142,7 +145,6 @@ public class MoodController {
      * @param feeling
      * @param username
      * @param moodMessage
-     * @param location
      * @param image
      * @param socialSituation
      * @param date
@@ -150,7 +152,8 @@ public class MoodController {
      * @return
      */
     public static Boolean editMood(String feeling, String username, String moodMessage,
-                                   double latitude,double longitude, Bitmap image, String socialSituation, Date date, Mood oldMood){
+                                   double latitude,double longitude, Bitmap image,
+                                   String socialSituation, Date date, String displayLocation, Mood oldMood, Context context){
 
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
@@ -163,47 +166,78 @@ public class MoodController {
 
 
         // checking to see if there is an image to add to the database
-        if(image != null){
-            // Creating a new image object that will be linked to the proper mood; greasy workaround
-            // to prevent slow loading of timeline
-            ElasticMoodController.AddImage addImage = new ElasticMoodController.AddImage();
-            MoodImage newImage = new MoodImage();
-            // encoding image. Compression of image also happens here.
-            newImage.encodeImage(image);
-
-            //adding image to database
-            addImage.execute(newImage);
-            try {
-                moodID = addImage.get().getId();
-            } catch (Exception E){
-                Log.i("Error", "Weird method resulted in error because method is weird and sucks");
-            }
-
-        }
-        else{
-            moodID = null;
-        }
+//        if(image != null){
+//            // Creating a new image object that will be linked to the proper mood; greasy workaround
+//            // to prevent slow loading of timeline
+//            ElasticMoodController.AddImage addImage = new ElasticMoodController.AddImage();
+//            MoodImage newImage = new MoodImage();
+//            // encoding image. Compression of image also happens here.
+//            newImage.encodeImage(image);
+//
+//            //adding image to database
+//            addImage.execute(newImage);
+//            try {
+//                moodID = addImage.get().getId();
+//            } catch (Exception E){
+//                Log.i("Error", "Weird method resulted in error because method is weird and sucks");
+//            }
+//
+//        }
+//        else{
+//            moodID = null;
+//        }
 
 
 
         // ID to link mood to image
         System.out.println("EDIT test ID"+ moodID);
 
-        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation);
-        editMood.setDate(oldMood.getDate());
+        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation,date,displayLocation);
+        //editMood.setDate(oldMood.getDate());
 //        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 
-        ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
-        ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+        if(checkNetwork(context)) {
+            ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+            ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
 
-        addMood.execute(editMood);
-        deleteMood.execute(oldMood.getId());
+            addMood.execute(editMood);
+            deleteMood.execute(oldMood.getId());
+        }
+        else{
+//            getOfflineMoodList();
+            //todo check if id is jest or if id is offline
+            if (editMood.idType == true) {
+                editMood.setId(oldMood.getId());
+            }
+            else{
+                editMood.setId(UUID.randomUUID().toString());
+                editMood.idType = false;
+            }
+            moodList.editMood(editMood, oldMood.getId());
+            saveMoodList();
+        }
 
         return true;
 
     }
 
-    static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll, Context context){
+    static public void deleteMood(Mood mood, Context context){
+        if(checkNetwork(context))
+        try {
+            ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+            deleteMood.execute(mood.getId());
+        }catch(Exception e){
+            System.out.println("Error when deleting mood in the mood Controller"+e);
+        }
+        else{
+//            moodList= getOfflineMoodList();
+            moodList.deleteMood(mood);
+            saveMoodList();
+        }
+    }
+
+    static public ArrayList<Mood> getUserMoods(String username, String indexOfScroll,
+                                               Context context, Boolean profileMoods){
 
         ArrayList<Mood> moodArrayList = null;
 
@@ -215,37 +249,105 @@ public class MoodController {
             try {
                 moodArrayList = getUserMoods.get();
                 // If moods are retrieved from server set them to the local moodList
+                if(profileMoods) {
+                    if(indexOfScroll.equals("0")) {
+                        moodList.setMoods(moodArrayList);
+                    }
+                    else{
+                        moodList.setLoadedMoods(moodArrayList);
+                    }
+                }
                 System.out.println("this is moodlist"+moodList.getMoods().get(0));
-                moodList.setMoods(moodArrayList);
 
 
             } catch (Exception e) {
-                Log.i("error", "failed to get the mood out of the async matched");
+
+                System.out.println("Error in getUserMoods catch"+e);
+                getOfflineMoodList().getMoods();
             }
 
             return moodArrayList;
         }
         else{
-//            return null;
-            return moodList.getMoods();
+            //to prevent doubling of list with infinite scroll when offline
+            if(indexOfScroll.equals("0")) {
+                return getOfflineMoodList().getMoods();
+            }
+            else{
+                return new ArrayList<Mood>();
+            }
         }
     }
 
-//    static public MoodList getOfflineMoodList(){
-//        if (moodList == null){
-//            try {
-//                /* Seeing if a previous recordList was saved */
-//                moodList = MoodManager.getManager().loadMoodList();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
-//            }
-//        }
-//        return moodList;
-//    }
+
+    static public ArrayList<Mood> getTimelineMoods(String username, String indexOfScroll, Context context){
+
+        if(checkNetwork(context)) {
+
+            // setting up array lists for moods and people the user follows
+            ArrayList nameList = new ArrayList();
+            ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+
+            // retrieving the list of users the user follows
+            FollowController followController = new FollowController();
+            FollowingList followingList = followController.getFollowingList(username);
+
+            // getting all the tweets for the timeline
+            nameList.addAll(followingList.getFollowingList());
+            try {
+                for (int i = 0; i < nameList.size(); i++) {
+                    moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
+                            String.valueOf(indexOfScroll), context, false));
+                }
+                System.out.println("this is NEW moodlist " + moodArrayList.size());
+                // sorting the tweets
+                moodArrayList = MoodController.sortMoods(moodArrayList);
+                // updating local timeline moodlist
+                timelineMoodList.setMoods(moodArrayList);
+                saveTimelineMoodList();
+            } catch (Exception e) {
+                System.out.println("this is a SAD! error with the timeline moods in MoodController" + e);
+                return getOfflineTimelineMoodList().getMoods();
+            }
+            // returning the sorted array of moods
+            return moodArrayList;
+        }
+        else{
+            return getOfflineTimelineMoodList().getMoods();
+        }
+    }
+
+    static public MoodList getOfflineMoodList(){
+        if (moodList == null){
+            try {
+                /* Seeing if a previous recordList was saved */
+                moodList = MoodManager.getManager().loadMoodList();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("MoodList cannot be de-serialized from MoodManager");
+            }
+        }
+        return moodList;
+    }
+
+    static public MoodList getOfflineTimelineMoodList(){
+        if (timelineMoodList == null){
+            try {
+                /* Seeing if a previous recordList was saved */
+                timelineMoodList = MoodManager.getManager().loadTimelineMoodList();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Timeline MoodList cannot be de-serialized from MoodManager");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Timeline MoodList cannot be de-serialized from MoodManager");
+            }
+        }
+        return timelineMoodList;
+    }
 
     static public ArrayList<Mood> sortMoods(ArrayList<Mood> moods){
         Date d1;
@@ -265,37 +367,96 @@ public class MoodController {
                 }
             }
         }
-
         return moods;
     }
 
     /* saveRecordList method*/
-//    static public void saveMoodList(){
-//        try {
-//            MoodManager.getManager().saveMoodList(getOfflineMoodList());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("MoodList cannot be de-serialized from recordListManager");
-//        }
-//    }
+    static public void saveMoodList(){
+        try {
+            MoodManager.getManager().saveMoodList(getOfflineMoodList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("MoodList cannot be de-serialized from recordListManager");
+        }
+    }
+
+    static public void saveTimelineMoodList(){
+        try {
+            MoodManager.getManager().saveTimelineMoodList(getOfflineTimelineMoodList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Timeline MoodList cannot be de-serialized from recordListManager");
+        }
+    }
 
 
     static public Boolean checkNetwork(Context context){
         manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         if (info == null) {
+            // setting to true because now offline and will be going back to online
+            ElasticController.connectionFlag = true;
             Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
             return false;
         } else {
+            // determining if we need to re-sync content when coming from offline to online
+            if(ElasticController.connectionFlag){
+                Toast.makeText(context, "SYNCHING", Toast.LENGTH_SHORT).show();
+                synchOffline();
+                ElasticController.connectionFlag = false;
+            }
+            //todo determine if setting the flag to false here is causing any errors
+            ElasticController.connectionFlag = false;
             return true;
         }
 
     }
 
 
+    static public void synchOffline(){
+        // sending any newly added moods to the server
+        int numberAdded = moodList.getAddedOffline().size();
+        if(numberAdded > 0){
+            for(int i = 0; i < numberAdded; i++){
+                try {
+                    ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+                    addMood.execute(moodList.addedOffline.get(i));
+                }catch(Exception e){
+                    System.out.println("Error when synching added moods with the server"+ e);
+                }
+            }
+            moodList.addedOffline.clear();
+        }
+        int numberDeleted = moodList.getDeletedOffline().size();
+        if(numberDeleted > 0){
+            for(int i = 0; i < numberDeleted; i++){
+                try {
+                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+                    deleteMood.execute(moodList.deletedOffline.get(i));
+                }catch(Exception e){
+                    System.out.println("Error when synching deleted moods with the server"+ e);
+                }
+            }
+            moodList.deletedOffline.clear();
+        }
+        int numberEdited = moodList.getEditedOffline().size();
+        if(numberEdited > 0){
+            for(int i = 0; i < numberEdited; i++){
+                try{
+                    ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
 
+                    Mood editedMood = moodList.editedOffline.get(i);
+                    addMood.execute(editedMood);
+                    deleteMood.execute(moodList.getOldIDs().get(i));
+                }catch(Exception e){
+                    System.out.println("Error when synching deleted moods with the server"+ e);
+                }
+            }
+        }
+    }
 
-
+    
     public String getMoodMessage() {
         return mood.getMoodMessage();
     }
@@ -303,6 +464,16 @@ public class MoodController {
     public void setMoodMessage(String moodMessage) {
         mood.setMoodMessage(moodMessage);
     }
+
+
+    public String getDisplayLocation() {
+        return mood.getDisplayLocation();
+    }
+
+    public void setDisplayLocation(String displayLocation) {
+        mood.setDisplayLocation(displayLocation);
+    }
+
 
     public Date getDate() {
         return mood.getDate();
@@ -364,6 +535,7 @@ public class MoodController {
     public void setFeeling(String feeling) {
         mood.setFeeling(feeling);
     }
+
 
     public String getUsername() {
         return mood.getUsername();

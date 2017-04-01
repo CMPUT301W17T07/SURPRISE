@@ -133,7 +133,7 @@ public class UserAdapter extends BaseAdapter {
             @Override
             public  void onClick(View v){
                 //todo implement ability to show send request button or following text depending on if user is already following
-                if(FollowController.sendPendingRequest(username, searchUsername)){
+                if(FollowController.sendPendingRequest(username, searchUsername, context)){
                     // if it returns true....
 
 

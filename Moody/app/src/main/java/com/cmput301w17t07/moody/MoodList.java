@@ -37,7 +37,12 @@ public class MoodList implements Serializable{
     private static final long serialVersionUID =  2L;
 
 
-    public ArrayList<Mood> moodList = null;
+    public ArrayList<Mood> moodList = new ArrayList<Mood>();
+    public ArrayList<Mood> addedOffline = new ArrayList<Mood>();
+    public ArrayList<String> deletedOffline = new ArrayList<String>();
+    public ArrayList<Mood> editedOffline = new ArrayList<Mood>();
+    // old IDs of edited moods that will need to be deleted upon synching
+    public ArrayList<String> oldIDs = new ArrayList<String>();
 
 
     public MoodList() {
@@ -45,19 +50,32 @@ public class MoodList implements Serializable{
     }
 
     public void addMood(Mood mood){
-        // add mood to database?
-        if(moodList.contains(mood)){
-            throw new IllegalArgumentException();
-        }
-        else{
-            moodList.add(mood);
-        }
+        moodList.add(0,mood);
+        addedOffline.add(mood);
     }
 
 
     public void deleteMood(Mood mood){
-        // delete mood from database?
-        moodList.remove(mood);
+//        moodList.remove(mood);
+        deletedOffline.add(mood.getId());
+        for(int i = 0; i < moodList.size(); i++) {
+            if (moodList.get(i).getId().equals(mood.getId())) {
+                moodList.remove(i);
+                return;
+            }
+        }
+        }
+
+    public void editMood(Mood mood, String oldMoodID){
+        editedOffline.add(mood);
+        oldIDs.add(oldMoodID);
+        for(int i = 0; i < moodList.size(); i++){
+            if(moodList.get(i).getId().equals(oldMoodID)){
+                moodList.remove(i);
+                moodList.add(i, mood);
+                return;
+            }
+        }
     }
 
     public int countMoodList(){
@@ -81,5 +99,23 @@ public class MoodList implements Serializable{
         moodList.addAll(moods);
     }
 
+    public void setLoadedMoods(ArrayList<Mood> moods){
+        moodList.addAll(moods);
+    }
 
+    public ArrayList<Mood> getAddedOffline() {
+        return addedOffline;
+    }
+
+    public ArrayList<String> getDeletedOffline() {
+        return deletedOffline;
+    }
+
+    public ArrayList<Mood> getEditedOffline() {
+        return editedOffline;
+    }
+
+    public ArrayList<String> getOldIDs() {
+        return oldIDs;
+    }
 }

@@ -18,17 +18,12 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
-import java.util.Locale;
 
 /**
  *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
@@ -60,25 +55,10 @@ public class ViewMoodActivity extends BarMenuActivity {
         trigger = intent.getExtras().getString("trigger");
         System.out.println("trigger = "+ trigger);
         TextView location = (TextView) findViewById(R.id.LocationTV);
-        Geocoder gcd = new Geocoder(ViewMoodActivity.this, Locale.getDefault());
-        try{
-            List<Address> addresses = gcd.getFromLocation(viewMood.getLatitude(), viewMood.getLongitude(), 1);
+        location.setText(viewMood.getDisplayLocation());
 
-            if (addresses.size() > 0)
-                address = "  " + addresses.get(0).getFeatureName() + " " +
-                        addresses.get(0).getThoroughfare() + ", " +
-                        addresses.get(0).getLocality() + ", " +
-                        addresses.get(0).getAdminArea() + ", " +
-                        addresses.get(0).getCountryCode();
-            location.setText(address);}
-
-        catch(Exception e){
-            e.printStackTrace();
-        }
         // Get the database id for the selected mood
         viewMoodID =viewMood.getId();
-//
-
         // get username right
         UserController userController = new UserController();
         username = userController.readUsername(ViewMoodActivity.this).toString();
@@ -88,25 +68,22 @@ public class ViewMoodActivity extends BarMenuActivity {
 
             displayAttributes();
 
-            Button deleteButton = (Button) findViewById(R.id.deleteButton);
+            ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
-                    //todo implement this functionality through the mood controller, so that offline
-                    // deletion can be handled
-                    ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
-                    deleteMood.execute(viewMoodID);
+                    MoodController.deleteMood(viewMood, ViewMoodActivity.this);
+                    MoodController.saveMoodList();
                     Intent intent=new Intent(ViewMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
-                    //intent.setClass(ViewMoodActivity.this,TimelineActivity.class);
                     finish();
                 }
             });
 
 
             // edit mood stuff ...
-            Button editButton = (Button) findViewById(R.id.editButton);
+            ImageButton editButton = (ImageButton) findViewById(R.id.editButton);
             editButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent editMoodIntent = new Intent(ViewMoodActivity.this, EditMoodActivity.class);
@@ -118,9 +95,9 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
         // else we disable and don't show the edit/delete button
         else {
-            Button edit = (Button) findViewById(R.id.deleteButton);
+            ImageButton edit = (ImageButton) findViewById(R.id.deleteButton);
             edit.setVisibility(Button.GONE);
-            Button delete = (Button) findViewById(R.id.editButton);
+            ImageButton delete = (ImageButton) findViewById(R.id.editButton);
             delete.setVisibility(Button.GONE);
             displayAttributes();
         }
@@ -153,14 +130,14 @@ public class ViewMoodActivity extends BarMenuActivity {
         String imageID = viewMood.getMoodImageID();
 //        Toast.makeText(ViewMoodActivity.this, imageID, Toast.LENGTH_SHORT).show();
 
-        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-        getMoodImage.execute(imageID);
-        // retrieving the image
-        try {
-            bitmapImage = getMoodImage.get().decodeImage();
-        }catch (Exception e){
-            Log.i("error","failed to get the moodImage"+imageID);
-        }
+//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
+//        getMoodImage.execute(imageID);
+//        // retrieving the image
+//        try {
+//            bitmapImage = getMoodImage.get().decodeImage();
+//        }catch (Exception e){
+//            Log.i("error","failed to get the moodImage"+imageID);
+//        }
 
         image.setImageBitmap(bitmapImage);
 
@@ -196,18 +173,22 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
 
     }
-//    @Override
-//    public void onBackPressed() {
-//        if(trigger.equals("profile")) {
-//            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
-//            startActivity(intentBack);
-//            this.finish();
-//        }
-//        else{
-//            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
-//            startActivity(intentBack);
-//            this.finish();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        //todo add logic for this scenario
+//        Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+//        startActivity(intentBack);
+//        this.finish();
+        if(trigger.equals("profile")) {
+            Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else{
+            Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+    }
 
     }

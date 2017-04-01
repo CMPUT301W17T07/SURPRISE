@@ -104,13 +104,18 @@ public class FilterActivity extends BarMenuActivity {
 
         feelingFilterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                selectedFilter = 0;
+                if (MoodController.checkNetwork(FilterActivity.this)){
+                    selectedFilter = 0;
                 Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
                 filterResults.putExtra("feelingFilter", feelingText);
                 filterResults.putExtra("selectedFilter", selectedFilter);
                 filterResults.putExtra("selectedUser", selectedUser);
                 startActivity(filterResults);
                 finish();
+            }
+            else{
+                return;
+            }
             }
         });
 
@@ -141,14 +146,19 @@ public class FilterActivity extends BarMenuActivity {
         // on click of filter date results button
         dateFilterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                selectedFilter = 1;
-                Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
-                //todo see if we need to pass this in or not (i.e. if we allow for other filter options aside from last week)
+                if(MoodController.checkNetwork(FilterActivity.this)) {
+                    selectedFilter = 1;
+                    Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
+                    //todo see if we need to pass this in or not (i.e. if we allow for other filter options aside from last week)
 //                filterResults.putExtra("dateFilter", dateText);
-                filterResults.putExtra("selectedFilter", selectedFilter);
-                filterResults.putExtra("selectedUser", selectedUser);
-                startActivity(filterResults);
-                finish();
+                    filterResults.putExtra("selectedFilter", selectedFilter);
+                    filterResults.putExtra("selectedUser", selectedUser);
+                    startActivity(filterResults);
+                    finish();
+                }
+                else{
+                    return;
+                }
             }
         });
 
@@ -162,14 +172,19 @@ public class FilterActivity extends BarMenuActivity {
 
         messageFilterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                selectedFilter = 2;
-                String filterMessage = messageFilter.getText().toString();
-                Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
-                filterResults.putExtra("messageFilter", filterMessage);
-                filterResults.putExtra("selectedFilter", selectedFilter);
-                filterResults.putExtra("selectedUser", selectedUser);
-                startActivity(filterResults);
-                finish();
+                if(MoodController.checkNetwork(FilterActivity.this)) {
+                    selectedFilter = 2;
+                    String filterMessage = messageFilter.getText().toString();
+                    Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
+                    filterResults.putExtra("messageFilter", filterMessage);
+                    filterResults.putExtra("selectedFilter", selectedFilter);
+                    filterResults.putExtra("selectedUser", selectedUser);
+                    startActivity(filterResults);
+                    finish();
+                }
+                else{
+                    return;
+                }
             }
         });
 

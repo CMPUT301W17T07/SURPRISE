@@ -39,14 +39,23 @@ import com.searchly.jestdroid.JestDroidClient;
 
 public class ElasticController {
     protected static JestDroidClient client;
+    static boolean connectionFlag = false;
 
     protected static void verifySettings() {
-        if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
-            DroidClientConfig config = builder.build();
-            JestClientFactory factory = new JestClientFactory();
-            factory.setDroidClientConfig(config);
-            client = (JestDroidClient) factory.getObject();
+        if (client == null || connectionFlag) {
+            createElasticClient();
         }
     }
+
+    private static void createElasticClient(){
+        DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
+        DroidClientConfig config = builder.build();
+        JestClientFactory factory = new JestClientFactory();
+        factory.setDroidClientConfig(config);
+        client = (JestDroidClient) factory.getObject();
+    }
+
+//    protected static void rebuildClient(){
+//        createElasticClient();
+//    }
 }

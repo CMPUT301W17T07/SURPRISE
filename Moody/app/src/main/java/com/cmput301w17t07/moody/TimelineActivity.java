@@ -59,13 +59,11 @@ public class TimelineActivity extends BarMenuActivity {
     String username;
     Boolean scrollFlag;
 
-    ArrayList nameList=new ArrayList();
     private ArrayList<Mood> templist = new ArrayList<Mood>();
 
     int indexOfScroll=0;
     int lastItem;
     private ListView oldUserList;
-    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
     private MoodAdapter adapter;
 
     private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
@@ -114,7 +112,7 @@ public class TimelineActivity extends BarMenuActivity {
                             return;
                         }
                         //todo use this internet checking method instead of one inside the activity
-                        
+
                         userController.saveUsername(username.toLowerCase(), TimelineActivity.this);
                         // creating follow/following lists for new user
                         FollowController followController = new FollowController();
@@ -177,32 +175,25 @@ public class TimelineActivity extends BarMenuActivity {
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
 
+        MoodManager.initManager(TimelineActivity.this);
+
         scrollFlag = true;
 
 
         UserController userController = new UserController();
         username = userController.readUsername(TimelineActivity.this).toString();
 
-        FollowController followController = new FollowController();
-        FollowingList followingList = followController.getFollowingList(username);
-        System.out.println("this is fff"+followingList.getFollowingList()+"num="+followingList.countFollowing());
         oldUserList = (ListView) findViewById(R.id.list_view);
 
-        nameList.addAll(followingList.getFollowingList());
         try {
-            for (int i = 0; i <nameList.size(); i++) {
-                moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
-                        String.valueOf(indexOfScroll), TimelineActivity.this));
-            }
-            System.out.println("this is fff moodlist "+moodArrayList.size());
-            sortedArrayList = MoodController.sortMoods(moodArrayList);
-            adapter = new MoodAdapter(this, R.layout.timeline_list, sortedArrayList);
-            oldUserList.setAdapter(adapter);
-
-        }catch (Exception e){
-            System.out.println("this is a timeline error"+e);
+            sortedArrayList = MoodController.getTimelineMoods(username,
+                    String.valueOf(indexOfScroll), TimelineActivity.this);
+        } catch (Exception E){
+            System.out.println("this is a NEW error in the TimelineActivity "+E);
         }
 
+        adapter = new MoodAdapter(this, R.layout.timeline_list, sortedArrayList);
+        oldUserList.setAdapter(adapter);
 
         oldUserList.setOnScrollListener(new AbsListView.OnScrollListener(){
             @Override
@@ -215,14 +206,14 @@ public class TimelineActivity extends BarMenuActivity {
                         Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
                         indexOfScroll = indexOfScroll + 6;
                         templist = MoodController.getUserMoods(username,
-                                String.valueOf(indexOfScroll), TimelineActivity.this);
+                                String.valueOf(indexOfScroll), TimelineActivity.this, false);
                         // determining if there any old moods to find
                         if (templist.size() == 0) {
                             scrollFlag = false;
                         }
 
-                        moodArrayList.addAll(templist);
-                        sortedArrayList = MoodController.sortMoods(moodArrayList);
+                        sortedArrayList.addAll(templist);
+                        sortedArrayList = MoodController.sortMoods(sortedArrayList);
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -240,17 +231,19 @@ public class TimelineActivity extends BarMenuActivity {
 
         oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Mood viewMood = moodArrayList.get(position);
-                Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
-                viewMoodIntent.putExtra("viewMood", viewMood);
-                startActivity(viewMoodIntent);
-                finish();
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+                        Mood viewMood = sortedArrayList.get(position);
+                        Intent viewMoodIntent = new Intent(TimelineActivity.this, ViewMoodActivity.class);
+                        viewMoodIntent.putExtra("viewMood", viewMood);
+                        String trigger = "timeline";
+                        viewMoodIntent.putExtra("trigger",trigger);
+                        startActivity(viewMoodIntent);
+                        finish();
+                    }
+                });
 
-            }
-        });
 
 
 

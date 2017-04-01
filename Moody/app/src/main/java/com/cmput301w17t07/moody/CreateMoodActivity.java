@@ -16,9 +16,12 @@
 
 package com.cmput301w17t07.moody;
 
+
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -35,15 +38,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,6 +77,18 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
 
     Bitmap bitmap = null;
+    //________________________________
+
+    AlertDialog TimeDialog;
+    AlertDialog DateDialog;
+    Calendar calendar = Calendar.getInstance();
+    int currentYear = calendar.get(Calendar.YEAR);
+    int currentMonth = calendar.get(Calendar.MONTH);
+    int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+    int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+    int currentMinte = calendar.get(Calendar.MINUTE);
+    String dateString;
+    Date date;
 
 //    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
 
@@ -80,6 +100,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         userName = userController.readUsername(CreateMoodActivity.this).toString();
         setUpMenuBar(this);
         location = null;
+        date = new Date();
 
 
 
@@ -120,7 +141,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                                        int position, long id) {
                 SocialSituation = parent.getItemAtPosition(position).toString();
                 TextView sizeView = (TextView) findViewById(R.id.SocialText);
-                sizeView.setText(SocialSituation);
+                sizeView.setText("  "+SocialSituation);
             }
 
             @Override
@@ -135,6 +156,16 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         ImageButton chooseButton = (ImageButton) findViewById(R.id.Camera);
 
         ImageButton locationButton = (ImageButton) findViewById(R.id.location);
+
+        ImageButton PickerButton = (ImageButton) findViewById(R.id.Picker);
+
+        PickerButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                innit();
+                TimeDialog.show();
+            }
+        });
 
 
         chooseButton.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +233,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 Geocoder gcd = new Geocoder(CreateMoodActivity.this, Locale.getDefault());
                 try{
                     List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+                    System.out.println("this is my location: " + addresses);
 
                     if (addresses.size() > 0)
                         address = "  " + addresses.get(0).getFeatureName() + " " +
@@ -223,10 +255,12 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
 
                 String moodMessage_text = Description.getText().toString();
-                MoodController moodController = new MoodController();
                 if(location != null){
-                if (moodController.createMood(EmotionText, userName,
-                        moodMessage_text, latitude,longitude, bitmap, SocialSituation) == false) {
+                    //todo can remove these if/else statements that toast message too long. They could
+                    // be handled in the controller
+                if (!MoodController.createMood(EmotionText, userName,
+                        moodMessage_text, latitude,longitude, bitmap,
+                        SocialSituation,date, address, CreateMoodActivity.this)) {
                     Toast.makeText(CreateMoodActivity.this,
                             "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -236,8 +270,9 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     finish();
                 }}
                 else{
-                    if (moodController.createMood(EmotionText, userName,
-                            moodMessage_text, 0,0, bitmap, SocialSituation) == false) {
+                    if (!MoodController.createMood(EmotionText, userName,
+                            moodMessage_text, 0,0, bitmap, SocialSituation,date,address,
+                            CreateMoodActivity.this)) {
                         Toast.makeText(CreateMoodActivity.this,
                                 "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                     } else {
@@ -341,4 +376,66 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     }
 
 
+    //http://blog.csdn.net/hzflogo/article/details/62423240
+    private void innit() {
+        final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
+        final View timeView = View.inflate(getApplicationContext(), R.layout.timepicker, null);
+        TimePicker timePicker = (TimePicker) timeView.findViewById(R.id.time);
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                currentHour = hourOfDay;
+                currentMinte = minute;
+            }
+        });
+        DatePicker datePicker = (DatePicker) dateView.findViewById(R.id.pick);
+        datePicker.setDrawingCacheBackgroundColor(getResources().getColor(R.color.colorAccent));
+        datePicker.init(currentYear, currentMonth, currentDay, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                currentYear = year;
+                currentMonth = monthOfYear+1;
+                currentDay = dayOfMonth;
+            }
+        });
+        DateDialog = new AlertDialog.Builder(CreateMoodActivity.this)
+                .setView(dateView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dateString = currentYear + "-" + currentMonth + "-" + currentDay + " " + currentHour+":"+currentMinte;
+                        try {
+                            java.text.SimpleDateFormat formatter = new SimpleDateFormat(
+                                "yyyy-MM-dd HH:mm");
+                        date = formatter.parse(dateString);}
+                        catch (Exception e){e.printStackTrace();}
+                        System.out.println("month: " + currentMonth);
+                        Toast.makeText(CreateMoodActivity.this, ""+date, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DateDialog.dismiss();
+                    }
+                })
+                .create();
+        TimeDialog = new AlertDialog.Builder(CreateMoodActivity.this)
+                .setView(timeView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DateDialog.show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TimeDialog.dismiss();
+                    }
+                })
+                .create();
+
+    }
 }
