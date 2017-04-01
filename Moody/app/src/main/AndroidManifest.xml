@@ -72,11 +72,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBQLBJjFiWP1QjmtH7eH3jWhMWLJVRL3-o" />
 
-
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".EditLocation"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".EditLocation" />
+        <activity android:name=".AchievementActivity2" />
+        <activity android:name=".AchievementActivity"></activity>
     </application>
 
 </manifest>

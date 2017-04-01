@@ -33,55 +33,77 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class Achievements implements Serializable {
 
     private static final long serialVersionUID = 3L;
-    private ArrayList<String> achievements = new ArrayList<String >();
+    protected ArrayList<String> achievementsTitleArray = new ArrayList<String >();
+    protected ArrayList<String> achievementsDescriptionArray = new ArrayList<String >();
 
-    // Achievement String
-    String firstMood = "Posted your first mood!";
+    // -------------------------- Achievements ------------------------------------
+    // Achievement Title String
+    String signUpMoody11 = "Welcome!\nCreated an account.";
+    String firstMood21 = "Feeling Moody!\nPosted your first mood.";
+    String fiveHappy31 = "Happy Camper!\nPosted 5 happiness moods.";
+    String fiveAngry41 = "Rampage!\nPosted 5 angry moods.";
+    String fiveSad51 = "You are morose!\nPosted 5 sad moods.";
+    String editAMood61 = "Big Mistake!\nEdited a mood.";
+    String followThem71 = "Follower!\nFollow another person.";
+    String followMe81 = "Popular!\nGain a follower.";
+    String showMeTheWay91 = "Show Me The Way!\nLaunch google maps.";
+    String scaredyCat101 = "Scaredy Cat!\nPost a fear mood.";
+
+    // Achievement Description String
+    String signUpMoody12 = "Registered an account.";
+    String firstMood22 = "Posted your first mood.";
+    String fiveHappy32 = "Posted 5 happiness moods.";
+    String fiveAngry42 = "Posted 5 angry moods.";
+    String fiveSad52 = "Posted 5 sad moods.";
+    String editAMood62 = "Edited a mood.";
+    String followThem72 = "Follow another person.";
+    String followMe82 = "Get one follower.";
+    String showMeTheWay92 = "Launch google maps.";
+    String scaredyCat102 = "Post a fear mood.";
+    // ----------------------------------------------------------------------------------
+
+    // user's total score counter
+    int score = 0;
+
+    // first time registration
+    public int firstTimeRegFlag = 0;
+    boolean firstTimeRegFlagEarned = false;
 
     // follow attributes
-    public int followCount;
-    public int followerCount;
+    public int followCount = 0;
+    public int followerCount = 0;
+    boolean followCountEarned = false;
+    boolean followerCountEarned = false;
+
+    // launch google maps
+    public int launchMapsFlag = 0;
+    boolean launchMapsFlagEarned = false;
+
+    // first time edit
+    public int firstTimeEditFlag = 0;
+    boolean firstTimeEditFlagEarned = false;
+
+    // fear mood
+    public int fearMoodCount = 0;
+    boolean fearMoodCountEarned = false;
 
     // Mood specific attributes
-    public int moodCount;
+    public int moodCount = 0;
     boolean moodCountEarned = false;
-    public int happyMoodCount;
-    boolean happyMoodCountEarned = false;
-    public int sadMoodCount;
+    public int fiveHappyMoodCount = 0;
+    boolean fiveHappyMoodCountEarned = false;
+    public int fiveAngryMoodCount = 0;
+    boolean fiveAngryMoodCountEarned = false;
+    public int fiveSadMoodCount = 0;
+    boolean fiveSadMoodCountEarned = false;
 
     // filter attributes
     public int timesFiltering;
     public int filterReturnedNoResults;
 
 
+
     public Achievements() {
     }
 
-
-    public void checkForMoodAchievements(Context context){
-        if(!moodCountEarned){
-            if(moodCount >= 1){
-                displayAchievement(context, firstMood);
-            }
-        }
-    }
-
-
-    public void displayAchievement(Context context, String achievement){
-            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
-            b.setAutoCancel(true)
-                    .setDefaults(NotificationCompat.DEFAULT_ALL)
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setTicker("{your tiny message}")
-                    .setContentTitle("Moody")
-                    .setContentText(achievement)
-                    .setContentInfo("INFO")
-                    .setPriority(Notification.PRIORITY_MAX);
-
-            NotificationManager nm = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-            nm.notify(1, b.build());
-
-
-    }
 }

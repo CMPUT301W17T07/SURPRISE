@@ -68,9 +68,23 @@ public class TimelineActivity extends BarMenuActivity {
 
     private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
 
+    private Achievements achievements;
+    private AchievementManager achievementManager;
+    private AchievementController achievementController;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        AchievementManager.initManager(TimelineActivity.this);
+//        AchievementController achievementController = new AchievementController();
+        //achievements = achievementController.getAchievements();
+
+
+
+
+
         SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
         boolean isFirstIn = sp.getBoolean("isFirstIn", true);
         if (isFirstIn) {
@@ -160,6 +174,12 @@ public class TimelineActivity extends BarMenuActivity {
 
     private void firstime() {
 
+        achievements = AchievementController.getAchievements();
+        achievements.firstTimeRegFlag = 1;
+        AchievementController.checkForMoodAchievements(TimelineActivity.this);
+        AchievementController.saveAchievements();
+
+
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
 
@@ -176,6 +196,9 @@ public class TimelineActivity extends BarMenuActivity {
         setUpMenuBar(this);
 
         MoodManager.initManager(TimelineActivity.this);
+
+        AchievementController.checkForMoodAchievements(TimelineActivity.this);
+        AchievementController.saveAchievements();
 
         scrollFlag = true;
 

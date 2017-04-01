@@ -16,7 +16,13 @@
 
 package com.cmput301w17t07.moody;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback {
 
@@ -45,12 +52,24 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     private Integer user; // user = 0 if My Moods else user = 1 if Timeline Moods
     ArrayList nameList = new ArrayList();
 
+    private LocationManager locationManager;
+    private double latitude, longitude;
+    private Location location;
+    private String provider;
+    private ArrayList<Mood> currLocationArrayList = new ArrayList<Mood>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMenuBar(this);
+
+        AchievementManager.initManager(MapsActivity.this);
+        Achievements achievements = AchievementController.getAchievements();
+        achievements.launchMapsFlag = 1;
+        AchievementController.checkForMoodAchievements(MapsActivity.this);
+        AchievementController.saveAchievements();
 
 
         UserController userController = new UserController();
@@ -61,11 +80,9 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
         selectedUser = intent.getStringExtra("selectedUser");
         if (selectedUser.equals("My Moods")) {
             user = 0;
-        }
-        else if (selectedUser.equals("Timeline Moods")) {
+        } else if (selectedUser.equals("Timeline Moods")) {
             user = 1;
-        }
-        else {
+        } else {
             user = 2;
         }
 
@@ -88,6 +105,15 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        //check the permission
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            Toast.makeText(getApplicationContext(), "Get location failed, Please check the Permission", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         filterFeeling = intent.getStringExtra("feelingFilter");
         //Toast.makeText(MapsActivity.this, filterFeeling, Toast.LENGTH_SHORT).show();
@@ -150,10 +176,11 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                             double latitude;
                             longitude = moodArrayList.get(i).getLongitude();
                             latitude = moodArrayList.get(i).getLatitude();
-                            Toast.makeText(MapsActivity.this, ""+longitude, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
                             LatLng tmp = new LatLng(latitude, longitude);
                             mMap.addMarker(new MarkerOptions().position(tmp).title(nameList.get(i).toString()).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+
                         }
                     }
                 }
@@ -164,14 +191,55 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
         } else if (user == 2) {
 
-            Toast.makeText(MapsActivity.this, "hello", Toast.LENGTH_SHORT).show();
-//            UserController userController = new UserController();
-//            username = userController.readUsername(MapsActivity.this).toString();
-//
-//            ElasticMoodController.FilterMapByLocation filterMapByLocation =
-//                    new ElasticMoodController.FilterMapByLocation();
-//            filterMapByLocation.execute(, filterFeeling);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            //check available tools
+            List<String> locationList = locationManager.getProviders(true);
+            if (locationList.contains(LocationManager.GPS_PROVIDER)) {
+                provider = LocationManager.GPS_PROVIDER;
+            } else if (locationList.contains(LocationManager.NETWORK_PROVIDER)) {
+                provider = LocationManager.NETWORK_PROVIDER;
+            } else {
+                Toast.makeText(getApplicationContext(), "No map to use", Toast.LENGTH_LONG).show();
+            }
 
+
+            location = locationManager.getLastKnownLocation(provider);
+            if (location == null) {
+                latitude = 0;
+                longitude = 0;
+            } else {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+
+            UserController userController = new UserController();
+            username = userController.readUsername(MapsActivity.this).toString();
+
+            ElasticMoodController.FilterMapByLocation filterMapByLocation =
+                    new ElasticMoodController.FilterMapByLocation();
+            filterMapByLocation.execute(location);
+
+
+            try {
+                currLocationArrayList.addAll(filterMapByLocation.get());
+
+            } catch (Exception e) {
+                System.out.println("this is fff" + e);
+            }
+            for (int j = 0; j < currLocationArrayList.size(); j++) {
+                if (currLocationArrayList.get(j).getLongitude() == 0 && currLocationArrayList.get(j).getLatitude() == 0) {
+                    break;
+                } else {
+                    double longitude;
+                    double latitude;
+                    longitude = moodArrayList.get(j).getLongitude();
+                    latitude = moodArrayList.get(j).getLatitude();
+                    Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
+                    LatLng tmp = new LatLng(latitude, longitude);
+                    mMap.addMarker(new MarkerOptions().position(tmp).snippet(filterFeeling).icon(BitmapDescriptorFactory.defaultMarker(setMarkerColor(filterFeeling))));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
+                }
+            }
 
         }
 

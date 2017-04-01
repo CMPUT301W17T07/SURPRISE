@@ -36,7 +36,7 @@ public class Mood implements Serializable {
     private static final long serialVersionUID = -7060210544600464481L;
     private String moodMessage;
     private Date date;
-    //private Location location;
+    private Double[] random;
     private double latitude;
     private double longitude;
 
@@ -120,6 +120,9 @@ public class Mood implements Serializable {
         this.moodMessage = moodMessage;
         this.date = date;
         //this.location = location;
+        //this.location = new Double[2];
+        //this.location[0] = longitude;
+        //this.location[1] = latitude;
         this.latitude = latitude;
         this.longitude = longitude;
         this.moodImageID = imageID;
@@ -170,6 +173,12 @@ public class Mood implements Serializable {
 //        }
 //        return bitmap;
 //    }
+
+    public void setRandom(Double passedLatitude, Double passedLongitude){
+        this.random = new Double[2];
+        this.random[0] = passedLongitude;
+        this.random[1] = passedLatitude;
+    }
 
     public String getSocialSituation() {
         return socialSituation;

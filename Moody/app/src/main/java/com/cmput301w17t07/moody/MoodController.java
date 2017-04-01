@@ -57,6 +57,10 @@ public class MoodController {
      * @param feeling           user's selected feeling
      * @param username          user's username
      * @param moodMessage       user's textual explanation for their mood
+<<<<<<< HEAD
+=======
+     * @param
+>>>>>>> 4462e10f3290e4b4be28e9995fd7fe9dc8792a88
      * @param image             bitmap of user's attached image
      * @param socialSituation   user's socialSituation
      * @return                  a boolean value indicating whether the mood was created
@@ -98,6 +102,7 @@ public class MoodController {
 //        System.out.println("test ID"+ moodID);
 
         Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation, date,displayLocation);
+
 
         if(checkNetwork(context)) {
             ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();

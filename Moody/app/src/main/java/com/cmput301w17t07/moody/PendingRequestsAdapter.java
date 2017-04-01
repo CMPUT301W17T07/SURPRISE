@@ -43,6 +43,8 @@ public class PendingRequestsAdapter extends BaseAdapter {
     private List<String> userList;
     private String username;
 
+    private Achievements achievements;
+
 
     /**
      * Constructor for the UserAdapter
@@ -135,6 +137,16 @@ public class PendingRequestsAdapter extends BaseAdapter {
                     viewHolder.acceptRequestButton.setEnabled(false);
                     //                viewHolder.declineRequestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
                     viewHolder.declineRequestButton.setEnabled(false);
+
+                    AchievementManager.initManager(context);
+                    achievements = AchievementController.getAchievements();
+
+                    achievements.followerCount += 1;
+                    AchievementController.checkForMoodAchievements(context);
+                    AchievementController.saveAchievements();
+
+
+
                 }
                 else{
                     Toast.makeText(context, "please check network connection", Toast.LENGTH_SHORT).show();
