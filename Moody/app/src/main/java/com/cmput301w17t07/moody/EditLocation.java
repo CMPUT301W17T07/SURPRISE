@@ -18,6 +18,8 @@ package com.cmput301w17t07.moody;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,6 +34,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+import java.util.Locale;
+
 public class EditLocation extends AppCompatActivity  implements OnMapReadyCallback {
     public Mood editMood;
     private GoogleMap mMap;
@@ -39,6 +44,7 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
     public double newLongitude;
     public LatLng mMarkerPosition;
     public Bitmap bitmap;
+    public String address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +94,20 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
                 mMarkerPosition = marker.getPosition();
                 newLatitude = mMarkerPosition.latitude;
                 newLongitude = mMarkerPosition.longitude;
+                Geocoder gcd = new Geocoder(EditLocation.this, Locale.getDefault());
+                try{
+                    List<Address> addresses = gcd.getFromLocation(newLatitude, newLongitude, 1);
+
+                    if (addresses.size() > 0)
+                        address = "  " + addresses.get(0).getFeatureName() + " " +
+                                addresses.get(0).getThoroughfare() + ", " +
+                                addresses.get(0).getLocality() + ", " +
+                                addresses.get(0).getAdminArea() + ", " +
+                                addresses.get(0).getCountryCode();
+                    editMood.setDisplayLocation(address);}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
                 System.out.println("Position: " + newLongitude);
             }
         });

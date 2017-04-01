@@ -18,29 +18,14 @@ package com.cmput301w17t07.moody;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.location.Location;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
-
-import static android.content.Context.CONTEXT_IGNORE_SECURITY;
-import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
 /**
  * Created by mike on 2017-02-23.
@@ -78,7 +63,7 @@ public class MoodController {
      */
     public static Boolean createMood(String feeling, String username, String moodMessage,
                                      double latitude, double longitude, Bitmap image,
-                                     String socialSituation,Date date, Context context){
+                                     String socialSituation,Date date,String displayLocation, Context context){
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
             return false;
@@ -112,7 +97,7 @@ public class MoodController {
             // ID to link mood to image
 //        System.out.println("test ID"+ moodID);
 
-        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation, date);
+        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation, date,displayLocation);
 
         if(checkNetwork(context)) {
             ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
@@ -168,7 +153,7 @@ public class MoodController {
      */
     public static Boolean editMood(String feeling, String username, String moodMessage,
                                    double latitude,double longitude, Bitmap image,
-                                   String socialSituation, Date date, Mood oldMood, Context context){
+                                   String socialSituation, Date date, String displayLocation, Mood oldMood, Context context){
 
         if(!checkMoodMessage(moodMessage)){
             // if it returns false...
@@ -207,7 +192,7 @@ public class MoodController {
         // ID to link mood to image
         System.out.println("EDIT test ID"+ moodID);
 
-        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation,date);
+        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation,date,displayLocation);
         //editMood.setDate(oldMood.getDate());
 //        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 
@@ -479,6 +464,16 @@ public class MoodController {
     public void setMoodMessage(String moodMessage) {
         mood.setMoodMessage(moodMessage);
     }
+
+
+    public String getDisplayLocation() {
+        return mood.getDisplayLocation();
+    }
+
+    public void setDisplayLocation(String displayLocation) {
+        mood.setDisplayLocation(displayLocation);
+    }
+
 
     public Date getDate() {
         return mood.getDate();
