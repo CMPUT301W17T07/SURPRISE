@@ -261,8 +261,9 @@ public class EditMoodActivity extends BarMenuActivity{
                 moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
 
-                if (moodController.editMood(EmotionText, userName, moodMessage_text,
-                        latitude,longitude, editBitmapImage, SocialSituation, date, editMood ) == false) {
+                if (!moodController.editMood(EmotionText, userName, moodMessage_text,
+                        latitude,longitude, editBitmapImage, SocialSituation,
+                        date, editMood, EditMoodActivity.this )) {
                     Toast.makeText(EditMoodActivity.this,
                             "Mood message length is too long. Please try again", Toast.LENGTH_SHORT).show();
                 } else {

@@ -255,10 +255,12 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
 
                 String moodMessage_text = Description.getText().toString();
-                MoodController moodController = new MoodController();
                 if(location != null){
-                if (moodController.createMood(EmotionText, userName,
-                        moodMessage_text, latitude,longitude, bitmap, SocialSituation,date) == false) {
+                    //todo can remove these if/else statements that toast message too long. They could
+                    // be handled in the controller
+                if (!MoodController.createMood(EmotionText, userName,
+                        moodMessage_text, latitude,longitude, bitmap,
+                        SocialSituation,date, CreateMoodActivity.this)) {
                     Toast.makeText(CreateMoodActivity.this,
                             "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -268,8 +270,9 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     finish();
                 }}
                 else{
-                    if (moodController.createMood(EmotionText, userName,
-                            moodMessage_text, 0,0, bitmap, SocialSituation,date) == false) {
+                    if (!MoodController.createMood(EmotionText, userName,
+                            moodMessage_text, 0,0, bitmap, SocialSituation,date,
+                            CreateMoodActivity.this)) {
                         Toast.makeText(CreateMoodActivity.this,
                                 "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                     } else {
