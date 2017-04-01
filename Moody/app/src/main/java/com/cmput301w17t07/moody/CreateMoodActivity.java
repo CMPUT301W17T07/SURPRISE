@@ -141,7 +141,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                                        int position, long id) {
                 SocialSituation = parent.getItemAtPosition(position).toString();
                 TextView sizeView = (TextView) findViewById(R.id.SocialText);
-                sizeView.setText(SocialSituation);
+                sizeView.setText("  "+SocialSituation);
             }
 
             @Override
