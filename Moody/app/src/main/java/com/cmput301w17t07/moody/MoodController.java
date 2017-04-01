@@ -37,6 +37,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
@@ -118,7 +119,11 @@ public class MoodController {
             addMood.execute(newMood);
         }
         else{
+//            getOfflineMoodList();
+            newMood.setId(UUID.randomUUID().toString());
+            newMood.idType = false;
             moodList.addMood(newMood);
+            saveMoodList();
         }
 
         return true;
@@ -214,6 +219,15 @@ public class MoodController {
             deleteMood.execute(oldMood.getId());
         }
         else{
+//            getOfflineMoodList();
+            //todo check if id is jest or if id is offline
+            if (editMood.idType == true) {
+                editMood.setId(oldMood.getId());
+            }
+            else{
+                editMood.setId(UUID.randomUUID().toString());
+                editMood.idType = false;
+            }
             moodList.editMood(editMood, oldMood.getId());
             saveMoodList();
         }
@@ -231,6 +245,7 @@ public class MoodController {
             System.out.println("Error when deleting mood in the mood Controller"+e);
         }
         else{
+//            moodList= getOfflineMoodList();
             moodList.deleteMood(mood);
             saveMoodList();
         }

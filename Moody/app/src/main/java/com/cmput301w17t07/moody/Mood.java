@@ -47,7 +47,7 @@ public class Mood implements Serializable {
     private String displayUsername;
 
     private String encodedImage;
-
+    protected Boolean idType = true;
     @JestId
 
     private String id;
@@ -214,5 +214,6 @@ public class Mood implements Serializable {
 //        return "Latitude: "+decimalFormat.format(location.getLatitude())
 //                +",Longitude: "+decimalFormat.format(location.getLongitude());
     }
+
 
 }

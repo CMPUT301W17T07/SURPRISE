@@ -37,7 +37,7 @@ public class MoodList implements Serializable{
     private static final long serialVersionUID =  2L;
 
 
-    public ArrayList<Mood> moodList = null;
+    public ArrayList<Mood> moodList = new ArrayList<Mood>();
     public ArrayList<Mood> addedOffline = new ArrayList<Mood>();
     public ArrayList<String> deletedOffline = new ArrayList<String>();
     public ArrayList<Mood> editedOffline = new ArrayList<Mood>();

@@ -117,20 +117,20 @@ public class EditMoodActivity extends BarMenuActivity{
         longitude = editMood.getLongitude();
 
         TextView location = (TextView) findViewById(R.id.locationText);
-        Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
-        try{
-            List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
-
-            if (addresses.size() > 0)
-                address = "  " + addresses.get(0).getFeatureName() + " " +
-                        addresses.get(0).getThoroughfare() + ", " +
-                        addresses.get(0).getLocality() + ", " +
-                        addresses.get(0).getAdminArea() + ", " +
-                        addresses.get(0).getCountryCode();
-            location.setText(address);}
-        catch(Exception e){
-            e.printStackTrace();
-        }
+//        Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
+//        try{
+//            List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+//
+//            if (addresses.size() > 0)
+//                address = "  " + addresses.get(0).getFeatureName() + " " +
+//                        addresses.get(0).getThoroughfare() + ", " +
+//                        addresses.get(0).getLocality() + ", " +
+//                        addresses.get(0).getAdminArea() + ", " +
+//                        addresses.get(0).getCountryCode();
+//            location.setText(address);}
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
 
         if(latitude == 0 && longitude == 0){
             location1 = null;
