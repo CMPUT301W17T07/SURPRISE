@@ -394,16 +394,16 @@ public class EditMoodActivity extends BarMenuActivity{
 
         String imageID = editMood.getMoodImageID();
 
-        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-        getMoodImage.execute(imageID);
-
-
-        // retrieving the image
-        try {
-            bitmapImage = getMoodImage.get().decodeImage();
-        }catch (Exception e){
-            Log.i("error","failed to get the moodImage"+imageID);
-        }
+//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
+//        getMoodImage.execute(imageID);
+//
+//
+//        // retrieving the image
+//        try {
+//            bitmapImage = getMoodImage.get().decodeImage();
+//        }catch (Exception e){
+//            Log.i("error","failed to get the moodImage"+imageID);
+//        }
 
 
         if(editBitmapImage!= null){

@@ -150,14 +150,14 @@ public class ViewMoodActivity extends BarMenuActivity {
         String imageID = viewMood.getMoodImageID();
 //        Toast.makeText(ViewMoodActivity.this, imageID, Toast.LENGTH_SHORT).show();
 
-        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-        getMoodImage.execute(imageID);
-        // retrieving the image
-        try {
-            bitmapImage = getMoodImage.get().decodeImage();
-        }catch (Exception e){
-            Log.i("error","failed to get the moodImage"+imageID);
-        }
+//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
+//        getMoodImage.execute(imageID);
+//        // retrieving the image
+//        try {
+//            bitmapImage = getMoodImage.get().decodeImage();
+//        }catch (Exception e){
+//            Log.i("error","failed to get the moodImage"+imageID);
+//        }
 
         image.setImageBitmap(bitmapImage);
 
