@@ -127,7 +127,6 @@ public class ViewMoodActivity extends BarMenuActivity {
 //        image.setImageBitmap(viewMood.getMoodImage());
 
         //!!!! NEW STUFF
-        String imageID = viewMood.getMoodImageID();
 //        Toast.makeText(ViewMoodActivity.this, imageID, Toast.LENGTH_SHORT).show();
 
 //        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
@@ -138,6 +137,8 @@ public class ViewMoodActivity extends BarMenuActivity {
 //        }catch (Exception e){
 //            Log.i("error","failed to get the moodImage"+imageID);
 //        }
+
+        bitmapImage = viewMood.decodeImage();
 
         image.setImageBitmap(bitmapImage);
 

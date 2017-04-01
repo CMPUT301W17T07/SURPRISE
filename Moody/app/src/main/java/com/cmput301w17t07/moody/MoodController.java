@@ -97,7 +97,7 @@ public class MoodController {
             // ID to link mood to image
 //        System.out.println("test ID"+ moodID);
 
-        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, moodID, socialSituation, date,displayLocation);
+        Mood newMood = new Mood(feeling, username, moodMessage, latitude, longitude, image, socialSituation, date,displayLocation);
 
         if(checkNetwork(context)) {
             ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
@@ -192,7 +192,7 @@ public class MoodController {
         // ID to link mood to image
         System.out.println("EDIT test ID"+ moodID);
 
-        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, moodID, socialSituation,date,displayLocation);
+        Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, image, socialSituation,date,displayLocation);
         //editMood.setDate(oldMood.getDate());
 //        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 

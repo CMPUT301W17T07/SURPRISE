@@ -45,6 +45,7 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
     public LatLng mMarkerPosition;
     public Bitmap bitmap;
     public String address;
+    public int deleteImage = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,13 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
                 editMood.setLongitude(newLongitude);
                 Intent editLocation = new Intent(EditLocation.this,EditMoodActivity.class);
                 editLocation.putExtra("editMood", editMood);
-                editLocation.putExtra("bitmap",bitmap);
+                if(bitmap == null){
+                    deleteImage = 1;
+                }
+                else{
+                    editLocation.putExtra("bitmapback",bitmap);}
+                editLocation.putExtra("bitmapdelete",deleteImage);
+                System.out.println("Bitmapdelete = " + deleteImage);
                 startActivity(editLocation);
                 finish();
             }
