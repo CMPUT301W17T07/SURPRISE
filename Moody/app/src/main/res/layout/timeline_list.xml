@@ -23,65 +23,77 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white">
 
-        <ImageView
-            android:id="@+id/profilePicture"
+        <TextView
+            android:id="@+id/usernameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxHeight="60dp"
-            android:maxWidth="70dp"
-            android:paddingBottom="10dp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="310dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/profilePicture">
-
-            <TextView
-                android:id="@+id/usernameTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </LinearLayout>
-
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/messageTV"
-            android:layout_width="310dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout1"
+            android:layout_below="@+id/usernameTV"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/messageTV"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif"
             android:text="TextView" />
 
-        <LinearLayout
-            android:layout_width="310dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/messageTV"
-            android:layout_below="@+id/messageTV">
+        <ImageView
+            android:id="@+id/haslocation"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_toRightOf="@+id/usernameTV"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"/>
 
-            <TextView
-                android:id="@+id/dateTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/hasimage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/haslocation"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/linearLayout1">
+            android:layout_toRightOf="@id/messageTV">
 
             <ImageView
                 android:id="@+id/feelingEmoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:adjustViewBounds="true"
                 android:maxHeight="500dp"
                 android:maxWidth="500dp"
+                android:layout_marginTop="10dp"
                 android:paddingBottom="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp" />

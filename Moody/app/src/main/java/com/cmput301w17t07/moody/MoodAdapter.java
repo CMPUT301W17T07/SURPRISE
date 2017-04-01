@@ -53,6 +53,8 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
             viewHolder.messageTest=(TextView) view.findViewById(R.id.messageTV);
             viewHolder.dataText=(TextView) view.findViewById(R.id.dateTV);
             viewHolder.emojiImage=(ImageView) view.findViewById(R.id.feelingEmoji);
+            viewHolder.locationImage=(ImageView) view.findViewById(R.id.haslocation);
+            viewHolder.imageIc=(ImageView) view.findViewById(R.id.hasimage);
 
             view.setTag(viewHolder);
         }else {
@@ -79,8 +81,22 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         String testDate = formatter.format(mood.getDate());
 
         viewHolder.dataText.setText(testDate);
-        viewHolder.dataText.setTextSize(20);
+        viewHolder.dataText.setTextSize(15);
         //        dateText.setTypeface(font);
+
+        if (mood.getLongitude()!=0.0 && mood.getLatitude()!=0.0){
+            System.out.println("this is long "+mood.getLongitude());
+            viewHolder.locationImage.setImageResource(R.drawable.ic_location);
+
+        }else {
+            viewHolder.locationImage.setImageResource(0);
+        }
+
+        if (mood.getMoodImageID()!=null){
+            viewHolder.imageIc.setImageResource(R.drawable.ic_camera);
+        }else {
+            viewHolder.imageIc.setImageResource(0);
+        }
 
         //todo get appropriate emoji images in the application and then can check mood.getFeeling() for proper emojis
         //ImageView emojiImage = (ImageView) convertView.findViewById(R.id.feelingEmoji);
@@ -121,6 +137,8 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         public TextView userName;
         public TextView messageTest;
         public TextView dataText;
+        public ImageView locationImage;
+        public ImageView imageIc;
 
     }
 

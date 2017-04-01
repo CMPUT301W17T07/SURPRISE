@@ -66,8 +66,8 @@ public class ProfileActivity extends BarMenuActivity {
 
         TextView userName = (TextView) findViewById(R.id.UserNameText);
         userName.setText(username);
-        userName.setTextColor(getResources().getColor(R.color.redTheme));
-        userName.setTypeface(null, Typeface.BOLD_ITALIC);
+        userName.setTextColor(getResources().getColor(R.color.black));
+
 
         TextView Following = (TextView) findViewById(R.id.Following);
         Following.setText("Following\n"+followController.getNumberOfFollowing(username, ProfileActivity.this));
