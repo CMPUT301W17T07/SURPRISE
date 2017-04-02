@@ -38,7 +38,7 @@ public class FilterResultsActivity extends BarMenuActivity {
 
     String username;
     private ListView moodTimeline;
-    private TimelineAdapter adapter;
+    private MoodAdapter adapter;
     private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
     private Integer selectedFilter;
     private String filterFeeling;
@@ -154,7 +154,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                         }
                     }
                     sortArrayList2 = MoodController.sortMoods(moodArrayList);
-                    adapter = new TimelineAdapter(this, R.layout.timeline_list, sortArrayList2);
+                    adapter = new MoodAdapter(this, R.layout.timeline_list, sortArrayList2);
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
@@ -179,7 +179,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                         }
                     }
                     sortArrayList2 = MoodController.sortMoods(moodArrayList);
-                    adapter = new TimelineAdapter(this, R.layout.timeline_list, sortArrayList2);
+                    adapter = new MoodAdapter(this, R.layout.timeline_list, sortArrayList2);
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
@@ -203,7 +203,7 @@ public class FilterResultsActivity extends BarMenuActivity {
 
                     }
                     sortArrayList2= MoodController.sortMoods(moodArrayList);
-                    adapter = new TimelineAdapter(this, R.layout.timeline_list, sortArrayList2);
+                    adapter = new MoodAdapter(this, R.layout.timeline_list, sortArrayList2);
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
@@ -213,7 +213,7 @@ public class FilterResultsActivity extends BarMenuActivity {
         }
 
 
-        adapter = new TimelineAdapter(this, R.layout.timeline_list, moodArrayList);
+        adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
 //        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
         moodTimeline.setAdapter(adapter);
