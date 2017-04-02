@@ -18,6 +18,7 @@ package com.cmput301w17t07.moody;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
@@ -42,6 +43,100 @@ public class AcceptFollowRequestUITest extends ActivityInstrumentationTestCase2 
     }
 
     public void testAcceptingRequest(){
+
+        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
+
+        // Getting current user's username
+        UserController userController = new UserController();
+        String username = userController.readUsername(getActivity()).toString();
+
+        if(UserController.checkUsername("testadd1")){
+            //checking to see if test user needs to be created or not
+            UserController.createUser("testadd1");
+            // Creating the follow lists
+            FollowController.createFollowLists("testadd1");
+        }
+
+
+        //sending requests
+        FollowController.sendPendingRequest("testadd1", username, getActivity().getApplicationContext());
+
+        //go to pending requests page
+        solo.clickOnButton("PENDING REQUESTS");
+
+        //check to see the current activity is correct
+        solo.assertCurrentActivity("Wrong Activity", PendingRequestsActivity.class);
+
+
+        solo.waitForText("testadd1");
+
+        // accept first user
+        solo.clickOnButton("ACCEPT");
+        solo.waitForText("ACCEPTED");
+
+        // Check the user's follower list to determine appropriate action was taken
+
+        FollowerList followerList = FollowController.getFollowerList(username);
+
+        assertTrue(followerList.hasFollower("testadd1"));
+
+        assertFalse(followerList.hasPending("testadd1"));
+
+        followerList.deleteFollower("testadd1");
+
+        //UPDATING THE SERVER
+
+        ElasticSearchFollowController.DeleteFollowerList deleteFollowerList =
+                new ElasticSearchFollowController.DeleteFollowerList();
+        ElasticSearchFollowController.AddFollowerList addFollowerList =
+                new ElasticSearchFollowController.AddFollowerList();
+
+        // deleting old followerlist
+        deleteFollowerList.execute(username);
+        // adding updated one
+        addFollowerList.execute(followerList);
+
+    }
+
+    public void testDeclineRequest(){
+
+        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
+
+        // Getting current user's username
+        UserController userController = new UserController();
+        String username = userController.readUsername(getActivity()).toString();
+
+
+        if(UserController.checkUsername("testdecline")){
+            //checking to see if test user needs to be created or not
+            UserController.createUser("testdecline");
+            FollowController.createFollowLists("testdecline");
+        }
+        // Creating the follow lists
+
+        //sending requests
+        FollowController.sendPendingRequest("testdecline", username, getActivity().getApplicationContext());
+
+        //go to pending requests page
+        solo.clickOnButton("PENDING REQUESTS");
+
+        //check to see the current activity is correct
+        solo.assertCurrentActivity("Wrong Activity", PendingRequestsActivity.class);
+
+
+        solo.waitForText("testdecline");
+
+        // decline user
+        solo.clickOnButton("DECLINE");
+        solo.waitForText("DECLINED");
+
+        // Check the user's follower list to determine appropriate action was taken
+
+        FollowerList followerList = FollowController.getFollowerList(username);
+
+        assertFalse(followerList.hasFollower("testdecline"));
+
+        assertFalse(followerList.hasPending("testdecline"));
 
     }
 
