@@ -57,6 +57,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     private Location location;
     private String provider;
     private ArrayList<Mood> currLocationArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> currLocationArrayListWith5Km = new ArrayList<Mood>();
 
 
     @Override
@@ -259,8 +260,22 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
             } catch (Exception e) {
                 System.out.println("this is fff" + e);
             }
-            for (int j = 0; j < currLocationArrayList.size(); j++) {
-                Mood mood = currLocationArrayList.get(j);
+
+
+            for (int p=0;p< currLocationArrayList.size();p++){
+                Location locationNear=new Location("near");
+                locationNear.setLatitude(currLocationArrayList.get(p).getLatitude());
+                locationNear.setLongitude(currLocationArrayList.get(p).getLongitude());
+                float distance=location.distanceTo(locationNear);
+                if (distance<=5000.0) {
+                    currLocationArrayListWith5Km.add(currLocationArrayList.get(p));
+                }
+
+            }
+
+
+            for (int j = 0; j < currLocationArrayListWith5Km.size(); j++) {
+                Mood mood = currLocationArrayListWith5Km.get(j);
                 if (mood.getLongitude() == 0 && mood.getLatitude() == 0) {
                     break;
                 } else {
@@ -280,15 +295,6 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
         }
 
-
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//
-//        LatLng uofa = new LatLng(-122.084, 37.422);
-//        mMap.addMarker(new MarkerOptions().position(uofa).title("Marker in UofA"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(uofa));
     }
 
 
