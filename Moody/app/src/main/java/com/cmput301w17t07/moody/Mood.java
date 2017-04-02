@@ -63,7 +63,7 @@ public class Mood implements Serializable {
 
 
 
-    private String encodedImage;
+    protected String encodedImage;
     protected Boolean idType = true;
     @JestId
 

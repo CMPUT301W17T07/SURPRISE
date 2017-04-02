@@ -195,7 +195,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                                 " timeline moods in MapsActivity" + e);
                     }
                     for (int j = 0; j < moodArrayList.size(); j++) {
-                        Mood mood = moodArrayList.get(i);
+                        Mood mood = moodArrayList.get(j);
                         if (mood.getLongitude() == 0 && mood.getLatitude() == 0) {
                             break;
                         } else {

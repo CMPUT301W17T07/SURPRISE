@@ -80,6 +80,18 @@
             android:maxWidth="20dp"
             />
 
+        <ImageView
+            android:id="@+id/withpeopleTV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/hasimage"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

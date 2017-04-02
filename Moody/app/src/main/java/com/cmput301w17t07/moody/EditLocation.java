@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -55,7 +56,7 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_map);
         mapFragment.getMapAsync(this);
-        Button OKButton = (Button) findViewById(R.id.OK);
+        ImageButton OKButton = (ImageButton) findViewById(R.id.mapSave);
         fromCreate = intent.getExtras().getInt("fromCreate");
         if(fromCreate == 123) {
             editMood = (Mood) intent.getSerializableExtra("EditMood");
