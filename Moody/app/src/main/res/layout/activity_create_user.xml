@@ -43,32 +43,28 @@
     <!--</android.support.v7.widget.Toolbar>-->
 
 
-
-
     <Button
-        android:text="REGISTER"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="123dp"
         android:id="@+id/register"
-        android:paddingLeft="150dp"
-        android:paddingRight="150dp"
-        android:background="@color/yellowTheme"
-        android:textColor="@color/redTheme"
-        android:layout_width="wrap_content"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="123dp"
+        android:background="@color/yellowTheme"
+        android:text="REGISTER"
+        android:textColor="@color/redTheme" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/enterUsername"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "
-        android:layout_marginBottom="112dp"
-        android:hint="Username"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/register"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="112dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName" />
 
 
     <ImageView

@@ -38,28 +38,16 @@ public class Achievements implements Serializable {
 
     // -------------------------- Achievements ------------------------------------
     // Achievement Title String
-    String signUpMoody11 = "Welcome!\nCreated an account.";
-    String firstMood21 = "Feeling Moody!\nPosted your first mood.";
-    String fiveHappy31 = "Happy Camper!\nPosted 5 happiness moods.";
-    String fiveAngry41 = "Rampage!\nPosted 5 angry moods.";
-    String fiveSad51 = "You are morose!\nPosted 5 sad moods.";
-    String editAMood61 = "Big Mistake!\nEdited a mood.";
-    String followThem71 = "Follower!\nFollow another person.";
-    String followMe81 = "Popular!\nGain a follower.";
-    String showMeTheWay91 = "Show Me The Way!\nLaunch google maps.";
-    String scaredyCat101 = "Scaredy Cat!\nPost a fear mood.";
-
-    // Achievement Description String
-    String signUpMoody12 = "Registered an account.";
-    String firstMood22 = "Posted your first mood.";
-    String fiveHappy32 = "Posted 5 happiness moods.";
-    String fiveAngry42 = "Posted 5 angry moods.";
-    String fiveSad52 = "Posted 5 sad moods.";
-    String editAMood62 = "Edited a mood.";
-    String followThem72 = "Follow another person.";
-    String followMe82 = "Get one follower.";
-    String showMeTheWay92 = "Launch google maps.";
-    String scaredyCat102 = "Post a fear mood.";
+    String signUpMoody = "Welcome!\nCreated an account.";
+    String firstMood = "Feeling Moody!\nPosted your first mood.";
+    String fiveHappy = "Happy Camper!\nPosted 5 happiness moods.";
+    String fiveAngry = "Rampage!\nPosted 5 angry moods.";
+    String fiveSad = "You are morose!\nPosted 5 sad moods.";
+    String editAMood = "Big Mistake!\nEdited a mood.";
+    String followThem = "Follower!\nFollow another person.";
+    String followMe = "Popular!\nGain a follower.";
+    String showMeTheWay = "Show Me The Way!\nLaunch google maps.";
+    String scaredyCat = "Scaredy Cat!\nPost a fear mood.";
     // ----------------------------------------------------------------------------------
 
     // user's total score counter
