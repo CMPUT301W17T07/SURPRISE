@@ -38,7 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Locale;
 
-public class EditLocation extends AppCompatActivity  implements OnMapReadyCallback {
+public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback {
     public Mood editMood;
     private GoogleMap mMap;
     public double newLatitude;
@@ -51,8 +51,14 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Intent intent = getIntent();
         setContentView(R.layout.activity_edit_location);
+        setUpMenuBar(this);
+
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_map);
         mapFragment.getMapAsync(this);
