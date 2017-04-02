@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,7 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Locale;
 
-public class EditLocation extends AppCompatActivity  implements OnMapReadyCallback {
+public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback {
     public Mood editMood;
     private GoogleMap mMap;
     public double newLatitude;
@@ -45,38 +46,74 @@ public class EditLocation extends AppCompatActivity  implements OnMapReadyCallba
     public LatLng mMarkerPosition;
     public Bitmap bitmap;
     public String address;
+    public int deleteImage = 0;
+    public int fromCreate = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Intent intent = getIntent();
-        editMood = (Mood) intent.getSerializableExtra("EditMood");
-        bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
-        System.out.println("bitmap:"+ bitmap);
         setContentView(R.layout.activity_edit_location);
-        newLatitude = editMood.getLatitude();
-        newLongitude = editMood.getLongitude();
+        setUpMenuBar(this);
+
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_map);
         mapFragment.getMapAsync(this);
-        Button OKButton = (Button) findViewById(R.id.OK);
-        OKButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                editMood.setLatitude(newLatitude);
-                editMood.setLongitude(newLongitude);
-                Intent editLocation = new Intent(EditLocation.this,EditMoodActivity.class);
-                editLocation.putExtra("editMood", editMood);
-                editLocation.putExtra("bitmap",bitmap);
-                startActivity(editLocation);
-                finish();
-            }
-        });
-
-
+        ImageButton OKButton = (ImageButton) findViewById(R.id.mapSave);
+        fromCreate = intent.getExtras().getInt("fromCreate");
+        if(fromCreate == 123) {
+            editMood = (Mood) intent.getSerializableExtra("EditMood");
+            bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+            newLatitude = editMood.getLatitude();
+            newLongitude = editMood.getLongitude();
+            OKButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    editMood.setLatitude(newLatitude);
+                    editMood.setLongitude(newLongitude);
+                    editMood.setDisplayLocation(address);
+                    Intent editLocation = new Intent(EditLocation.this, CreateMoodActivity.class);
+                    editLocation.putExtra("editMood", editMood);
+                    editLocation.putExtra("bitmapback", bitmap);
+                    editLocation.putExtra("pickLocation",1);
+                    startActivity(editLocation);
+                    finish();
+                }
+            });
+        }
+        else {
+            editMood = (Mood) intent.getSerializableExtra("EditMood");
+            bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+            System.out.println("bitmap:" + bitmap);
+            newLatitude = editMood.getLatitude();
+            newLongitude = editMood.getLongitude();
+            OKButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    editMood.setLatitude(newLatitude);
+                    editMood.setLongitude(newLongitude);
+                    Intent editLocation = new Intent(EditLocation.this, EditMoodActivity.class);
+                    editLocation.putExtra("editMood", editMood);
+                    if (bitmap == null) {
+                        deleteImage = 1;
+                    } else {
+                        editLocation.putExtra("bitmapback", bitmap);
+                    }
+                    editLocation.putExtra("bitmapdelete", deleteImage);
+                    System.out.println("Bitmapdelete = " + deleteImage);
+                    startActivity(editLocation);
+                    finish();
+                }
+            });
+        }
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng tmp = new LatLng(editMood.getLatitude(), editMood.getLongitude());
+        LatLng tmp = new LatLng(53.5444,113.4909);
+        if(fromCreate != 123){
+        tmp = new LatLng(editMood.getLatitude(), editMood.getLongitude());}
         mMap.addMarker(new MarkerOptions().draggable(true).position(tmp).title("Select location").icon(BitmapDescriptorFactory.defaultMarker()));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));

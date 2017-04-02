@@ -65,29 +65,49 @@ public class MoodList implements Serializable{
                 return;
             }
         }
-        }
+    }
 
     public void editMood(Mood mood, Mood oldMood){
 //        deleteMood(oldMood);
 //        addMood(mood);
-       editedOffline.add(mood);
+//       editedOffline.add(mood);
+////       oldIDs.add(oldMood.getId());
+//        for(int i = 0; i < moodList.size(); i++){
+//            if(moodList.get(i).getId().equals(oldMood.getId())){
+//
+//                if(addedOffline.contains(oldMood)){
+//                    moodList.remove(i);
+//                    moodList.add(i, mood);
+//                    addedOffline.remove(addedOffline.indexOf(oldMood));
+//                    return;
+//                }
+//                if(editedOffline.contains(oldMood)){
+//                    moodList.remove(i);
+//                    moodList.add(i, mood);
+//                    editedOffline.remove(editedOffline.indexOf(oldMood));
+//                    return;
+//                }
+//                moodList.remove(i);
+//                moodList.add(i, mood);
+//
+//
+//                return;
+//            }
+//        }
+
+        addedOffline.add(mood);
 //       oldIDs.add(oldMood.getId());
         for(int i = 0; i < moodList.size(); i++){
             if(moodList.get(i).getId().equals(oldMood.getId())){
 
-                if(addedOffline.contains(mood)){
+                if(addedOffline.contains(oldMood)){
                     moodList.remove(i);
                     moodList.add(i, mood);
-                    addedOffline.remove(mood);
-                    return;
-                }
-                if(editedOffline.contains(mood)){
-                    moodList.remove(i);
-                    moodList.add(i, mood);
-                    editedOffline.remove(mood);
+                    addedOffline.remove(addedOffline.indexOf(oldMood));
                     return;
                 }
                 moodList.remove(i);
+                deletedOffline.add(oldMood.getId());
                 moodList.add(i, mood);
 
 

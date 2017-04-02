@@ -83,12 +83,13 @@ public class TimelineActivity extends BarMenuActivity {
 
 
 
+        UserController userController = new UserController();
+        username = userController.readUsername(TimelineActivity.this).toString();
 
-
-        SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
-        boolean isFirstIn = sp.getBoolean("isFirstIn", true);
-        if (isFirstIn) {
-            sp.edit().putBoolean("isFirstIn", false).apply();
+//        SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
+//        boolean isFirstIn = sp.getBoolean("isFirstIn", true);
+        if (username.equals("")) {
+//            sp.edit().putBoolean("isFirstIn", false).apply();
             setContentView(R.layout.activity_create_user);
             Toast.makeText(TimelineActivity.this, " Welcome to Moody! ", Toast.LENGTH_SHORT).show();
             Button registerButton = (Button) findViewById(R.id.register);
@@ -228,8 +229,8 @@ public class TimelineActivity extends BarMenuActivity {
                     if(scrollFlag) {
                         Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
                         indexOfScroll = indexOfScroll + 6;
-                        templist = MoodController.getUserMoods(username,
-                                String.valueOf(indexOfScroll), TimelineActivity.this, false);
+                        templist = MoodController.getTimelineMoods(username,
+                                String.valueOf(indexOfScroll), TimelineActivity.this);
                         // determining if there any old moods to find
                         if (templist.size() == 0) {
                             scrollFlag = false;

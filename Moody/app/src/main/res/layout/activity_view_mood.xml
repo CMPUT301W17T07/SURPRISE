@@ -20,6 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blueTheme"
     android:orientation="vertical" >
 
     <ImageView
@@ -38,7 +39,7 @@
         android:layout_alignLeft="@+id/userUsernameTV"
         android:layout_alignStart="@+id/userUsernameTV"
         android:layout_below="@+id/userUsernameTV"
-        android:text="TextView"
+        android:text="date"
         android:textSize="40px" />
 
     <ImageView
@@ -72,16 +73,16 @@
         android:layout_height="250dp"
         android:scaleType="fitCenter"
         app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_toRightOf="@+id/userProfilePicture"
-        android:layout_toEndOf="@+id/userProfilePicture" />
+        android:layout_below="@+id/LocationTV"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <TextView
         android:id="@+id/userFeelingTV"
         android:layout_width="280dp"
         android:layout_height="40dp"
-        android:text="TextView"
+        android:text="feeling"
         android:textSize="65px"
         android:layout_below="@+id/userDateTV"
         android:layout_alignLeft="@+id/userDateTV"
@@ -96,28 +97,30 @@
         android:layout_marginStart="22dp"
         android:layout_toEndOf="@+id/userProfilePicture"
         android:layout_toRightOf="@+id/userProfilePicture"
-        android:text="TextView"
+        android:text="username"
         android:textSize="65px"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/userSocialTV"
-        android:layout_width="280dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
-        android:text="TextView"
-        android:textSize="65px"
+        android:text="social"
+        android:textSize="40px"
         android:layout_below="@+id/userFeelingTV"
         android:layout_alignLeft="@+id/userFeelingTV"
         android:layout_alignStart="@+id/userFeelingTV" />
 
     <TextView
         android:id="@+id/LocationTV"
-        android:layout_width="280dp"
+        android:layout_width="200dp"
         android:layout_height="40dp"
+        android:text="location"
+        android:layout_below="@+id/userSocialTV"
         android:layout_alignLeft="@+id/userSocialTV"
         android:layout_alignStart="@+id/userSocialTV"
-        android:layout_below="@+id/userSocialTV"
-        android:text="TextView" />
+        android:layout_alignRight="@+id/deleteButton"
+        android:layout_alignEnd="@+id/deleteButton" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -125,9 +128,9 @@
         android:layout_height="35dp"
         app:srcCompat="@drawable/ic_newmood"
         android:background="#00000000"
-        android:layout_above="@+id/viewMoodImage"
-        android:layout_alignRight="@+id/LocationTV"
-        android:layout_alignEnd="@+id/LocationTV" />
+        android:layout_below="@+id/viewMoodImage"
+        android:layout_alignRight="@+id/userFeelingTV"
+        android:layout_alignEnd="@+id/userFeelingTV" />
 
     <ImageButton
         android:id="@+id/deleteButton"
@@ -135,7 +138,7 @@
         android:layout_height="35dp"
         app:srcCompat="@drawable/ic_delete"
         android:background="#00000000"
-        android:layout_above="@+id/viewMoodImage"
+        android:layout_below="@+id/viewMoodImage"
         android:layout_alignRight="@+id/userFeelingEmoji"
         android:layout_alignEnd="@+id/userFeelingEmoji" />
 

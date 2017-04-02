@@ -359,7 +359,7 @@ public class ElasticMoodController extends ElasticController {
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will   want
             }else {
                 query = "{\n" +
-                        "    \"from\":\"" + search_parameters[1] + "\",\"size\":6, \n"+
+                        "    \"from\":\"" + search_parameters[1] + "\",\"size\":\"" + search_parameters[2] + "\", \n"+
                         "    \"query\" : {\n" +
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
                         "    },\n" +
@@ -444,71 +444,18 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(Location... locations) {
             verifySettings();
 
-            String DISTANCE = "5";
-
-//            String query = "{\n" +
-//                    "\"query\" : {\n" +
-//                        "\"match_all\" : {}\n" +
-//                            "},\n" +
-//                    "\"filter\" : {\n" +
-//                        "\"bool\" : {\n" +
-//                            "\"must\" : [\n" +
-//                    "{\n" +
-//                        "\"geo_distance\" : {\n" +
-//                            "\"distance\" : \"5km\",\n" +
-//                                "\"random\" : [" + locations[0].getLongitude() + ", "
-//                                    + locations[0].getLatitude() + "]\n" +
-//                    "}\n" +
-//                    "} ,\n" +
-//                    "] ,\n" +
-//                    "}\n" +
-//                    "}\n" +
-//                    "}";
-//            String query = "{\n"+
-//                    "\"query\":{\n" +
-//                    "\"filtered\":{\n"+
-//                    "\"filter\":{ \n"+
-//                    "\"geo_distance\" : {\n"+
-//                    "\"distance\" : \"50000000km\",\n" +
-//                    "\"location\" : {\"lat\":37.421998333333335 ,"+ "\"lon\":-122.08400000000002"+ "}\n"+
-//                    "}\n" + "}\n" + "}\n" + "}\n" + "}";
-
-//            String query = "{\n"+
-//                    "\"filtered\": {\n" +
-//                    "         \"query\" : {\n" +
-//                "             \"match_all\" : {}\n" +
-//                    "  },\n" +
-//                    "\"filter\":{ \n"+
-//                    "\"geo_distance\" : {\n"+
-//                    "\"distance\" : \"50000km\",\n" +
-//                    "  \"term\" : {\"latitude\":37.421998333333335 ,"+ "\"longitude\":-122.08400000000002"+ "}\n"+
-//                    "}\n" +
-//                    "}\n"+
-//                    "}\n" +
-//                    "}";
-
-
-
-//            String query = "{\n"+
-//                    "\"filtered\": {\n" +
-//                    "         \"query\" : {\n" +
-//                    "             \"match_all\" : {}\n" +
-//                    "  },\n" +
-//                    "\"filter\":{ \n"+
-//                    "\"geo_distance\" : {\n"+
-//                    "\"distance\" : \"5000km\",\n" +
-//                    "  \"location\" : [37.421998333333335,-122.0840000000000]\n"+
-//                    "       }\n" +
-//                    "   }\n"+
-//                    "  }\n" +
-//                    "}";
-            String query = "{\n" +
+            String query = "{\n"+
                     "\"query\" : {\n" +
-                        "\"match_all\" : {}}\n" +
-                            "}";
+                    "\"filtered\": {\n" +
+                    "         \"query\" : {\n" +
+                    "             \"match_all\" : {}\n" +
+                    "  },\n" +
+                    "\"filter\":{ \n"+
 
-            System.out.println("this is location query"+query);
-
+                    "       }\n" +
+                    "   }\n"+
+                    "  }\n" +
+                    "}";
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")

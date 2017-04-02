@@ -17,17 +17,12 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_timeline"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blueTheme"
     tools:context="com.cmput301w17t07.moody.TimelineActivity">
-    <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
-    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
-    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
-    <!--android:background="@color/blueTheme"-->
-    <!--tools:context="com.cmput301w17t07.moody.TimelineActivity">-->
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolname"
@@ -39,10 +34,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Moody"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/redTheme"
             android:textSize="24sp" />
+
     </android.support.v7.widget.Toolbar>
 
     <ListView
@@ -68,22 +64,16 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menubar" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/list_view"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        app:srcCompat="@drawable/moodylogo6" />
 
-
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignEnd="@+id/bottom_navigation"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignRight="@+id/bottom_navigation"-->
-        <!--android:layout_below="@+id/list_view"-->
-        <!--android:layout_marginTop="12dp"-->
-        <!--android:text="Main Timeline Activity Coming Soon In Project Part 5 ..."-->
-        <!--android:textSize="50px"/>-->
 
 
 </RelativeLayout>

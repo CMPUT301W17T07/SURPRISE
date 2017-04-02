@@ -55,6 +55,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
             viewHolder.emojiImage=(ImageView) view.findViewById(R.id.feelingEmoji);
             viewHolder.locationImage=(ImageView) view.findViewById(R.id.haslocation);
             viewHolder.imageIc=(ImageView) view.findViewById(R.id.hasimage);
+            viewHolder.withP=(ImageView) view.findViewById(R.id.withpeopleTV);
 
             view.setTag(viewHolder);
         }else {
@@ -92,10 +93,16 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
             viewHolder.locationImage.setImageResource(0);
         }
 
-        if (mood.getMoodImageID()!=null){
+        if (mood.encodedImage !=null){
             viewHolder.imageIc.setImageResource(R.drawable.ic_camera);
         }else {
             viewHolder.imageIc.setImageResource(0);
+        }
+
+        if(mood.getSocialSituation() != ""){
+            viewHolder.withP.setImageResource(R.drawable.ic_social);
+        }else{
+            viewHolder.withP.setImageResource(0);
         }
 
         //todo get appropriate emoji images in the application and then can check mood.getFeeling() for proper emojis
@@ -139,6 +146,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         public TextView dataText;
         public ImageView locationImage;
         public ImageView imageIc;
+        public ImageView withP;
 
     }
 

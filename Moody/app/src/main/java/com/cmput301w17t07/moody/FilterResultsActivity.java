@@ -224,26 +224,14 @@ public class FilterResultsActivity extends BarMenuActivity {
                                     long id) {
                 // TODO Auto-generated method stub
                 Mood viewMood = moodArrayList.get(position);
-
                 Intent viewMoodIntent = new Intent(FilterResultsActivity.this, ViewMoodActivity.class);
+                String trigger = "filter";
+                viewMoodIntent.putExtra("trigger",trigger);
                 viewMoodIntent.putExtra("viewMood", viewMood);
                 startActivity(viewMoodIntent);
             }
 
 
-        });
-
-
-        moodTimeline.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Mood viewMood = moodArrayList.get(position);
-                Intent viewMoodIntent = new Intent(FilterResultsActivity.this, ViewMoodActivity.class);
-                viewMoodIntent.putExtra("viewMood", viewMood);
-                startActivity(viewMoodIntent);
-            }
         });
 
     }

@@ -127,7 +127,6 @@ public class ViewMoodActivity extends BarMenuActivity {
 //        image.setImageBitmap(viewMood.getMoodImage());
 
         //!!!! NEW STUFF
-        String imageID = viewMood.getMoodImageID();
 //        Toast.makeText(ViewMoodActivity.this, imageID, Toast.LENGTH_SHORT).show();
 
 //        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
@@ -138,6 +137,8 @@ public class ViewMoodActivity extends BarMenuActivity {
 //        }catch (Exception e){
 //            Log.i("error","failed to get the moodImage"+imageID);
 //        }
+
+        bitmapImage = viewMood.decodeImage();
 
         image.setImageBitmap(bitmapImage);
 
@@ -184,8 +185,13 @@ public class ViewMoodActivity extends BarMenuActivity {
             startActivity(intentBack);
             this.finish();
         }
-        else{
+        else if(trigger.equals("timeline")){
             Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else if(trigger.equals("filter")){
+            Intent intentBack = new Intent(ViewMoodActivity.this, FilterActivity.class);
             startActivity(intentBack);
             this.finish();
         }

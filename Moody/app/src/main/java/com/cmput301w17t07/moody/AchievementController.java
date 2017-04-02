@@ -63,70 +63,64 @@ public class AchievementController {
         achievements = getAchievements();
         if(!achievements.moodCountEarned){
             if(achievements.moodCount >= 1){
-                displayAchievement(context, achievements.firstMood21);
+                displayAchievement(context, achievements.firstMood);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.firstMood21);
-                achievements.achievementsDescriptionArray.add(achievements.firstMood22);
+                achievements.achievementsTitleArray.add(achievements.firstMood);
+                achievements.achievementsDescriptionArray.add(achievements.firstMood);
                 achievements.moodCountEarned = true;
                 achievements.score = achievements.score + 10;
             }
         }
         if (!achievements.fiveHappyMoodCountEarned) {
             if (achievements.fiveHappyMoodCount >= 5) {
-                displayAchievement(context, achievements.fiveHappy31);
+                displayAchievement(context, achievements.fiveHappy);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.fiveHappy31);
-                achievements.achievementsDescriptionArray.add(achievements.fiveHappy32);
+                achievements.achievementsTitleArray.add(achievements.fiveHappy);
                 achievements.fiveHappyMoodCountEarned = true;
                 achievements.score = achievements.score + 10;
             }
         }
         if (!achievements.fiveAngryMoodCountEarned) {
             if (achievements.fiveAngryMoodCount >= 5) {
-                displayAchievement(context, achievements.fiveAngry41);
+                displayAchievement(context, achievements.fiveAngry);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.fiveAngry41);
-                achievements.achievementsDescriptionArray.add(achievements.fiveAngry42);
+                achievements.achievementsTitleArray.add(achievements.fiveAngry);
                 achievements.fiveAngryMoodCountEarned = true;
                 achievements.score = achievements.score + 10;
             }
         }
         if (!achievements.fiveSadMoodCountEarned) {
             if (achievements.fiveSadMoodCount >= 5) {
-                displayAchievement(context, achievements.fiveSad51);
+                displayAchievement(context, achievements.fiveSad);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.fiveSad51);
-                achievements.achievementsDescriptionArray.add(achievements.fiveSad52);
+                achievements.achievementsTitleArray.add(achievements.fiveSad);
                 achievements.fiveSadMoodCountEarned = true;
                 achievements.score = achievements.score + 10;
             }
         }
         if (!achievements.firstTimeRegFlagEarned) {
             if (achievements.firstTimeRegFlag != 0) {
-                displayAchievement(context, achievements.signUpMoody11);
+                displayAchievement(context, achievements.signUpMoody);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.signUpMoody11);
-                achievements.achievementsDescriptionArray.add(achievements.signUpMoody12);
+                achievements.achievementsTitleArray.add(achievements.signUpMoody);
                 achievements.firstTimeRegFlagEarned = true;
                 achievements.score = achievements.score + 10;
             }
         }
         if (!achievements.firstTimeEditFlagEarned) {
             if (achievements.firstTimeEditFlag != 0) {
-                displayAchievement(context, achievements.editAMood61);
+                displayAchievement(context, achievements.editAMood);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.editAMood61);
-                achievements.achievementsDescriptionArray.add(achievements.editAMood62);
+                achievements.achievementsTitleArray.add(achievements.editAMood);
                 achievements.firstTimeEditFlagEarned = true;
                 achievements.score = achievements.score + 10;
             }
         }
         if (!achievements.followCountEarned) {
             if (achievements.followCount != 0) {
-                displayAchievement(context, achievements.followThem71);
+                displayAchievement(context, achievements.followThem);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.followThem71);
-                achievements.achievementsDescriptionArray.add(achievements.followThem72);
+                achievements.achievementsTitleArray.add(achievements.followThem);
                 achievements.followCountEarned = true;
                 achievements.score = achievements.score + 10;
 
@@ -134,10 +128,9 @@ public class AchievementController {
         }
         if (!achievements.followerCountEarned) {
             if (achievements.followerCount != 0) {
-                displayAchievement(context, achievements.followMe81);
+                displayAchievement(context, achievements.followMe);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.followMe81);
-                achievements.achievementsDescriptionArray.add(achievements.followMe82);
+                achievements.achievementsTitleArray.add(achievements.followMe);
                 achievements.followerCountEarned = true;
                 achievements.score = achievements.score + 10;
 
@@ -145,10 +138,9 @@ public class AchievementController {
         }
         if (!achievements.launchMapsFlagEarned) {
             if (achievements.launchMapsFlag != 0) {
-                displayAchievement(context, achievements.showMeTheWay91);
+                displayAchievement(context, achievements.showMeTheWay);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.showMeTheWay91);
-                achievements.achievementsDescriptionArray.add(achievements.showMeTheWay92);
+                achievements.achievementsTitleArray.add(achievements.showMeTheWay);
                 achievements.launchMapsFlagEarned = true;
                 achievements.score = achievements.score + 10;
 
@@ -156,10 +148,9 @@ public class AchievementController {
         }
         if (!achievements.fearMoodCountEarned) {
             if (achievements.fearMoodCount != 0) {
-                displayAchievement(context, achievements.scaredyCat101);
+                displayAchievement(context, achievements.scaredyCat);
                 //add achievement to list and increment score
-                achievements.achievementsTitleArray.add(achievements.scaredyCat101);
-                achievements.achievementsDescriptionArray.add(achievements.scaredyCat102);
+                achievements.achievementsTitleArray.add(achievements.scaredyCat);
                 achievements.fearMoodCountEarned = true;
                 achievements.score = achievements.score + 10;
 
@@ -191,9 +182,6 @@ public class AchievementController {
             case "surprise":
                 break;
         }
-
-
-
 
     }
 

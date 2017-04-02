@@ -86,7 +86,7 @@ import org.junit.Test;
 //        followerList.addFollower(user);
 //        assertEquals(followerList.getFollower(0),user);
 //    }
-//
+
 //    @Test
 //    public void testHasFollower(){
 //        // TDD: Test > Fail > Code > Pass (LOOP)
