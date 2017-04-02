@@ -25,22 +25,22 @@
     tools:context="com.cmput301w17t07.moody.TimelineActivity">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/yellowTheme">
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolname"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/yellowTheme">-->
 
-        <!--自定义控件-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAlignment="center"
-            android:textColor="@color/redTheme"
-            android:textSize="24sp" />
+        <!--&lt;!&ndash;自定义控件&ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=""-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="@color/redTheme"-->
+            <!--android:textSize="24sp" />-->
 
-    </android.support.v7.widget.Toolbar>
+    <!--</android.support.v7.widget.Toolbar>-->
 
 
 
@@ -71,17 +71,12 @@
         android:layout_centerHorizontal="true" />
 
 
-
-
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        app:srcCompat="@drawable/moodylogo6"
-        android:layout_alignBottom="@+id/toolname" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
 
 </RelativeLayout>
