@@ -33,15 +33,6 @@ public class AchievementActivity extends BarMenuActivity {
     private static Achievements achievements;
 
 
-    // Array of strings for ListView Title
-    String[] listviewTitle = new String[]{"MoneyMan"};
-
-
-    int[] listviewImage = new int[]{R.drawable.achievement2};
-
-    String[] listviewShortDescription = new String[]{"Good Job!"};
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,24 +61,7 @@ public class AchievementActivity extends BarMenuActivity {
 
 
 
-//        List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
-//
-//        for (int i = 0; i < achievements.achievementsTitleArray.size(); i++) {
-//            HashMap<String, String> hm = new HashMap<String, String>();
-//            hm.put("achievement_title", achievements.achievementsTitleArray.get(i));
-//            hm.put("achievement_description", achievements.achievementsDescriptionArray.get(i));
-//            hm.put("achievement_image", Integer.toString(listviewImage[i]));
-//            aList.add(hm);
-//        }
-
-//
-//        String[] from = {"achievement_image", "achievement_title", "achievement_description"};
-//        int[] to = {R.id.achievement_image, R.id.achievement_title, R.id.achievement_short_description};
-////
-//        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.achievement_list, from, to);
         ListView androidListView = (ListView) findViewById(R.id.test3_list);
-
-
 
         AchievementsAdapter achievementsAdapter = new AchievementsAdapter(AchievementActivity.this, R.layout.achievement_list, achievements.achievementsTitleArray);
         androidListView.setAdapter(achievementsAdapter);
