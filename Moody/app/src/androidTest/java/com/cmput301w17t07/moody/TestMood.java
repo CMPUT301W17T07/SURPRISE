@@ -44,13 +44,13 @@ public class TestMood extends ActivityInstrumentationTestCase2{
 
     @Test
     public void testgetUsername() throws Exception {
-        Mood mood=new Mood("happy","xin","mes",null,null,"soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         assertEquals(mood.getUsername(),"xin");
     }
 
     @Test
     public void testsetUsername() throws Exception {
-        Mood mood=new Mood("happy","xin","mes",null,null,"soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         mood.setUsername("pang");
         assertEquals(mood.getUsername(),"pang");
 
@@ -58,40 +58,40 @@ public class TestMood extends ActivityInstrumentationTestCase2{
 
     @Test
     public void testGetMoodMessage(){
-        Mood mood=new Mood("happy","xin","mes",null,null,"soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         assertEquals(mood.getFeeling(),"happy");
     }
 
     @Test
     public void testSetMoodMessage(){
-        Mood mood=new Mood("happy","xin","mes",null,null,"soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         mood.setMoodMessage("sad");
         assertEquals(mood.getMoodMessage(),"sad");
     }
 
     @Test
     public void testGetFeeling(){
-        Mood mood=new Mood("happy","xin","mes",null,null,"soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         assertEquals(mood.getFeeling(),"happy");
     }
 
     @Test
     public void testSetFeeling(){
-        Mood mood=new Mood("happy","xin","mes",null,null,"soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         mood.setFeeling("sad");
         assertEquals(mood.getFeeling(),"sad");
     }
 
     @Test
     public void testgetMoodImageID() throws Exception {
-        Mood mood=new Mood("happy","xin","mes",null,"1","soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,"1",null,null,null);
         assertEquals(mood.getMoodImageID(),"1");
 
     }
 
     @Test
     public void testsetMoodImageID() throws Exception {
-        Mood mood=new Mood("happy","xin","mes",null,"1","soc");
+        Mood mood=new Mood("happy","xin","mes",0,0,"1",null,null,null);
         mood.setMoodImageID("2");
         assertEquals(mood.getMoodImageID(),"2");
     }

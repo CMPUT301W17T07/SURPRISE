@@ -446,80 +446,68 @@ public class ElasticMoodController extends ElasticController {
 
             String DISTANCE = "5";
 
-            String query = "{\n" +
-                    "\"query\" : {\n" +
-                        "\"match_all\" : {}\n" +
-                            "},\n" +
-                    "\"filter\" : {\n" +
-                        "\"bool\" : {\n" +
-                            "\"must\" : [\n" +
-                    "{\n" +
-                        "\"geo_distance\" : {\n" +
-                            "\"distance\" : \"5km\",\n" +
-                                "\"random\" : [" + locations[0].getLongitude() + ", "
-                                    + locations[0].getLatitude() + "]\n" +
-                    "}\n" +
-                    "} ,\n" +
-                    "] ,\n" +
-                    "}\n" +
-                    "}\n" +
-                    "}";
-
-
-
-//                    "{\n" +
+//            String query = "{\n" +
 //                    "\"query\" : {\n" +
 //                        "\"match_all\" : {}\n" +
 //                            "},\n" +
 //                    "\"filter\" : {\n" +
-//                    "        \"geo_distance\" : {\n" +
-//                    "          \"distance\" : \"" + DISTANCE + "km\",\n" +
-//                    "          \"random\" : [" + locations[0].getLongitude() + ", "
-//                    + locations[0].getLatitude() + "]\n" +
-//                    "}\n" +
-//                    "}\n" +
-//                    "}\n";
-
-
+//                        "\"bool\" : {\n" +
+//                            "\"must\" : [\n" +
 //                    "{\n" +
-//                    "\"query\" : {\n" +
-//                    "\"filter\" : {\n" +
 //                        "\"geo_distance\" : {\n" +
 //                            "\"distance\" : \"5km\",\n" +
-//                    "\"pin\" : {\n" +
-//                        "\"random\" : [" + locations[0].getLongitude() + ", "
-//                    + locations[0].getLatitude() + "]\n" +
+//                                "\"random\" : [" + locations[0].getLongitude() + ", "
+//                                    + locations[0].getLatitude() + "]\n" +
+//                    "}\n" +
+//                    "} ,\n" +
+//                    "] ,\n" +
 //                    "}\n" +
 //                    "}\n" +
-//                                    "}\n" +
-//                                        "}\n" +
-//                                            "}\n";
-//
+//                    "}";
+//            String query = "{\n"+
+//                    "\"query\":{\n" +
+//                    "\"filtered\":{\n"+
+//                    "\"filter\":{ \n"+
+//                    "\"geo_distance\" : {\n"+
+//                    "\"distance\" : \"50000000km\",\n" +
+//                    "\"location\" : {\"lat\":37.421998333333335 ,"+ "\"lon\":-122.08400000000002"+ "}\n"+
+//                    "}\n" + "}\n" + "}\n" + "}\n" + "}";
+
+//            String query = "{\n"+
+//                    "\"filtered\": {\n" +
+//                    "         \"query\" : {\n" +
+//                "             \"match_all\" : {}\n" +
+//                    "  },\n" +
+//                    "\"filter\":{ \n"+
+//                    "\"geo_distance\" : {\n"+
+//                    "\"distance\" : \"50000km\",\n" +
+//                    "  \"term\" : {\"latitude\":37.421998333333335 ,"+ "\"longitude\":-122.08400000000002"+ "}\n"+
+//                    "}\n" +
+//                    "}\n"+
+//                    "}\n" +
+//                    "}";
 
 
 
-//            "\"filtered\" : {\n" +
-//                    "\"query\" : {\n" +
-//                    "\"match_all\" : {}\n" +
-//                    "},\n" +
+//            String query = "{\n"+
+//                    "\"filtered\": {\n" +
+//                    "         \"query\" : {\n" +
+//                    "             \"match_all\" : {}\n" +
+//                    "  },\n" +
+//                    "\"filter\":{ \n"+
+//                    "\"geo_distance\" : {\n"+
+//                    "\"distance\" : \"5000km\",\n" +
+//                    "  \"location\" : [37.421998333333335,-122.0840000000000]\n"+
+//                    "       }\n" +
+//                    "   }\n"+
+//                    "  }\n" +
+//                    "}";
+            String query = "{\n" +
+                    "\"query\" : {\n" +
+                        "\"match_all\" : {}}\n" +
+                            "}";
 
-
-
-
-//                    "{\n" +
-//                    "\"query\" : {\n" +
-//                    "\"bool\" : {\n" +
-//                    "\"must\" : {\n" +
-//                    " \"match_all\" : {}\n" +
-//                    "}," +
-//                    "\"filter\" : {\n" +
-//                    "\"geo_distance\" : {\n" +
-//                    "\"distance : 5km\",\n" +
-//                    "\"location\" : [" + locations[0].getLongitude() + ", "
-//                    + locations[0].getLatitude() + "]\n" +
-//                    "}}}";
-
-            System.out.println("this is location query "+query);
+            System.out.println("this is location query"+query);
 
 
             Search search = new Search.Builder(query)

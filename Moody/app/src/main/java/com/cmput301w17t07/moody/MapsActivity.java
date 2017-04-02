@@ -222,7 +222,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
             try {
                 currLocationArrayList.addAll(filterMapByLocation.get());
-
+                System.out.println("this is location www "+currLocationArrayList);
             } catch (Exception e) {
                 System.out.println("this is fff" + e);
             }
