@@ -185,8 +185,13 @@ public class ViewMoodActivity extends BarMenuActivity {
             startActivity(intentBack);
             this.finish();
         }
-        else{
+        else if(trigger.equals("timeline")){
             Intent intentBack = new Intent(ViewMoodActivity.this, TimelineActivity.class);
+            startActivity(intentBack);
+            this.finish();
+        }
+        else if(trigger.equals("filter")){
+            Intent intentBack = new Intent(ViewMoodActivity.this, FilterActivity.class);
             startActivity(intentBack);
             this.finish();
         }
