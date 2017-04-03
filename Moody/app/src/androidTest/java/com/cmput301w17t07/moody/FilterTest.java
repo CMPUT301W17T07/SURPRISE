@@ -137,6 +137,7 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
 
         followingList.deleteFollowing("testfilter");
 
+
         //UPDATING THE SERVER
 
         ElasticSearchFollowController.DeleteFollowingList deleteFollowingList =
@@ -148,6 +149,25 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
         deleteFollowingList.execute(username);
         // adding updated one
         addFollowingList.execute(followingList);
+
+        FollowerList followerList = FollowController.getFollowerList("testfilter");
+
+        followerList.deleteFollower(username);
+
+        ElasticSearchFollowController.DeleteFollowerList deleteFollowerList =
+                new ElasticSearchFollowController.DeleteFollowerList();
+        ElasticSearchFollowController.AddFollowerList addFollowerList =
+                new ElasticSearchFollowController.AddFollowerList();
+
+        deleteFollowerList.execute("testfilter");
+        addFollowerList.execute(followerList);
+
+        //delete the mood
+
+        ElasticMoodController.DeleteMood deleteMood = new ElasticMoodController.DeleteMood();
+
+        deleteMood.execute(newMood.getId());
+
     }
 
 }
