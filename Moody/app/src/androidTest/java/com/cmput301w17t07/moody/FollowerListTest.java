@@ -49,20 +49,6 @@ public class FollowerListTest extends ActivityInstrumentationTestCase2{
         // check if user removed from pending list
         assertFalse(followerList.hasPending("user"));
 
-        // attempting to add a user already in the following list
-        try{
-            followerList.addFollower("user");
-            assertTrue(false);
-        } catch(IllegalArgumentException e){
-            assertTrue(true);
-        }
-        // attempting to add a user not in the pending list
-        try{
-            followerList.addFollower("user1");
-            assertTrue(false);
-        } catch(IllegalArgumentException e){
-            assertTrue((true));
-        }
     }
 
     @Test
