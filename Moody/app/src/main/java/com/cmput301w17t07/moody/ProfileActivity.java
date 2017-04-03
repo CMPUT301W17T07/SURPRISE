@@ -50,6 +50,11 @@ public class ProfileActivity extends BarMenuActivity {
 
 //    final Context currentContext = context;
 
+    /**
+     * Handles the setting up of the follower/follow information & the UI interface for the profile
+     * page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,6 +125,9 @@ public class ProfileActivity extends BarMenuActivity {
 
     }
 
+    /**
+     * Handles the populating of the profile listview with the user's moods
+     */
     @Override
     protected void onStart(){
         super.onStart();
