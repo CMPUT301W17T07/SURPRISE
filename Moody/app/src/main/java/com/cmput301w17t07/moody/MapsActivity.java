@@ -124,7 +124,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
             if(filterFeeling.equals("all")){
                 try {
                     moodArrayList = MoodController.getUserMoods(username,
-                            String.valueOf(0), MapsActivity.this, false, String.valueOf(50));
+                            String.valueOf(0), MapsActivity.this, false, String.valueOf(100));
                 } catch (Exception e){
                     System.out.println("Error when trying to retrieve user's " +
                             "location based mood history for all feelings" + e);
@@ -179,22 +179,28 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
                 }
             }
+            else {
 
-            nameList.addAll(followingList.getFollowingList());
-            try {
-                for (int i = 0; i < nameList.size(); i++) {
+                nameList.addAll(followingList.getFollowingList());
+                try {
+                    for (int i = 0; i < nameList.size(); i++) {
 
-                    ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
-                            new ElasticMoodController.GetFeelingFilterMoods();
-                    getFeelingFilterMoods.execute(nameList.get(i).toString(), filterFeeling);
+                        ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                                new ElasticMoodController.GetFeelingFilterMoods();
+                        getFeelingFilterMoods.execute(nameList.get(i).toString(), filterFeeling);
 
-                    try {
-                        moodArrayList.addAll(getFeelingFilterMoods.get());
+                        try {
+                            moodArrayList.addAll(getFeelingFilterMoods.get());
 
-                    } catch (Exception e) {
-                        System.out.println("Error with getting filtered" +
-                                " timeline moods in MapsActivity" + e);
+                        } catch (Exception e) {
+                            System.out.println("Error with getting filtered" +
+                                    " timeline moods in MapsActivity" + e);
+                        }
                     }
+                } catch (Exception e) {
+                }
+            }
+
                     for (int j = 0; j < moodArrayList.size(); j++) {
                         Mood mood = moodArrayList.get(j);
                         if (mood.getLongitude() == 0 && mood.getLatitude() == 0) {
@@ -207,7 +213,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                             Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
                             LatLng tmp = new LatLng(latitude, longitude);
                             mMap.addMarker(new MarkerOptions().position(tmp).
-                                    title(nameList.get(i).toString()).
+                                    title(mood.getDisplayUsername()).
                                     snippet(mood.getFeeling()).
                                     icon(BitmapDescriptorFactory.
                                             defaultMarker(setMarkerColor(mood.getFeeling()))));
@@ -215,11 +221,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
                         }
                     }
-                }
 
-            } catch (Exception e) {
-                System.out.println("this is fff error" + e);
-            }
 
         }
         //--------------------------- ALL MOODS WITHIN 5KM OF THE USER -----------------------------
@@ -256,7 +258,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
             try {
                 currLocationArrayList.addAll(filterMapByLocation.get());
-
+                System.out.println("this is cur "+currLocationArrayList.size());
             } catch (Exception e) {
                 System.out.println("this is fff" + e);
             }
@@ -267,7 +269,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 locationNear.setLatitude(currLocationArrayList.get(p).getLatitude());
                 locationNear.setLongitude(currLocationArrayList.get(p).getLongitude());
                 float distance=location.distanceTo(locationNear);
-                if (distance<=5000.0) {
+                if (distance<=50000000000.0) {
                     currLocationArrayListWith5Km.add(currLocationArrayList.get(p));
                 }
 

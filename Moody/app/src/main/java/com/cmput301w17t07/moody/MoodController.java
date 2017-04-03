@@ -233,6 +233,25 @@ public class MoodController {
 
             // getting all the tweets for the timeline
             nameList.addAll(followingList.getFollowingList());
+
+            if(context.getClass() == MapsActivity.class){
+                try {
+                    for (int i = 0; i < nameList.size(); i++) {
+                        moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
+                                String.valueOf(indexOfScroll), context, false, String.valueOf(30)));
+                    }
+                    System.out.println("this is NEW moodlist " + moodArrayList.size());
+                    // sorting the tweets
+
+                } catch (Exception e) {
+                    System.out.println("this is a SAD! error with the timeline moods in MoodController" + e);
+                    return getOfflineTimelineMoodList().getMoods();
+                }
+                // returning the sorted array of moods
+                return moodArrayList;
+            }
+
+
             try {
                 for (int i = 0; i < nameList.size(); i++) {
                     moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
