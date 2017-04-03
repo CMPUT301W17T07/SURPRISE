@@ -58,7 +58,8 @@ import java.util.Locale;
 
 
 /**
- * The CreateMoodActivity for handles the user interface logic for when a user is creating a mood.
+ * The CreateMoodActivity is used for  handling the user interface
+ * logic for when a user is creating a mood.
  */
 
 public class CreateMoodActivity extends BarMenuActivity implements LocationListener{
@@ -128,9 +129,9 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
 
         /**
-         * Spinner dropdown logic taken from http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
-         * Author: Nicolas Tyler, 2013/07/15 8:47
-         * taken by Xin Huang 2017/03/10
+         * Spinner dropdown logic taken from http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list <br>
+         * Author: Nicolas Tyler, 2013/07/15 8:47 <br>
+         * taken by Xin Huang 2017/03/10 <br>
          */
         //Spinner for emotion and socialsituatuion
         if(pickLocation == 0) {
@@ -327,15 +328,15 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
     /**
      * Method handles user interface response to when a user adds an image to their mood
-     * from either their camera or their gallery.
+     * from either their camera or their gallery. <br>
      *
-     * Knowledge and logic of onActivityResult referenced and taken from
-     * link: http://blog.csdn.net/AndroidStudioo/article/details/52077597
-     * author: AndroidStudio 2016-07-31 11:15
-     * taken by Xin Huang 2017-03-04 15:30
-     * @param requestCode          integer indicating the kind of action taken by the user
-     * @param resultCode
-     * @param data
+     * Knowledge and logic of onActivityResult referenced and taken from <br>
+     * link: http://blog.csdn.net/AndroidStudioo/article/details/52077597 <br>
+     * author: AndroidStudio 2016-07-31 11:15 <br>
+     * taken by Xin Huang 2017-03-04 15:30 <br>
+     * @param requestCode          integer indicating the kind of action taken by the user <br>
+     * @param resultCode <br>
+     * @param data <br>
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -401,16 +402,18 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
     }
 
+    /**
+     * link: http://blog.csdn.net/hzflogo/article/details/62423240 <br>
+     * author: hzflogo 2017-03-16 14:58 <br>
+     * taken by Xin Huang 2017-03-29 21:42 <br>
+     * get the datetimePicker <br>
+     * @param provider <br>
+     */
     @Override
     public void onProviderDisabled(String provider) {
         Log.d("Latitude", "disable");
     }
 
-
-    //link: http://blog.csdn.net/hzflogo/article/details/62423240
-    //author: hzflogo 2017-03-16 14:58
-    //taken by Xin Huang 2017-03-29 21:42
-    //get the datetimePicker
     private void innit() {
         final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
         final View timeView = View.inflate(getApplicationContext(), R.layout.timepicker, null);
@@ -471,12 +474,17 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 .create();
 
     }
+
+    /**
+     * Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467 <br>
+     * author: HarryWeasley 2016-07-20 15:26 <br>
+     * taken by Xin Huang 2017-03-04 18:45 <br>
+     * for compressing the image to meet the project storage requirements <br>
+     * @param image <br>
+     * @return Bitmap image <br>
+     */
     public Bitmap compress(Bitmap image) {
         try {
-            // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
-            // author: HarryWeasley 2016-07-20 15:26
-            // taken by Xin Huang 2017-03-04 18:45
-            // for compressing the image to meet the project storage requirements
             while (((image.getRowBytes() * image.getHeight()) / 8) > 65536) {
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;
@@ -493,14 +501,16 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     }
 
 
-    //When user back from "Map" display the changed spinner staff
+    /**
+     * displayAttributes method used when the user gets back from the "Map" display
+     * and displays the changed spinner attributes.
+     * <br>
+     * Spinner dropdown logic taken from <br>
+     * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-listm <br>
+     * Author: Nicolas Tyler, 2013/07/15 8:47 <br>
+     * taken by Xin Huang 2017-03-04 15:30 (used and switch function written by Nick 2017/03/12 14:30) <br>
+     */
     private void displayAttributes() {
-        /**
-         * Spinner dropdown logic taken from
-         * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
-         * Author: Nicolas Tyler, 2013/07/15 8:47
-         * taken by Xin Huang 2017-03-04 15:30 (used and switch function written by Nick 2017/03/12 14:30)
-         */
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);

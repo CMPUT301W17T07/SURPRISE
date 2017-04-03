@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
- * Created by mike on 2017-03-30.
+ * Achievements class which defines all the different achievements that users
+ * can obtain through using the Moody application.
  */
 
 public class Achievements implements Serializable {
@@ -84,7 +85,6 @@ public class Achievements implements Serializable {
     boolean fiveAngryMoodCountEarned = false;
     public int fiveSadMoodCount = 0;
     boolean fiveSadMoodCountEarned = false;
-
 
     public Achievements() {
     }

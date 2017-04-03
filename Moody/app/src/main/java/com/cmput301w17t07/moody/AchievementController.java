@@ -25,9 +25,7 @@ import java.io.IOException;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
-/**
- * Created by mike on 2017-03-30.
- */
+
 
 /**
  * The AchievementController for the Moody application. Handles the achievement model by incrementing
@@ -38,9 +36,10 @@ public class AchievementController {
 
     private static Achievements achievements = null;
 
+
     /**
-     * Gets the achievements object from the AchievementManager
-     * @return achievements
+     * getAchievements gets all the achievements that the user has associated with their account <br>
+     * @return Achievements object
      */
     static public Achievements getAchievements(){
         if (achievements == null){
@@ -58,7 +57,9 @@ public class AchievementController {
         return achievements;
     }
 
-
+    /**
+     * saveAchievements saves the users achievements to the phones internal storage
+     */
     static public void saveAchievements(){
         try {
             AchievementManager.getManager().saveAchievements(getAchievements());
@@ -68,6 +69,12 @@ public class AchievementController {
         }
     }
 
+    /**
+     * checkForMoodAchievements is the method called in various
+     * places of the app to check if the user has obtained any of the
+     * achievements from doing various tasks
+     * @param context
+     */
     public static void checkForMoodAchievements(Context context){
         achievements = getAchievements();
         if(!achievements.moodCountEarned){
@@ -167,7 +174,11 @@ public class AchievementController {
         }
     }
 
-
+    /**
+     * incrementMoodCounter is a simple method which just updates all of
+     * the mood counters as the user posts different moods
+     * @param feeling
+     */
     public void incrementMoodCounter (String feeling) {
         switch (feeling) {
             case "anger":
@@ -195,6 +206,12 @@ public class AchievementController {
     }
 
 
+    /**
+     * this method is used to send a notification to the android phone once a achievement has been
+     * unlocked and then displays the information of the achievement <br>
+     * @param context <br>
+     * @param achievement <br>
+     */
     public static void displayAchievement(Context context, String achievement){
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
         b.setAutoCancel(true)

@@ -57,19 +57,11 @@ public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
         assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(1, "alone"));
         solo.pressSpinnerItem(1, 2);
         assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(1, "with two people"));
-
-
         solo.enterText((EditText) solo.getView(R.id.Description), "Test Mood!");
 
-        // solo.clickOnImageButton(0);
-        // solo.click
         ImageView photo = (ImageView) solo.getView(R.id.editImageView);
-
-
-
         solo.clickOnButton("Send");
         solo.clickOnMenuItem("Profile");
-
         solo.clickInList(0);
         solo.clickOnImageButton(1);
         solo.assertCurrentActivity("Wrong Activity", EditMoodActivity.class);
@@ -78,12 +70,10 @@ public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
         solo.pressSpinnerItem(1, 1);
         assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(1, "with several people"));
         solo.enterText((EditText) solo.getView(R.id.editDescription), "Edit Mood!");
-
         solo.clickOnButton("Send");
         solo.clickOnMenuItem("Profile");
         solo.clickInList(0);
-
-        solo.waitForText("Test Tweet!Edit Mood!");
+        solo.waitForText("Test Mood!Edit Mood!");
         solo.waitForText("with several people");
         ImageButton imageButton = (ImageButton) solo.getView(R.id.deleteButton);
         solo.clickOnView(imageButton);

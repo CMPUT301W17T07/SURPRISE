@@ -27,11 +27,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by mike on 2017-03-08.
- */
-
-/**
- * TimelineAdapter class object for the Moody application. Used to display moodlists in the user's
+ * TimelineAdapter class object for the Moody application. Used to display moodLists in the user's
  * profile page, and in the FilterResultsActivity.
  */
 
@@ -44,11 +40,11 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
     /**
      * Used https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
      * as a reference for constructing TimelineAdapter
-     * Referenced by: Michael Simion 2017/03/7
+     * Referenced by: Michael Simion 2017/03/7 <br>
      *
-     * @param context
-     * @param layout_timeline_list
-     * @param moodTimeline
+     * @param context <br>
+     * @param layout_timeline_list <br>
+     * @param moodTimeline <br>
      */
     public TimelineAdapter(Context context, int layout_timeline_list, ArrayList<Mood> moodTimeline) {
         super(context, layout_timeline_list, moodTimeline);
@@ -61,11 +57,10 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
     /**
      * Override of the getView function in ArrayAdapter that allows us to display the appropriate
      * properties on the listview of our current view. i.e. moodMessage, proper emoji based
-     * on feeling, etc.
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
+     * on feeling, etc. <br>
+     * @param position <br>
+     * @param convertView <br>
+     * @param parent <br>
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -130,9 +125,9 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
     }
 
     /**
-     * Idea for MoodViewHolder implementation stuff is based on
-     * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask
-     * Taken by: Qi Pang 2017/03/10
+     * Idea for MoodViewHolder implementation stuff is based on <br>
+     * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask <br>
+     * Taken by: Qi Pang 2017/03/10 <br>
      */
     public class MoodViewHolder {
         public ImageView emojiImage;

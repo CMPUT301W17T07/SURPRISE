@@ -25,6 +25,7 @@ import android.widget.TextView;
  * This is the AchievementActivity class for the Moody application. It handles the user interface
  * for a user viewing his/her achievements.
  */
+
 public class AchievementActivity extends BarMenuActivity {
 
     private String username;

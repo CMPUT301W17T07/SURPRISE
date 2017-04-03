@@ -30,7 +30,8 @@ import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWING;
 import static com.cmput301w17t07.moody.ApplicationMoody.PENDING;
 
 /**
- * Created by mike on 2017-03-25.
+ * FollowController communicates with the ElasticSearchFollowController
+ * and passes all the following/follower Lists to the DB
  */
 
 public class FollowController {

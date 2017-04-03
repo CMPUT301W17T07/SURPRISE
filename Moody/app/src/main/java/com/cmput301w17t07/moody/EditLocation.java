@@ -36,6 +36,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * EditLocation is associated with the GoogleMaps API and this activity
+ * is used when the user goes to edit the location of a mood that
+ * they have posted.
+ */
 public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback {
     public Mood editMood;
     private GoogleMap mMap;
@@ -103,7 +108,7 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
         }
     }
 
-    //set up the google map and marker, user can drag the marker to get a new latitude and new longtitude
+    //set up the google map and marker, user can drag the marker to get a new latitude and new longitude
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

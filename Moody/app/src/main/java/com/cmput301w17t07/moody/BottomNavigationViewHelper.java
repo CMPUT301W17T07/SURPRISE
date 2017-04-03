@@ -27,9 +27,9 @@ import android.view.View;
 import java.lang.reflect.Field;
 
 /**
- * Created by anicn on 2017-03-05.
+ * BottomNavigationViewHelper class is used with our BarMenuActivity
+ * to disable the shift mode associated with our menu bar.
  */
-
 
 public class BottomNavigationViewHelper {
     public static void disableShiftMode(BottomNavigationView view) {

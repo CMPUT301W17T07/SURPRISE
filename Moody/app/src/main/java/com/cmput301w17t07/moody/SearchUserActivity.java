@@ -24,9 +24,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- *  The SearchUserActivty handles the user interface logic for when a user is viewing
- *  the users they searched for. Functionality of this activity will be increased
- *  when following functionality is added in part 5.
+ *  The SearchUserActivity handles the user interface logic for when a user is viewing
+ *  the users they searched for.
  */
 
 public class SearchUserActivity extends BarMenuActivity {

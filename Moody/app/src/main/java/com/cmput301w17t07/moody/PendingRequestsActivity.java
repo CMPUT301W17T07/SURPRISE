@@ -23,6 +23,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * PendingRequestsActivity is used to keep track of follower/following
+ * requests and display them for them user .
+ */
+
 public class PendingRequestsActivity extends BarMenuActivity {
 
     private String username;

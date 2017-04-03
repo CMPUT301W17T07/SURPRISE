@@ -29,10 +29,6 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Created by mike on 2017-02-23.
- */
-
-/**
  * ElasticSearchUserController class for the Moody application. ElasticMoodController is the communicator
  * between our application and our server for all user related tasks.
  */
@@ -74,9 +70,9 @@ public class ElasticSearchUserController extends ElasticController{
      */
     public static class GetUser extends AsyncTask<String, Void, ArrayList<User>> {
         /**
-         * doInBackground returns a user from the server
-         * @param params            username is passed in
-         * @return users             a user object is returned
+         * doInBackground returns a user from the server <br>
+         * @param params            username is passed in <br>
+         * @return users             a user object is returned <br>
          */
         @Override
         protected ArrayList<User> doInBackground(String... params) {
@@ -124,14 +120,14 @@ public class ElasticSearchUserController extends ElasticController{
 
         /**
          * doInBackground returns a boolean value indicating whether a user's desired username is
-         * unique. This lets the user know if he or she can have his/her desired username
+         * unique. This lets the user know if he or she can have his/her desired username <br>
          *
          * Knowledge of how to return a boolean value while using async task is from:
-         * link: http://stackoverflow.com/questions/33616123/asynctask-doinbackgroundstring-clashes-with-doinbackgroundparams
-         * Author: prashant Nov 9 '15 at 19:01
-         * Referenced by: Michael Simion 2017/03/5
-         * @param search_parameters             desired username
-         * @return uniqueFlag                   Boolean value indicating whether unique (true = unique)
+         * link: http://stackoverflow.com/questions/33616123/asynctask-doinbackgroundstring-clashes-with-doinbackgroundparams <br>
+         * Author: prashant Nov 9 '15 at 19:01 <br>
+         * Referenced by: Michael Simion 2017/03/5 <br>
+         * @param search_parameters             desired username <br>
+         * @return uniqueFlag                   Boolean value indicating whether unique (true = unique) <br>
          */
         @Override
         protected Boolean doInBackground(String... search_parameters) {

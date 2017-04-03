@@ -27,10 +27,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
- * Created by anicn on 2017-03-12.
- */
-
-/**
  * FilterActivity class. User interface logic for the view that allows the user to customize filter
  * options.
  */

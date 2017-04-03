@@ -24,11 +24,6 @@ import java.io.FileOutputStream;
 
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 
-
-/**
- * Created by mike on 2017-03-04.
- */
-
 /**
  * UserController class for the user class object. Controller that controls user objects with
  * regards to offline functionality. The UserController also acts as a communicator
@@ -52,10 +47,10 @@ public class UserController {
     /**
      * createUser method. Checks appropriate responses for if a user can be created and then
      * communicates to the ElasticSearchUserController to add the user to the database. Returns
-     * int values that act as flags that will indicate appropriate response on the activity pages
-     * @param username      user's desired username
-     * @return              0,1, or 3. 0 indicates that the user was created. 1 indicates that the username
-     *                      is not unique. 3 indicates that the device is not connected to the internet
+     * int values that act as flags that will indicate appropriate response on the activity pages <br>
+     * @param username      user's desired username <br>
+     * @return              0,1, or 3. 0 indicates that the user was created. 1 indicates that the username <br>
+     *                      is not unique. 3 indicates that the device is not connected to the internet <br>
      */
     public static int createUser(String username){
         if(!checkInternet()){
@@ -79,10 +74,10 @@ public class UserController {
     /**
      * createUser method. Checks appropriate responses for if a user can be created and then
      * communicates to the ElasticSearchUserController to add the user to the database. Returns
-     * int values that act as flags that will indicate appropriate response on the activity pages
-     * @param username          user's desired username
-     * @param profilePicture    user's desired profile picture
-     * @return
+     * int values that act as flags that will indicate appropriate response on the activity pages <br>
+     * @param username          user's desired username <br>
+     * @param profilePicture    user's desired profile picture <br>
+     * @return int
      */
     public static int createUser(String username, Image profilePicture){
         if(!checkInternet()){
@@ -108,9 +103,9 @@ public class UserController {
 
     /**
      * checkUsername method that communicates with the ElasticSearchUserController to determine
-     * if a user's username is unique.
-     * @param username          user's desired username
-     * @return                  boolean value indicating whether username is unique
+     * if a user's username is unique. <br>
+     * @param username          user's desired username <br>
+     * @return                  boolean value indicating whether username is unique <br>
      */
     public static Boolean checkUsername(String username){
         // function to check if username is unique
@@ -182,9 +177,9 @@ public class UserController {
 
     /**
      * Method that saves the username locally. This allows us to always have a username
-     * to pass to the elasticSearch controllers and then on to our server.
-     * @param username          User's username
-     * @param ctx
+     * to pass to the elasticSearch controllers and then on to our server. <br>
+     * @param username          User's username <br>
+     * @param ctx <br>
      */
     public static void saveUsername(String username, Context ctx) {
         FileOutputStream outputStream;

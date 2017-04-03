@@ -124,11 +124,6 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2 {
         UserController userController = new UserController();
         username = userController.readUsername(getActivity().getApplicationContext()).toString();
 
-        //Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
-
-
-
-
         ElasticMoodController.FilterMapByLocation filterMapByLocation =
                 new ElasticMoodController.FilterMapByLocation();
         filterMapByLocation.execute();

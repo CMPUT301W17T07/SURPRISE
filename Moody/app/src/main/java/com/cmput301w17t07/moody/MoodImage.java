@@ -55,8 +55,8 @@ public class MoodImage {
 
     /**
      * This method decodes the encodedImage string that is stored on the Moody application's server
-     * and allows the image to be displayed from the server in the ViewMoodActivity.
-     * @return bitmap       The decoded bitmap image from the server
+     * and allows the image to be displayed from the server in the ViewMoodActivity. <br>
+     * @return bitmap       The decoded bitmap image from the server <br>
      */
     public Bitmap decodeImage() {
         Bitmap bitmap;
@@ -73,19 +73,19 @@ public class MoodImage {
 
     /**
      * This method encodes and compresses a user's supplied bitmap image for appropriate storage
-     * on the application's server. Images stored on the server are all under 65536 bytes.
+     * on the application's server. Images stored on the server are all under 65536 bytes. <br>
      *
-     * Logic for compression of the image is from:
-     * link: http://blog.csdn.net/harryweasley/article/details/51955467
-     * Author: Harry Weasley
-     * Taken by: Xin Huang 2017/03/11
+     * Logic for compression of the image is from: <br>
+     * link: http://blog.csdn.net/harryweasley/article/details/51955467 <br>
+     * Author: Harry Weasley <br>
+     * Taken by: Xin Huang 2017/03/11 <br>
      *
-     * Logic for encoding of image string was based upon:
-     * link: http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json
-     * Author: Carnal
-     * Taken by: Michael Simion 2017/03/10
-     * @param moodImage         The user's supplied image for his or her mood
-     * @return encodedImage     The encodedImage string that will be stored within the object on the server
+     * Logic for encoding of image string was based upon: <br>
+     * link: http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json <br>
+     * Author: Carnal <br>
+     * Taken by: Michael Simion 2017/03/10 <br>
+     * @param moodImage         The user's supplied image for his or her mood <br>
+     * @return encodedImage     The encodedImage string that will be stored within the object on the server <br>
      */
     public String encodeImage(Bitmap moodImage){
         if(moodImage == null){

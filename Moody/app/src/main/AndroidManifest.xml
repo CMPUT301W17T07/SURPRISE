@@ -74,7 +74,6 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".EditLocation" />
-        <activity android:name=".AchievementActivity2" />
         <activity android:name=".AchievementActivity"></activity>
     </application>
 

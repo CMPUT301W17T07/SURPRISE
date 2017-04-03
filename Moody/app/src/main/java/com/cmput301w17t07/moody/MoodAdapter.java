@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
- * Created by mike on 2017-03-08.
+ * MoodAdapter is used to display the different mood posts in our ListView
  */
 
 public class MoodAdapter extends ArrayAdapter<Mood> {
@@ -24,10 +24,10 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
 
     /**
      * Used https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
-     * as a reference
-     * @param context
-     * @param layout_timeline_list
-     * @param moodTimeline
+     * as a reference <br>
+     * @param context <br>
+     * @param layout_timeline_list <br>
+     * @param moodTimeline <br>
      */
     public MoodAdapter(Context context, int layout_timeline_list, ArrayList<Mood> moodTimeline){
         super(context, layout_timeline_list, moodTimeline);
@@ -67,7 +67,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         viewHolder.messageTest.setText(mood.getMoodMessage());
         viewHolder.messageTest.setTextSize(20);
 
-        //http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
+        // http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
         // Date: answered Apr 16 '11 at 1:02
         // Author: Charlie Salts
         Format formatter = new SimpleDateFormat("hh:mm a dd/MM/yyyy");

@@ -21,10 +21,6 @@ import android.media.Image;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by mike on 2017-02-23.
- */
-
-/**
  * The User model class for the Moody application. Stores the information for a user of the
  * Moody application.
  */
@@ -43,16 +39,16 @@ public class User {
     private String id;
 
     /**
-     * Function used by jestDroid to retrieve the unique id of the user object on the server
-     * @return id
+     * Function used by jestDroid to retrieve the unique id of the user object on the server <br>
+     * @return id <br>
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Function used by jestDroid to set the unique id of the user object on the server
-     * @param id
+     * Function used by jestDroid to set the unique id of the user object on the server <br>
+     * @param id <br>
      */
     public void setId(String id) {
         this.id = id;
@@ -62,8 +58,8 @@ public class User {
     /**
      * Constructor for the user object. Takes in a username, and stores it as both "displayUsername"
      * that will be displayed in the application, and as a "username", which is a lowercase version
-     * used to help with elastic search of the database
-     * @param username      The user's selected username
+     * used to help with elastic search of the database <br>
+     * @param username      The user's selected username <br>
      */
     public User(String username){
 
@@ -79,9 +75,9 @@ public class User {
      * Constructor for the user object. Takes in a username, and stores it as both "displayUsername"
      * that will be displayed in the application, and as a "username", which is a lowercase version
      * used to help with elastic search of the database. This constructor also takes in a profile picture
-     * that the user selects. Not yet implemented in project part 4.
-     * @param username         The user's selected username
-     * @param profilePicture   The user's selected profile picture
+     * that the user selects. <br>
+     * @param username         The user's selected username <br>
+     * @param profilePicture   The user's selected profile picture <br>
      */
     public User(String username, Image profilePicture) {
         this.username=username.toLowerCase();

@@ -28,10 +28,6 @@ import java.util.Date;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by mike on 2017-02-23.
- */
-
-/**
  * This is the Mood model class for the Moody application. It contains the data that is displayed
  * in a user's posted mood.
  */
@@ -72,16 +68,16 @@ public class Mood implements Serializable {
     }
 
     /**
-     * Function used by jestDroid to retrieve the unique id of the mood object on the server
-     * @return id
+     * Function used by jestDroid to retrieve the unique id of the mood object on the server <br>
+     * @return id <br>
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Function used by jestDroid to set the unique id of the mood object on the server
-     * @param id
+     * Function used by jestDroid to set the unique id of the mood object on the server <br>
+     * @param id <br>
      */
     public void setId(String id) {
         this.id = id;
@@ -107,13 +103,13 @@ public class Mood implements Serializable {
     /**
      * Constructor for the mood object. Takes in a mandatory feeling and username, and "optional"
      * parameters such as location, imageID, mood message, and social situation. "Optional" parameters
-     * means that objects can be passed in as null.
-     * @param feeling               The associated feeling of a mood (happiness, confusion, etc.)
-     * @param username              The user's username
-     * @param moodMessage           The textual explanation for a user's mood
-     * @param latitude              The user's pinned location (Will be null in part 4, as it's not yet implemented)
-     * @param longitude
-     * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.)
+     * means that objects can be passed in as null. <br>
+     * @param feeling               The associated feeling of a mood (happiness, confusion, etc.) <br>
+     * @param username              The user's username <br>
+     * @param moodMessage           The textual explanation for a user's mood <br>
+     * @param latitude              The user's pinned location (Will be null in part 4, as it's not yet implemented) <br>
+     * @param longitude <br>
+     * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.) <br>
      */
     public Mood(String feeling, String username, String moodMessage, double latitude,double longitude,
                 Bitmap image, String socialSituation,Date date,String displayLocation){
@@ -138,10 +134,7 @@ public class Mood implements Serializable {
         this.moodMessage = moodMessage;
     }
 
-    /**
-     *  Logic on date to string from http://www.java-examples.com/java-date-string-example
-     * @return
-     */
+
     public Date getDate() {
         return this.date;
     }
@@ -207,8 +200,8 @@ public class Mood implements Serializable {
 
     /**
      * This method decodes the encodedImage string that is stored on the Moody application's server
-     * and allows the image to be displayed from the server in the ViewMoodActivity.
-     * @return bitmap       The decoded bitmap image from the server
+     * and allows the image to be displayed from the server in the ViewMoodActivity. <br>
+     * @return bitmap       The decoded bitmap image from the server <br>
      */
     public Bitmap decodeImage() {
         Bitmap bitmap;
@@ -223,29 +216,31 @@ public class Mood implements Serializable {
 
     /**
      * This method encodes and compresses a user's supplied bitmap image for appropriate storage
-     * on the application's server. Images stored on the server are all under 65536 bytes.
+     * on the application's server. Images stored on the server are all under 65536 bytes. <br>
      *
-     * Logic for compression of the image is from:
-     * link: http://blog.csdn.net/harryweasley/article/details/51955467
-     * Author: Harry Weasley
-     * Taken by: Xin Huang 2017/03/11
+     * Logic for compression of the image is from: <br>
+     * link: http://blog.csdn.net/harryweasley/article/details/51955467 <br>
+     * Author: Harry Weasley <br>
+     * Taken by: Xin Huang 2017/03/11 <br>
      *
-     * Logic for encoding of image string was based upon:
-     * link: http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json
-     * Author: Carnal
-     * Taken by: Michael Simion 2017/03/10
-     * @param moodImage         The user's supplied image for his or her mood
-     * @return encodedImage     The encodedImage string that will be stored within the object on the server
+     * Logic for encoding of image string was based upon: <br>
+     * link: http://stackoverflow.com/questions/12796579/how-to-send-image-bitmap-to-server-in-android-with-multipart-form-data-json <br>
+     * Author: Carnal <br>
+     * Taken by: Michael Simion 2017/03/10 <br>
+     * @param moodImage         The user's supplied image for his or her mood <br>
+     * @return encodedImage     The encodedImage string that will be stored within the object on the server <br>
      */
     public String encodeImage(Bitmap moodImage){
         if(moodImage == null){
             return null;
         }
         try {
-            // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
-            // author: HarryWeasley 2016-07-20 15:26
-            // taken by Xin Huang 2017-03-04 18:45
-            // for compressing the image to meet the project storage requirements
+            /**
+             * Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467 <br>
+             * author: HarryWeasley 2016-07-20 15:26 <br>
+             * taken by Xin Huang 2017-03-04 18:45 <br>
+             * for compressing the image to meet the project storage requirements <br>
+             */
             while (((moodImage.getRowBytes() * moodImage.getHeight()) / 8) > 65536) {
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;

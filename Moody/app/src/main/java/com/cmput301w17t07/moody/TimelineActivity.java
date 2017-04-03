@@ -37,8 +37,7 @@ import java.util.ArrayList;
  *  our application. It allows them to create a unique username after that.
  *
  *  After the user's first time using the application, it takes them to the timeline activity page
- *  which will display the moods of the users they follow. This functionality is being added in
- *  project part 5.
+ *  which displays the moods of the users they follow.
  */
 
 public class TimelineActivity extends BarMenuActivity {
@@ -129,10 +128,10 @@ public class TimelineActivity extends BarMenuActivity {
      * checkNetworkState method. This is a temporary method in project part 4 that checks if a user
      * is online before attempting to register a username. A similar type of function will be moved
      * into an appropriate controller class for project part 5 to reflect better separation of
-     * user interface logic and backend logic.
+     * user interface logic and backend logic. <br>
      *
-     * Method currently returns a boolean indicating whether the user is connected to the internet.
-     * @return
+     * Method currently returns a boolean indicating whether the user is connected to the internet. <br>
+     * @return boolean
      */
     private boolean checkNetworkState() {
         manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -158,8 +157,8 @@ public class TimelineActivity extends BarMenuActivity {
     }
 
     /**
-     * Current implementation of timelineActivity method. Just displays blank xml content screen
-     * with menubar.
+     * Current implementation of timelineActivity method. Displays all the moods
+     * that the user follows.
      */
     private void timelineActivity(){
 
