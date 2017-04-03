@@ -21,12 +21,21 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * This is the AchievementActivity class for the Moody application. It handles the user interface
+ * for a user viewing his/her achievements.
+ */
 public class AchievementActivity extends BarMenuActivity {
 
     private String username;
     private static Achievements achievements;
 
 
+    /**
+     * Called when activity is first created. Generates the listview filled with the String array
+     * list of a user's achievements
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

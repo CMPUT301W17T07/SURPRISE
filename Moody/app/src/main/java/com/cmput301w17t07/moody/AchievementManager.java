@@ -30,6 +30,16 @@ import java.io.ObjectOutputStream;
  * Created by mike on 2017-03-30.
  */
 
+/**
+ * AchievementManager class object. Handles the saving and loading of the achievements model object.
+ * for the Moody application. Structure and code of this class follows Abram Hindle's Studentpicker
+ * tutorial video series as seen here:
+ * <br>
+ * Author: Abram Hindle <br>
+ * Date: Sep. 11, 2014 <br>
+ * Link: www.youtube.com/watch?v=5PPD0ncJU1g&list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O <br>
+ * Used By: Michael Simion (March 31, 2017)
+ */
 public class AchievementManager {
 
     static final String prefFile = "Achievements";
@@ -40,6 +50,12 @@ public class AchievementManager {
     static private AchievementManager achievementManager = null;
 
     /* intialization method of the object*/
+
+    /**
+     * This is the initialization method. It constructs a new Achievement manager object if one does
+     * not already exist. It is called in any activity where achievements are updated/saved. <br>
+     * @param context
+     */
     public static void initManager(Context context){
         if(achievementManager == null){
             if(context == null){

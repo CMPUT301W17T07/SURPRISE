@@ -29,10 +29,19 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  * Created by mike on 2017-03-30.
  */
 
+/**
+ * The AchievementController for the Moody application. Handles the achievement model by incrementing
+ * its attributes, and determining if a user has earned an achievement. Also communicates with the
+ * AchievementManager to help save and load the Achievements model class.
+ */
 public class AchievementController {
 
     private static Achievements achievements = null;
 
+    /**
+     * Gets the achievements object from the AchievementManager
+     * @return achievements
+     */
     static public Achievements getAchievements(){
         if (achievements == null){
             try {
