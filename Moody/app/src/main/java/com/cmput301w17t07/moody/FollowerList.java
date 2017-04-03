@@ -92,9 +92,9 @@ public class FollowerList {
         return followerList.size();
     }
 
-//    public User getFollower(int index){
-//        return followerList.get(index);
-//    }
+    public String getFollower(int index){
+        return followerList.get(index);
+    }
 
     public boolean hasFollower(String username){
         return followerList.contains(username);
