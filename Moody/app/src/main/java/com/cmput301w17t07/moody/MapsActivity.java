@@ -203,7 +203,6 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                             double latitude;
                             longitude = mood.getLongitude();
                             latitude = mood.getLatitude();
-                            Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
                             LatLng tmp = new LatLng(latitude, longitude);
                             mMap.addMarker(new MarkerOptions().position(tmp).
                                     title(mood.getDisplayUsername()).
