@@ -149,8 +149,8 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2 {
         }
 
         Location location=new Location("pointa");
-        location.setLatitude(84);
-        location.setLongitude(84);
+        location.setLatitude(84.0);
+        location.setLongitude(84.0);
 
         for (int p=0;p< currLocationArrayList.size();p++){
             Location locationNear=new Location("near");
