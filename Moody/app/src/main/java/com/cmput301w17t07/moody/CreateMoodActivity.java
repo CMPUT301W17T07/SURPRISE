@@ -236,7 +236,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 } else if (locationList.contains(LocationManager.NETWORK_PROVIDER)) {
                     provider = LocationManager.NETWORK_PROVIDER;
                 } else {
-                    Toast.makeText(getApplicationContext(), "No map to use", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please check application permissions", Toast.LENGTH_LONG).show();
                 }
 
                 //check the permission

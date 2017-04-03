@@ -102,7 +102,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
     }
 
     private void setWifiEnabled(boolean state) {
-        WifiManager wifiManager = (WifiManager)solo.getCurrentActivity().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager)solo.getCurrentActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(state);
         try{
             ConnectivityManager dataManager=(ConnectivityManager)solo.getCurrentActivity().getSystemService(Context.CONNECTIVITY_SERVICE);

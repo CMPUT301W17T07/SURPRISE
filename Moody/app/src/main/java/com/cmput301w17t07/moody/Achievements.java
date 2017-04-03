@@ -46,8 +46,8 @@ public class Achievements implements Serializable {
     String editAMood = "Big Mistake!\nEdited a mood.";
     String followThem = "Follower!\nFollow another person.";
     String followMe = "Popular!\nGain a follower.";
-    String showMeTheWay = "Show Me The Way!\nLaunch google maps.";
-    String scaredyCat = "Scaredy Cat!\nPost a fear mood.";
+    String showMeTheWay = "Show Me The Way!\nLaunch Moody's map filtering options.";
+    String scaredyCat = "Scaredy Cat!\nPost a mood with a fear feeling.";
     // ----------------------------------------------------------------------------------
 
     // user's total score counter

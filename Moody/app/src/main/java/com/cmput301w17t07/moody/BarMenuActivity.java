@@ -37,11 +37,11 @@ public class BarMenuActivity extends AppCompatActivity {
      * This method contains the logic for responding to specific button presses on the menu bar.
      * @param context
      */
-    public void setUpMenuBar(Context context) {
+    public void setUpMenuBar(final Context context) {
 
         final Context currentContext = context;
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -65,7 +65,7 @@ public class BarMenuActivity extends AppCompatActivity {
                                 }
                             case R.id.action_search:
                                 Class searchFilterActivity = SearchFilterOptionsActivity.class;
-                                if(currentContext.getClass() == searchFilterActivity){
+                                if(currentContext.getClass() == searchFilterActivity || !MoodController.checkNetwork(context)){
                                     break;
                                 }
                                 else {
