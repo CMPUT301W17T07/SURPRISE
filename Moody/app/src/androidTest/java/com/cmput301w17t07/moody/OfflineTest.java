@@ -18,7 +18,6 @@ package com.cmput301w17t07.moody;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
@@ -27,11 +26,13 @@ import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
 
-import java.lang.reflect.Method;
-
 /**
  * Created by xin on 2017/4/2.
  */
+
+
+// need turn off the mobile data for this test!
+//(We do not have permisson for "setMobileDataEnabled" ? for API later than 19?)
 
 public class OfflineTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
@@ -48,12 +49,11 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
     public void testStart() throws Exception {
         Activity activity = getActivity();
+        setWifiEnabled(false);
 
     }
 
     public void testAddMood() {
-
-        setWifiEnabled(false);
         solo.assertCurrentActivity("Wrong Activity", CreateMoodActivity.class);
         solo.pressSpinnerItem(0, 0);
         assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
@@ -68,8 +68,6 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
         solo.enterText((EditText) solo.getView(R.id.Description), "Test Mood!");
 
-        // solo.clickOnImageButton(0);
-        // solo.click
         ImageView photo = (ImageView) solo.getView(R.id.editImageView);
 
 
@@ -100,14 +98,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
     private void setWifiEnabled(boolean state) {
         WifiManager wifiManager = (WifiManager)solo.getCurrentActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(state);
-        try{
-            ConnectivityManager dataManager=(ConnectivityManager)solo.getCurrentActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            Method dataClass = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-            dataClass.setAccessible(false);
-            dataClass.invoke(dataManager, false);}
-        catch(Exception e){
-            e.printStackTrace();
-        }
     }
+
 
 }
