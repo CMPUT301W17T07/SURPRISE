@@ -29,7 +29,6 @@ import android.widget.TextView;
  *  The ViewMoodActivity handles the user interface logic for when a user is viewing a specific
  *  mood.
  */
-
 public class ViewMoodActivity extends BarMenuActivity {
     private String username;
     public Mood viewMood;
@@ -43,6 +42,10 @@ public class ViewMoodActivity extends BarMenuActivity {
     private String address;
 
 
+    /**
+     * The onCreate method for the ViewMoodActivity. Used to set up the ViewMood user interface screen
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,10 @@ public class ViewMoodActivity extends BarMenuActivity {
     }
 
     // display the attributes of the mood that was selected to view
+
+    /**
+     * The displayAttributes method displays the mood specific data for the selected mood.
+     */
     private void displayAttributes() {
 
         // NOTE MISSING IMAGE AND LOCATION STILL !!!!!!!!!!!
@@ -151,6 +158,11 @@ public class ViewMoodActivity extends BarMenuActivity {
         }
 
     }
+
+    /**
+     * The onBackPressed method of the activity determines the context from which the user came to this
+     * screen, and uses it to send them back to the appropriate screen.
+     */
     @Override
     public void onBackPressed() {
         if(trigger.equals("profile")) {

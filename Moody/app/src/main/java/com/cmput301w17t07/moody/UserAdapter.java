@@ -126,6 +126,10 @@ public class UserAdapter extends BaseAdapter {
 
         viewHolder.requestButton.setTag(position);
         viewHolder.requestButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click function for the adapter. Handles user response to sending a follow request
+             * @param v
+             */
             @Override
             public  void onClick(View v){
                 //todo implement ability to show send request button or following text depending on if user is already following
@@ -157,6 +161,9 @@ public class UserAdapter extends BaseAdapter {
         return view;
     }
 
+    /**
+     * SearchViewHolder class which stores the username and request button for each adapter entry
+     */
     public class SearchViewHolder {
 
         public TextView userName;

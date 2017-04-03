@@ -123,12 +123,18 @@ public class UserController {
         return uniqueFlag; //returns true if username is unique
     }
 
+    /**
+     * Check profilePicture method. This falls under the future work section...
+     * @param profilePicture
+     * @return
+     */
     public static Boolean checkProfilePicture(Image profilePicture){
         //todo implement image size checker method
         // function to check if profile picture meets size requirements
 
         return true; //placeholder
     }
+
 
     public static Boolean checkInternet(){
         //todo implement internet checker code here
