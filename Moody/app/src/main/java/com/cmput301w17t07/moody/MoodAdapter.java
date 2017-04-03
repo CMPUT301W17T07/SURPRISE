@@ -70,6 +70,7 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         // http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
         // Date: answered Apr 16 '11 at 1:02
         // Author: Charlie Salts
+        // Taken by: Michael Simion 2017/03/5
         Format formatter = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
         String testDate = formatter.format(mood.getDate());
 
