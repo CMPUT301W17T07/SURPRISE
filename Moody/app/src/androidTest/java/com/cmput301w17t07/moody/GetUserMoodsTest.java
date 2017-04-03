@@ -22,6 +22,7 @@ import android.util.Log;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by mike on 2017-03-05.
@@ -33,31 +34,37 @@ import java.util.ArrayList;
  */
 
 public class GetUserMoodsTest extends ActivityInstrumentationTestCase2 {
+    ArrayList<Mood> moods = null;
 
     public GetUserMoodsTest() {super(ElasticMoodController.GetUserMoods.class);}
 
     @Test
     public void testDoInBackground() {
+        if(UserController.checkUsername("testgetuser")){
+            //checking to see if test user needs to be created or not
+            UserController.createUser("testgetuser");
+        }
+
+        Mood mood = new Mood("sad", "testgetuser", "timeline",
+                0.0, 0.0, null, "alone", new Date(), "");
+
+        ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+        addMood.execute(mood);
+
         //todo implement proper test and fix other outdated test cases
-        ArrayList<Mood> moods = null;
-        Mood mood;
+
         ElasticMoodController.GetUserMoods getUserMoods = new ElasticMoodController.GetUserMoods();
-        getUserMoods.execute("xin");
+        getUserMoods.execute("testgetuser");
+
         try {
-            moods = getUserMoods.get();
+            moods.clear();
+            moods.addAll(getUserMoods.get());
         } catch (Exception E){
             Log.i("Error","Error when retrieving user moods");
         }
+        //assertTrue(moods.get(0).getFeeling().equals("sad"));
 
-        for(int i = 0; i < 3;i++){
-            mood = moods.get(i);
-            if( mood.getFeeling() == "sad" ){
-                assertTrue(true);
-                return;
-            }
 
-        }
-        assertTrue(false);
 
 
     }

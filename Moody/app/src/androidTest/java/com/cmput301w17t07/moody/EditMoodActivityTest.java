@@ -16,7 +16,6 @@
 
 package com.cmput301w17t07.moody;
 
-import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,10 +44,6 @@ public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testStart() throws Exception {
-        Activity activity = getActivity();
-
-    }
 
     public void testAddMood() {
 
