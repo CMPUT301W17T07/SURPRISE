@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/avd_hide_password.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/drawable-v21/avd_hide_password.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/design_password_eye.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/drawable-v21/design_password_eye.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/avd_show_password.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/drawable-v21/avd_show_password.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-v21/design_bottom_navigation_item_background.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/drawable-v21/design_bottom_navigation_item_background.xml"
+    }
+]

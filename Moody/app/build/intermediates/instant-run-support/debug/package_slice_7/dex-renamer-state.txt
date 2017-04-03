@@ -1,0 +1,4 @@
+#Sun Apr 02 20:27:47 MDT 2017
+base.0=/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7
+renamed.0=classes.dex
+file.0=/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex

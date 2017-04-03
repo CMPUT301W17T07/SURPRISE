@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_trophy.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_trophy.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_delete.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_delete.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_main.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_main.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_x.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_x.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_profile.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_profile.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_location.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_location.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_deletepic.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_deletepic.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_newmood.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_newmood.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_camera.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_camera.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_action_happy.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_action_happy.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/moodylogo6.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/moodylogo6.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/app_logo.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/app_logo.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_search.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_search.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_map_save.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_map_save.png"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_social.png",
+        "source": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/drawable-mdpi/ic_social.png"
+    }
+]

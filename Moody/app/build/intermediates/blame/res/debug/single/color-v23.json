@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/design_tint_password_toggle.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/color-v23/design_tint_password_toggle.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/color-v23/abc_color_highlight_material.xml"
+    }
+]

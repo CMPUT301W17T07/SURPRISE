@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/design_snackbar_in.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/design_fab_in.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/anim/design_fab_in.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/design_fab_out.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/anim/design_fab_out.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/anim/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/anim/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/design_snackbar_out.xml",
+        "source": "/Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/res/anim/abc_slide_out_bottom.xml"
+    }
+]

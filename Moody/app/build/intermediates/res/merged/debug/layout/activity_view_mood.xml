@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2017 CMPUT301W17T07
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blueTheme"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/userProfilePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="60dp"
+        android:maxWidth="70dp"
+        android:paddingBottom = "10dp" />
+
+    <TextView
+        android:id="@+id/userDateTV"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/userUsernameTV"
+        android:layout_alignStart="@+id/userUsernameTV"
+        android:layout_below="@+id/userUsernameTV"
+        android:text="date"
+        android:textSize="40px" />
+
+    <ImageView
+        android:id="@+id/userFeelingEmoji"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="150dp"
+        android:maxWidth="150dp"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/userProfilePicture"
+        android:layout_toRightOf="@+id/userDateTV"
+        android:layout_toEndOf="@+id/userDateTV" />
+
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/yellowTheme"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menubar" />
+
+    <ImageView
+        android:id="@+id/viewMoodImage"
+        android:layout_width="match_parent"
+
+        android:layout_height="250dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:layout_below="@+id/LocationTV"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:id="@+id/userFeelingTV"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:text="feeling"
+        android:textSize="65px"
+        android:layout_below="@+id/userDateTV"
+        android:layout_alignLeft="@+id/userDateTV"
+        android:layout_alignStart="@+id/userDateTV" />
+
+    <TextView
+        android:id="@+id/userUsernameTV"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/userProfilePicture"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_toEndOf="@+id/userProfilePicture"
+        android:layout_toRightOf="@+id/userProfilePicture"
+        android:text="username"
+        android:textSize="65px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/userSocialTV"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="social"
+        android:textSize="40px"
+        android:layout_below="@+id/userFeelingTV"
+        android:layout_alignLeft="@+id/userFeelingTV"
+        android:layout_alignStart="@+id/userFeelingTV" />
+
+    <TextView
+        android:id="@+id/LocationTV"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="location"
+        android:layout_below="@+id/userSocialTV"
+        android:layout_alignLeft="@+id/userSocialTV"
+        android:layout_alignStart="@+id/userSocialTV"
+        android:layout_alignRight="@+id/deleteButton"
+        android:layout_alignEnd="@+id/deleteButton" />
+
+    <ImageButton
+        android:id="@+id/editButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/ic_newmood"
+        android:background="#00000000"
+        android:layout_below="@+id/viewMoodImage"
+        android:layout_alignRight="@+id/userFeelingTV"
+        android:layout_alignEnd="@+id/userFeelingTV" />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/ic_delete"
+        android:background="#00000000"
+        android:layout_below="@+id/viewMoodImage"
+        android:layout_alignRight="@+id/userFeelingEmoji"
+        android:layout_alignEnd="@+id/userFeelingEmoji" />
+
+</RelativeLayout>
+
+
+
+

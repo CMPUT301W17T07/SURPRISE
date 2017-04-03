@@ -1,0 +1,211 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:16:1-80:12
+	package
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:17:5-39
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:16:11-69
+	android:versionCode
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:19:5-81
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:19:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:20:5-75
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:20:22-72
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:21:5-80
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:21:22-77
+uses-permission#android.permission.INTERNET
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:20:5-66
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:22:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:19:5-78
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:23:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:24:5-81
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:24:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:25:5-79
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:25:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:28:5-76
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:28:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:29:5-76
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:29:22-73
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:30:5-79
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:30:22-76
+application
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:33:5-78:19
+MERGED from [com.android.support:design:25.2.0] /Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.2.0] /Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.2.0] /Users/mike/.android/build-cache/603a0bb12fb9ae834ab48474859d3ff72e583a2d/output/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.2.0] /Users/mike/.android/build-cache/f573663272b87838fbca2fe1aec084954553ee9c/output/AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:transition:25.2.0] /Users/mike/.android/build-cache/c933a1cac5a88c721a16d59828b60775812f3346/output/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:24:5-19
+MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/mike/.android/build-cache/731fd2ecda324404670d6b9ec86d6518b32fff88/output/AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:10.0.1] /Users/mike/.android/build-cache/3a16dae5fa51df1bfa3372b501981ebe3a63bcf7/output/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:10.0.1] /Users/mike/.android/build-cache/2f4a9539428786ecc6c33c055366a1311c05884c/output/AndroidManifest.xml:19:5-21:19
+MERGED from [com.android.support:support-v4:25.2.0] /Users/mike/.android/build-cache/0d97c476c697be0c0f692386367316a5828827cb/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.2.0] /Users/mike/.android/build-cache/623e5689a456c978215d4a1e2693e59ba193b755/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.2.0] /Users/mike/.android/build-cache/0a10047752e04ec00593dee2411749d054624199/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.2.0] /Users/mike/.android/build-cache/8fbdd905d86d3b87ca341bddb6ab4291f7238c96/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.2.0] /Users/mike/.android/build-cache/7d2255ec6096126fced1d73ab5904f4fc9b18910/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.2.0] /Users/mike/.android/build-cache/789c372f1a7bf328301c9512d7cc82bef3bc2124/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mike/.android/build-cache/07c44a41f1db477ef91b76855577c9e761abe3e9/output/AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:36:9-41
+	android:supportsRtl
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:37:9-35
+	android:allowBackup
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:34:9-35
+	android:icon
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:35:9-43
+	android:theme
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:38:9-52
+activity#com.cmput301w17t07.moody.TimelineActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:39:9-47:20
+	android:label
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:41:13-45
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:40:13-45
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:42:13-46:29
+action#android.intent.action.MAIN
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:43:17-69
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:43:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:45:17-77
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:45:27-74
+activity#com.cmput301w17t07.moody.CreateMoodActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:48:9-56
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:48:19-53
+activity#com.cmput301w17t07.moody.EditMoodActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:49:9-54
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:49:19-51
+activity#com.cmput301w17t07.moody.ViewMoodActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:50:9-54
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:50:19-51
+activity#com.cmput301w17t07.moody.ProfileActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:51:9-53
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:51:19-50
+activity#com.cmput301w17t07.moody.PendingRequestsActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:52:9-61
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:52:19-58
+activity#com.cmput301w17t07.moody.SearchFilterOptionsActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:53:9-55:40
+	android:noHistory
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:55:13-37
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:54:13-56
+activity#com.cmput301w17t07.moody.FilterActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:56:9-52
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:56:19-49
+activity#com.cmput301w17t07.moody.SearchUserActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:57:9-56
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:57:19-53
+activity#com.cmput301w17t07.moody.MapOptionsActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:58:9-56
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:58:19-53
+activity#com.cmput301w17t07.moody.FilterResultsActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:59:9-59
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:59:19-56
+meta-data#com.google.android.geo.API_KEY
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:69:9-71:71
+	android:value
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:71:13-68
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:70:13-58
+activity#com.cmput301w17t07.moody.MapsActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:73:9-75:59
+	android:label
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:75:13-56
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:74:13-41
+activity#com.cmput301w17t07.moody.EditLocation
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:76:9-50
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:76:19-47
+activity#com.cmput301w17t07.moody.AchievementActivity
+ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:77:9-66
+	android:name
+		ADDED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml:77:19-54
+uses-sdk
+INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:multidex:1.0.1] /Users/mike/.android/build-cache/a4241d27184d3bd7da2dd487414d5958a0416ee8/output/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:design:25.2.0] /Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.2.0] /Users/mike/.android/build-cache/142348aad2f614b753d4987d694b8cea8da96d35/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.2.0] /Users/mike/.android/build-cache/603a0bb12fb9ae834ab48474859d3ff72e583a2d/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.2.0] /Users/mike/.android/build-cache/f573663272b87838fbca2fe1aec084954553ee9c/output/AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:recyclerview-v7:25.2.0] /Users/mike/.android/build-cache/cc6f54effc86825e82562c7edcb39243901eacb7/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.2.0] /Users/mike/.android/build-cache/c933a1cac5a88c721a16d59828b60775812f3346/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:23:5-42
+MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/mike/.android/build-cache/731fd2ecda324404670d6b9ec86d6518b32fff88/output/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-tasks:10.0.1] /Users/mike/.android/build-cache/3a16dae5fa51df1bfa3372b501981ebe3a63bcf7/output/AndroidManifest.xml:3:5-42
+MERGED from [com.google.android.gms:play-services-basement:10.0.1] /Users/mike/.android/build-cache/2f4a9539428786ecc6c33c055366a1311c05884c/output/AndroidManifest.xml:17:5-42
+MERGED from [com.android.support:support-v4:25.2.0] /Users/mike/.android/build-cache/0d97c476c697be0c0f692386367316a5828827cb/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.2.0] /Users/mike/.android/build-cache/623e5689a456c978215d4a1e2693e59ba193b755/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.2.0] /Users/mike/.android/build-cache/0a10047752e04ec00593dee2411749d054624199/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.2.0] /Users/mike/.android/build-cache/8fbdd905d86d3b87ca341bddb6ab4291f7238c96/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.2.0] /Users/mike/.android/build-cache/7d2255ec6096126fced1d73ab5904f4fc9b18910/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.2.0] /Users/mike/.android/build-cache/789c372f1a7bf328301c9512d7cc82bef3bc2124/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mike/.android/build-cache/07c44a41f1db477ef91b76855577c9e761abe3e9/output/AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.2.0] /Users/mike/.android/build-cache/13661249bcfa86ce126da8483a47eeb64e2b1d94/output/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/AndroidManifest.xml
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:21:5-77
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:21:19-51
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:10.0.1] /Users/mike/.android/build-cache/aa7571eb7b76a2ce836cbe7312a7e3d1e456df9c/output/AndroidManifest.xml:21:52-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:10.0.1] /Users/mike/.android/build-cache/731fd2ecda324404670d6b9ec86d6518b32fff88/output/AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:10.0.1] /Users/mike/.android/build-cache/731fd2ecda324404670d6b9ec86d6518b32fff88/output/AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:10.0.1] /Users/mike/.android/build-cache/731fd2ecda324404670d6b9ec86d6518b32fff88/output/AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:10.0.1] /Users/mike/.android/build-cache/731fd2ecda324404670d6b9ec86d6518b32fff88/output/AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:10.0.1] /Users/mike/.android/build-cache/2f4a9539428786ecc6c33c055366a1311c05884c/output/AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:10.0.1] /Users/mike/.android/build-cache/2f4a9539428786ecc6c33c055366a1311c05884c/output/AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:10.0.1] /Users/mike/.android/build-cache/2f4a9539428786ecc6c33c055366a1311c05884c/output/AndroidManifest.xml:20:20-65

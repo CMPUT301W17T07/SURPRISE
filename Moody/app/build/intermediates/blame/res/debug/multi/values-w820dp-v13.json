@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/main/res/values-w820dp/dimens.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 903,
+                        "endColumn": 57,
+                        "endOffset": 956
+                    }
+                }
+            }
+        ]
+    }
+]
