@@ -401,36 +401,4 @@ public class ElasticMoodController extends ElasticController {
 
     }
 
-
-
-
-    //todo part 5 implement EditMood nested class, as opposed to relying on add and delete for editing
-//    public static class EditMood extends AsyncTask<Mood, Void, Void> {
-//
-//        @Override
-//        protected Void doInBackground(Mood... moods) {
-//            verifySettings();
-//
-//            for (Mood mood : moods ) {
-//
-//                String query;
-//
-//
-//                Update update = new Update.Builder(query)
-//                        .index("cmput301w17t07")
-//                        .type("mood")
-//                        .id(mood.getId())
-//                        .build();
-//
-//                try {
-//                    client.execute( update );
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            return null;
-//        }
-//    }
-
 }

@@ -69,8 +69,8 @@ public class TimelineActivity extends BarMenuActivity {
     private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
 
     private Achievements achievements;
-    private AchievementManager achievementManager;
-    private AchievementController achievementController;
+    //private AchievementManager achievementManager;
+    //private AchievementController achievementController;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -139,7 +139,7 @@ public class TimelineActivity extends BarMenuActivity {
 
                     Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
-                    firstime();
+                    firstTime();
                 }
             });
         }else {
@@ -173,7 +173,7 @@ public class TimelineActivity extends BarMenuActivity {
     }
 
 
-    private void firstime() {
+    private void firstTime() {
 
         achievements = AchievementController.getAchievements();
         achievements.firstTimeRegFlag = 1;

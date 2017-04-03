@@ -37,11 +37,11 @@ public class BarMenuActivity extends AppCompatActivity {
      * This method contains the logic for responding to specific button presses on the menu bar.
      * @param context
      */
-    public void setUpMenuBar(Context context) {
+    public void setUpMenuBar(final Context context) {
 
         final Context currentContext = context;
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -58,20 +58,17 @@ public class BarMenuActivity extends AppCompatActivity {
                                 }
                                 else{
                                     Intent home = new Intent (currentContext, timelineActivity);
-//                                    home.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                     startActivity(home);
-                                    //setContentView(R.layout.activity_timeline);
                                     break;
                                 }
                             case R.id.action_search:
                                 Class searchFilterActivity = SearchFilterOptionsActivity.class;
-                                if(currentContext.getClass() == searchFilterActivity){
+                                if(currentContext.getClass() == searchFilterActivity || !MoodController.checkNetwork(context)){
                                     break;
                                 }
                                 else {
                                     Intent search = new Intent(currentContext, searchFilterActivity);
                                     startActivity(search);
-                                    //setContentView(R.layout.activity_search_filter_options);
                                     break;
                                 }
                             case R.id.action_profile:
@@ -81,10 +78,7 @@ public class BarMenuActivity extends AppCompatActivity {
                                 }
                                 else {
                                     Intent profile = new Intent(currentContext, profileActivity);
-//                                    profile.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
                                     startActivity(profile);
-                                    //setContentView(R.layout.activity_profile);
                                     break;
                                 }
                             case R.id.action_create:
@@ -95,7 +89,6 @@ public class BarMenuActivity extends AppCompatActivity {
                                 else {
                                     Intent create = new Intent(currentContext, createMoodActivity);
                                     startActivity(create);
-                                    //setContentView(R.layout.activity_create_mood);
                                     break;
                                 }
                         }

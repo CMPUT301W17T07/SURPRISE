@@ -149,7 +149,7 @@ public class UserAdapter extends BaseAdapter {
 
                     // change button displayed
                     //todo need to implement check for what button to display on this screen
-                    viewHolder.requestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
+//                    viewHolder.requestButton.setBackgroundColor(context.getResources().getColor(R.color.blueTheme));
                     viewHolder.requestButton.setText("REQUEST SENT");
                     viewHolder.requestButton.setEnabled(false);
                     return;
