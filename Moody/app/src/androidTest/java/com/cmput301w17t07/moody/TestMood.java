@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
  * Copyright 2017 CMPUT301W17T07
  *
@@ -21,8 +21,6 @@ import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
-
-import java.util.Date;
 
 
 /**
@@ -83,24 +81,10 @@ public class TestMood extends ActivityInstrumentationTestCase2{
         assertEquals(mood.getFeeling(),"sad");
     }
 
-    @Test
-    public void testgetMoodImageID() throws Exception {
-        Mood mood=new Mood("happy","xin","mes",0,0,"1",null,null,null);
-        assertEquals(mood.getMoodImageID(),"1");
-
-    }
-
-    @Test
-    public void testsetMoodImageID() throws Exception {
-        Mood mood=new Mood("happy","xin","mes",0,0,"1",null,null,null);
-        mood.setMoodImageID("2");
-        assertEquals(mood.getMoodImageID(),"2");
-    }
 
 
 }
 
-=======
 ///*
 // * Copyright 2017 CMPUT301W17T07
 // *
@@ -202,4 +186,3 @@ public class TestMood extends ActivityInstrumentationTestCase2{
 //
 //}
 //
->>>>>>> 3c42643d3a68c6371f73f144e40f52314277f0ba
