@@ -91,10 +91,10 @@ public class FollowingList {
         return followingList.size();
     }
 
-//    public User getFollowing(int index){
-//        // get specific user from following list
-//        return followingList.get(index);
-//    }
+    public String getFollowing(int index){
+        // get specific user from following list
+        return followingList.get(index);
+    }
 
 
 
