@@ -16,12 +16,19 @@
 
 package com.cmput301w17t07.moody;
 
+import android.location.Location;
+import android.location.LocationManager;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
+import com.google.android.gms.maps.MapView;
 import com.robotium.solo.Solo;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
+import static android.content.Context.LOCATION_SERVICE;
 import static org.junit.Assert.*;
 
 /**
@@ -29,9 +36,13 @@ import static org.junit.Assert.*;
  */
 public class MapsActivityTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
+    String username;
+    private ArrayList<Mood> moodArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> currLocationArrayList = new ArrayList<Mood>();
+    private ArrayList<Mood> currLocationArrayListWith5Km = new ArrayList<Mood>();
 
     public MapsActivityTest() {
-        super(com.cmput301w17t07.moody.SearchUserActivity.class);
+        super(com.cmput301w17t07.moody.CreateMoodActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -40,24 +51,127 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
 
-    @Test
-    public void onCreate() throws Exception {
-
-    }
 
     @Test
-    public void onMapReady() throws Exception {
-        solo.assertCurrentActivity("Wrong Activity",SearchUserActivity.class);
-        solo.clickOnButton("Map");
+    public void testonMapReady() throws Exception {
+        solo.assertCurrentActivity("Wrong Activity",CreateMoodActivity.class);
+        solo.pressSpinnerItem(0, 0);
+        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
+        solo.clickOnImage(2);
+
+        solo.clickOnButton("Send");
+        solo.clickOnMenuItem("Search");
+
+        solo.clickOnButton("MAP");
         solo.pressSpinnerItem(0, 0);
 
-        assertFalse(solo.searchText("test tweet!"));
+        solo.clickOnButton(0);
+
+        UserController userController = new UserController();
+        username = userController.readUsername(getActivity().getApplicationContext()).toString();
+
+        ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                new ElasticMoodController.GetFeelingFilterMoods();
+        getFeelingFilterMoods.execute(username,"anger");
+        try {
+            moodArrayList = getFeelingFilterMoods.get();
+        } catch (Exception e) {
+            Log.i("error", "failed to get filtered feeling moods in map activity");
+        }
+        solo.waitForView(R.id.map);
+        assertNotNull(moodArrayList);
+
 
     }
 
     @Test
-    public void setMarkerColor() throws Exception {
+    public void testonMapTimeline() throws Exception {
+        solo.assertCurrentActivity("Wrong Activity",CreateMoodActivity.class);
+        solo.pressSpinnerItem(0, 0);
+        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
+        solo.clickOnImage(2);
+
+        solo.clickOnButton("Send");
+        solo.clickOnMenuItem("Search");
+
+        solo.clickOnButton("MAP");
+        solo.pressSpinnerItem(0, 1);
+
+        solo.clickOnButton(0);
+
+        UserController userController = new UserController();
+        username = userController.readUsername(getActivity().getApplicationContext()).toString();
+
+        //Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
+
+
+        ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
+                new ElasticMoodController.GetFeelingFilterMoods();
+        getFeelingFilterMoods.execute("tyyyyyy","anger");
+        try {
+            moodArrayList = getFeelingFilterMoods.get();
+        } catch (Exception e) {
+            Log.i("error", "failed to get filtered feeling moods in map activity");
+        }
+        solo.waitForView(R.id.map);
+        assertEquals(moodArrayList.size(),0);
 
     }
+
+
+    @Test
+    public void testonMap5KM() throws Exception {
+        solo.assertCurrentActivity("Wrong Activity",CreateMoodActivity.class);
+        solo.pressSpinnerItem(0, 0);
+        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
+        solo.clickOnImage(2);
+
+
+        solo.clickOnButton("Send");
+        solo.clickOnMenuItem("Search");
+
+        solo.clickOnButton("MAP");
+        solo.pressSpinnerItem(0,0);
+
+        solo.clickOnButton(1);
+
+        UserController userController = new UserController();
+        username = userController.readUsername(getActivity().getApplicationContext()).toString();
+
+        //Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
+
+
+
+
+        ElasticMoodController.FilterMapByLocation filterMapByLocation =
+                new ElasticMoodController.FilterMapByLocation();
+        filterMapByLocation.execute();
+        try {
+            currLocationArrayList.addAll(filterMapByLocation.get());
+
+        } catch (Exception e) {
+            System.out.println("this is fff" + e);
+        }
+
+        Location location=new Location("pointa");
+        location.setLatitude(84);
+        location.setLongitude(84);
+
+        for (int p=0;p< currLocationArrayList.size();p++){
+            Location locationNear=new Location("near");
+            locationNear.setLatitude(currLocationArrayList.get(p).getLatitude());
+            locationNear.setLongitude(currLocationArrayList.get(p).getLongitude());
+            float distance=location.distanceTo(locationNear);
+            if (distance<=5000.0) {
+                currLocationArrayListWith5Km.add(currLocationArrayList.get(p));
+            }
+
+        }
+
+        solo.waitForView(R.id.map);
+        assertEquals(currLocationArrayListWith5Km.size(),0);
+
+    }
+
 
 }

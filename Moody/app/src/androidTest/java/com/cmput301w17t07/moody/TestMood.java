@@ -22,8 +22,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
 
-import java.util.Date;
-
 
 /**
  * Created by Panchy on 2017/2/24.
@@ -86,3 +84,4 @@ public class TestMood extends ActivityInstrumentationTestCase2{
 
 
 }
+

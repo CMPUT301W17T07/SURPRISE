@@ -80,6 +80,7 @@ public class MoodController {
 //            getOfflineMoodList();
             newMood.setId(UUID.randomUUID().toString());
             newMood.idType = false;
+            moodList = getOfflineMoodList();
             moodList.addMood(newMood);
             saveMoodList();
         }
@@ -149,6 +150,7 @@ public class MoodController {
         }
         else{
             editMood.setId(UUID.randomUUID().toString());
+            moodList = getOfflineMoodList();
             moodList.editMood(editMood, oldMood);
             saveMoodList();
         }
