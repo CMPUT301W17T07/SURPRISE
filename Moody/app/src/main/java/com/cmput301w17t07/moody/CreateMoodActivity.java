@@ -77,13 +77,10 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     private Mood tempMood;
     private String moodMessage_text = "";
     private int pickLocation = 0;
-
     private static Achievements achievements;
-
-
-    Bitmap bitmap = null;
+    private Bitmap bitmap = null;
     //________________________________
-
+    //parameters for datetimePicker
     AlertDialog TimeDialog;
     AlertDialog DateDialog;
     Calendar calendar = Calendar.getInstance();
@@ -109,6 +106,8 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         Description = (EditText) findViewById(R.id.Description);
         mImageView = (ImageView) findViewById(R.id.editImageView);
 
+        //try to get picklocation, if it is equal to 1 that means, user just back from map not
+        //other activities
         try{
             pickLocation = (int) intent.getExtras().getInt("pickLocation");}
         catch(Exception e){e.printStackTrace();
@@ -146,7 +145,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                                        int position, long id) {
                 EmotionText = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(CreateMoodActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
@@ -181,6 +179,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
         ImageButton PickerButton = (ImageButton) findViewById(R.id.Picker);
 
+        //click on PickerButton, call the datetimePicker
         PickerButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -265,6 +264,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             }
         });
 
+        //pass users' changes to map, will be passed back
         locationButton.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View view) {
                 int fromCreate = 123;
@@ -407,7 +407,9 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     }
 
 
-    //http://blog.csdn.net/hzflogo/article/details/62423240
+    //link: http://blog.csdn.net/hzflogo/article/details/62423240
+    //author: hzflogo 2017-03-16 14:58
+    //taken by Xin Huang 2017-03-29 21:42
     //get the datetimePicker
     private void innit() {
         final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
@@ -442,7 +444,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                                 "yyyy-MM-dd HH:mm");
                         date = formatter.parse(dateString);}
                         catch (Exception e){e.printStackTrace();}
-                        System.out.println("month: " + currentMonth);
                         Toast.makeText(CreateMoodActivity.this, ""+date, Toast.LENGTH_LONG).show();
                     }
                 })
@@ -473,10 +474,10 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     public Bitmap compress(Bitmap image) {
         try {
             // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
+            // author: HarryWeasley 2016-07-20 15:26
+            // taken by Xin Huang 2017-03-04 18:45
             // for compressing the image to meet the project storage requirements
             while (((image.getRowBytes() * image.getHeight()) / 8) > 65536) {
-                System.out.println("Image size is too big! " + ((image.getRowBytes() * image.getHeight()) / 8));
-
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;
 
@@ -484,9 +485,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 matrix.setScale(0.5f, 0.5f);
                 image = Bitmap.createBitmap(image, 0, 0, image.getWidth(),
                         image.getHeight(), matrix, true);
-
-                System.out.println("Image size is too big! " + ((image.getRowBytes() * image.getHeight()) / 8));
-
             }
         } catch (Exception E) {
 
@@ -504,7 +502,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
          * taken by Xin Huang 2017-03-04 15:30 (used and switch function written by Nick 2017/03/12 14:30)
          */
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
-
         String[] items = new String[]{"anger", "confusion", "disgust", "fear", "happiness", "sadness", "shame", "surprise"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
@@ -587,6 +584,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(CreateMoodActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
             }
         });
     }

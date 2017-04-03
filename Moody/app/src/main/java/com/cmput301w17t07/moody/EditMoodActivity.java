@@ -72,10 +72,10 @@ public class EditMoodActivity extends BarMenuActivity {
     private String address;
     private String moodMessage_text;
     private Bitmap editBitmapImage = null;
-
     Location location1 = new Location(LocationManager.NETWORK_PROVIDER);
 
     //----------------------------- date parameters ----------------------------
+    // parameters for datetimePicker
 
     AlertDialog TimeDialog;
     AlertDialog DateDialog;
@@ -463,7 +463,9 @@ public class EditMoodActivity extends BarMenuActivity {
     }
 
     //set up the datetimePicker
-    //http://blog.csdn.net/hzflogo/article/details/62423240
+    //link: http://blog.csdn.net/hzflogo/article/details/62423240
+    //author: hzflogo 2017-03-16 14:58
+    //taken by Xin Huang 2017-03-29 21:42
     private void innit() {
         final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
         final View timeView = View.inflate(getApplicationContext(), R.layout.timepicker, null);
@@ -526,6 +528,10 @@ public class EditMoodActivity extends BarMenuActivity {
 
     }
 
+    // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
+    // author: HarryWeasley 2016-07-20 15:26
+    // taken by Xin Huang 2017-03-04 18:45
+    // for compressing the image to meet the project storage requirements
     public Bitmap compress(Bitmap image) {
         try {
             // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467

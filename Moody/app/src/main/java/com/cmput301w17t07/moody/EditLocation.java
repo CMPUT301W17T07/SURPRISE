@@ -58,6 +58,7 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         ImageButton OKButton = (ImageButton) findViewById(R.id.mapSave);
         fromCreate = intent.getExtras().getInt("fromCreate");
+        // user is from createMoodActivity
         if(fromCreate == 123) {
             editMood = (Mood) intent.getSerializableExtra("EditMood");
             bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
@@ -77,6 +78,7 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
                 }
             });
         }
+        // user is from EditMoodActivity
         else {
             editMood = (Mood) intent.getSerializableExtra("EditMood");
             bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
