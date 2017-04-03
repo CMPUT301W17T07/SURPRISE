@@ -90,19 +90,14 @@ public class EditMoodActivity extends BarMenuActivity {
 
     private Achievements achievements;
 
+    //initialize the data, because user may back from map if they want to edit location
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         UserController userController = new UserController();
         userName = userController.readUsername(EditMoodActivity.this).toString();
-
-
         setContentView(R.layout.activity_edit_mood);
         setUpMenuBar(this);
-
-        //TextView sizeView = (TextView) findViewById(R.id.editSocialText);
-
 
         // get the mood object that was selected
         Intent intent = getIntent();
@@ -110,17 +105,12 @@ public class EditMoodActivity extends BarMenuActivity {
         date = editMood.getDate();
         bitmapImage = (Bitmap) intent.getParcelableExtra("bitmapback");
         editBitmapImage = bitmapImage;
-        System.out.println("bitmapback: " + editBitmapImage);
         deletedPic = (int) intent.getExtras().getInt("bitmapdelete");
-        System.out.println("bitmapback: " + deletedPic);
         latitude = editMood.getLatitude();
         longitude = editMood.getLongitude();
         image = (ImageView) findViewById(R.id.editImageView);
-
-
         final TextView location = (TextView) findViewById(R.id.locationText);
         address = editMood.getDisplayLocation();
-        System.out.println("location = " + address);
         location.setText(address);
 
         if (latitude == 0 && longitude == 0) {
@@ -130,6 +120,8 @@ public class EditMoodActivity extends BarMenuActivity {
         if (deletedPic == 1) {
             image.setImageBitmap(null);
         }
+
+        //set up the button and imageButton
         ImageButton editLocation = (ImageButton) findViewById(R.id.location);
         editLocation.setOnClickListener(new View.OnClickListener() {
 
@@ -145,7 +137,6 @@ public class EditMoodActivity extends BarMenuActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Please check your permissions", Toast.LENGTH_LONG).show();
                 }
-
                 //check the permission
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                         && ActivityCompat.checkSelfPermission(getApplicationContext(),
@@ -164,7 +155,7 @@ public class EditMoodActivity extends BarMenuActivity {
                     longitude = location1.getLongitude();
                 }
 
-                //System.out.println("this is loc "+location.getLongitude());
+                //get the location name by latitude and longitude
                 Geocoder gcd = new Geocoder(EditMoodActivity.this, Locale.getDefault());
                 try {
                     List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
@@ -181,7 +172,6 @@ public class EditMoodActivity extends BarMenuActivity {
                 }
 
                 final ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
-
                 deleteLocation.setVisibility(View.VISIBLE);
                 deleteLocation.setEnabled(true);
             }
@@ -193,7 +183,6 @@ public class EditMoodActivity extends BarMenuActivity {
                 moodMessage_text = Description.getText().toString();
                 editMood.setMoodMessage(moodMessage_text);
                 editMood.setDate(date);
-                System.out.println("Bitmap: " + bitmapImage);
                 Intent editLocation = new Intent(EditMoodActivity.this, EditLocation.class);
                 editLocation.putExtra("EditMood", editMood);
                 editLocation.putExtra("bitmap", compress(editBitmapImage));
@@ -201,7 +190,6 @@ public class EditMoodActivity extends BarMenuActivity {
                 return true;
             }
         });
-
 
         final ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
         deleteLocation.setOnClickListener(new View.OnClickListener() {
@@ -224,8 +212,6 @@ public class EditMoodActivity extends BarMenuActivity {
                 try {
                     Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                     startActivityForResult(intent, 1);
-
-
                 } catch (Exception e) {
                     Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
@@ -242,14 +228,12 @@ public class EditMoodActivity extends BarMenuActivity {
                 } catch (Exception e) {
                     Intent intent = new Intent(getApplicationContext(), EditMoodActivity.class);
                     startActivity(intent);
-
                 }
                 return true;
             }
         });
 
         ImageButton PickerButton = (ImageButton) findViewById(R.id.EditDate);
-
         PickerButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -257,21 +241,16 @@ public class EditMoodActivity extends BarMenuActivity {
                 TimeDialog.show();
             }
         });
-
-
         Button submitButton = (Button) findViewById(R.id.button5);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 moodMessage_text = Description.getText().toString();
                 MoodController moodController = new MoodController();
                 editBitmapImage = bitmapImage;
-
                 AchievementManager.initManager(EditMoodActivity.this);
                 AchievementController achievementController = new AchievementController();
                 achievements = achievementController.getAchievements();
-
                 achievements.firstTimeEditFlag = 1;
-
                 achievementController.saveAchievements();
 
                 if (!moodController.editMood(EmotionText, userName, moodMessage_text,
@@ -297,15 +276,9 @@ public class EditMoodActivity extends BarMenuActivity {
             public void onClick(View v) {
                 bitmapImage = null;
                 editBitmapImage = null;
-                //editBitmapImage = null;
-                //ImageView image = (ImageView) findViewById(R.id.editImageView);
                 image.setImageDrawable(null);
-                //ImageButton deletePicture = (ImageButton) findViewById(R.id.deletePicture);
-                //deletePicture.setVisibility(View.INVISIBLE);
                 deletePicture.setVisibility(View.INVISIBLE);
                 deletePicture.setEnabled(false);
-
-
             }
         });
     }
@@ -313,8 +286,6 @@ public class EditMoodActivity extends BarMenuActivity {
 
     // display the attributes of the mood that was selected to view
     private void displayAttributes() {
-
-
         /**
          * Spinner dropdown logic taken from
          * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
@@ -416,21 +387,14 @@ public class EditMoodActivity extends BarMenuActivity {
             }
         });
 
-
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
-
-
         editBitmapImage = editMood.decodeImage();
-
-
         if (editBitmapImage != null) {
             image.setImageBitmap(editBitmapImage);
         } else {
             image.setImageBitmap(bitmapImage);
         }
-
-
     }
 
 
@@ -470,7 +434,6 @@ public class EditMoodActivity extends BarMenuActivity {
             // saveToSDCard(bitmap);
             try {
                 bitmapImage = (Bitmap) data.getExtras().get("data");
-                System.out.println("photosize = " + bitmapImage.getByteCount());
             } catch (Exception e) {
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
@@ -497,10 +460,9 @@ public class EditMoodActivity extends BarMenuActivity {
             deletePicture.setVisibility(View.VISIBLE);
             deletePicture.setEnabled(true);
         }
-
-
     }
 
+    //set up the datetimePicker
     //http://blog.csdn.net/hzflogo/article/details/62423240
     private void innit() {
         final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
@@ -569,25 +531,16 @@ public class EditMoodActivity extends BarMenuActivity {
             // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
             // for compressing the image to meet the project storage requirements
             while (((image.getRowBytes() * image.getHeight()) / 8) > 65536) {
-                System.out.println("Image size is too big! " + ((image.getRowBytes() * image.getHeight()) / 8));
-
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;
-
                 Matrix matrix = new Matrix();
                 matrix.setScale(0.5f, 0.5f);
                 image = Bitmap.createBitmap(image, 0, 0, image.getWidth(),
                         image.getHeight(), matrix, true);
-
-                System.out.println("Image size is too big! " + ((image.getRowBytes() * image.getHeight()) / 8));
-
             }
         } catch (Exception E) {
-
+            E.printStackTrace();
         }
         return image;
     }
-
-
-
 }

@@ -53,10 +53,6 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
         Intent intent = getIntent();
         setContentView(R.layout.activity_edit_location);
         setUpMenuBar(this);
-
-
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_map);
         mapFragment.getMapAsync(this);
@@ -84,7 +80,6 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
         else {
             editMood = (Mood) intent.getSerializableExtra("EditMood");
             bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
-            System.out.println("bitmap:" + bitmap);
             newLatitude = editMood.getLatitude();
             newLongitude = editMood.getLongitude();
             OKButton.setOnClickListener(new View.OnClickListener() {
@@ -99,13 +94,14 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
                         editLocation.putExtra("bitmapback", bitmap);
                     }
                     editLocation.putExtra("bitmapdelete", deleteImage);
-                    System.out.println("Bitmapdelete = " + deleteImage);
                     startActivity(editLocation);
                     finish();
                 }
             });
         }
     }
+
+    //set up the google map and marker, user can drag the marker to get a new latitude and new longtitude
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -113,7 +109,6 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
         if(fromCreate != 123){
         tmp = new LatLng(editMood.getLatitude(), editMood.getLongitude());}
         mMap.addMarker(new MarkerOptions().draggable(true).position(tmp).title("Select location").icon(BitmapDescriptorFactory.defaultMarker()));
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
@@ -132,7 +127,6 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
                 Geocoder gcd = new Geocoder(EditLocation.this, Locale.getDefault());
                 try{
                     List<Address> addresses = gcd.getFromLocation(newLatitude, newLongitude, 1);
-
                     if (addresses.size() > 0)
                         address = "  " + addresses.get(0).getFeatureName() + " " +
                                 addresses.get(0).getThoroughfare() + ", " +
@@ -143,10 +137,7 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
                 catch(Exception e){
                     e.printStackTrace();
                 }
-                System.out.println("Position: " + newLongitude);
             }
         });
-
-
     }
 }

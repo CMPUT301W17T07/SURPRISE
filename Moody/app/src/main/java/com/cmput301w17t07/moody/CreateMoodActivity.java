@@ -95,8 +95,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     String dateString;
     Date date;
 
-//    private static final String iconPath = Environment.getExternalStorageDirectory() + "/Image";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +133,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
          * Author: Nicolas Tyler, 2013/07/15 8:47
          * taken by Xin Huang 2017/03/10
          */
+        //Spinner for emotion and socialsituatuion
         if(pickLocation == 0) {
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
 
@@ -153,8 +152,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 Toast.makeText(CreateMoodActivity.this, "Please pick a feeling!", Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
             Spinner dropdown_SocialSituation = (Spinner) findViewById(R.id.SocialSituation);
             String[] item_SocialSituation = new String[]{"", "alone", "with one other person",
@@ -178,8 +175,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             });
         }
 
-
-
         ImageButton chooseButton = (ImageButton) findViewById(R.id.Camera);
 
         ImageButton locationButton = (ImageButton) findViewById(R.id.location);
@@ -194,7 +189,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             }
         });
 
-
         chooseButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -207,7 +201,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 }
             }
         });
-
 
         chooseButton.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View view) {
@@ -222,7 +215,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 return true;
             }
         });
-
 
         locationButton.setOnClickListener(new View.OnClickListener() {
 
@@ -260,8 +252,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 Geocoder gcd = new Geocoder(CreateMoodActivity.this, Locale.getDefault());
                 try{
                     List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
-                    System.out.println("this is my location: " + addresses);
-
                     if (addresses.size() > 0)
                         address = "  " + addresses.get(0).getFeatureName() + " " +
                                 addresses.get(0).getThoroughfare() + ", " +
@@ -272,7 +262,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                 catch(Exception e){
                     e.printStackTrace();
                 }
-                //System.out.println("this is loc "+location.getLongitude());
             }
         });
 
@@ -296,24 +285,17 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
                 moodMessage_text = Description.getText().toString();
-
                 MoodController moodController = new MoodController();
 
                 // --------------------------- achievements -------------------------------------
                 AchievementManager.initManager(CreateMoodActivity.this);
                 AchievementController achievementController = new AchievementController();
                 achievements = achievementController.getAchievements();
-
                 achievements.moodCount += 1;
-
                 achievementController.incrementMoodCounter(EmotionText);
-
                 achievementController.saveAchievements();
                 // ------------------------------------------------------------------------------
-
-
                 if(location != null || pickLocation == 1){
                     //todo can remove these if/else statements that toast message too long. They could
                     // be handled in the controller
@@ -323,7 +305,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     Toast.makeText(CreateMoodActivity.this,
                             "Mood message length is too long. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
-                    System.out.println("loca = " + location);
                     Intent intent = new Intent(CreateMoodActivity.this, TimelineActivity.class);
                     startActivity(intent);
                     finish();
@@ -341,8 +322,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     }}
             }
         });
-
-
     }
 
 
@@ -383,17 +362,12 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         } else if (requestCode == 1) {
             try {
                 bitmap = (Bitmap) data.getExtras().get("data");
-                System.out.println("photosize = " + bitmap.getByteCount());
             } catch (Exception e) {
                 Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
                 startActivity(intent);
-
             }
-
-
         } else if (resultCode == Activity.RESULT_CANCELED) {
             try {
-                System.out.println("test for ccamere" + data.getExtras().get("data"));
                 Intent intent = new Intent(getApplicationContext(), CreateMoodActivity.class);
                 startActivity(intent);
             } catch (RuntimeException e) {
@@ -412,7 +386,6 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
         Log.e("Map", "Location changed : Lat: " + location.getLatitude()
                 + " Lng: " + location.getLongitude());
-        System.out.printf("this is loc ");
 
     }
 
@@ -435,6 +408,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
 
 
     //http://blog.csdn.net/hzflogo/article/details/62423240
+    //get the datetimePicker
     private void innit() {
         final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
         final View timeView = View.inflate(getApplicationContext(), R.layout.timepicker, null);
@@ -520,9 +494,9 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
         return image;
     }
 
+
+    //When user back from "Map" display the changed spinner staff
     private void displayAttributes() {
-
-
         /**
          * Spinner dropdown logic taken from
          * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
@@ -615,9 +589,5 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-
-
-
     }
 }
