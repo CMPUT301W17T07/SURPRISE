@@ -286,7 +286,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                     Toast.makeText(MapsActivity.this, "" + longitude, Toast.LENGTH_SHORT).show();
                     LatLng tmp = new LatLng(latitude, longitude);
                     mMap.addMarker(new MarkerOptions().position(tmp).
-                            snippet(mood.getFeeling()).
+                            title(mood.getFeeling()).
                             icon(BitmapDescriptorFactory.
                                     defaultMarker(setMarkerColor(mood.getFeeling()))));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp));
