@@ -139,7 +139,6 @@ public class Mood implements Serializable {
     }
 
     /**
-     *  Logic on date to string from http://www.java-examples.com/java-date-string-example
      * @return
      */
     public Date getDate() {
