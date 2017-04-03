@@ -38,6 +38,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MapsActivity handles the user interface for the map filtering functionality, as well as working
+ * with Google maps API.
+ */
 public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -58,6 +62,10 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
     private ArrayList<Mood> currLocationArrayListWith5Km = new ArrayList<Mood>();
 
 
+    /**
+     * The onCreate method determines which map filter view should be displayed and then displays it to the user
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
