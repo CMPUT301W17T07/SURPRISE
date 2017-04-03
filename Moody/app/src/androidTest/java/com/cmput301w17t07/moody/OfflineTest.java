@@ -22,6 +22,7 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
@@ -92,13 +93,8 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
         solo.waitForText("Test Tweet!Edit Mood!");
         solo.waitForText("with several people");
-        solo.clickOnImageButton(1);
-//        solo.clickOnButton("Delete");
-
-        //assertTrue(solo.waitForText("Test Mood!"));
-
-//        solo.clickOnButton(("Clear"));
-//        assertFalse(solo.searchText("Test Tweet!"));
+        ImageButton imageButton = (ImageButton) solo.getView(R.id.deleteButton);
+        solo.clickOnView(imageButton);
     }
 
     private void setWifiEnabled(boolean state) {

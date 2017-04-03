@@ -18,6 +18,8 @@ package com.cmput301w17t07.moody;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.robotium.solo.Solo;
 
@@ -46,9 +48,42 @@ public class AchievementsActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     @Test
-    public void getAchievementsTest() {
+    public void testAchievementsCreateTest() {
+        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
+        solo.clickOnMenuItem("Create");
+        solo.pressSpinnerItem(0, 0);
+        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
+        solo.pressSpinnerItem(0, 1);
+        assertTrue("mood spinner test confusion", solo.isSpinnerTextSelected(0, "confusion"));
 
-        solo.clickOnButton("achievementButton");
+        solo.pressSpinnerItem(1, 1);
+        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(1, "alone"));
+        solo.pressSpinnerItem(1, 2);
+        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(1, "with two people"));
+
+
+        solo.enterText((EditText) solo.getView(R.id.Description), "achievement");
+        solo.clickOnButton("Send");
+
+        solo.clickOnMenuItem("Profile");
+        solo.clickOnImageButton(0);
+        solo.waitForText("Post your first mood");
+
+    }
+
+    public void testAchievementsEditTest(){
+        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
+        solo.clickInList(0);
+        solo.clickOnImageButton(1);
+        solo.enterText((EditText) solo.getView(R.id.editDescription), "!");
+        solo.clickOnButton("Send");
+        solo.clickOnMenuItem("Profile");
+        solo.clickOnImageButton(0);
+        solo.waitForText("Edited a mood");
+        solo.clickOnMenuItem("Profile");
+        solo.clickInList(0);
+        ImageButton imageButton = (ImageButton) solo.getView(R.id.deleteButton);
+        solo.clickOnView(imageButton);
     }
 
 }

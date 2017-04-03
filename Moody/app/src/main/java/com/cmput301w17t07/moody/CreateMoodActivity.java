@@ -91,7 +91,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
     int currentMonth = calendar.get(Calendar.MONTH);
     int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
     int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-    int currentMinte = calendar.get(Calendar.MINUTE);
+    int currentMinute = calendar.get(Calendar.MINUTE);
     String dateString;
     Date date;
 
@@ -443,7 +443,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 currentHour = hourOfDay;
-                currentMinte = minute;
+                currentMinute = minute;
             }
         });
         DatePicker datePicker = (DatePicker) dateView.findViewById(R.id.pick);
@@ -462,7 +462,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        dateString = currentYear + "-" + currentMonth + "-" + currentDay + " " + currentHour+":"+currentMinte;
+                        dateString = currentYear + "-" + currentMonth + "-" + currentDay + " " + currentHour+":"+currentMinute;
                         try {
                             java.text.SimpleDateFormat formatter = new SimpleDateFormat(
                                 "yyyy-MM-dd HH:mm");
@@ -527,7 +527,7 @@ public class CreateMoodActivity extends BarMenuActivity implements LocationListe
          * Spinner dropdown logic taken from
          * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
          * Author: Nicolas Tyler, 2013/07/15 8:47
-         * taken by Xin Huang 2017-03-04 15:30 (used and swith function written by Nick 2017/03/12 14:30)
+         * taken by Xin Huang 2017-03-04 15:30 (used and switch function written by Nick 2017/03/12 14:30)
          */
         Spinner dropdown = (Spinner) findViewById(R.id.Emotion);
 

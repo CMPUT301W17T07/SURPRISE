@@ -19,6 +19,7 @@ package com.cmput301w17t07.moody;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
@@ -88,6 +89,10 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
         solo.clickInList(0);
         solo.waitForText("filter");
         solo.waitForText("with two people");
+        solo.clickOnMenuItem("Profile");
+        solo.clickInList(0);
+        ImageButton imageButton = (ImageButton) solo.getView(R.id.deleteButton);
+        solo.clickOnView(imageButton);
 
 
 

@@ -19,6 +19,7 @@ package com.cmput301w17t07.moody;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
@@ -75,7 +76,7 @@ public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnMenuItem("Profile");
 
         solo.clickInList(0);
-        solo.clickOnButton("Edit");
+        solo.clickOnImageButton(1);
         solo.assertCurrentActivity("Wrong Activity", EditMoodActivity.class);
         solo.pressSpinnerItem(0, 2);
         assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "fear"));
@@ -89,12 +90,8 @@ public class EditMoodActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.waitForText("Test Tweet!Edit Mood!");
         solo.waitForText("with several people");
-//        solo.clickOnButton("Delete");
-
-        //assertTrue(solo.waitForText("Test Mood!"));
-
-//        solo.clickOnButton(("Clear"));
-//        assertFalse(solo.searchText("Test Tweet!"));
+        ImageButton imageButton = (ImageButton) solo.getView(R.id.deleteButton);
+        solo.clickOnView(imageButton);
     }
 }
 
