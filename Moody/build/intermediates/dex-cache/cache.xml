@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/include/jest-droid-2.0.1-SNAPSHOT.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e1199e84d8d3907b8262330dd6976ce04d37f6de">
+        <dex dex="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/transforms/dex/debug/folders/1000/2/jest-droid-2.0.1-SNAPSHOT_893834b17c4bc266475de076466261e8ced13772/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/src/include/jest-droid-2.0.1-SNAPSHOT.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e1199e84d8d3907b8262330dd6976ce04d37f6de">
+        <dex dex="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/transforms/dex/debug/folders/1000/2/jest-droid-2.0.1-SNAPSHOT_893834b17c4bc266475de076466261e8ced13772/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_6a6815787a216d3da6a67a910f7bfc9790ed3033/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="166a15272fb6047426d62257bbf7a3f5f8e404dc">
+        <dex dex="/Users/mike/Desktop/PART 5/SURPRISE/Moody/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_005b521075020f0d35b30b3306775bbbd0214d11/classes.dex" />
+    </item>
+
+</items>
