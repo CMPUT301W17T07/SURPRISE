@@ -21,9 +21,7 @@ import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -111,7 +109,7 @@ public class EditLocation extends BarMenuActivity  implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng tmp = new LatLng(53.5444,113.4909);
+        LatLng tmp = new LatLng(53.631611,-113.323975);
         if(fromCreate != 123){
         tmp = new LatLng(editMood.getLatitude(), editMood.getLongitude());}
         mMap.addMarker(new MarkerOptions().draggable(true).position(tmp).title("Select location").icon(BitmapDescriptorFactory.defaultMarker()));

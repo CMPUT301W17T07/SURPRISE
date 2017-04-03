@@ -19,6 +19,7 @@ package com.cmput301w17t07.moody;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
@@ -76,7 +77,8 @@ public class CreateMoodActivityTest extends ActivityInstrumentationTestCase2 {
         //assertEquals(photo, photo1);
         solo.waitForText("Test Tweet!");
         solo.waitForText("with two person");
-        solo.clickOnButton("Delete");
+        ImageButton imageButton = (ImageButton) solo.getView(R.id.deleteButton);
+        solo.clickOnView(imageButton);
 
         //assertTrue(solo.waitForText("Test Mood!"));
 
