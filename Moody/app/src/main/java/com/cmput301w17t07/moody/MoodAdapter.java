@@ -37,13 +37,11 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
 
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
 
         View view;
         MoodViewHolder viewHolder;
-
         Mood mood = getItem(position);
 
         if (convertView == null) {
@@ -63,17 +61,11 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
             viewHolder=(MoodViewHolder) view.getTag();
         }
 
-        //        ImageView testImage = (ImageView) convertView.findViewById(R.id.profilePicture);
-        //        testImage.setImageBitmap(mood.getMoodImage());
-
         viewHolder.userName.setText(mood.getDisplayUsername());
         viewHolder.userName.setTextSize(20);
         viewHolder.userName.getPaint().setFakeBoldText(true);
-        //        username.setTypeface(font);
-
         viewHolder.messageTest.setText(mood.getMoodMessage());
         viewHolder.messageTest.setTextSize(20);
-        //        feelingText.setTypeface(font);
 
         //http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
         // Date: answered Apr 16 '11 at 1:02
@@ -83,10 +75,8 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
 
         viewHolder.dataText.setText(testDate);
         viewHolder.dataText.setTextSize(15);
-        //        dateText.setTypeface(font);
 
         if (mood.getLongitude()!=0.0 && mood.getLatitude()!=0.0){
-            System.out.println("this is long "+mood.getLongitude());
             viewHolder.locationImage.setImageResource(R.drawable.ic_location);
 
         }else {
@@ -104,9 +94,6 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         }else{
             viewHolder.withP.setImageResource(0);
         }
-
-        //todo get appropriate emoji images in the application and then can check mood.getFeeling() for proper emojis
-        //ImageView emojiImage = (ImageView) convertView.findViewById(R.id.feelingEmoji);
 
         switch (mood.getFeeling()) {
             case "anger":
@@ -149,9 +136,5 @@ public class MoodAdapter extends ArrayAdapter<Mood> {
         public ImageView withP;
 
     }
-
-
-
-
 
 }

@@ -27,7 +27,6 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
 /**
  * Created by mike on 2017-02-23.
@@ -61,13 +60,11 @@ public class ElasticSearchUserController extends ElasticController{
                     } else {
                         Log.i("Error", "Elasticsearch was unable to add the user");
                     }
-
                 } catch (IOException e) {
                     Log.i("Error", "The application failed to add the user");
                 }
 
             }
-
             return null;
         }
     }
@@ -85,7 +82,6 @@ public class ElasticSearchUserController extends ElasticController{
         protected ArrayList<User> doInBackground(String... params) {
             verifySettings();
 
-
             ArrayList<User> users = new ArrayList<User>();
             String query;
             if (params[0]==""){
@@ -97,16 +93,13 @@ public class ElasticSearchUserController extends ElasticController{
                         "        \"term\" : { \"username\" :\"" + params[0] + "\" }\n" +
                         "    }\n" +
                         "}";
-                System.out.println("This is query" + query);
             }
-            // TODO Build the query
             Search search=new Search.Builder(query)
                     .addIndex("cmput301w17t07")
                     .addType("user")
                     .build();
 
             try {
-                // TODO get the results of the query
                 SearchResult result=client.execute(search);
                 if (result.isSucceeded()){
                     List<User> foundUsers=result.getSourceAsObjectList(User.class);
@@ -118,7 +111,6 @@ public class ElasticSearchUserController extends ElasticController{
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-            //System.out.println("this is user"+users);
             return users;
 
         }
@@ -153,8 +145,6 @@ public class ElasticSearchUserController extends ElasticController{
                     "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
                     "    }\n" +
                     "}";
-            System.out.println("this is query" + query);
-
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
@@ -164,23 +154,17 @@ public class ElasticSearchUserController extends ElasticController{
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     // if username is not unique
-                    //todo for some reason it always succeeds
                     if(result.getTotal()  >= 1) {
                         uniqueFlag = false;
-                        System.out.println("should NOT be unique" + result.getTotal());
                     }
                     else{
                         // if username is not found
                         uniqueFlag = true;
-                        System.out.println("should be unique" + result.getTotal());
-
-
                     }
 
                 }
                 else {
                     uniqueFlag = false;
-                    System.out.println("something happened here");
                 }
             }
             catch (Exception e) {

@@ -17,17 +17,13 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * FilterResultsActivity class. User interface logic for the view that allows the user
@@ -79,7 +75,6 @@ public class FilterResultsActivity extends BarMenuActivity {
         super.onStart();
         moodTimeline = (ListView) findViewById(R.id.filterResultsList);
 
-
         if (user == 0){
             // if equals 0 filter by feeling
             if(selectedFilter == 0) {
@@ -90,8 +85,6 @@ public class FilterResultsActivity extends BarMenuActivity {
 
                 try {
                     moodArrayList = getFeelingFilterMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
-
                 } catch (Exception e) {
                     Log.i("error", "failed to get the mood out of the async matched");
                 }
@@ -100,13 +93,9 @@ public class FilterResultsActivity extends BarMenuActivity {
             if(selectedFilter == 1) {
                 ElasticMoodController.GetRecentWeekUserMoods getRecentWeekUserMoods =
                         new ElasticMoodController.GetRecentWeekUserMoods();
-                //todo will have to change this elastic controller if we want other types of date filters
                 getRecentWeekUserMoods.execute(username);
-
                 try {
                     moodArrayList = getRecentWeekUserMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
-
                 } catch (Exception e) {
                     Log.i("error", "failed to get the recent week moods out of the async matched");
                 }
@@ -120,8 +109,6 @@ public class FilterResultsActivity extends BarMenuActivity {
 
                 try {
                     moodArrayList = getMessageFilterMoods.get();
-//               System.out.println("this is moodlist"+moodArrayList);
-
                 } catch (Exception e) {
                     Log.i("error", "failed to get the mood out of the async matched");
                 }
@@ -150,7 +137,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                             moodArrayList.addAll(getFeelingFilterMoods.get());
 
                         } catch (Exception e) {
-                            System.out.println("failed to get the feeling filter moods out of the async matched" + e);
+                            e.printStackTrace();
                         }
                     }
                     sortArrayList2 = MoodController.sortMoods(moodArrayList);
@@ -158,7 +145,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
-                    System.out.println("this is a timeline feeling filter error"+e);
+                    e.printStackTrace();
                 }
 
             }
@@ -168,7 +155,6 @@ public class FilterResultsActivity extends BarMenuActivity {
 
                         ElasticMoodController.GetRecentWeekUserMoods getRecentWeekUserMoods =
                                 new ElasticMoodController.GetRecentWeekUserMoods();
-                        //todo will have to change this elastic controller if we want other types of date filters
                         getRecentWeekUserMoods.execute(nameList.get(i).toString());
 
                         try {
@@ -183,7 +169,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
-                    System.out.println("this is a timeline recent week moods error"+e);
+                    e.printStackTrace();
                 }
             }
             if (selectedFilter == 2) {
@@ -207,7 +193,7 @@ public class FilterResultsActivity extends BarMenuActivity {
                     moodTimeline.setAdapter(adapter);
 
                 }catch (Exception e){
-                    System.out.println("this is a timeline message filter moods error"+e);
+                    e.printStackTrace();
                 }
             }
         }
@@ -221,7 +207,6 @@ public class FilterResultsActivity extends BarMenuActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                // TODO Auto-generated method stub
                 Mood viewMood = moodArrayList.get(position);
                 Intent viewMoodIntent = new Intent(FilterResultsActivity.this, ViewMoodActivity.class);
                 String trigger = "filter";

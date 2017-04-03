@@ -39,9 +39,6 @@ public class PendingRequestsActivity extends BarMenuActivity {
         setUpMenuBar(this);
         TextView PendingRequestsText = (TextView) findViewById(R.id.PendingRequestsText);
         PendingRequestsText.setText("Pending Requests");
-
-
-
     }
 
     @Override
@@ -65,7 +62,6 @@ public class PendingRequestsActivity extends BarMenuActivity {
         // setting the adapter
         pendingRequestsAdapter = new PendingRequestsAdapter(this, userArrayList, username);
         requestList.setAdapter(pendingRequestsAdapter);
-
 
     }
     @Override

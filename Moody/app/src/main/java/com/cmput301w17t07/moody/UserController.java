@@ -17,29 +17,12 @@
 package com.cmput301w17t07.moody;
 
 import android.content.Context;
-
-import android.content.res.AssetManager;
 import android.media.Image;
 
-
-import com.google.gson.Gson;
-
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.nio.ByteBuffer;
 
 import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
-
-import android.media.Image;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -115,9 +98,6 @@ public class UserController {
             return 2; // timeline activity will check to see if profilePicture meets size requirements
         }
         else{
-//            User newUser = new User(username);
-//            ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
-//            addUser.execute(newUser);
             user = new User(username);
             ElasticSearchUserController.AddUser addUser = new ElasticSearchUserController.AddUser();
             addUser.execute(user);

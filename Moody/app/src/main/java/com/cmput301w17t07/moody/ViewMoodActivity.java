@@ -64,8 +64,6 @@ public class ViewMoodActivity extends BarMenuActivity {
         username = userController.readUsername(ViewMoodActivity.this).toString();
         // if the mood was from user profile allow edit/delete
         if (viewMood.getUsername().equals(username)) {
-            //System.out.println("this is erro" +viewMood.getLocation());
-
             displayAttributes();
 
             ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
@@ -80,7 +78,6 @@ public class ViewMoodActivity extends BarMenuActivity {
                     finish();
                 }
             });
-
 
             // edit mood stuff ...
             ImageButton editButton = (ImageButton) findViewById(R.id.editButton);
@@ -116,27 +113,7 @@ public class ViewMoodActivity extends BarMenuActivity {
         TextView date = (TextView) findViewById(R.id.userDateTV);
         date.setText(viewMood.getDate().toString());
 
-
-
-        //TextView location = (TextView) findViewById(R.id.locationTV);
-        //System.out.println("thsi is e"+viewMood.locationToString(viewMood.getLocation()));
-        //location.setText(viewMood.toString());
-
         ImageView image = (ImageView) findViewById(R.id.viewMoodImage);
-//        //todo handle no image case!!
-//        image.setImageBitmap(viewMood.getMoodImage());
-
-        //!!!! NEW STUFF
-//        Toast.makeText(ViewMoodActivity.this, imageID, Toast.LENGTH_SHORT).show();
-
-//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-//        getMoodImage.execute(imageID);
-//        // retrieving the image
-//        try {
-//            bitmapImage = getMoodImage.get().decodeImage();
-//        }catch (Exception e){
-//            Log.i("error","failed to get the moodImage"+imageID);
-//        }
 
         bitmapImage = viewMood.decodeImage();
 
@@ -176,10 +153,6 @@ public class ViewMoodActivity extends BarMenuActivity {
     }
     @Override
     public void onBackPressed() {
-        //todo add logic for this scenario
-//        Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
-//        startActivity(intentBack);
-//        this.finish();
         if(trigger.equals("profile")) {
             Intent intentBack = new Intent(ViewMoodActivity.this, ProfileActivity.class);
             startActivity(intentBack);

@@ -36,13 +36,11 @@ public class MoodList implements Serializable{
     //    private static final long serialVersionUID =  6673446047991058932L;
     private static final long serialVersionUID =  2L;
 
-
     public ArrayList<Mood> moodList = new ArrayList<Mood>();
     public ArrayList<Mood> addedOffline = new ArrayList<Mood>();
     public ArrayList<String> deletedOffline = new ArrayList<String>();
     public ArrayList<Mood> editedOffline = new ArrayList<Mood>();
     // old IDs of edited moods that will need to be deleted upon synching
-
 
     public MoodList() {
         moodList = new ArrayList<Mood>();
@@ -52,7 +50,6 @@ public class MoodList implements Serializable{
         moodList.add(0,mood);
         addedOffline.add(mood);
     }
-
 
     public void deleteMood(Mood mood){
 

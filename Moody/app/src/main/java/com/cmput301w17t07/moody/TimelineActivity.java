@@ -17,11 +17,8 @@
 package com.cmput301w17t07.moody;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -33,14 +30,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.sql.Time;
-import java.text.DecimalFormat;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 
 /**
  *  The Timeline Activity handles the user interface logic for when the user has first installed
@@ -69,33 +59,19 @@ public class TimelineActivity extends BarMenuActivity {
     private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
 
     private Achievements achievements;
-    //private AchievementManager achievementManager;
-    //private AchievementController achievementController;
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         AchievementManager.initManager(TimelineActivity.this);
-//        AchievementController achievementController = new AchievementController();
-        //achievements = achievementController.getAchievements();
-
-
 
         UserController userController = new UserController();
         username = userController.readUsername(TimelineActivity.this).toString();
 
-//        SharedPreferences sp = getSharedPreferences("isFirstIn", Activity.MODE_PRIVATE);
-//        boolean isFirstIn = sp.getBoolean("isFirstIn", true);
         if (username.equals("")) {
-//            sp.edit().putBoolean("isFirstIn", false).apply();
             setContentView(R.layout.activity_create_user);
             Toast.makeText(TimelineActivity.this, " Welcome to Moody! ", Toast.LENGTH_SHORT).show();
             Button registerButton = (Button) findViewById(R.id.register);
-
             usernameText = (EditText) findViewById(R.id.enterUsername);
-
 
             /**
              * On user's click of the register button
@@ -109,8 +85,6 @@ public class TimelineActivity extends BarMenuActivity {
                     }
                     else {
                         String username = usernameText.getText().toString();
-
-
                         //todo get image from user and createUser with image parameter
                         UserController userController = new UserController();
                         createUserFlag = userController.createUser(username);
@@ -135,8 +109,6 @@ public class TimelineActivity extends BarMenuActivity {
 
 
                     }
-
-
                     Toast.makeText(TimelineActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
                     firstTime();
@@ -183,8 +155,6 @@ public class TimelineActivity extends BarMenuActivity {
 
         setContentView(R.layout.activity_timeline);
         setUpMenuBar(this);
-
-
     }
 
     /**
@@ -222,9 +192,9 @@ public class TimelineActivity extends BarMenuActivity {
         oldUserList.setOnScrollListener(new AbsListView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState){
-                // 当不滚动时
+                // when it not scroll
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    // 判断是否滚动到底部
+                    // when it scroll to bottom
                     // added a test to see if all moods have been loaded
                     if(scrollFlag) {
                         Toast.makeText(getApplicationContext(), "Starting load new moody", Toast.LENGTH_SHORT).show();
@@ -249,10 +219,6 @@ public class TimelineActivity extends BarMenuActivity {
             }
         });
 
-
-
-
-
         oldUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
@@ -267,9 +233,6 @@ public class TimelineActivity extends BarMenuActivity {
                         finish();
                     }
                 });
-
-
-
 
     }
 

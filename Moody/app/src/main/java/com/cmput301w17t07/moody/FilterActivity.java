@@ -24,11 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by anicn on 2017-03-12.
@@ -121,8 +117,6 @@ public class FilterActivity extends BarMenuActivity {
 
         // -------------------------Filter by Date------------------------------------------------
         Button dateFilterButton = (Button) findViewById(R.id.filterDateResults);
-//        dateFilterButton.setEnabled(false);
-
 
         Spinner dropdownDate = (Spinner) findViewById(R.id.filterDate);
 
@@ -149,8 +143,6 @@ public class FilterActivity extends BarMenuActivity {
                 if(MoodController.checkNetwork(FilterActivity.this)) {
                     selectedFilter = 1;
                     Intent filterResults = new Intent(FilterActivity.this, FilterResultsActivity.class);
-                    //todo see if we need to pass this in or not (i.e. if we allow for other filter options aside from last week)
-//                filterResults.putExtra("dateFilter", dateText);
                     filterResults.putExtra("selectedFilter", selectedFilter);
                     filterResults.putExtra("selectedUser", selectedUser);
                     startActivity(filterResults);
@@ -164,11 +156,8 @@ public class FilterActivity extends BarMenuActivity {
 
         // ---------------------Filter by Message --------------------------------------
 
-        //todo restrict message to a single word!!
         messageFilterButton = (Button) findViewById(R.id.filterMessageResults);
         messageFilter = (EditText) findViewById(R.id.filterMessageText);
-
-
 
         messageFilterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -187,8 +176,6 @@ public class FilterActivity extends BarMenuActivity {
                 }
             }
         });
-
-
     }
 
 }

@@ -92,23 +92,18 @@ public class MoodImage {
             return null;
         }
 
-        System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
         try {
             // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
+            // author: HarryWeasley 2016-07-20 15:26
+            // taken by Xin Huang 2017-03-04 18:45
             // for compressing the image to meet the project storage requirements
             while (((moodImage.getRowBytes() * moodImage.getHeight()) / 8) > 65536) {
-                System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
-
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;
-
                 Matrix matrix = new Matrix();
                 matrix.setScale(0.5f, 0.5f);
                 moodImage = Bitmap.createBitmap(moodImage, 0, 0, moodImage.getWidth(),
                         moodImage.getHeight(), matrix, true);
-
-                System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
-
             }
         } catch (Exception E){
 

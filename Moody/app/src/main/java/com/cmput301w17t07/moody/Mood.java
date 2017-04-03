@@ -19,10 +19,7 @@ package com.cmput301w17t07.moody;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.Point;
 import android.util.Base64;
-
-import com.google.android.gms.maps.Projection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
@@ -63,8 +60,6 @@ public class Mood implements Serializable {
     public void setDisplayLocation(String displayLocation) {
         this.displayLocation = displayLocation;
     }
-
-
 
     protected String encodedImage;
     protected Boolean idType = true;
@@ -118,7 +113,6 @@ public class Mood implements Serializable {
      * @param moodMessage           The textual explanation for a user's mood
      * @param latitude              The user's pinned location (Will be null in part 4, as it's not yet implemented)
      * @param longitude
-     * @param imageID               The unique server ID of the mood's associated image
      * @param socialSituation       The user's selected socialSituation (alone, with a crowd, etc.)
      */
     public Mood(String feeling, String username, String moodMessage, double latitude,double longitude,
@@ -128,18 +122,11 @@ public class Mood implements Serializable {
         this.displayUsername = username;
         this.moodMessage = moodMessage;
         this.date = date;
-        //this.location = location;
-        //this.location = new Double[2];
-        //this.location[0] = longitude;
-        //this.location[1] = latitude;
         this.latitude = latitude;
         this.longitude = longitude;
         this.encodedImage = encodeImage(image);
-//        this.moodImageID = imageID;
         this.socialSituation = socialSituation;
         this.displayLocation = displayLocation;
-        //        this.moodImage = encodeImage(image);
-
     }
 
 
@@ -163,27 +150,6 @@ public class Mood implements Serializable {
         this.date = date;
     }
 
-//    public Location getLocation() {
-//        return location;
-//    }
-//
-//
-//    public void setLocation(Location location) {
-//        this.location = location;
-//    }
-
-    // todo might be utilized for offline functionality
-//    public Bitmap getMoodImage() {
-//        Bitmap bitmap;
-//        bitmap = null;
-//        if(encodedImage != null){
-//            byte[]bitmapArray = null;
-//            bitmapArray= Base64.decode(encodedImage, Base64.URL_SAFE);
-//            bitmap= BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
-//        }
-//        return bitmap;
-//    }
-
     public void setRandom(Double passedLatitude, Double passedLongitude){
         this.random = new Double[2];
         this.random[0] = passedLongitude;
@@ -202,8 +168,6 @@ public class Mood implements Serializable {
         this.moodImageID = moodImage;
     }
 
-
-
     public String getFeeling() {
         return feeling;
     }
@@ -219,8 +183,6 @@ public class Mood implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
-
 
     public String getDisplayUsername() {
         return displayUsername;
@@ -241,12 +203,7 @@ public class Mood implements Serializable {
     public String toString( ){
         return "Name: " + username + "\n" + "feeling: " + feeling + "\n" + "Moodmessage: " + moodMessage + "\n" +
                 "date: " + date + "\n"  + "location: " + latitude + " " + longitude + "\n" + "sociation: " + socialSituation;
-//        DecimalFormat decimalFormat=new DecimalFormat(".##");
-//        return "Latitude: "+decimalFormat.format(location.getLatitude())
-//                +",Longitude: "+decimalFormat.format(location.getLongitude());
     }
-
-
 
     /**
      * This method decodes the encodedImage string that is stored on the Moody application's server
@@ -263,8 +220,6 @@ public class Mood implements Serializable {
         }
         return bitmap;
     }
-
-
 
     /**
      * This method encodes and compresses a user's supplied bitmap image for appropriate storage
@@ -286,24 +241,18 @@ public class Mood implements Serializable {
         if(moodImage == null){
             return null;
         }
-
-        System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
         try {
             // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
+            // author: HarryWeasley 2016-07-20 15:26
+            // taken by Xin Huang 2017-03-04 18:45
             // for compressing the image to meet the project storage requirements
             while (((moodImage.getRowBytes() * moodImage.getHeight()) / 8) > 65536) {
-                System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
-
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
                 options2.inPreferredConfig = Bitmap.Config.RGB_565;
-
                 Matrix matrix = new Matrix();
                 matrix.setScale(0.5f, 0.5f);
                 moodImage = Bitmap.createBitmap(moodImage, 0, 0, moodImage.getWidth(),
                         moodImage.getHeight(), matrix, true);
-
-                System.out.println("Image size is too big! " + ((moodImage.getRowBytes() * moodImage.getHeight()) / 8));
-
             }
         } catch (Exception E){
 

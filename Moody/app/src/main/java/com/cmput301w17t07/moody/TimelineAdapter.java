@@ -89,23 +89,15 @@ public class TimelineAdapter extends ArrayAdapter<Mood> {
             viewHolder = (MoodViewHolder) view.getTag();
         }
 
-        //        ImageView testImage = (ImageView) convertView.findViewById(R.id.profilePicture);
-        //        testImage.setImageBitmap(mood.getMoodImage());
-
         viewHolder.userName.setText(mood.getDisplayUsername());
         viewHolder.userName.setTextSize(20);
         viewHolder.userName.getPaint().setFakeBoldText(true);
-        //        username.setTypeface(font);
 
         viewHolder.messageTest.setText(mood.getMoodMessage());
         viewHolder.messageTest.setTextSize(20);
-        //        feelingText.setTypeface(font);
 
         viewHolder.dataText.setText(mood.getDate().toString());
         viewHolder.dataText.setTextSize(20);
-        //        dateText.setTypeface(font);
-
-        //ImageView emojiImage = (ImageView) convertView.findViewById(R.id.feelingEmoji);
 
         switch (mood.getFeeling()) {
             case "anger":

@@ -25,7 +25,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import static com.cmput301w17t07.moody.ApplicationMoody.FILENAME;
 import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWERS;
 import static com.cmput301w17t07.moody.ApplicationMoody.FOLLOWING;
 import static com.cmput301w17t07.moody.ApplicationMoody.PENDING;
@@ -120,10 +119,7 @@ public class FollowController {
             // if connection is present....
 
             //-------------------- UPDATING FOLLOWER LIST FOR ACCEPTING USER ----------------------
-
-
             FollowerList followerList = getFollowerList(userAcceptingRequest);
-
             // adding follower to the accepting user's follower list
 
             //todo try catch this block
@@ -146,7 +142,6 @@ public class FollowController {
 
             FollowingList followingList = getFollowingList(userThatSentRequest);
 
-            // todo try catch this block
             followingList.addFollowing(userAcceptingRequest);
 
             //----------------------- NOW UPDATING THE SERVER --------------------------------------
@@ -199,7 +194,6 @@ public class FollowController {
             return true;
         }
         else{
-            //todo notify the user that he or she is not connected to the internet
             return false;
         }
 
@@ -207,13 +201,8 @@ public class FollowController {
 
 
     public static ArrayList<String> getPendingRequests(String username){
-
-        // todo need to check for internet here
-
         FollowerList followerList = null;
         ArrayList<String> userArrayList=new ArrayList<>();
-
-
         // ElasticController to retrieve pending followers list
         ElasticSearchFollowController.GetFollowerList getFollowerList =
                 new ElasticSearchFollowController.GetFollowerList();
@@ -318,8 +307,6 @@ public class FollowController {
         }
     }
 
-
-    //todo make two generic functions because having 6 functions is a dumb way to go
     public static void saveFollowerInfo(String followers, Context ctx) {
         FileOutputStream outputFollowerStream;
         try {
@@ -331,7 +318,6 @@ public class FollowController {
             e.printStackTrace();
         }
     }
-
 
     public static StringBuffer readFollowerInfo(Context ctx) {
         FileInputStream inputFollowerStream;

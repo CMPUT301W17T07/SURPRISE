@@ -19,16 +19,11 @@ package com.cmput301w17t07.moody;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
 /**
  * Created by mike on 2017-03-25.
@@ -85,12 +80,10 @@ public class ElasticSearchFollowController extends ElasticMoodController {
                     else{
                         Log.i("Error", "Elasticsearch was not able to build and send the mood");
                     }
-
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the mood");
                 }
-
             }
             return null;
 
@@ -115,10 +108,8 @@ public class ElasticSearchFollowController extends ElasticMoodController {
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
                         "    }\n" +
                         "}";
-                System.out.println("this is query" + query);
             }
 
-            // TODO Build the query
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
                     .addType("followerlist").build();
@@ -158,10 +149,8 @@ public class ElasticSearchFollowController extends ElasticMoodController {
                         "        \"term\" : { \"username\" :\"" + search_parameters[0] + "\" }\n" +
                         "    }\n" +
                         "}";
-                System.out.println("this is query" + query);
             }
 
-            // TODO Build the query
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
                     .addType("followinglist").build();
@@ -204,7 +193,6 @@ public class ElasticSearchFollowController extends ElasticMoodController {
                 client.execute(delete);
             } catch (Exception e) {
                 e.printStackTrace();
-//                   throw new IllegalArgumentException();
             }
 
             return null;
@@ -232,9 +220,7 @@ public class ElasticSearchFollowController extends ElasticMoodController {
                 client.execute(delete);
             } catch (Exception e) {
                 e.printStackTrace();
-//                   throw new IllegalArgumentException();
             }
-
             return null;
         }
     }

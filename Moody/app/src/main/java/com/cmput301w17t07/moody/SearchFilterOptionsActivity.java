@@ -44,8 +44,6 @@ public class SearchFilterOptionsActivity extends BarMenuActivity {
         searchUser = (Button) findViewById(R.id.searchUser);
         searchUsername = (TextView) findViewById(R.id.searchEditname);
 
-
-
         // for filtering
         filterMood = (Button) findViewById(R.id.filterMood);
         filterMood.setOnClickListener(new View.OnClickListener() {

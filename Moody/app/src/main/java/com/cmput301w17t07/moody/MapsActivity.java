@@ -22,13 +22,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -162,14 +160,9 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
         }
         //--------------------- MAP FILTERS FOR USER'S TIMELINE'S MOODS ----------------------------
         else if (user == 1) {
-            // do timeline stuff ...
-//            UserController userController = new UserController();
-//            username = userController.readUsername(MapsActivity.this).toString();
-
             FollowController followController = new FollowController();
             FollowingList followingList = followController.getFollowingList(username);
 
-//            Toast.makeText(MapsActivity.this, "timeline", Toast.LENGTH_SHORT).show();
             if(filterFeeling.equals("all")){
                 try {
                     moodArrayList = MoodController.getTimelineMoods(username,
@@ -258,7 +251,6 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
             try {
                 currLocationArrayList.addAll(filterMapByLocation.get());
-                System.out.println("this is cur "+currLocationArrayList.size());
             } catch (Exception e) {
                 System.out.println("this is fff" + e);
             }

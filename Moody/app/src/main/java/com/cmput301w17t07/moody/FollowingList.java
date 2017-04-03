@@ -32,7 +32,6 @@ import io.searchbox.annotations.JestId;
 
 public class FollowingList {
     String username;
-//    public ArrayList<User> pendingFollowing = new ArrayList<User>();
     public ArrayList<String> followingList = new ArrayList<String>();
 
     @JestId
@@ -55,26 +54,6 @@ public class FollowingList {
         this.username = username;
     }
 
-    //
-//    public void addPending(User user){
-//        // When a user sends a follow request to another user
-//        pendingFollowing.add(user);
-//    }
-//
-//    public void deletePending(User user){
-//        // When a user's follow request is rejected by another user
-//        pendingFollowing.remove(user);
-//    }
-//
-//    public int countPending(){
-//        // method should not be used, as the number of pending requests a user sends out is not kept track of
-//        return pendingFollowing.size();
-//    }
-//
-//    public User getPending(int index){
-//        return pendingFollowing.get(index);
-//    }
-
     public void addFollowing(String username){
         // add a user to the user's following list
         followingList.add(username);
@@ -96,14 +75,9 @@ public class FollowingList {
         return followingList.get(index);
     }
 
-
-
     public boolean hasFollowing(String username){
         return followingList.contains(username);
     }
 
-//    public boolean hasPending(User user){
-//        return pendingFollowing.contains(user);
-//    }
 
 }

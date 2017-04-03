@@ -19,7 +19,6 @@ package com.cmput301w17t07.moody;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -129,9 +128,6 @@ public class ProfileActivity extends BarMenuActivity {
         // we cannot tell if they have all been loaded yet
         scrollFlag = true;
         indexOfScroll = 0;
-
-
-
         final ListView moodTimelineListView = (ListView) findViewById(R.id.test_list);
 
         // Getting the user's moods
@@ -145,19 +141,16 @@ public class ProfileActivity extends BarMenuActivity {
             System.out.println("this is an error in the Profile Activity "+E);
         }
 
-
-
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-//        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
         moodTimelineListView.setAdapter(adapter);
 
         moodTimelineListView.setOnScrollListener(new AbsListView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState){
-                // 当不滚动时
+                // when not scroll
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    // 判断是否滚动到底部
+                    // when it scroll to bottom
                     // added a test to see if all moods have been loaded
                     if(scrollFlag) {
                         Toast.makeText(getApplicationContext(), "Starting loading new moody", Toast.LENGTH_SHORT).show();
@@ -205,10 +198,7 @@ public class ProfileActivity extends BarMenuActivity {
 
         });
 
-
-
     }
-
 
 }
 

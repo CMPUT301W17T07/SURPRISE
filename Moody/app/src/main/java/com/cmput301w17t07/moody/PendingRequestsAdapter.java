@@ -99,14 +99,12 @@ public class PendingRequestsAdapter extends BaseAdapter {
         View view;
         final SearchViewHolder viewHolder;
 
-
         if (convertView == null) {
             viewHolder =new SearchViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.single_pending_request,null);
             viewHolder.userName=(TextView) view.findViewById(R.id.pendingRequestUsername);
             viewHolder.acceptRequestButton=(Button) view.findViewById(R.id.acceptRequest);
             viewHolder.declineRequestButton=(Button) view.findViewById(R.id.declineRequest);
-
 
             view.setTag(viewHolder);
         }else {
@@ -144,9 +142,6 @@ public class PendingRequestsAdapter extends BaseAdapter {
                     achievements.followerCount += 1;
                     AchievementController.checkForMoodAchievements(context);
                     AchievementController.saveAchievements();
-
-
-
                 }
                 else{
                     Toast.makeText(context, "please check network connection", Toast.LENGTH_SHORT).show();
@@ -173,8 +168,6 @@ public class PendingRequestsAdapter extends BaseAdapter {
                 }
             }
         });
-
-
         return view;
     }
 

@@ -77,7 +77,6 @@ public class MoodController {
             addMood.execute(newMood);
         }
         else{
-//            getOfflineMoodList();
             newMood.setId(UUID.randomUUID().toString());
             newMood.idType = false;
             moodList = getOfflineMoodList();
@@ -135,11 +134,7 @@ public class MoodController {
         }
 
 
-
-
         Mood editMood = new Mood(feeling, username, moodMessage, latitude,longitude, image, socialSituation,date,displayLocation);
-        //editMood.setDate(oldMood.getDate());
-//        editMood.setId(oldMood.getId());    Will need this if we end up implementing a method that updates instead of edit and delete
 
         if(checkNetwork(context)) {
             ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
@@ -168,7 +163,6 @@ public class MoodController {
                 System.out.println("Error when deleting mood in the mood Controller"+e);
             }
         else{
-//            moodList= getOfflineMoodList();
             moodList.deleteMood(mood);
             saveMoodList();
         }
@@ -196,11 +190,9 @@ public class MoodController {
                         moodList.setLoadedMoods(moodArrayList);
                     }
                 }
-                System.out.println("this is moodlist"+moodList.getMoods().get(0));
 
 
             } catch (Exception e) {
-
                 System.out.println("Error in getUserMoods catch"+e);
                 getOfflineMoodList().getMoods();
             }
@@ -240,7 +232,6 @@ public class MoodController {
                         moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
                                 String.valueOf(indexOfScroll), context, false, String.valueOf(30)));
                     }
-                    System.out.println("this is NEW moodlist " + moodArrayList.size());
                     // sorting the tweets
 
                 } catch (Exception e) {
@@ -257,7 +248,6 @@ public class MoodController {
                     moodArrayList.addAll(MoodController.getUserMoods(nameList.get(i).toString(),
                             String.valueOf(indexOfScroll), context, false, String.valueOf(6)));
                 }
-                System.out.println("this is NEW moodlist " + moodArrayList.size());
                 // sorting the tweets
                 moodArrayList = MoodController.sortMoods(moodArrayList);
                 // updating local timeline moodlist
@@ -312,7 +302,6 @@ public class MoodController {
         Date d2;
         Mood mood;
         //pop sort maybe binary sort....
-        System.out.println("this is fff lll size "+moods.size());
         for (int i = 0; i < moods.size() - 1; i++) {
             for (int j = i + 1; j < moods.size(); j++) {
 
@@ -408,7 +397,6 @@ public class MoodController {
         mood.setMoodMessage(moodMessage);
     }
 
-
     public String getDisplayLocation() {
         return mood.getDisplayLocation();
     }
@@ -417,7 +405,6 @@ public class MoodController {
         mood.setDisplayLocation(displayLocation);
     }
 
-
     public Date getDate() {
         return mood.getDate();
     }
@@ -425,15 +412,6 @@ public class MoodController {
     public void setDate(Date date) {
         mood.setDate(date);
     }
-
-//    public Location getLocation() {
-//        return mood.getLocation();
-//    }
-//
-//    public void setLocation(Location location) {
-//        mood.setLocation(location);
-//    }
-
 
     public double getLatitude() {
         return mood.getLatitude();
@@ -451,16 +429,9 @@ public class MoodController {
         mood.setLongitude(longitude);
     }
 
-
-
-//    public Bitmap getMoodImage() {
-//        return mood.getMoodImage();
-//    }
-
     public void setMoodImage(String moodImage) {
         mood.setMoodImage(moodImage);
     }
-
 
     public String getSocialSituation() {
         return mood.getSocialSituation();
@@ -470,7 +441,6 @@ public class MoodController {
         mood.setSocialSituation(socialSituation);
     }
 
-
     public String getFeeling() {
         return mood.getFeeling();
     }
@@ -478,7 +448,6 @@ public class MoodController {
     public void setFeeling(String feeling) {
         mood.setFeeling(feeling);
     }
-
 
     public String getUsername() {
         return mood.getUsername();

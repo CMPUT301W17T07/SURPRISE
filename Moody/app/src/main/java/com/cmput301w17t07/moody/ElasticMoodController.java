@@ -110,9 +110,6 @@ public class ElasticMoodController extends ElasticController {
                         "      \"date\"  : {\"order\" : \"desc\" }}\n" +
                         "    }"+
                         "}";
-
-
-                System.out.println("this is query" + query);
             }
 
             Search search = new Search.Builder(query)
@@ -120,8 +117,6 @@ public class ElasticMoodController extends ElasticController {
                     .addType("mood").build();
 
             try {
-
-
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
@@ -134,7 +129,6 @@ public class ElasticMoodController extends ElasticController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-
             return moods;
         }
     }
@@ -171,8 +165,6 @@ public class ElasticMoodController extends ElasticController {
                         "      \"date\"  : {\"order\" : \"desc\" }}\n" +
                         "    }"+
                         "}";
-
-                System.out.println("this is query" + query);
             }
 
             Search search = new Search.Builder(query)
@@ -180,8 +172,6 @@ public class ElasticMoodController extends ElasticController {
                     .addType("mood").build();
 
             try {
-
-
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
@@ -194,7 +184,6 @@ public class ElasticMoodController extends ElasticController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-
             return moods;
         }
     }
@@ -224,19 +213,13 @@ public class ElasticMoodController extends ElasticController {
                                             " {\"range\" :" +
                                                 " { \"date\" :" +
                                                     " { \"gte\" : \"now-1w\" }}}}";
-
-                System.out.println("this is recent week query" + query);
             }
 
-            // TODO Build the query
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
                     .addType("mood").build();
 
             try {
-                // TODO get the results of the query
-
-
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
@@ -272,7 +255,6 @@ public class ElasticMoodController extends ElasticController {
 
             String query;
             //search param 0 = username FOR NOW
-//            System.out.println("this is fff "+search_parameters[2]);
             if (search_parameters[0]==""){
                 query="{\"from\":0,\"size\":10}"; // CHANGE SIZE and NOT sure if this is what we will   want
             }else {
@@ -284,18 +266,13 @@ public class ElasticMoodController extends ElasticController {
                         "     \"sort\" : {\n" +
                         "      \"date\"  : {\"order\" : \"desc\" }}\n" +
                         "    }";
-                System.out.println("this is query "+query);
             }
 
-            // TODO Build the query
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
                     .addType("mood").build();
 
             try {
-                // TODO get the results of the query
-
-
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Mood> foundMoods = result.getSourceAsObjectList(Mood.class);
@@ -335,16 +312,11 @@ public class ElasticMoodController extends ElasticController {
                     .addIndex("cmput301w17t07")
                     .addType("mood")
                     .build();
-
-            //todo probably worth trying to see if an associated image could also be deleted here
-
             try {
                 client.execute(delete);
             } catch (Exception e) {
                 e.printStackTrace();
-//                   throw new IllegalArgumentException();
             }
-
             return null;
         }
     }

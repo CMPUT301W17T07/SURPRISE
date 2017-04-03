@@ -17,15 +17,9 @@
 package com.cmput301w17t07.moody;
 
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class AchievementActivity extends BarMenuActivity {
 
@@ -58,8 +52,6 @@ public class AchievementActivity extends BarMenuActivity {
         userScore.setText("Score: " + String.valueOf(achievements.score));
         userScore.setTextColor(getResources().getColor(R.color.redTheme));
         userScore.setTypeface(null, Typeface.BOLD_ITALIC);
-
-
 
         ListView androidListView = (ListView) findViewById(R.id.test3_list);
 
