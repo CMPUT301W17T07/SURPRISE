@@ -46,13 +46,6 @@ public class FollowingListTest extends ActivityInstrumentationTestCase2 {
         // check if user added to following list
         assertTrue(followingList.hasFollowing("user"));
 
-        // attempting to add a user already in the following list
-        try{
-            followingList.addFollowing("user");
-            assertTrue(false);
-        } catch(IllegalArgumentException e){
-            assertTrue(true);
-        }
 
 
     }
