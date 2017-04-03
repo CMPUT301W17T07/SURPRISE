@@ -23,6 +23,8 @@ import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
 
+import java.util.Date;
+
 /**
  * Created by xin on 2017/4/2.
  */
@@ -87,8 +89,65 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
         solo.waitForText("filter");
         solo.waitForText("with two people");
 
+
+
     }
+    public void testTimeLine() {
+        solo.assertCurrentActivity("Wrong Activity", CreateMoodActivity.class);
+        solo.clickOnMenuItem("Home");
+        UserController userController = new UserController();
+        String username = userController.readUsername(getActivity()).toString();
+
+        if (UserController.checkUsername("testfilter")) {
+            //checking to see if test user needs to be created or not
+            UserController.createUser("testfilter");
+            // Creating the follow lists
+            FollowController.createFollowLists("testfilter");
+        }
+        //sending requests
+        FollowController.sendPendingRequest(username, "testfilter", getActivity().getApplicationContext());
+
+        Mood newMood = new Mood("anger", "testfilter", "timeline",
+                0.0, 0.0, null, "alone", new Date(), "");
+
+        ElasticMoodController.AddMood addMood = new ElasticMoodController.AddMood();
+        addMood.execute(newMood);
+
+        FollowController.acceptFollowRequest("testfilter", username, getActivity().getApplicationContext());
 
 
+        //go to pending requests page
+        solo.clickOnMenuItem("Search");
+        solo.clickOnButton(1);
+        solo.pressSpinnerItem(0, 1);
+        solo.pressSpinnerItem(1, 0);
+        solo.clickOnButton(1);
+        solo.clickInList(0);
+
+        //check to see the current activity is correct
+        solo.waitForText("testfilter");
+        solo.waitForText("timeline");
+
+        // Check the user's follower list to determine appropriate action was taken
+
+        FollowingList followingList = FollowController.getFollowingList(username);
+
+        assertTrue(followingList.hasFollowing("testfilter"));
+
+
+        followingList.deleteFollowing("testfilter");
+
+        //UPDATING THE SERVER
+
+        ElasticSearchFollowController.DeleteFollowingList deleteFollowingList =
+                new ElasticSearchFollowController.DeleteFollowingList();
+        ElasticSearchFollowController.AddFollowingList addFollowingList =
+                new ElasticSearchFollowController.AddFollowingList();
+
+        // deleting old followerlist
+        deleteFollowingList.execute(username);
+        // adding updated one
+        addFollowingList.execute(followingList);
+    }
 
 }
