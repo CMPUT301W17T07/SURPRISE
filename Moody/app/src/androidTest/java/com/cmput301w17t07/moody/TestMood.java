@@ -17,10 +17,16 @@
 
 package com.cmput301w17t07.moody;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
+
+import java.util.Date;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 
 /**
@@ -79,6 +85,20 @@ public class TestMood extends ActivityInstrumentationTestCase2{
         Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
         mood.setFeeling("sad");
         assertEquals(mood.getFeeling(),"sad");
+    }
+
+    @Test
+    public void testEncodeImage() throws Exception {
+
+        Bitmap mPicture = null;
+        mPicture = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
+        if (mPicture == null) {
+            assertNull(mPicture);
+        } else {
+            Mood moodEncode = new Mood("anger", "testing", "", 0.0, 0.0, mPicture, "", new Date(), "");
+            String string = moodEncode.encodeImage(mPicture);
+            assertNotNull(string);
+        }
     }
 
 

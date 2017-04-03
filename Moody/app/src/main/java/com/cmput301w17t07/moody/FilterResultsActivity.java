@@ -214,7 +214,6 @@ public class FilterResultsActivity extends BarMenuActivity {
 
 
         adapter = new MoodAdapter(this, R.layout.timeline_list, moodArrayList);
-//        Toast.makeText(ProfileActivity.this, moodArrayList.get(1).getFeeling(), Toast.LENGTH_SHORT).show();
 
         moodTimeline.setAdapter(adapter);
         moodTimeline.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -202,5 +202,9 @@ public class AchievementController {
         nm.notify(1, b.build());
     }
 
+    public void setAchievements(Achievements achievementsSet){
+        achievements = achievementsSet;
+    }
+
 
 }

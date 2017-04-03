@@ -75,7 +75,7 @@ public class EditMoodActivity extends BarMenuActivity {
 
     Location location1 = new Location(LocationManager.NETWORK_PROVIDER);
 
-    //________________________________date parameters:
+    //----------------------------- date parameters ----------------------------
 
     AlertDialog TimeDialog;
     AlertDialog DateDialog;
@@ -143,7 +143,7 @@ public class EditMoodActivity extends BarMenuActivity {
                 } else if (locationList.contains(LocationManager.NETWORK_PROVIDER)) {
                     provider = LocationManager.NETWORK_PROVIDER;
                 } else {
-                    Toast.makeText(getApplicationContext(), "No map to use", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please check your permissions", Toast.LENGTH_LONG).show();
                 }
 
                 //check the permission
@@ -151,7 +151,7 @@ public class EditMoodActivity extends BarMenuActivity {
                         && ActivityCompat.checkSelfPermission(getApplicationContext(),
                         android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
-                    Toast.makeText(getApplicationContext(), "Get location felled, Please check the Permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Getting location failed, Please check the application permissions", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -420,20 +420,6 @@ public class EditMoodActivity extends BarMenuActivity {
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
 
-//        image = (ImageView) findViewById(R.id.editImageView);
-
-//        String imageID = editMood.getMoodImageID();
-
-//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-//        getMoodImage.execute(imageID);
-//
-//
-//        // retrieving the image
-//        try {
-//            bitmapImage = getMoodImage.get().decodeImage();
-//        }catch (Exception e){
-//            Log.i("error","failed to get the moodImage"+imageID);
-//        }
 
         editBitmapImage = editMood.decodeImage();
 

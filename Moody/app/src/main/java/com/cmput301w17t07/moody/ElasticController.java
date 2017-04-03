@@ -55,7 +55,4 @@ public class ElasticController {
         client = (JestDroidClient) factory.getObject();
     }
 
-//    protected static void rebuildClient(){
-//        createElasticClient();
-//    }
 }
