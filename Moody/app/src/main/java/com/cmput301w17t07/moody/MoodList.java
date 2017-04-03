@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 public class MoodList implements Serializable{
 
-    //    private static final long serialVersionUID =  6673446047991058932L;
     private static final long serialVersionUID =  2L;
 
     public ArrayList<Mood> moodList = new ArrayList<Mood>();

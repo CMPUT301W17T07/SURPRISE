@@ -29,6 +29,8 @@ import java.util.Date;
  * Created by xin on 2017/4/2.
  */
 
+
+//To run this test make sure you opened the google Map and got your current location
 public class FilterTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
@@ -59,7 +61,6 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
 
         solo.enterText((EditText) solo.getView(R.id.Description), "filter");
 
-        //ImageView photo = (ImageView) solo.getView(R.id.editImageView);
 
         solo.clickOnButton("Send");
         solo.clickOnMenuItem("Search");

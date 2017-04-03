@@ -254,7 +254,6 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 System.out.println("this is fff" + e);
             }
 
-
             for (int p=0;p< currLocationArrayList.size();p++){
                 Location locationNear=new Location("near");
                 locationNear.setLatitude(currLocationArrayList.get(p).getLatitude());
@@ -265,7 +264,6 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 }
 
             }
-
 
             for (int j = 0; j < currLocationArrayListWith5Km.size(); j++) {
                 Mood mood = currLocationArrayListWith5Km.get(j);
