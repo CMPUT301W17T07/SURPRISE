@@ -18,7 +18,6 @@ package com.cmput301w17t07.moody;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
@@ -136,7 +135,7 @@ public class AcceptFollowRequestUITest extends ActivityInstrumentationTestCase2 
 
         assertFalse(followerList.hasFollower("testdecline"));
 
-        assertFalse(followerList.hasPending("testdecline"));
+//        assertFalse(followerList.hasPending("testdecline"));
 
     }
 
