@@ -27,21 +27,15 @@ import android.widget.Toast;
 
 import java.util.List;
 
-
-
-/**
- * Created by Panchy on 2017-03-12.
- */
-
 /**
  * The UserAdapter class object of the Moody application. This class is used to properly display
  * the list of user after searching for user in SearchFilterOptionsActivity. It is used in the
- * SearchUserActivity class.
+ * SearchUserActivity class. <br>
  *
  * Implementation of part of this class was partially inspired by the Android developer's web
- * page on ListView Scrolling Smoothly:
- * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask
- * Taken By: Qi Pang 2017/03/10
+ * page on ListView Scrolling Smoothly: <br>
+ * https://developer.android.com/training/improving-layouts/smooth-scrolling.html#AsyncTask <br>
+ * Taken By: Qi Pang 2017/03/10 <br>
  */
 
 public class UserAdapter extends BaseAdapter {
@@ -54,9 +48,9 @@ public class UserAdapter extends BaseAdapter {
 
 
     /**
-     * Constructor for the UserAdapter
-     * @param context       Context for the adapter
-     * @param userList      The list of users
+     * Constructor for the UserAdapter <br>
+     * @param context       Context for the adapter <br>
+     * @param userList      The list of users <br>
      */
     public UserAdapter(Context context, List<User> userList, String username, String searchUsername) {
         this.context = context;
@@ -66,8 +60,8 @@ public class UserAdapter extends BaseAdapter {
     }
 
     /**
-     * get the size of peoplelist
-     * @return size
+     * get the size of peoplelist <br>
+     * @return size <br>
      */
     @Override
     public int getCount() {
@@ -75,9 +69,9 @@ public class UserAdapter extends BaseAdapter {
     }
 
     /**
-     * get the item in the position of peoplelist
-     * @param position
-     * @return
+     * get the item in the position of peoplelist <br>
+     * @param position <br>
+     * @return int <br>
      */
     @Override
     public Object getItem(int position) {
@@ -85,9 +79,9 @@ public class UserAdapter extends BaseAdapter {
     }
 
     /**
-     * get the position
-     * @param position
-     * @return
+     * get the position <br>
+     * @param position <br>
+     * @return Object <br>
      */
     @Override
     public long getItemId(int position) {
@@ -95,11 +89,11 @@ public class UserAdapter extends BaseAdapter {
     }
 
     /**
-     * set the people information in main activity
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
+     * set the people information in main activity <br>
+     * @param position  <br>
+     * @param convertView <br>
+     * @param parent <br>
+     * @return long <br>
      */
     @Override
     public View getView(final int position, final View convertView, ViewGroup parent) {

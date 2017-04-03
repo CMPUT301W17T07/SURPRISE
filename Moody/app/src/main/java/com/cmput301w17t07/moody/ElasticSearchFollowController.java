@@ -26,16 +26,19 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Created by mike on 2017-03-25.
- */
-
-/**
- * ElasticSearch controller for
+ * ElasticSearch controller for following/follower lists
  */
 public class ElasticSearchFollowController extends ElasticMoodController {
 
+    /**
+     * AddFollowingList nested class object. Used to add follows to the server.
+     */
     public static class AddFollowingList extends AsyncTask<FollowingList, Void, Void> {
 
+        /**
+         * doInBackground function that adds follows to server. <br>
+         * @param followingLists    followingList to be added to server <br>
+         */
         @Override
         protected Void doInBackground(FollowingList... followingLists) {
             verifySettings();
@@ -63,8 +66,15 @@ public class ElasticSearchFollowController extends ElasticMoodController {
         }
     }
 
+    /**
+     * AddFollowerList nested class object. Used to add followers to the server.
+     */
     public static class AddFollowerList extends AsyncTask<FollowerList, Void, Void> {
 
+        /**
+         * doInBackground function that adds followers to server. <br>
+         * @param followerLists    followerList to be added to server <br>
+         */
         @Override
         protected Void doInBackground(FollowerList... followerLists) {
             verifySettings();
@@ -90,8 +100,15 @@ public class ElasticSearchFollowController extends ElasticMoodController {
         }
     }
 
+    /**
+     * GetFollowerList nested class object. Used to get followers from the server.
+     */
     public static class GetFollowerList extends AsyncTask<String, Void, FollowerList> {
 
+        /**
+         * doInBackground function that gets followers from server. <br>
+         * @param search_parameters <br>
+         */
         @Override
         protected FollowerList doInBackground(String... search_parameters) {
             verifySettings();
@@ -131,8 +148,15 @@ public class ElasticSearchFollowController extends ElasticMoodController {
     }
 
 
+    /**
+     * GetFollowingList nested class object. Used to get follows from the server.
+     */
     public static class GetFollowingList extends AsyncTask<String, Void, FollowingList> {
 
+        /**
+         * doInBackground function that gets follows from server. <br>
+         * @param search_parameters <br>
+         */
         @Override
         protected FollowingList doInBackground(String... search_parameters) {
             verifySettings();
@@ -171,9 +195,15 @@ public class ElasticSearchFollowController extends ElasticMoodController {
         }
     }
 
-
+    /**
+     * DeleteFollowerList nested class object. Used to delete followers from the server.
+     */
     public static class DeleteFollowerList extends AsyncTask<String, Void, Void> {
 
+        /**
+         * doInBackground function that deletes followers from server. <br>
+         * @param search_parameters <br>
+         */
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
@@ -199,8 +229,15 @@ public class ElasticSearchFollowController extends ElasticMoodController {
         }
     }
 
+    /**
+     * DeleteFollowingList nested class object. Used to delete follows from the server.
+     */
     public static class DeleteFollowingList extends AsyncTask<String, Void, Void> {
 
+        /**
+         * doInBackground function that deletes follows from server. <br>
+         * @param search_parameters <br>
+         */
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
@@ -224,7 +261,5 @@ public class ElasticSearchFollowController extends ElasticMoodController {
             return null;
         }
     }
-
-
 
 }

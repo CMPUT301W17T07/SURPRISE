@@ -21,6 +21,11 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * AchievementActivity is where all the achievements get displayed
+ * that the user has received from using Moody
+ */
+
 public class AchievementActivity extends BarMenuActivity {
 
     private String username;

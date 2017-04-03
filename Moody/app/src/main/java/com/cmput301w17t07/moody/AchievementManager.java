@@ -27,7 +27,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Created by mike on 2017-03-30.
+ * AchievementManager class object. Handles the saving and loading of the achievements
+ * for the Moody application. Structure and code of this class follows Abram Hindle's Studentpicker
+ * tutorial video series as seen here & logic from our Moody application: <br>
+ * www.youtube.com/watch?v=5PPD0ncJU1g&list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O
  */
 
 public class AchievementManager {
@@ -39,7 +42,7 @@ public class AchievementManager {
 
     static private AchievementManager achievementManager = null;
 
-    /* intialization method of the object*/
+    /* initialization method of the object*/
     public static void initManager(Context context){
         if(achievementManager == null){
             if(context == null){
@@ -62,8 +65,14 @@ public class AchievementManager {
         this.context = context;
     }
 
-    /* loadRecordList method. Following implementation detailed by Abram Hindle in video
-     *  referenced above*/
+    /**
+     * loadAchievements method is used to load the achievements that are stored
+     * in the phones internal storage. Following implementation detailed by Abram Hindle in video
+     * referenced above <br>
+     * @return Achievements object <br>
+     * @throws IOException <br>
+     * @throws ClassNotFoundException <br>
+     */
     public Achievements loadAchievements() throws IOException, ClassNotFoundException {
         SharedPreferences settings = context.getSharedPreferences(prefFile, context.MODE_PRIVATE);
         String achievementData = settings.getString(akey, "");
@@ -75,24 +84,40 @@ public class AchievementManager {
         }
     }
 
-    /* recordListFromString method. Following implementation detailed by Abram Hindle in video
-    *  referenced above*/
+
+    /**
+     * achievementFromString method. Following implementation by Abraham Hindle in video <br>
+     * @param achievementsData <br>
+     * @return Achievements object <br>
+     * @throws IOException <br>
+     * @throws ClassNotFoundException <br>
+     */
     static public Achievements achievementsFromString(String achievementsData) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bi = new ByteArrayInputStream(Base64.decode(achievementsData, Base64.DEFAULT));
         ObjectInputStream oi = new ObjectInputStream(bi);
         return (Achievements) oi.readObject();
     }
 
-    /* saveRecordList method. Following implementation detailed by Abram Hindle in video
-    *  referenced above*/
+    /**
+     * saveAchievements method. Used to save the achievements to the phone internally.
+     * Following implementation detailed by Abram Hindle in video referenced above. <br>
+     * @param a <br>
+     * @throws IOException <br>
+     */
     public void saveAchievements(Achievements a) throws IOException {
         SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(akey, achievementsToString(a));
         editor.commit();
     }
-    /* recordListToString method. Following implementation detailed by Abram Hindle in video
-     *  referenced above*/
+
+    /**
+     * achievementsToString method. Following implementation detailed by
+     * Abram Hindle in video referenced above. <br>
+     * @param a <br>
+     * @return String <br>
+     * @throws IOException <br>
+     */
     static public String achievementsToString(Achievements a) throws IOException {
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
         ObjectOutputStream oo = new ObjectOutputStream(bo);

@@ -32,7 +32,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by mike on 2017-03-08.
+ * AchievementsAdapter is used to display the achievements in a ListView.
+ * Used https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
+ * as a reference.
  */
 
 public class AchievementsAdapter extends ArrayAdapter<String> {

@@ -23,7 +23,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 /**
- * Created by anicn on 2017-03-08.
+ * ApplicationMoody makes a few filename strings global
+ * so the rest of the app can have access to them and use them
+ * to save various things to the phones internal storage.
  */
 
 public class ApplicationMoody extends Application {

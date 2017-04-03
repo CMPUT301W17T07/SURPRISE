@@ -30,10 +30,6 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Created by mike on 2017-03-05.
- */
-
-/**
  * ElasticMoodController class for the Moody application. ElasticMoodController is the communicator
  * between our application and our server for all mood related tasks.
  */
@@ -47,9 +43,8 @@ public class ElasticMoodController extends ElasticController {
     public static class AddMood extends AsyncTask<Mood, Void, Void> {
 
         /**
-         * doInBackground function that adds mood to server.
-         * @param moods     Mood to be added to server
-         * @return
+         * doInBackground function that adds mood to server. <br>
+         * @param moods     Mood to be added to server <br>
          */
         @Override
         protected Void doInBackground(Mood... moods) {
@@ -85,9 +80,9 @@ public class ElasticMoodController extends ElasticController {
      */
     public static class GetFeelingFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         /**
-         * doInBackground returns the filtered list of moods.
-         * @param search_parameters       the username and desired feeling are passed in
-         * @return moods                  the filtered list of moods
+         * doInBackground returns the filtered list of moods. <br>
+         * @param search_parameters       the username and desired feeling are passed in <br>
+         * @return moods                  the filtered list of moods <br>
          */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
@@ -140,9 +135,9 @@ public class ElasticMoodController extends ElasticController {
      */
     public static class GetMessageFilterMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         /**
-         * doInBackground returns the filtered list of moods.
-         * @param search_parameters    Username and desired filter word are passed in
-         * @return moods               A list of the filtered moods
+         * doInBackground returns the filtered list of moods. <br>
+         * @param search_parameters    Username and desired filter word are passed in <br>
+         * @return moods               A list of the filtered moods <br>
          */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
@@ -188,7 +183,17 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
+    /**
+     * The GetRecentWeekUserMoods nested class object. Used to return a moodHistory of followers
+     * on his or her timeline .
+     */
+
     public static class GetRecentWeekUserMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
+        /**
+         * doInBackground returns the filtered list of moods. <br>
+         * @param search_parameters    Username and desired filter word are passed in <br>
+         * @return moods               A list of the filtered moods <br>
+         */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
             verifySettings();
@@ -243,9 +248,9 @@ public class ElasticMoodController extends ElasticController {
     public static class GetUserMoods extends AsyncTask<String, Void, ArrayList<Mood>> {
         /**
          * doInBackground returns a list of moods for a particular user, sorted by date with
-         * the most recent moods coming first.
-         * @param search_parameters         username is passed in
-         * @return moods                    list of the user's moods
+         * the most recent moods coming first. <br>
+         * @param search_parameters         username is passed in <br>
+         * @return moods                    list of the user's moods <br>
          */
         @Override
         protected ArrayList<Mood> doInBackground(String... search_parameters) {
@@ -294,9 +299,9 @@ public class ElasticMoodController extends ElasticController {
      */
     public static class DeleteMood extends AsyncTask<String, Void, Void> {
         /**
-         * doInBackground deletes the desired mood from the server
-         * @param search_parameters        unique server ID of the mood to be deleted
-         * @return null
+         * doInBackground deletes the desired mood from the server <br>
+         * @param search_parameters        unique server ID of the mood to be deleted <br>
+         * @return null <br>
          */
         @Override
         protected Void doInBackground(String... search_parameters) {
@@ -326,9 +331,9 @@ public class ElasticMoodController extends ElasticController {
      */
     public static class FilterMapByLocation extends AsyncTask<Location, Void, ArrayList<Mood>> {
         /**
-         * doInBackground finds moods within 5km of my current location
-         * @param locations        unique server ID of the moods posted by me
-         * @return null
+         * doInBackground finds moods within 5km of my current location <br>
+         * @param locations        unique server ID of the moods posted by me <br>
+         * @return null <br>
          */
         @Override
         protected ArrayList<Mood> doInBackground(Location... locations) {

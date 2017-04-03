@@ -284,14 +284,14 @@ public class EditMoodActivity extends BarMenuActivity {
     }
 
 
-    // display the attributes of the mood that was selected to view
+    /**
+     * display the attributes of the mood that was selected to view <br>
+     * Spinner dropdown logic taken from <br>
+     * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list <br>
+     * Author: Nicolas Tyler, 2013/07/15 8:47 <br>
+     * taken by Xin Huang 2017-03-04 15:30 (used and swith function written by Nick 2017/03/12 14:30) <br>
+     */
     private void displayAttributes() {
-        /**
-         * Spinner dropdown logic taken from
-         * link: http://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
-         * Author: Nicolas Tyler, 2013/07/15 8:47
-         * taken by Xin Huang 2017-03-04 15:30 (used and swith function written by Nick 2017/03/12 14:30)
-         */
         final ImageButton deleteLocation = (ImageButton) findViewById(R.id.deleteLocation);
         if(address == null){
             deleteLocation.setVisibility(View.INVISIBLE);
@@ -401,11 +401,11 @@ public class EditMoodActivity extends BarMenuActivity {
     /**
      * Method handles user interface response to when a user adds an image to their mood
      * from either their camera or their gallery.
-     * <p>
-     * Knowledge and logic of onActivityResult referenced and taken from
-     * link: http://blog.csdn.net/AndroidStudioo/article/details/52077597
-     * author: AndroidStudio 2016-07-31 11:15
-     * taken by Xin Huang 2017-03-04 15:30
+     *
+     * Knowledge and logic of onActivityResult referenced and taken from <br>
+     * link: http://blog.csdn.net/AndroidStudioo/article/details/52077597 <br>
+     * author: AndroidStudio 2016-07-31 11:15 <br>
+     * taken by Xin Huang 2017-03-04 15:30 <br>
      *
      * @param requestCode integer indicating the kind of action taken by the user
      * @param resultCode
@@ -462,10 +462,13 @@ public class EditMoodActivity extends BarMenuActivity {
         }
     }
 
-    //set up the datetimePicker
-    //link: http://blog.csdn.net/hzflogo/article/details/62423240
-    //author: hzflogo 2017-03-16 14:58
-    //taken by Xin Huang 2017-03-29 21:42
+    /**
+     * set up the datetimePicker <br>
+     * link: http://blog.csdn.net/hzflogo/article/details/62423240 <br>
+     * author: hzflogo 2017-03-16 14:58 <br>
+     * taken by Xin Huang 2017-03-29 21:42 <br>
+     */
+
     private void innit() {
         final View dateView = View.inflate(getApplicationContext(), R.layout.datepicker, null);
         final View timeView = View.inflate(getApplicationContext(), R.layout.timepicker, null);
@@ -528,10 +531,14 @@ public class EditMoodActivity extends BarMenuActivity {
 
     }
 
-    // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467
-    // author: HarryWeasley 2016-07-20 15:26
-    // taken by Xin Huang 2017-03-04 18:45
-    // for compressing the image to meet the project storage requirements
+    /**
+     * Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467 <br>
+     * author: HarryWeasley 2016-07-20 15:26 <br>
+     * taken by Xin Huang 2017-03-04 18:45 <br>
+     * for compressing the image to meet the project storage requirements <br>
+     * @param image  // the image to be compressed <br>
+     * @return Bitmap  // the compressed image <br>
+     */
     public Bitmap compress(Bitmap image) {
         try {
             // Compression of image. From: http://blog.csdn.net/harryweasley/article/details/51955467

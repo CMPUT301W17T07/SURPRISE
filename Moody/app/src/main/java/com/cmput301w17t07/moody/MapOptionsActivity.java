@@ -27,6 +27,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+/**
+ * MapOptionsAcitivty display the various options that the user has access to
+ * when filtering the GoogleMaps for various moods and timelines
+ */
 public class MapOptionsActivity extends BarMenuActivity {
 
     private String userText;

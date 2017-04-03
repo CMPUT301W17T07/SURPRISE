@@ -21,13 +21,8 @@ import java.util.ArrayList;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by mike on 2017-02-23.
- */
-
-/**
- * The FollowerList model class for the Moody application. Will be utilized for implementation of
- * user following capabilities in part 5. Javadocs for methods will be included then, once
- * the model is implemented.
+ * The FollowerList model class for the Moody application. Is utilized by the implementation of
+ * user following capabilities.
  */
 
 public class FollowerList {

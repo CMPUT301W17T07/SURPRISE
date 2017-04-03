@@ -26,18 +26,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * Created by mike on 2017-03-28.
+/* MoodListManager class object. Handles the saving and loading of the moodList and moods
+ * for the Moody application. Structure and code of this class follows Abram Hindle's Studentpicker
+ * tutorial video series as seen here & logic from my Moody application: <br>
+ * www.youtube.com/watch?v=5PPD0ncJU1g&list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O <br>
  */
 
 public class MoodManager {
-
-    /* MoodListManager class object. Handles the saving and loading of the moodList and moods
- * for the Moody application. Structure and code of this class follows Abram Hindle's Studentpicker
- * tutorial video series as seen here & logic from my Moody application:
- * www.youtube.com/watch?v=5PPD0ncJU1g&list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O
- *
- * */
 
     //todo condense save and load methods for timeline and profile moods into single more general methods
 
