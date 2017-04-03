@@ -42,7 +42,6 @@ public class MoodList implements Serializable{
     public ArrayList<String> deletedOffline = new ArrayList<String>();
     public ArrayList<Mood> editedOffline = new ArrayList<Mood>();
     // old IDs of edited moods that will need to be deleted upon synching
-    public ArrayList<String> oldIDs = new ArrayList<String>();
 
 
     public MoodList() {
@@ -56,7 +55,6 @@ public class MoodList implements Serializable{
 
 
     public void deleteMood(Mood mood){
-//        moodList.remove(mood);
 
         deletedOffline.add(mood.getId());
         for(int i = 0; i < moodList.size(); i++) {
@@ -68,35 +66,8 @@ public class MoodList implements Serializable{
     }
 
     public void editMood(Mood mood, Mood oldMood){
-//        deleteMood(oldMood);
-//        addMood(mood);
-//       editedOffline.add(mood);
-////       oldIDs.add(oldMood.getId());
-//        for(int i = 0; i < moodList.size(); i++){
-//            if(moodList.get(i).getId().equals(oldMood.getId())){
-//
-//                if(addedOffline.contains(oldMood)){
-//                    moodList.remove(i);
-//                    moodList.add(i, mood);
-//                    addedOffline.remove(addedOffline.indexOf(oldMood));
-//                    return;
-//                }
-//                if(editedOffline.contains(oldMood)){
-//                    moodList.remove(i);
-//                    moodList.add(i, mood);
-//                    editedOffline.remove(editedOffline.indexOf(oldMood));
-//                    return;
-//                }
-//                moodList.remove(i);
-//                moodList.add(i, mood);
-//
-//
-//                return;
-//            }
-//        }
 
         addedOffline.add(mood);
-//       oldIDs.add(oldMood.getId());
         for(int i = 0; i < moodList.size(); i++){
             if(moodList.get(i).getId().equals(oldMood.getId())){
 
@@ -153,7 +124,4 @@ public class MoodList implements Serializable{
         return editedOffline;
     }
 
-    public ArrayList<String> getOldIDs() {
-        return oldIDs;
-    }
 }

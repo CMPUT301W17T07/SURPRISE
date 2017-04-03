@@ -19,7 +19,10 @@ package com.cmput301w17t07.moody;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.util.Base64;
+
+import com.google.android.gms.maps.Projection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;

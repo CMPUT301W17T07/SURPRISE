@@ -78,7 +78,6 @@ public class ElasticMoodController extends ElasticController {
         }
     }
 
-
     /**
      * The GetFeelingFilterMoods nested class object. The class returns a filtered moodList of the
      * user's moods, based on feeling, to the FilterResultsActivity
@@ -106,7 +105,13 @@ public class ElasticMoodController extends ElasticController {
                         "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
                         "{\"term\": {\"feeling\": \""+ search_parameters[1] +"\"}}\n" +
                         "]\n" +
-                        "}}}";
+                        "}}," +
+                        "     \"sort\" : {\n" +
+                        "      \"date\"  : {\"order\" : \"desc\" }}\n" +
+                        "    }"+
+                        "}";
+
+
                 System.out.println("this is query" + query);
             }
 
@@ -161,7 +166,12 @@ public class ElasticMoodController extends ElasticController {
                         "{\"term\": {\"username\": \""+ search_parameters[0] +"\"}},\n" +
                         "{\"term\": {\"moodMessage\": \""+ search_parameters[1] +"\"}}\n" +
                         "]\n" +
-                        "}}}";
+                        "}}," +
+                        "     \"sort\" : {\n" +
+                        "      \"date\"  : {\"order\" : \"desc\" }}\n" +
+                        "    }"+
+                        "}";
+
                 System.out.println("this is query" + query);
             }
 
@@ -352,83 +362,18 @@ public class ElasticMoodController extends ElasticController {
         protected ArrayList<Mood> doInBackground(Location... locations) {
             verifySettings();
 
-            String DISTANCE = "5";
-
-            String query = "{\n" +
+            String query = "{\n"+
                     "\"query\" : {\n" +
-                        "\"match_all\" : {}\n" +
-                            "},\n" +
-                    "\"filter\" : {\n" +
-                        "\"bool\" : {\n" +
-                            "\"must\" : [\n" +
-                    "{\n" +
-                        "\"geo_distance\" : {\n" +
-                            "\"distance\" : \"5km\",\n" +
-                                "\"random\" : [" + locations[0].getLongitude() + ", "
-                                    + locations[0].getLatitude() + "]\n" +
-                    "}\n" +
-                    "} ,\n" +
-                    "] ,\n" +
-                    "}\n" +
-                    "}\n" +
+                    "\"filtered\": {\n" +
+                    "         \"query\" : {\n" +
+                    "             \"match_all\" : {}\n" +
+                    "  },\n" +
+                    "\"filter\":{ \n"+
+
+                    "       }\n" +
+                    "   }\n"+
+                    "  }\n" +
                     "}";
-
-
-
-//                    "{\n" +
-//                    "\"query\" : {\n" +
-//                        "\"match_all\" : {}\n" +
-//                            "},\n" +
-//                    "\"filter\" : {\n" +
-//                    "        \"geo_distance\" : {\n" +
-//                    "          \"distance\" : \"" + DISTANCE + "km\",\n" +
-//                    "          \"random\" : [" + locations[0].getLongitude() + ", "
-//                    + locations[0].getLatitude() + "]\n" +
-//                    "}\n" +
-//                    "}\n" +
-//                    "}\n";
-
-
-//                    "{\n" +
-//                    "\"query\" : {\n" +
-//                    "\"filter\" : {\n" +
-//                        "\"geo_distance\" : {\n" +
-//                            "\"distance\" : \"5km\",\n" +
-//                    "\"pin\" : {\n" +
-//                        "\"random\" : [" + locations[0].getLongitude() + ", "
-//                    + locations[0].getLatitude() + "]\n" +
-//                    "}\n" +
-//                    "}\n" +
-//                                    "}\n" +
-//                                        "}\n" +
-//                                            "}\n";
-//
-
-
-
-//            "\"filtered\" : {\n" +
-//                    "\"query\" : {\n" +
-//                    "\"match_all\" : {}\n" +
-//                    "},\n" +
-
-
-
-
-//                    "{\n" +
-//                    "\"query\" : {\n" +
-//                    "\"bool\" : {\n" +
-//                    "\"must\" : {\n" +
-//                    " \"match_all\" : {}\n" +
-//                    "}," +
-//                    "\"filter\" : {\n" +
-//                    "\"geo_distance\" : {\n" +
-//                    "\"distance : 5km\",\n" +
-//                    "\"location\" : [" + locations[0].getLongitude() + ", "
-//                    + locations[0].getLatitude() + "]\n" +
-//                    "}}}";
-
-            System.out.println("this is location query "+query);
-
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w17t07")
