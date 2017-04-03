@@ -261,7 +261,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
                 locationNear.setLatitude(currLocationArrayList.get(p).getLatitude());
                 locationNear.setLongitude(currLocationArrayList.get(p).getLongitude());
                 float distance=location.distanceTo(locationNear);
-                if (distance<=50000000000.0) {
+                if (distance<=5000.0) {
                     currLocationArrayListWith5Km.add(currLocationArrayList.get(p));
                 }
 
