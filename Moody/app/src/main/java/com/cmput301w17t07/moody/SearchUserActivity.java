@@ -34,7 +34,10 @@ public class SearchUserActivity extends BarMenuActivity {
     private ListView oldUserList;
     private UserAdapter userAdapter;
 
-
+    /**
+     * onCreate method sets the content view for the application.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,9 @@ public class SearchUserActivity extends BarMenuActivity {
         setUpMenuBar(this);
     }
 
+    /**
+     * The onStart method displays the searched user in the list adapter.
+     */
     @Override
     protected void onStart() {
         super.onStart();

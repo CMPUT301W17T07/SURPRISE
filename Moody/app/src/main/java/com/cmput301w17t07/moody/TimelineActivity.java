@@ -58,6 +58,12 @@ public class TimelineActivity extends BarMenuActivity {
     private ArrayList<Mood> sortedArrayList = new ArrayList<Mood>();
 
     private Achievements achievements;
+
+    /**
+     * The oncCreate function for the timeline activity. The register page logic for the application
+     * is handled here.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +150,10 @@ public class TimelineActivity extends BarMenuActivity {
     }
 
 
+    /**
+     * The firstTime function is the screen the user is brought to after registering the firstTime.
+     * User only brought here once.
+     */
     private void firstTime() {
 
         achievements = AchievementController.getAchievements();
