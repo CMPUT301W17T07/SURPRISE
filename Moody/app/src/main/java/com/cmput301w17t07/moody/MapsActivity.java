@@ -256,7 +256,7 @@ public class MapsActivity extends BarMenuActivity implements OnMapReadyCallback 
 
             try {
                 currLocationArrayList.addAll(filterMapByLocation.get());
-
+                System.out.println("this is cur "+currLocationArrayList.size());
             } catch (Exception e) {
                 System.out.println("this is fff" + e);
             }

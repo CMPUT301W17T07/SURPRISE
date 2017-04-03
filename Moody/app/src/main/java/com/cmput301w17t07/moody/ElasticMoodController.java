@@ -363,6 +363,7 @@ public class ElasticMoodController extends ElasticController {
             verifySettings();
 
             String query = "{\n"+
+                    "\"from\":0,\"size\":100000,\n"+
                     "\"query\" : {\n" +
                     "\"filtered\": {\n" +
                     "         \"query\" : {\n" +
