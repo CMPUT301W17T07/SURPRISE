@@ -17,20 +17,14 @@
 package com.cmput301w17t07.moody;
 
 import android.location.Location;
-import android.location.LocationManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
-import com.google.android.gms.maps.MapView;
 import com.robotium.solo.Solo;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
-
-import static android.content.Context.LOCATION_SERVICE;
-import static org.junit.Assert.*;
 
 /**
  * Created by Panchy on 2017/4/2.
@@ -50,9 +44,6 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2 {
         solo = new Solo(getInstrumentation(), getActivity());
 
     }
-
-
-
     @Test
     public void testonMapReady() throws Exception {
         solo.assertCurrentActivity("Wrong Activity",CreateMoodActivity.class);

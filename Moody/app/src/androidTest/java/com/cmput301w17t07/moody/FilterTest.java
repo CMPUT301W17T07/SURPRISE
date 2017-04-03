@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
 
@@ -46,7 +45,7 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testAddMood() {
+    public void testAddMoodFilter() {
 
         solo.assertCurrentActivity("Wrong Activity", CreateMoodActivity.class);
         solo.pressSpinnerItem(0, 0);
@@ -60,7 +59,7 @@ public class FilterTest extends ActivityInstrumentationTestCase2 {
 
         solo.enterText((EditText) solo.getView(R.id.Description), "filter");
 
-        ImageView photo = (ImageView) solo.getView(R.id.editImageView);
+        //ImageView photo = (ImageView) solo.getView(R.id.editImageView);
 
         solo.clickOnButton("Send");
         solo.clickOnMenuItem("Search");

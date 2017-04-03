@@ -56,11 +56,6 @@ public class FilterMoodsUITest extends ActivityInstrumentationTestCase2<FilterAc
         solo.clickOnMenuItem("Create");
         solo.assertCurrentActivity("Wrong Activity", CreateMoodActivity.class);
 
-        // selecting the mood feeling
-        solo.pressSpinnerItem(0, 1);
-        assertTrue("mood spinner test confusion", solo.isSpinnerTextSelected(0, "confusion"));
-
-
         // Entering the mood message
         solo.enterText((EditText) solo.getView(R.id.Description), "Test Mood!");
         solo.waitForText("Test Mood!");

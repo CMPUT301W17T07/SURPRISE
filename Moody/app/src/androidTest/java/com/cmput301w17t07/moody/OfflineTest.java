@@ -53,7 +53,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testAddMood() {
+    public void testAddMoodOffline() {
         solo.assertCurrentActivity("Wrong Activity", CreateMoodActivity.class);
         solo.pressSpinnerItem(0, 0);
         assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
