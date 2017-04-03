@@ -31,16 +31,8 @@ public class MapOptionsActivity extends BarMenuActivity {
 
     private String userText;
     private String feelingText;
-    private Integer selectedFilter;
 
     private String selectedUser;
-
-    private Intent intent;
-
-    private Button resultMap;
-
-
-    private Achievements achievements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

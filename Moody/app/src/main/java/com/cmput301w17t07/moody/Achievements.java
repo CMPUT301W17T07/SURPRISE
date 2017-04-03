@@ -85,11 +85,6 @@ public class Achievements implements Serializable {
     public int fiveSadMoodCount = 0;
     boolean fiveSadMoodCountEarned = false;
 
-    // filter attributes
-    public int timesFiltering;
-    public int filterReturnedNoResults;
-
-
 
     public Achievements() {
     }

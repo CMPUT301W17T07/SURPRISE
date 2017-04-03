@@ -75,7 +75,7 @@ public class EditMoodActivity extends BarMenuActivity {
 
     Location location1 = new Location(LocationManager.NETWORK_PROVIDER);
 
-    //________________________________date parameters:
+    //----------------------------- date parameters ----------------------------
 
     AlertDialog TimeDialog;
     AlertDialog DateDialog;
@@ -420,20 +420,6 @@ public class EditMoodActivity extends BarMenuActivity {
         Description = (EditText) findViewById(R.id.editDescription);
         Description.setText(editMood.getMoodMessage());
 
-//        image = (ImageView) findViewById(R.id.editImageView);
-
-//        String imageID = editMood.getMoodImageID();
-
-//        ElasticMoodController.GetMoodImage getMoodImage = new ElasticMoodController.GetMoodImage();
-//        getMoodImage.execute(imageID);
-//
-//
-//        // retrieving the image
-//        try {
-//            bitmapImage = getMoodImage.get().decodeImage();
-//        }catch (Exception e){
-//            Log.i("error","failed to get the moodImage"+imageID);
-//        }
 
         editBitmapImage = editMood.decodeImage();
 
