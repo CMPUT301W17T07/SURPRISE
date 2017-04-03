@@ -3,13 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Moody.iml" filepath="$PROJECT_DIR$/Moody.iml" />
-<<<<<<< HEAD
-=======
-      <module fileurl="file://$PROJECT_DIR$/Moody.iml" filepath="$PROJECT_DIR$/Moody.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Moody.iml" filepath="$PROJECT_DIR$/Moody.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
->>>>>>> 51cddd26ce20ca955075e8dce17b5c84d6db0dac
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

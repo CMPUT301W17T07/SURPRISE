@@ -27,6 +27,7 @@ import com.robotium.solo.Solo;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.Context.LOCATION_SERVICE;
 import static org.junit.Assert.*;
@@ -86,33 +87,27 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2 {
 
     @Test
     public void testonMapTimeline() throws Exception {
-        solo.assertCurrentActivity("Wrong Activity",CreateMoodActivity.class);
-        solo.pressSpinnerItem(0, 0);
-        assertTrue("mood spinner test anger", solo.isSpinnerTextSelected(0, "anger"));
-        solo.clickOnImage(2);
+        solo.assertCurrentActivity("Wrong Activity", CreateMoodActivity.class);
 
-        solo.clickOnButton("Send");
+
         solo.clickOnMenuItem("Search");
-
-        solo.clickOnButton("MAP");
+        solo.clickOnButton(2);
         solo.pressSpinnerItem(0, 1);
-
         solo.clickOnButton(0);
-
-        UserController userController = new UserController();
-        username = userController.readUsername(getActivity().getApplicationContext()).toString();
-
-        //Mood mood=new Mood("happy","xin","mes",0,0,null,null,null,null);
+        User user=new User("maptest",null);
 
 
-        ElasticMoodController.GetFeelingFilterMoods getFeelingFilterMoods =
-                new ElasticMoodController.GetFeelingFilterMoods();
-        getFeelingFilterMoods.execute("tyyyyyy","anger");
+        Mood mood=new Mood("happy","maptest","mes",0,0,null,null,null,null);
+
+
         try {
-            moodArrayList = getFeelingFilterMoods.get();
-        } catch (Exception e) {
-            Log.i("error", "failed to get filtered feeling moods in map activity");
+            moodArrayList = MoodController.getTimelineMoods(user.getUsername(),
+                    String.valueOf(0),getActivity());
+        } catch(Exception e){
+            System.out.println("Error with getting timeline mood in MapsActivity" + e);
+
         }
+
         solo.waitForView(R.id.map);
         assertEquals(moodArrayList.size(),0);
 
